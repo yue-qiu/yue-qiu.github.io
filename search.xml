@@ -23,17 +23,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[python web开发学习]]></title>
-    <url>%2F2017%2F12%2F12%2Fpython%20web%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%2F</url>
-    <content type="text"><![CDATA[##配置环境 windows下安装virtualenv]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>python web</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[重新开始]]></title>
     <url>%2F2017%2F12%2F02%2F%E9%87%8D%E6%96%B0%E5%BC%80%E5%A7%8B%2F</url>
     <content type="text"><![CDATA[前阵子手贱删了博客文件，还糊里糊涂地把coding里的项目也删了。然后各种蜜汁错误，各种无法重新部署。最近几天又蜜汁部署成功。可以说十分难受了。 不过塞翁失马，焉知非福。经过这么一遭我再次练习了一遍coding+hexo下博客的部署，也算是好事一桩了吧？（强行自我安慰一波233）以后我一定天天向上，重新做人，再不手贱。 再次感谢王哥的教程，很详细，帮助很大，很好，很棒。感兴趣的同志可以去他那里转转呀（手动滑稽）windliang的博客扯到这里算是暂时结束，以后有时间再上来扯扯淡，写点学习心得啥的吧。]]></content>
