@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[父进程与子进程]]></title>
+    <url>%2F2018%2F01%2F09%2F%E7%88%B6%E8%BF%9B%E7%A8%8B%E4%B8%8E%E5%AD%90%E8%BF%9B%E7%A8%8B%2F</url>
+    <content type="text"><![CDATA[学习《python爬虫开发与项目实践》时，执行下面一段代码：1234567891011121314from multiprocessing import Processimport osdef run_process(name): print(&quot;Child process %s (%s) is running&quot; % (name,os.getpid()))if __name__ == &quot;__main__&quot;: print(&quot;parant process %s &quot; % os.getpid()) for i in range(5): p = Process(target=run_process, args=(str(i),)) print(&quot;process will start&quot;) p.start() p.join() print(&quot;process end&quot;) 显示的结果是123456789101112parant process 6332 process will startprocess will startprocess will startprocess will startprocess will startChild process 2 (9896) is runningChild process 0 (11208) is runningChild process 3 (5464) is runningChild process 1 (10208) is runningChild process 4 (12596) is runningprocess end 可以看到，程序在执行完1print (&quot;parant process %s &quot; % os.getpid()) 没有接着马上执行run_process()，而是先打印process will start，最后把子进程一起执行。这是因为子进程的创建是需要时间的，在这个空闲时间里父进程继续执行代码，而子进程在创建完成后显示。]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>爬虫</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[http学习]]></title>
     <url>%2F2017%2F12%2F17%2Fhttp%E5%AD%A6%E4%B9%A0%2F</url>
     <content type="text"><![CDATA[TCP/IP与DNS什么是TCP/IP?协议中存在各式各样的内容。从电缆的规格到 IP 地址的选定方法、寻找异地用户的方法、双方建立通信的顺序，以及 Web 页面显示需要处理的步骤，等等。像这样把与互联网相关联的协议集合起来总称为 TCP/IP。HTTP 属于它内部的一个子集。也有说法认为，TCP/IP 是指 TCP 和 IP 这两种协议。还有一种说法认为，TCP/IP 是在 IP 协议的通信过程中，使用到的协议族的统称。 IPIP与IP地址不同。IP是一种网络协议，它的作用是把数据包传给对方。具体是通过MAC地址和ip地址来实现的。MAC地址对应网卡所属的固定地址，ip地址指节点被分配到的地址。IP地址可以与MAC地址对应，IP地址可以换，MAC地址一般是固定的。IP 间的通信依赖 MAC 地址。在网络上，通信的双方在同一局域网（LAN）内的情况是很少的，通常是经过多台计算机和网络设备中转才能连接到对方。而在进行中转时，会利用下一站中转设备的 MAC 地址来搜索下一个中转目标。这时，会采用 ARP 协议（AddressResolution Protocol）。ARP 是一种用以解析地址的协议，根据通信方的 IP 地址就可以反查出对应的 MAC 地址。 TCP所谓的字节流服务（Byte Stream Service）是指，为了方便传输，将大块数据分割成以报文段（segment）为单位的数据包进行管理。而可靠的传输服务是指，能够把数据准确可靠地传给对方。一言以蔽之，TCP 协议为了更容易传送大数据才把数据分割，而且 TCP 协议能够确认数据最终是否送达到对方。 TCP的三次握手TCP把数据包发出去之后还会确认数据到达了目的地，通过三次握手机制进行确认。发送端发送数据时，TCP会向服务器发送带有SYN标记的数据包，当服务器接收到这个数据包后，会返回一个带有SYN或者ASK的数据包表示确认，最后发送端会再次发送带有ASK标志的数据包表示握手结束。 DNSDNS（Domain Name System）服务是和 HTTP 协议一样位于应用层的协议。它提供域名到 IP 地址之间的解析服务。计算机既可以被赋予 IP 地址，也可以被赋予主机名和域名。比如 www.baidu.com。用户通常使用主机名或域名来访问对方的计算机，而不是直接通过 IP 地址访问。因为与 IP 地址的一组纯数字相比，用字母配合数字的表示形式来指定计算机名更符合人类的记忆习惯。但要让计算机去理解名称，相对而言就变得困难了。因为计算机更擅长处理一长串数字。为了解决上述的问题，DNS 服务应运而生。DNS 协议提供通过域名查找 IP 地址，或逆向从 IP 地址反查域名的服务。 综上，从输入网址到服务器获得请求的过程是：]]></content>
