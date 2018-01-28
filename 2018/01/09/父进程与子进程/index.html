@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="精神书屋">
 <meta property="og:description" content="开进程需要时间学习《python爬虫开发与项目实践》时，执行下面一段代码：1234567891011121314from multiprocessing import Processimport osdef run_process(name):    print(&amp;quot;Child process %s (%s) is running&amp;quot; % (name,os.getpid()))if">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-10T06:12:24.976Z">
+<meta property="og:updated_time" content="2018-01-28T17:48:18.405Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="父进程与子进程">
 <meta name="twitter:description" content="开进程需要时间学习《python爬虫开发与项目实践》时，执行下面一段代码：1234567891011121314from multiprocessing import Processimport osdef run_process(name):    print(&amp;quot;Child process %s (%s) is running&amp;quot; % (name,os.getpid()))if">
@@ -382,7 +382,8 @@
 <p>显示的结果是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">parant process 6332 </span><br><span class="line">process will start</span><br><span class="line">process will start</span><br><span class="line">process will start</span><br><span class="line">process will start</span><br><span class="line">process will start</span><br><span class="line">Child process 2 (9896) is running</span><br><span class="line">Child process 0 (11208) is running</span><br><span class="line">Child process 3 (5464) is running</span><br><span class="line">Child process 1 (10208) is running</span><br><span class="line">Child process 4 (12596) is running</span><br><span class="line">process end</span><br></pre></td></tr></table></figure></p>
 <p>可以看到，程序在执行完<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print (&quot;parant process %s &quot; % os.getpid())</span><br></pre></td></tr></table></figure></p>
 <p>没有接着马上执行run_process()，而是先打印process will start，最后把子进程一起执行。这是因为子进程的创建是需要时间的，在这个空闲时间里父进程继续执行代码，而子进程在创建完成后显示。    </p>
-<h1 id="Pool"><a href="#Pool" class="headerlink" title="Pool"></a>Pool</h1><p>需要创建多个进程时，可以使用multiprocessing中的Pool类开进程池。Pool()默认开启数量等于当前cpu核心数的子进程（当然可以手动改变）</p>
+<h1 id="Pool"><a href="#Pool" class="headerlink" title="Pool"></a>Pool</h1><p>需要创建多个进程时，可以使用multiprocessing中的Pool类开进程池。Pool()默认开启数量等于当前cpu核心数的子进程（当然可以手动改变）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">def hello(i):</span><br><span class="line">    print(&quot;hello ,this is the %d process&quot; % i)</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    p = Pool()</span><br><span class="line">    for i in range(1,5):</span><br><span class="line">        p.apply_async(targe=hell0,args=(i,))</span><br><span class="line">    p.close    </span><br><span class="line">    p.join</span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure></p>
+<p>apply_async表示在开线程时不阻塞主线程，是异步IO的一种方式之一。targe传入要在子线程中执行的函数（约定此时函数不用带括号），args以元组的方式传入函数的参数。<br>join会等待线程池中的每一个线程执行完毕，在调用join之前必须要先调用close，close表示不能再向线程池中添加新的process了。</p>
 
       
     </div>
@@ -423,8 +424,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/01/29/python爬虫之爬取静态网页/" rel="prev" title="python爬虫之爬取静态网页(知识储备)">
-                python爬虫之爬取静态网页(知识储备) <i class="fa fa-chevron-right"></i>
+              <a href="/2018/01/29/python爬虫之爬取静态网页/" rel="prev" title="python爬虫之爬取静态网页(知识储备篇)">
+                python爬虫之爬取静态网页(知识储备篇) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
