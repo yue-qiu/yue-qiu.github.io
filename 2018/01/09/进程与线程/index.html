@@ -82,14 +82,14 @@
 <meta name="description" content="开进程需要时间学习《python爬虫开发与项目实践》时，执行下面一段代码：1234567891011121314from multiprocessing import Processimport osdef run_process(name):    print(&amp;quot;Child process %s (">
 <meta name="keywords" content="爬虫">
 <meta property="og:type" content="article">
-<meta property="og:title" content="父进程与子进程">
-<meta property="og:url" content="http://yoursite.com/2018/01/09/父进程与子进程/index.html">
+<meta property="og:title" content="进程与线程">
+<meta property="og:url" content="http://yoursite.com/2018/01/09/进程与线程/index.html">
 <meta property="og:site_name" content="精神书屋">
 <meta property="og:description" content="开进程需要时间学习《python爬虫开发与项目实践》时，执行下面一段代码：1234567891011121314from multiprocessing import Processimport osdef run_process(name):    print(&amp;quot;Child process %s (%s) is running&amp;quot; % (name,os.getpid()))if">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-28T17:48:18.405Z">
+<meta property="og:updated_time" content="2018-02-13T10:22:31.941Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="父进程与子进程">
+<meta name="twitter:title" content="进程与线程">
 <meta name="twitter:description" content="开进程需要时间学习《python爬虫开发与项目实践》时，执行下面一段代码：1234567891011121314from multiprocessing import Processimport osdef run_process(name):    print(&amp;quot;Child process %s (%s) is running&amp;quot; % (name,os.getpid()))if">
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/09/父进程与子进程/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/09/进程与线程/"/>
 
 
 
 
 
-  <title>父进程与子进程 | 精神书屋</title>
+  <title>进程与线程 | 精神书屋</title>
   
 
 
@@ -273,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/09/父进程与子进程/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/09/进程与线程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qiuyue">
@@ -290,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">父进程与子进程</h1>
+          <h1 class="post-title" itemprop="name headline">进程与线程</h1>
         
 
         <div class="post-meta">
@@ -342,7 +342,7 @@
 
           
           
-             <span id="/2018/01/09/父进程与子进程/" class="leancloud_visitors" data-flag-title="父进程与子进程">
+             <span id="/2018/01/09/进程与线程/" class="leancloud_visitors" data-flag-title="进程与线程">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -382,8 +382,9 @@
 <p>显示的结果是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">parant process 6332 </span><br><span class="line">process will start</span><br><span class="line">process will start</span><br><span class="line">process will start</span><br><span class="line">process will start</span><br><span class="line">process will start</span><br><span class="line">Child process 2 (9896) is running</span><br><span class="line">Child process 0 (11208) is running</span><br><span class="line">Child process 3 (5464) is running</span><br><span class="line">Child process 1 (10208) is running</span><br><span class="line">Child process 4 (12596) is running</span><br><span class="line">process end</span><br></pre></td></tr></table></figure></p>
 <p>可以看到，程序在执行完<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print (&quot;parant process %s &quot; % os.getpid())</span><br></pre></td></tr></table></figure></p>
 <p>没有接着马上执行run_process()，而是先打印process will start，最后把子进程一起执行。这是因为子进程的创建是需要时间的，在这个空闲时间里父进程继续执行代码，而子进程在创建完成后显示。    </p>
-<h1 id="Pool"><a href="#Pool" class="headerlink" title="Pool"></a>Pool</h1><p>需要创建多个进程时，可以使用multiprocessing中的Pool类开进程池。Pool()默认开启数量等于当前cpu核心数的子进程（当然可以手动改变）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">def hello(i):</span><br><span class="line">    print(&quot;hello ,this is the %d process&quot; % i)</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    p = Pool()</span><br><span class="line">    for i in range(1,5):</span><br><span class="line">        p.apply_async(targe=hell0,args=(i,))</span><br><span class="line">    p.close    </span><br><span class="line">    p.join</span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure></p>
+<h1 id="Pool线程池"><a href="#Pool线程池" class="headerlink" title="Pool线程池"></a>Pool线程池</h1><p>需要创建多个进程时，可以使用multiprocessing中的Pool类开进程池。Pool()默认开启数量等于当前cpu核心数的子进程（当然可以手动改变）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">def hello(i):</span><br><span class="line">    print(&quot;hello ,this is the %d process&quot; % i)</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    p = Pool()</span><br><span class="line">    for i in range(1,5):</span><br><span class="line">        p.apply_async(targe=hell0,args=(i,))</span><br><span class="line">    p.close    </span><br><span class="line">    p.join</span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure></p>
 <p>apply_async表示在开线程时不阻塞主线程，是异步IO的一种方式之一。targe传入要在子线程中执行的函数（约定此时函数不用带括号），args以元组的方式传入函数的参数。<br>join会等待线程池中的每一个线程执行完毕，在调用join之前必须要先调用close，close表示不能再向线程池中添加新的process了。</p>
+<h1 id="守护线程"><a href="#守护线程" class="headerlink" title="守护线程"></a>守护线程</h1><p>线程并没有主次的概念，我们一般说的‘主线程’实际上是main函数的线程，而所谓主线程结束子线程也会结束是因为在主线程结束时调用了退出函数。而守护线程是指‘不重要线程’。主线程会等所有‘重要’线程结束后才结束。通常当客户端访问服务器时会为这次访问开启一个守护线程。将setDaemon属性设为True即可将该线程设为守护线程。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">from threading import Thread</span><br><span class="line">from multiprocessing import Process</span><br><span class="line"></span><br><span class="line">n = 100</span><br><span class="line"></span><br><span class="line">def count(x,y):</span><br><span class="line">    n=x+y</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line"></span><br><span class="line">    t = Thread(target=count,args=(1,2))</span><br><span class="line">    t.setDaemon = True</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -564,7 +565,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#开进程需要时间"><span class="nav-number">1.</span> <span class="nav-text">开进程需要时间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pool"><span class="nav-number">2.</span> <span class="nav-text">Pool</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#开进程需要时间"><span class="nav-number">1.</span> <span class="nav-text">开进程需要时间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pool线程池"><span class="nav-number">2.</span> <span class="nav-text">Pool线程池</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#守护线程"><span class="nav-number">3.</span> <span class="nav-text">守护线程</span></a></li></ol></div>
             
 
           </div>
