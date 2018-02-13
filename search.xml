@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[sqlalchemy框架下的数据库关系]]></title>
+    <url>%2F2018%2F02%2F13%2Fsqlalchemy%E6%A1%86%E6%9E%B6%E4%B8%8B%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E5%85%B3%E7%B3%BB%2F</url>
+    <content type="text"><![CDATA[关系型数据库中表的关系一对多考虑下面的代码12345678910111213141516171819202122232425from flask-sqlalchemy import SQLAlchemyfrom flask import Flaskimport osapp = Flask(__name__)# 配置app，实例化SQLAlchemybasedir = os.path.abspath(os.path.dirname(__file__))app.config[&apos;SQLALCHEMY_DATABASE_URI&apos;] = &apos;sqlite:///&apos; + os.path.join(basedir + &apos;db.sqlite&apos;)app.config[&apos;SECRECT_KEY&apos;] = &apos;a secrect string&apos;db = SQLAlchemy(app)# 定义模型class Writer(db.model): __tablename__ = writers id = db.Column(db.Integer,primary_key=True) name = db.Column(db.String(64),unique=True) posts = db.relationship(&apos;articles&apos;,backref=&apos;writer&apos;)class Article(db.model): __tablename__ = articles id = db.Column(db.Integer,primary_key) title = db.Column(db.String(64)) body = db.Column(db.String(2018)) writer_id = db.Colum(db.Integer,ForeignKey=&apos;writers.id&apos;) 在Writer模型中，relationship定义了两张表之间的关系.relationship的backref属性相当于在另一张表中也定义了一个相关关系。这样Writer实例通过posts属性可以访问所有与之相关的Article模型，返回一个关联Article组成的列表。Article实例通过writer属性可以访问对应的Writer模型。 在Article模型中，writer_id属性被定义为外键，其值通过ForeignKey指向Writer模型中的主键。实例化模型123susan = writer(name=susan)love_python = article(title=&apos;love python&apos;,body=&apos;python is easy and \elegant&apos;,writer=susan) 在实例化Article模型时，由relationship反向定义的writer属性要传入与love_python对应的的Writer实例susan。这样就可以让love_python与susan两个实例关联起来。 一对一要让两张表是一对一关系，只需要在relationship中将uselist设为False。 多对一与一对多类似，只需要对调两张表。]]></content>
+      <categories>
+        <category>python 数据库</category>
+      </categories>
+      <tags>
+        <tag>杂谈</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[python杂谈]]></title>
     <url>%2F2018%2F02%2F07%2Fpython%E6%9D%82%E8%B0%88%2F</url>
     <content type="text"><![CDATA[面向对象编程之方法与函数面向对象编程思想中，方法是指一个对象可以使用的功能，举个例子12arr = [1,2,3]arr.remove(2) arr被定义为指向列表对象的变量，而remove则是列表对象的一个方法，用于从列表中删除某个值。而函数则是对对象进行操作，例如12arr = [1,2,3]len(arr) len()函数对其参数求长度。在本例中len()的参数既是一个列表。]]></content>
