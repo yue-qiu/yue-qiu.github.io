@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="web开发,爬虫," />
+  <meta name="keywords" content="爬虫,web开发," />
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="什么是进程/线程众所周知，CPU是计算机的核心，它承担了所有的计算任务。而操作系统是计算机的管理者，是一个大管家，它负责任务的调度，资源的分配和管理，统领整个计算机硬件。应用应用程序是具有某种功能的程序，程序运行与操作系统之上。 进程进程时一个具有一定功能的程序在一个数据集上的一次动态执行过程。进程由程序，数据集合和进">
-<meta name="keywords" content="web开发,爬虫">
+<meta name="keywords" content="爬虫,web开发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="进程与线程">
 <meta property="og:url" content="http://yoursite.com/2018/01/09/进程与线程/index.html">
@@ -477,9 +477,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/web开发/" rel="tag"># web开发</a>
-          
             <a href="/tags/爬虫/" rel="tag"># 爬虫</a>
+          
+            <a href="/tags/web开发/" rel="tag"># web开发</a>
           
         </div>
       
@@ -756,6 +756,12 @@
       </div>
     
 
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
     
 
   </div>
@@ -1366,6 +1372,18 @@
       
       new needShareButton('#needsharebutton-postbottom', pbOptions);
     
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
     
   </script>
 
