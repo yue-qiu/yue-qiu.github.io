@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="flask," />
 
 
 
@@ -79,16 +79,21 @@
 
 
 
-<meta name="description" content="高山仰止，景行行止。虽不能至，心向往之。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="精神书屋">
-<meta property="og:url" content="http://yoursite.com/archives/2018/02/index.html">
+<meta name="description" content="flask的4种请求钩子有时在处理请求之前或者之后执行代码会很有用。例如：在请求开始时，我们可能需要创建数据库连接或者认证发起请求的用户，为了避免在每个视图函数中都有重复的代码，Flask提供了注册通用函数的功能，注册的函数可以在请求被分别发布到视图函数之前或之后自动调用。这种注册函数的功能就称之为“请求钩子”。 @b">
+<meta name="keywords" content="flask">
+<meta property="og:type" content="article">
+<meta property="og:title" content="flask学习">
+<meta property="og:url" content="http://yoursite.com/2018/03/22/flask学习/index.html">
 <meta property="og:site_name" content="精神书屋">
-<meta property="og:description" content="高山仰止，景行行止。虽不能至，心向往之。">
+<meta property="og:description" content="flask的4种请求钩子有时在处理请求之前或者之后执行代码会很有用。例如：在请求开始时，我们可能需要创建数据库连接或者认证发起请求的用户，为了避免在每个视图函数中都有重复的代码，Flask提供了注册通用函数的功能，注册的函数可以在请求被分别发布到视图函数之前或之后自动调用。这种注册函数的功能就称之为“请求钩子”。 @before_first_request注册一个函数，在处理第一个请求之前执行。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p1csf090h.bkt.clouddn.com/g.png">
+<meta property="og:image" content="http://p1csf090h.bkt.clouddn.com/current_app.png">
+<meta property="og:updated_time" content="2018-03-22T13:51:27.301Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="精神书屋">
-<meta name="twitter:description" content="高山仰止，景行行止。虽不能至，心向往之。">
+<meta name="twitter:title" content="flask学习">
+<meta name="twitter:description" content="flask的4种请求钩子有时在处理请求之前或者之后执行代码会很有用。例如：在请求开始时，我们可能需要创建数据库连接或者认证发起请求的用户，为了避免在每个视图函数中都有重复的代码，Flask提供了注册通用函数的功能，注册的函数可以在请求被分别发布到视图函数之前或之后自动调用。这种注册函数的功能就称之为“请求钩子”。 @before_first_request注册一个函数，在处理第一个请求之前执行。">
+<meta name="twitter:image" content="http://p1csf090h.bkt.clouddn.com/g.png">
 
 
 
@@ -118,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2018/02/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/22/flask学习/"/>
 
 
 
 
 
-  <title>归档 | 精神书屋</title>
+  <title>flask学习 | 精神书屋</title>
   
 
 
@@ -153,7 +158,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -281,148 +286,230 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/22/flask学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qiuyue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/惊讶猫.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="精神书屋">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">flask学习</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-22T16:27:15+08:00">
+                2018-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 11 篇日志。 继续努力。
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web开发/" itemprop="url" rel="index">
+                    <span itemprop="name">Web开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/22/flask学习/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/03/22/flask学习/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/03/22/flask学习/" class="leancloud_visitors" data-flag-title="flask学习">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+      
 
+      
+        <h1 id="flask的4种请求钩子"><a href="#flask的4种请求钩子" class="headerlink" title="flask的4种请求钩子"></a>flask的4种请求钩子</h1><p>有时在处理请求之前或者之后执行代码会很有用。例如：在请求开始时，我们可能需要创建数据库连接或者认证发起请求的用户，为了避免在每个视图函数中都有重复的代码，Flask提供了注册通用函数的功能，注册的函数可以在请求被分别发布到视图函数之前或之后自动调用。这种注册函数的功能就称之为“请求钩子”。</p>
+<h3 id="before-first-request"><a href="#before-first-request" class="headerlink" title="@before_first_request"></a>@before_first_request</h3><p>注册一个函数，在处理第一个请求之前执行。</p>
+<h3 id="before-request"><a href="#before-request" class="headerlink" title="@before_request"></a>@before_request</h3><p>注册一个函数，在每次请求之前执行。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'hi'</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.before_request</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'hello'</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="after-request"><a href="#after-request" class="headerlink" title="@after_request"></a>@after_request</h3><p>注册一个函数，如果没有未处理的异常抛出，在每次请求之后执行。</p>
+<h3 id="teardown-request"><a href="#teardown-request" class="headerlink" title="@teardown_request"></a>@teardown_request</h3><p>注册一个函数，即使有未处理的异常抛出，也在每次请求之后运行。</p>
+<h1 id="flask的4种上下文全局变量"><a href="#flask的4种上下文全局变量" class="headerlink" title="flask的4种上下文全局变量"></a>flask的4种上下文全局变量</h1><h2 id="请求上下文-request-context"><a href="#请求上下文-request-context" class="headerlink" title="请求上下文(request context)"></a>请求上下文(request context)</h2><h3 id="request"><a href="#request" class="headerlink" title="request"></a>request</h3><p>请求对象，封装了客户端发出的HTTP请求中的内容。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> request,Flask,abort</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/',methods=['GET','POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'GET'</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'hello'</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        abort(<span class="number">404</span>)</span><br></pre></td></tr></table></figure></p>
+<p>这段代码表示当客户端以GET的方式发送HTTP请求时，会返回hello，否则abort()会抛出一个404错误。</p>
+<h4 id="request获取HTTP请求内容的几种方式"><a href="#request获取HTTP请求内容的几种方式" class="headerlink" title="request获取HTTP请求内容的几种方式"></a>request获取HTTP请求内容的几种方式</h4><ol>
+<li>request.method<br>获取HTTP请求方式</li>
+<li>request.form.get(‘name’)<br>获取form中的内容，当name不存在时返回None。(注意：用request.form[‘name’]也可以把内容取出来，但是任何时候都不应该用这种危险的方式，因为当name不存在时会直接抛出错误，下文同理)</li>
+<li>request.args.get(‘name’)<br>获取以查询字符串中的内容，当name不存在时返回None。</li>
+<li>request.cookies.get(‘name’)<br>获取cookies中的内容，当name不存在时返回None。</li>
+<li>request.header.get(‘name’)<br>获取HTTP请求的header中的内容，当name不存在时返回None。</li>
+<li>request.url/base_url/path/url_root<br>获取请求url相关内容，直接上结果方便理解：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">return &apos;url: %s , path: %s , base_url: %s , url_root : %s&apos; % (request.url,request.script_root, request.path,request.base_url,request.url_root)</span><br><span class="line"></span><br><span class="line">#url: http://192.168.1.183:5000/testrequest?a&amp;b ,path: /testrequest , base_url: http://192.168.1.183:5000/testrequest , url_root : http://192.168.1.183:5000/</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="g"><a href="#g" class="headerlink" title="g"></a>g</h3><p>g：global。处理请求时用作临时存储的对象，<strong>每次请求</strong>都会<strong>重设</strong>这个变量。<br><strong>g还常用于在请求钩子和视图函数之间共享数据</strong>。例如：before_request处理程序可以从数据库中加载已登录用户并将其保存到g.user中，随后调用视图函数时，视图函数就可以直接使用g.user获取用户。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,g,request,render_templat,g</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login_log</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">print</span> (<span class="string">'当前登录用户是：%s'</span> % g.username)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login_ip</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">print</span> (<span class="string">'当前登录用户的IP是：%s'</span> % g.ip)</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello_world</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'Hello World!'</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/login/',methods=['GET', 'POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'GET'</span>:</span><br><span class="line">        <span class="keyword">return</span> render_template(<span class="string">'login.html'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        username = request.form.get(<span class="string">'username'</span>)</span><br><span class="line">        password = request.form.get(<span class="string">'password'</span>)</span><br><span class="line">        g.username = username</span><br><span class="line">        g.ip = password</span><br><span class="line">        login_log()</span><br><span class="line">        login_ip()</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'恭喜登录成功！'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app.run()</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://p1csf090h.bkt.clouddn.com/g.png" alt=""></p>
+<h2 id="程序上下文-app-context"><a href="#程序上下文-app-context" class="headerlink" title="程序上下文(app context)"></a>程序上下文(app context)</h2><h3 id="current-app"><a href="#current-app" class="headerlink" title="current_app"></a>current_app</h3><p>current_app，顾名思义这个变量表示当前激活的程序实例<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> current_app,Flask</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/test')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> current_app.name</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://p1csf090h.bkt.clouddn.com/current_app.png" alt=""></p>
+<h3 id="session"><a href="#session" class="headerlink" title="session"></a>session</h3><p>用户回话，用于存储请求直接需要“记住”的值的<strong>字典</strong>，其操作方式也与字典相似。当客户端关闭则session失效。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,session,url_for</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/login',methods=['GET','POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:</span><br><span class="line">        session[<span class="string">'username'</span>] = request.form.get(<span class="string">'username'</span>)</span><br><span class="line">        <span class="keyword">return</span> url_for(<span class="string">'index'</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"""</span></span><br><span class="line"><span class="string">        &lt;form action="" method="post"&gt;</span></span><br><span class="line"><span class="string">            &lt;p&gt;&lt;input type=text name=username&gt;</span></span><br><span class="line"><span class="string">            &lt;p&gt;&lt;input type=submit value=Login&gt;</span></span><br><span class="line"><span class="string">        &lt;/form&gt;</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">'username'</span> <span class="keyword">in</span> session:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'%s 已经登录'</span> % session[<span class="string">'username'</span>]</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'请登录'</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/flask/" rel="tag"># flask</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
         
-        
+
         
 
         
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
           </div>
         
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/02/24/python爬虫之爬取静态网页实战篇/" itemprop="url">
-              
-                <span itemprop="name">python爬虫之爬取静态网页（实战篇）</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-02-24T21:15:34+08:00"
-              content="2018-02-24" >
-          02-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
+        </div>
+      
       
 
-        
-        
-        
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/20/书单整理/" rel="next" title="书单整理">
+                <i class="fa fa-chevron-left"></i> 书单整理
+              </a>
+            
+          </div>
 
-        
-        
+          <span class="post-nav-divider"></span>
 
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/02/13/sqlalchemy框架下的数据库关系/" itemprop="url">
-              
-                <span itemprop="name">sqlalchemy框架下的数据库关系</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-02-13T13:42:33+08:00"
-              content="2018-02-13" >
-          02-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/02/07/python杂谈/" itemprop="url">
-              
-                <span itemprop="name">python杂谈</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-02-07T14:51:08+08:00"
-              content="2018-02-07" >
-          02-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
-
-    </div>
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -430,6 +517,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -450,8 +544,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -537,6 +640,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#flask的4种请求钩子"><span class="nav-number">1.</span> <span class="nav-text">flask的4种请求钩子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#before-first-request"><span class="nav-number">1.0.1.</span> <span class="nav-text">@before_first_request</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#before-request"><span class="nav-number">1.0.2.</span> <span class="nav-text">@before_request</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#after-request"><span class="nav-number">1.0.3.</span> <span class="nav-text">@after_request</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#teardown-request"><span class="nav-number">1.0.4.</span> <span class="nav-text">@teardown_request</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#flask的4种上下文全局变量"><span class="nav-number">2.</span> <span class="nav-text">flask的4种上下文全局变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#请求上下文-request-context"><span class="nav-number">2.1.</span> <span class="nav-text">请求上下文(request context)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#request"><span class="nav-number">2.1.1.</span> <span class="nav-text">request</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#request获取HTTP请求内容的几种方式"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">request获取HTTP请求内容的几种方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#g"><span class="nav-number">2.1.2.</span> <span class="nav-text">g</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序上下文-app-context"><span class="nav-number">2.2.</span> <span class="nav-text">程序上下文(app context)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#current-app"><span class="nav-number">2.2.1.</span> <span class="nav-text">current_app</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#session"><span class="nav-number">2.2.2.</span> <span class="nav-text">session</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -715,6 +834,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
