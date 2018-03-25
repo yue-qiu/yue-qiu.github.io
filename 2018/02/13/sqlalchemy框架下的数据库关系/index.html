@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="精神书屋">
 <meta property="og:description" content="关系型数据库中表的关系一对多考虑下面的代码12345678910111213141516171819202122232425from flask-sqlalchemy import SQLAlchemyfrom flask import Flaskimport osapp = Flask(__name__)# 配置app，实例化SQLAlchemybasedir = os.path.abspath">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-25T02:09:25.456Z">
+<meta property="og:updated_time" content="2018-03-25T02:26:18.729Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="flask-sqlalchemy框架的使用">
 <meta name="twitter:description" content="关系型数据库中表的关系一对多考虑下面的代码12345678910111213141516171819202122232425from flask-sqlalchemy import SQLAlchemyfrom flask import Flaskimport osapp = Flask(__name__)# 配置app，实例化SQLAlchemybasedir = os.path.abspath">
@@ -428,7 +428,14 @@
 <p>将学生与课程之间的关系添加到Reflection中<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">f = Reflection(student=Mike,class=English)</span><br><span class="line">db.session.add(f)</span><br><span class="line">db.session.commit()</span><br></pre></td></tr></table></figure></p>
 <p>当我们想要查询学生的课程时，通过Student.classes获取到Reflection对象，再通过Reflection.class就可以查到该学生的课了。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">student = Student.query.filter_by(name=<span class="string">'Mike'</span>).first()</span><br><span class="line">classes = student.classes.<span class="keyword">class</span>.all()</span><br></pre></td></tr></table></figure></p>
 <h2 id="联结查询"><a href="#联结查询" class="headerlink" title="联结查询"></a>联结查询</h2><p>在上面的例子中，我们为了获取学生的课程，执行了多次查询，这样的效率太低了，最好是一次就直接把结果查询出来。我们可以考虑把Class和Reflection结合起来，然后分别过滤Reflection中student_id与class_id，这样就得到一样包含了学生和相应课程的表。这种操作就叫做联结查询。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(db.Model)</span>:</span></span><br><span class="line">    ......</span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getclass</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> Reflection.query.join(Class,Class.id==Reflection.class_id).filter(Reflection.student_id==self.id)</span><br></pre></td></tr></table></figure></p>
-<p>这样，我们就可以通过<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Mike.getclass获得Mike的课程了。</span><br></pre></td></tr></table></figure></p>
+<p>下面对这行代码进行分析：</p>
+<ol>
+<li>Reflection.query返回Reflection对象</li>
+<li>join(Class,Class.id==Reflection.class_id) 联结Class与Reflection对象，并且将Class.id与Reflection.class_id的值对应起来</li>
+<li>filter(Reflection.student_id==self.id) 对这张临时表进行过滤：只有Reflection.student_id与当前学生实例id相同的会留下来</li>
+</ol>
+<p>这样，我们就可以用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Mike.getclass</span><br></pre></td></tr></table></figure></p>
+<p>获得Mike的课程了。</p>
 
       
     </div>
