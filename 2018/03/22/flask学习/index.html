@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://p1csf090h.bkt.clouddn.com/g.png">
 <meta property="og:image" content="http://p1csf090h.bkt.clouddn.com/current_app.png">
-<meta property="og:updated_time" content="2018-03-27T13:18:05.008Z">
+<meta property="og:updated_time" content="2018-03-27T13:44:44.170Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="flask学习">
 <meta name="twitter:description" content="flask的4种请求钩子有时在处理请求之前或者之后执行代码会很有用。例如：在请求开始时，我们可能需要创建数据库连接或者认证发起请求的用户，为了避免在每个视图函数中都有重复的代码，Flask提供了注册通用函数的功能，注册的函数可以在请求被分别发布到视图函数之前或之后自动调用。这种注册函数的功能就称之为“请求钩子”。 @before_first_request注册一个函数，在处理第一个请求之前执行。">
@@ -427,7 +427,7 @@
 <li>request.form.get(‘name’)<br>获取form中的内容，当name不存在时返回None。(注意：用request.form[‘name’]也可以把内容取出来，但是任何时候都不应该用这种危险的方式，因为当name不存在时会直接抛出错误，下文同理)</li>
 <li>request.args.get(‘name’)<br>获取以查询字符串中的内容，当name不存在时返回None。</li>
 <li>request.cookies.get(‘name’)<br>获取cookies中的内容，当name不存在时返回None。</li>
-<li>request.header.get(‘name’)<br>获取HTTP请求的header中的内容，当name不存在时返回None。</li>
+<li>request.headers.get(‘name’)<br>获取HTTP请求的header中的内容，当name不存在时返回None。</li>
 <li>request.url/base_url/path/url_root<br>获取请求url相关内容，直接上结果方便理解：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">return &apos;url: %s , path: %s , base_url: %s , url_root : %s&apos; % (request.url,request.script_root, request.path,request.base_url,request.url_root)</span><br><span class="line"></span><br><span class="line">#url: http://192.168.1.183:5000/testrequest?a&amp;b ,path: /testrequest , base_url: http://192.168.1.183:5000/testrequest , url_root : http://192.168.1.183:5000/</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
