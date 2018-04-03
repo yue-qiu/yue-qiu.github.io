@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="精神书屋">
 <meta property="og:description" content="关系型数据库中表的关系一对多考虑下面的代码12345678910111213141516171819202122232425from flask-sqlalchemy import SQLAlchemyfrom flask import Flaskimport osapp = Flask(__name__)# 配置app，实例化SQLAlchemybasedir = os.path.abspath">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-31T13:57:04.732Z">
+<meta property="og:updated_time" content="2018-04-03T08:48:51.790Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="flask-sqlalchemy框架">
 <meta name="twitter:description" content="关系型数据库中表的关系一对多考虑下面的代码12345678910111213141516171819202122232425from flask-sqlalchemy import SQLAlchemyfrom flask import Flaskimport osapp = Flask(__name__)# 配置app，实例化SQLAlchemybasedir = os.path.abspath">
@@ -434,7 +434,7 @@
 <li>join(Class,Class.id==Reflection.class_id) 联结Class与Reflection表，并且将Class.id与Reflection.class_id的值对应起来，相当于sql语句中的on</li>
 <li>filter(Reflection.student_id==self.id) 对这张临时表进行过滤：只有Reflection.student_id与当前学生实例id相同的会留下来  </li>
 </ol>
-<p>转换为sql语句是这样的：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> a.student_id,a.class_id,a.classes,a.students,a.timestamp,b.name,b.student <span class="keyword">from</span> Reflection <span class="keyword">as</span> a <span class="keyword">join</span> <span class="keyword">Class</span> <span class="keyword">as</span> b <span class="keyword">on</span> a.class_id=b.id <span class="keyword">where</span> a.student_id=self.id</span><br></pre></td></tr></table></figure></p>
+<p>转换为sql语句是这样的：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> a.student_id,a.class_id,a.classes,a.students,a.timestamp,b.name,b.student <span class="keyword">from</span> Reflection a <span class="keyword">join</span> <span class="keyword">Class</span> b <span class="keyword">on</span> a.class_id=b.id <span class="keyword">where</span> a.student_id=self.id</span><br></pre></td></tr></table></figure></p>
 <p>这样，我们就可以使用这样临时的表来获取想要的内容了。</p>
 
       
