@@ -88,7 +88,7 @@
 <meta property="og:description" content="范式(Normal Form)关系型数据库的规范化理论为：关系数据库中的每一个关系都要满足一定的规范。根据满足规范的条件不同，可以分为5个等级，一般只要把数据库规范到第三等级就足够了。 第一范式(1NF)第一范式包括下列指导原则：  数据组中的每个属性只可以包含一个值 关系中的每个数组必须包含相同数量的值 关系中的每个数组一定不能相同在任何一个关系型数据库中，第一范式是对关系模式的基本要求，不满足">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://p1csf090h.bkt.clouddn.com/mysql/082230505368061.png">
-<meta property="og:updated_time" content="2018-04-10T12:52:07.254Z">
+<meta property="og:updated_time" content="2018-04-29T12:53:24.235Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《MySQL从入门到精通》读书笔记">
 <meta name="twitter:description" content="范式(Normal Form)关系型数据库的规范化理论为：关系数据库中的每一个关系都要满足一定的规范。根据满足规范的条件不同，可以分为5个等级，一般只要把数据库规范到第三等级就足够了。 第一范式(1NF)第一范式包括下列指导原则：  数据组中的每个属性只可以包含一个值 关系中的每个数组必须包含相同数量的值 关系中的每个数组一定不能相同在任何一个关系型数据库中，第一范式是对关系模式的基本要求，不满足">
@@ -439,7 +439,7 @@
 <ol>
 <li>FORM: 对FROM的左边的表和右边的表计算笛卡尔积。产生虚表VT1</li>
 <li>ON: 对虚表VT1进行ON筛选，只有那些符合<join-condition>的行才会被记录在虚表VT2中。</join-condition></li>
-<li>JOIN： 如果指定了OUTER JOIN（比如left join、 right join），那么保留表中未匹配的行就会作为外部行添加到虚拟表VT2中，产生虚拟表VT3, rug from子句中包含两个以上的表的话，那么就会对上一个join连接产生的结果VT3和下一个表重复执行步骤1~3这三个步骤，一直到处理完所有的表为止。</li>
+<li>JOIN： 如果指定了OUTER JOIN（比如left join、 right join），那么保留表中未匹配的行就会作为外部行添加到虚拟表VT2中，产生虚拟表VT3,如果from子句中包含两个以上的表的话，那么就会对上一个join连接产生的结果VT3和下一个表重复执行步骤1~3这三个步骤，一直到处理完所有的表为止。</li>
 <li>WHERE： 对虚拟表VT3进行WHERE条件过滤。只有符合<where-condition>的记录才会被插入到虚拟表VT4中。</where-condition></li>
 <li>GROUP BY: 根据group by子句中的列，对VT4中的记录进行分组操作，产生VT5.</li>
 <li>CUBE | ROLLUP: 对表VT5进行cube或者rollup操作，产生表VT6.</li>
@@ -505,8 +505,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/04/29/Nginx与gunicorn/" rel="prev" title="Nginx与gunicorn">
-                Nginx与gunicorn <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/09/Python常用库/" rel="prev" title="Python常用库">
+                Python常用库 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -591,7 +591,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
