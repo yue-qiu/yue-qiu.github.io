@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="flask," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,21 +79,17 @@
 
 
 
-<meta name="description" content="flask的4种请求钩子有时在处理请求之前或者之后执行代码会很有用。例如：在请求开始时，我们可能需要创建数据库连接或者认证发起请求的用户，为了避免在每个视图函数中都有重复的代码，Flask提供了注册通用函数的功能，注册的函数可以在请求被分别发布到视图函数之前或之后自动调用。这种注册函数的功能就称之为“请求钩子”。 @b">
-<meta name="keywords" content="flask">
+<meta name="description" content="dict dict的key是唯一的，而values不保证唯一。 dict()函数语法：参数说明 **kwargs – 关键字 mapping – 元素的容器。 iterable – 可迭代对象123class dict(**kwarg)class dict(mapping, **kwarg)class dict(ite">
 <meta property="og:type" content="article">
-<meta property="og:title" content="flask学习">
-<meta property="og:url" content="http://yoursite.com/2018/03/22/flask学习/index.html">
+<meta property="og:title" content="《Python cookbook》第一章">
+<meta property="og:url" content="http://yoursite.com/2018/05/13/《Python-cookbook》笔记/index.html">
 <meta property="og:site_name" content="精神书屋">
-<meta property="og:description" content="flask的4种请求钩子有时在处理请求之前或者之后执行代码会很有用。例如：在请求开始时，我们可能需要创建数据库连接或者认证发起请求的用户，为了避免在每个视图函数中都有重复的代码，Flask提供了注册通用函数的功能，注册的函数可以在请求被分别发布到视图函数之前或之后自动调用。这种注册函数的功能就称之为“请求钩子”。 @before_first_request注册一个函数，在处理第一个请求之前执行。">
+<meta property="og:description" content="dict dict的key是唯一的，而values不保证唯一。 dict()函数语法：参数说明 **kwargs – 关键字 mapping – 元素的容器。 iterable – 可迭代对象123class dict(**kwarg)class dict(mapping, **kwarg)class dict(iterable, **kwarg)     下面这三种调用方式是可接受的123dic">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://p1csf090h.bkt.clouddn.com/g.png">
-<meta property="og:image" content="http://p1csf090h.bkt.clouddn.com/current_app.png">
-<meta property="og:updated_time" content="2018-03-27T13:44:44.170Z">
+<meta property="og:updated_time" content="2018-05-17T11:24:30.596Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="flask学习">
-<meta name="twitter:description" content="flask的4种请求钩子有时在处理请求之前或者之后执行代码会很有用。例如：在请求开始时，我们可能需要创建数据库连接或者认证发起请求的用户，为了避免在每个视图函数中都有重复的代码，Flask提供了注册通用函数的功能，注册的函数可以在请求被分别发布到视图函数之前或之后自动调用。这种注册函数的功能就称之为“请求钩子”。 @before_first_request注册一个函数，在处理第一个请求之前执行。">
-<meta name="twitter:image" content="http://p1csf090h.bkt.clouddn.com/g.png">
+<meta name="twitter:title" content="《Python cookbook》第一章">
+<meta name="twitter:description" content="dict dict的key是唯一的，而values不保证唯一。 dict()函数语法：参数说明 **kwargs – 关键字 mapping – 元素的容器。 iterable – 可迭代对象123class dict(**kwarg)class dict(mapping, **kwarg)class dict(iterable, **kwarg)     下面这三种调用方式是可接受的123dic">
 
 
 
@@ -123,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/22/flask学习/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/13/《Python-cookbook》笔记/"/>
 
 
 
 
 
-  <title>flask学习 | 精神书屋</title>
+  <title>《Python cookbook》第一章 | 精神书屋</title>
   
 
 
@@ -300,7 +296,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/22/flask学习/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/13/《Python-cookbook》笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qiuyue">
@@ -317,7 +313,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">flask学习</h1>
+          <h1 class="post-title" itemprop="name headline">《Python cookbook》第一章</h1>
         
 
         <div class="post-meta">
@@ -329,8 +325,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-22T16:27:15+08:00">
-                2018-03-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-13T21:32:20+08:00">
+                2018-05-13
               </time>
             
 
@@ -352,8 +348,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web开发/" itemprop="url" rel="index">
-                    <span itemprop="name">Web开发</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -370,8 +366,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/22/flask学习/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/03/22/flask学习/" itemprop="commentCount"></span>
+                <a href="/2018/05/13/《Python-cookbook》笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/05/13/《Python-cookbook》笔记/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -379,7 +375,7 @@
 
           
           
-             <span id="/2018/03/22/flask学习/" class="leancloud_visitors" data-flag-title="flask学习">
+             <span id="/2018/05/13/《Python-cookbook》笔记/" class="leancloud_visitors" data-flag-title="《Python cookbook》第一章">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -415,35 +411,31 @@
       
 
       
-        <h1 id="flask的4种请求钩子"><a href="#flask的4种请求钩子" class="headerlink" title="flask的4种请求钩子"></a>flask的4种请求钩子</h1><p>有时在处理请求之前或者之后执行代码会很有用。例如：在请求开始时，我们可能需要创建数据库连接或者认证发起请求的用户，为了避免在每个视图函数中都有重复的代码，Flask提供了注册通用函数的功能，注册的函数可以在请求被分别发布到视图函数之前或之后自动调用。这种注册函数的功能就称之为“请求钩子”。</p>
-<h3 id="before-first-request"><a href="#before-first-request" class="headerlink" title="@before_first_request"></a>@before_first_request</h3><p>注册一个函数，在处理第一个请求之前执行。</p>
-<h3 id="before-request"><a href="#before-request" class="headerlink" title="@before_request"></a>@before_request</h3><p>注册一个函数，在每次请求之前执行。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'hi'</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.before_request</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'hello'</span>)</span><br></pre></td></tr></table></figure></p>
-<h3 id="after-request"><a href="#after-request" class="headerlink" title="@after_request"></a>@after_request</h3><p>注册一个函数，如果没有未处理的异常抛出，在每次请求之后执行。</p>
-<h3 id="teardown-request"><a href="#teardown-request" class="headerlink" title="@teardown_request"></a>@teardown_request</h3><p>注册一个函数，即使有未处理的异常抛出，也在每次请求之后运行。</p>
-<h1 id="flask的4种上下文全局变量"><a href="#flask的4种上下文全局变量" class="headerlink" title="flask的4种上下文全局变量"></a>flask的4种上下文全局变量</h1><h2 id="请求上下文-request-context"><a href="#请求上下文-request-context" class="headerlink" title="请求上下文(request context)"></a>请求上下文(request context)</h2><h3 id="request"><a href="#request" class="headerlink" title="request"></a>request</h3><p>请求对象，封装了客户端发出的HTTP请求中的内容。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> request,Flask,abort</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/',methods=['GET','POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'GET'</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'hello'</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        abort(<span class="number">404</span>)</span><br></pre></td></tr></table></figure></p>
-<p>这段代码表示当客户端以GET的方式发送HTTP请求时，会返回hello，否则abort()会抛出一个404错误。</p>
-<h4 id="request获取HTTP请求内容的几种方式"><a href="#request获取HTTP请求内容的几种方式" class="headerlink" title="request获取HTTP请求内容的几种方式"></a>request获取HTTP请求内容的几种方式</h4><ol>
-<li>request.method<br>获取HTTP请求方式</li>
-<li>request.form.get(‘name’)<br>获取form中的内容，当name不存在时返回None。(注意：用request.form[‘name’]也可以把内容取出来，但是任何时候都不应该用这种危险的方式，因为当name不存在时会直接抛出错误，下文同理)</li>
-<li>request.args.get(‘name’)<br>获取以查询字符串中的内容，当name不存在时返回None。</li>
-<li>request.cookies.get(‘name’)<br>获取cookies中的内容，当name不存在时返回None。</li>
-<li>request.headers.get(‘name’)<br>获取HTTP请求的header中的内容，当name不存在时返回None。</li>
-<li>request.url/base_url/path/url_root<br>获取请求url相关内容，直接上结果方便理解：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">return &apos;url: %s , path: %s , base_url: %s , url_root : %s&apos; % (request.url,request.script_root, request.path,request.base_url,request.url_root)</span><br><span class="line"></span><br><span class="line">#url: http://192.168.1.183:5000/testrequest?a&amp;b ,path: /testrequest , base_url: http://192.168.1.183:5000/testrequest , url_root : http://192.168.1.183:5000/</span><br></pre></td></tr></table></figure>
+        <h1 id="dict"><a href="#dict" class="headerlink" title="dict"></a>dict</h1><ol>
+<li>dict的key是唯一的，而values不保证唯一。</li>
+<li>dict()函数语法：<br>参数说明<ul>
+<li>**kwargs – 关键字</li>
+<li>mapping – 元素的容器。</li>
+<li>iterable – 可迭代对象<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">dict</span><span class="params">(**kwarg)</span></span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">dict</span><span class="params">(mapping, **kwarg)</span></span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">dict</span><span class="params">(iterable, **kwarg)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 </li>
 </ol>
-<h3 id="g"><a href="#g" class="headerlink" title="g"></a>g</h3><p>g：global。处理请求时用作临时存储的对象，<strong>每次请求</strong>都会<strong>重设</strong>这个变量。<br><strong>g还常用于在请求钩子和视图函数之间共享数据</strong>。例如：before_request处理程序可以从数据库中加载已登录用户并将其保存到g.user中，随后调用视图函数时，视图函数就可以直接使用g.user获取用户。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,g,request,render_templat,g</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login_log</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">print</span> (<span class="string">'当前登录用户是：%s'</span> % g.username)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login_ip</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">print</span> (<span class="string">'当前登录用户的IP是：%s'</span> % g.ip)</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello_world</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'Hello World!'</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/login/',methods=['GET', 'POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'GET'</span>:</span><br><span class="line">        <span class="keyword">return</span> render_template(<span class="string">'login.html'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        username = request.form.get(<span class="string">'username'</span>)</span><br><span class="line">        password = request.form.get(<span class="string">'password'</span>)</span><br><span class="line">        g.username = username</span><br><span class="line">        g.ip = password</span><br><span class="line">        login_log()</span><br><span class="line">        login_ip()</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'恭喜登录成功！'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app.run()</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://p1csf090h.bkt.clouddn.com/g.png" alt=""></p>
-<h2 id="程序上下文-app-context"><a href="#程序上下文-app-context" class="headerlink" title="程序上下文(app context)"></a>程序上下文(app context)</h2><h3 id="current-app"><a href="#current-app" class="headerlink" title="current_app"></a>current_app</h3><p>current_app，顾名思义这个变量表示当前激活的程序实例<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> current_app,Flask</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/test')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> current_app.name</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://p1csf090h.bkt.clouddn.com/current_app.png" alt=""></p>
-<h3 id="session"><a href="#session" class="headerlink" title="session"></a>session</h3><p>用户回话，用于存储请求直接需要“记住”的值的<strong>字典</strong>，其操作方式也与字典相似。当客户端关闭则session失效。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,session,url_for</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/login',methods=['GET','POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:</span><br><span class="line">        session[<span class="string">'username'</span>] = request.form.get(<span class="string">'username'</span>)</span><br><span class="line">        <span class="keyword">return</span> url_for(<span class="string">'index'</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"""</span></span><br><span class="line"><span class="string">        &lt;form action="" method="post"&gt;</span></span><br><span class="line"><span class="string">            &lt;p&gt;&lt;input type=text name=username&gt;</span></span><br><span class="line"><span class="string">            &lt;p&gt;&lt;input type=submit value=Login&gt;</span></span><br><span class="line"><span class="string">        &lt;/form&gt;</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">'username'</span> <span class="keyword">in</span> session:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'%s 已经登录'</span> % session[<span class="string">'username'</span>]</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'请登录'</span></span><br></pre></td></tr></table></figure></p>
-<h1 id="蓝图"><a href="#蓝图" class="headerlink" title="蓝图"></a>蓝图</h1><p>为了方便开发和调试，我们用蓝图将程序分成一些不同的部分。每一部分相互独立。通常同一部分的程序url都带有相同的前缀，如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/user/1和http://127.0.0.1/2</span><br></pre></td></tr></table></figure></p>
-<h2 id="创建蓝图"><a href="#创建蓝图" class="headerlink" title="创建蓝图"></a>创建蓝图</h2><p>在flask中，通过自带的blueprint函数就能注册一个创建一个蓝图：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># !E:/web_develop/bp/__init__.py</span></span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> blueprint</span><br><span class="line"></span><br><span class="line">bp = blueprint(<span class="string">'bp'</span>,__name__)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> views,errors</span><br></pre></td></tr></table></figure></p>
-<p>blueprint接受两个参数：第一个参数是这个蓝图的名字，第二个参数是蓝图所在文件或模块的名字，通常是<strong>name</strong><br><strong>注意：</strong>我们在创建蓝图后导入bp的视图函数模块views和错误处理模块errors，这是因为这两个模块中都有这一句：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> bp</span><br></pre></td></tr></table></figure></p>
-<p>这句话会从<strong>init</strong>.py中尝试导入bp，如果在创建bp前导入这两个模块，会出现循环调用的问题。</p>
-<h2 id="注册蓝图"><a href="#注册蓝图" class="headerlink" title="注册蓝图"></a>注册蓝图</h2><p>蓝图创建好了之后，还要在分发函数中注册它：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># !E:/web_develop/__init__.py</span></span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"><span class="keyword">from</span> .bp <span class="keyword">import</span> bp</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_app</span><span class="params">()</span>:</span></span><br><span class="line">    app = Flask(__name__)</span><br><span class="line">    app.config.from_object(<span class="string">'config'</span>)</span><br><span class="line">    app.register_blueprint(bp,url_prefix=<span class="string">'/bp'</span>)</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
-<p>通过register_blueprint()函数就可以注册这个蓝图，url_prefix属性指定url前缀。</p>
-<h2 id="在蓝图中创建视图函数"><a href="#在蓝图中创建视图函数" class="headerlink" title="在蓝图中创建视图函数"></a>在蓝图中创建视图函数</h2><p>在蓝图外，我们通常用:@app.route()注册视图函数，在蓝图内，我们用:@蓝图名.route()注册视图函数。如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@bp.before_app_request</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">print</span> (<span class="string">'hello'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@bp.errorhandler(404)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">error</span><span class="params">(e)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'Not Found'</span>,<span class="number">404</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@bp.route('/hi')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hi</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'hi'</span></span><br></pre></td></tr></table></figure></p>
-<p>这样注册的函数的作用范围仅限于蓝图内。要让函数变得全局可用，我们要这样写：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@bp.app_errorhandler(404)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">error</span><span class="params">(e)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'Not Found'</span>,<span class="number">400</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@bp.before_app_request</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'hello'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>下面这三种调用方式是可接受的<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dict(a=<span class="string">'hello'</span>,b=<span class="string">'hi'</span>) <span class="comment"># &#123;'a':'hello','b':'hi'&#125;</span></span><br><span class="line">dict(zip([<span class="string">'a'</span>,<span class="string">'b'</span>],[<span class="string">'hello'</span>,<span class="string">'hi'</span>])) <span class="comment"># 映射函数方式构造字典，zip()返回一个迭代器 &#123;'a':'hello','b':'hi'&#125;</span></span><br><span class="line">dict([(<span class="string">'a'</span>,<span class="string">'hello'</span>),(<span class="string">'b'</span>,<span class="string">'hi'</span>)]) <span class="comment"># &#123;'a':'hello','b':'hi'&#125;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="让key映射到多个values上"><a href="#让key映射到多个values上" class="headerlink" title="让key映射到多个values上"></a>让key映射到多个values上</h2><p>多数情况下，字典的key与values并不是1对1而是1对多。例如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">d = &#123;</span><br><span class="line">    <span class="string">'a'</span>:[<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>],</span><br><span class="line">    <span class="string">'b'</span>:[<span class="number">3</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">e = &#123;</span><br><span class="line">    <span class="string">'c'</span>:&#123;<span class="number">35</span>,<span class="number">345</span>&#125;,</span><br><span class="line">    <span class="string">'d'</span>: &#123;<span class="number">3222</span>,<span class="number">89</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>values是使用list还是set完全取决于需要，如果要保持顺序就用list，如果要保证唯一性而顺序不是那么重要就用set。<br>如果手动创建一个list或者set来存放values，再将之与key对应起来会使代码很混乱。这时可以用collenctions模块的defaultdict()类。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line">d = defaultdict(list)</span><br><span class="line">d[<span class="string">'a'</span>].append(<span class="number">2</span>)</span><br><span class="line">d[<span class="string">'a'</span>].append(<span class="number">2</span>)</span><br><span class="line">d[<span class="string">'a'</span>].append(<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">e = defaultdict(set)</span><br><span class="line">e[<span class="string">'c'</span>].add(<span class="number">35</span>)</span><br><span class="line">e[<span class="string">'c'</span>].add(<span class="number">345</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="让dict保持有序"><a href="#让dict保持有序" class="headerlink" title="让dict保持有序"></a>让dict保持有序</h2><p>通常情况下，当我们对字典做迭代时，并不能保证迭代是按排列顺序进行的。<br>我们想创建一个字典，同时当对字典做迭代或序列化操作时，也能控制其中元素的顺序。<br>可以使用collections模块中的OrderDict类。当对字典做迭代时，它会严格按照元素初始添加的顺序进行。值得一提的是，OrderDict()内部维护了一个双向列表用于记录dict本身与key添加顺序，所以它的大小也是一般dict的两倍多。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> OrderDict</span><br><span class="line">d = OrderDict()</span><br><span class="line">d[<span class="string">'foo'</span>] = <span class="number">1</span></span><br><span class="line">d[<span class="string">'bar'</span>] = <span class="number">2</span></span><br><span class="line">d[<span class="string">'spam'</span>] = <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> d:</span><br><span class="line">    print(d[key])</span><br><span class="line"><span class="comment"># 输出1,2,3</span></span><br></pre></td></tr></table></figure></p>
+<p>这在我们要精确控制json的时候特别有用：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line">json.dumps(d) <span class="comment"># 将一个OrderedDict对象转化为json</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="与字典有关的计算问题"><a href="#与字典有关的计算问题" class="headerlink" title="与字典有关的计算问题"></a>与字典有关的计算问题</h2><p>我们想在字典上进行各式各样的计算，如求最小值、最大值，排序等。假设我们有这样一个字典：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">price = &#123;</span><br><span class="line">    <span class="string">'Apple'</span>: <span class="number">10</span>,</span><br><span class="line">    <span class="string">'Banana'</span>: <span class="number">8</span>,</span><br><span class="line">    <span class="string">'Pear'</span>: <span class="number">12</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果尝试在字典上执行常见的数据操作，将发现它们只会处理键，而不是值。例如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">max(price) <span class="comment"># Pear</span></span><br><span class="line">min(price) <span class="comment"># Apple</span></span><br></pre></td></tr></table></figure></p>
+<p>通常这没有意义，因为我们更多时候是想要对values进行处理，当然可以将<code>price.values()</code>作为参数传给比较函数，即使这样也没有意义，因为我们想知道最值对应的key（如最贵的水果是什么）。利用zip(iterable，iterable)函数的解决方案是生成一个values-key生成器。zip有拉链的意思，这个函数就像拉链一样把两个迭代对象的值一一对应起来，每组对应起来的值放在一个二元tuple中。</p>
+<p>在这样的元组中进行比较时，values会先进行比较，然后才是key。例如我们可以这样找出最贵与最便宜的水果：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">max(zip(prices.values(), prices.keys())) <span class="comment"># (12, 'Pear')</span></span><br><span class="line">min(zip(prices.values(), prices.keys())) <span class="comment"># (8, 'Banana')</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="找出两个字典的相同点"><a href="#找出两个字典的相同点" class="headerlink" title="找出两个字典的相同点"></a>找出两个字典的相同点</h2><p>这很像数学上的交集。类似的操作还有求并集，差集。python中的set就是一个典型的集合对象，符合集合的一切特征：无序性，唯一性。（由于集合的无序性，set并不保证元素的顺序是固定的，所以不支持索引操作，类似的dict也是无序的，所以也不支持位置索引）</p>
+<p>考虑下面两个dict<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">a = &#123;</span><br><span class="line">    <span class="string">'x'</span>: <span class="number">100</span>,</span><br><span class="line">    <span class="string">'y'</span>: <span class="number">80</span>,</span><br><span class="line">    <span class="string">'z'</span>: <span class="number">150</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">b = &#123;</span><br><span class="line">    <span class="string">'x'</span>: <span class="number">100</span>,</span><br><span class="line">    <span class="string">'y'</span>: <span class="number">39</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>dict的keys()方法与items()方法返回的都是集合对象，所以可以直接对其应用常用的集合操作。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 找出a与b的交集</span></span><br><span class="line">a.items() &amp; b.items() <span class="comment"># &#123;('x', 100)&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 找出a与b的key交集</span></span><br><span class="line">a.keys() &amp; b.keys() <span class="comment"># &#123;'x', 'y'&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 找出a与b的不同</span></span><br><span class="line">a.items() - b.items() <span class="comment"># &#123;('z': 150), ('y', 80)&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>dict的<strong>values()方法并不支持集合操作</strong>，这是由dict的values没有唯一性决定的。如果想对values进行集合操作就要先用set()方法将values转化为集合。</p>
+<h2 id="对切片命名"><a href="#对切片命名" class="headerlink" title="对切片命名"></a>对切片命名</h2><p>随着代码越来越复杂，时间越隔越久，当初做切片时为什么要选那几个数字早就想不起来了。这时代码已经无法阅读，到处都是硬编码的切片索引。我们对切片命名，这样大大增加了代码的可阅读性。</p>
+<p>内置的slice()函数会创建一个切片对象，可以用在任何允许进行切片操作的地方。与普通的切片操作一样，slice()的截取是<strong>前闭后开</strong>的<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = slice(<span class="number">6</span>,)</span><br><span class="line">b = slice(<span class="number">0</span>,<span class="keyword">None</span>,<span class="number">2</span>)</span><br><span class="line">x = <span class="string">'hello world'</span></span><br><span class="line">print(x[a]) <span class="comment"># 'world'</span></span><br><span class="line">print(x[b]) <span class="comment"># 'hlowrd'</span></span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -458,12 +450,6 @@
     
 
     <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/flask/" rel="tag"># flask</a>
-          
-        </div>
       
 
       
@@ -489,8 +475,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/20/书单整理/" rel="next" title="书单整理">
-                <i class="fa fa-chevron-left"></i> 书单整理
+              <a href="/2018/05/06/Python常用库/" rel="next" title="Python常用库">
+                <i class="fa fa-chevron-left"></i> Python常用库
               </a>
             
           </div>
@@ -498,10 +484,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/31/《MySQL从入门到精通》读书笔记/" rel="prev" title="《MySQL从入门到精通》读书笔记">
-                《MySQL从入门到精通》读书笔记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -662,7 +644,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#flask的4种请求钩子"><span class="nav-number">1.</span> <span class="nav-text">flask的4种请求钩子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#before-first-request"><span class="nav-number">1.0.1.</span> <span class="nav-text">@before_first_request</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#before-request"><span class="nav-number">1.0.2.</span> <span class="nav-text">@before_request</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#after-request"><span class="nav-number">1.0.3.</span> <span class="nav-text">@after_request</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#teardown-request"><span class="nav-number">1.0.4.</span> <span class="nav-text">@teardown_request</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#flask的4种上下文全局变量"><span class="nav-number">2.</span> <span class="nav-text">flask的4种上下文全局变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#请求上下文-request-context"><span class="nav-number">2.1.</span> <span class="nav-text">请求上下文(request context)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#request"><span class="nav-number">2.1.1.</span> <span class="nav-text">request</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#request获取HTTP请求内容的几种方式"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">request获取HTTP请求内容的几种方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#g"><span class="nav-number">2.1.2.</span> <span class="nav-text">g</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序上下文-app-context"><span class="nav-number">2.2.</span> <span class="nav-text">程序上下文(app context)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#current-app"><span class="nav-number">2.2.1.</span> <span class="nav-text">current_app</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#session"><span class="nav-number">2.2.2.</span> <span class="nav-text">session</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#蓝图"><span class="nav-number">3.</span> <span class="nav-text">蓝图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建蓝图"><span class="nav-number">3.1.</span> <span class="nav-text">创建蓝图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注册蓝图"><span class="nav-number">3.2.</span> <span class="nav-text">注册蓝图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在蓝图中创建视图函数"><span class="nav-number">3.3.</span> <span class="nav-text">在蓝图中创建视图函数</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#dict"><span class="nav-number">1.</span> <span class="nav-text">dict</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#让key映射到多个values上"><span class="nav-number">1.1.</span> <span class="nav-text">让key映射到多个values上</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#让dict保持有序"><span class="nav-number">1.2.</span> <span class="nav-text">让dict保持有序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与字典有关的计算问题"><span class="nav-number">1.3.</span> <span class="nav-text">与字典有关的计算问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#找出两个字典的相同点"><span class="nav-number">1.4.</span> <span class="nav-text">找出两个字典的相同点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对切片命名"><span class="nav-number">1.5.</span> <span class="nav-text">对切片命名</span></a></li></ol></li></ol></div>
             
 
           </div>
