@@ -410,7 +410,8 @@
       
         
           
-          关系型数据库中表的关系一对多考虑下面的代码12345678910111213141516171819202122232425from flask-sqlalchemy import SQLAlchemyfrom flask import Flaskimport osapp = Flask(__nam
+          创建模型你需要做的全部就是创建你的 Flask 应用，选择加载你的配置，然后在创建 SQLALchemy 时把应用传递给它。
+一旦创建，这个对象会包含 sqlalchemy和sqlalchemy.orm中的所有函数和助手。此外，它还提供了一个名为 Model 的类，用于作为声明模型时的delarat
           ...
           <!--noindex-->
           <div class="post-button text-center">
