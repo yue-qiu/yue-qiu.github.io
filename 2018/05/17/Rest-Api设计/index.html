@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="dict dict的key是唯一的，而values不保证唯一。 dict()函数语法：参数说明 **kwargs – 关键字 mapping – 元素的容器。 iterable – 可迭代对象123class dict(**kwarg)class dict(mapping, **kwarg)class dict(ite">
+<meta name="description" content="近几年Web程序有种趋势，就是业务逻辑越来越转移到了客户端一侧，开创出了一种称为富互联网应用（RIA） 的架构。在RIA中，服务器的主要功能就是为客户端提高数据存取服务。在这种模式中，服务器变成了Web服务或应用编程接口（API）。 RIA可采用多种协议与Web服务通信。其中最常用的就是REST架构了，因为这种架构建立">
 <meta property="og:type" content="article">
-<meta property="og:title" content="《Python cookbook》第一章">
-<meta property="og:url" content="http://yoursite.com/2018/05/13/《Python-cookbook》笔记/index.html">
+<meta property="og:title" content="Rest Api设计">
+<meta property="og:url" content="http://yoursite.com/2018/05/17/Rest-Api设计/index.html">
 <meta property="og:site_name" content="精神书屋">
-<meta property="og:description" content="dict dict的key是唯一的，而values不保证唯一。 dict()函数语法：参数说明 **kwargs – 关键字 mapping – 元素的容器。 iterable – 可迭代对象123class dict(**kwarg)class dict(mapping, **kwarg)class dict(iterable, **kwarg)     下面这三种调用方式是可接受的123dic">
+<meta property="og:description" content="近几年Web程序有种趋势，就是业务逻辑越来越转移到了客户端一侧，开创出了一种称为富互联网应用（RIA） 的架构。在RIA中，服务器的主要功能就是为客户端提高数据存取服务。在这种模式中，服务器变成了Web服务或应用编程接口（API）。 RIA可采用多种协议与Web服务通信。其中最常用的就是REST架构了，因为这种架构建立在大家熟悉的HTTP协议之上。 REST简介REST符合以下6种特征：  客户端">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-17T11:24:30.596Z">
+<meta property="og:updated_time" content="2018-05-19T10:04:01.639Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="《Python cookbook》第一章">
-<meta name="twitter:description" content="dict dict的key是唯一的，而values不保证唯一。 dict()函数语法：参数说明 **kwargs – 关键字 mapping – 元素的容器。 iterable – 可迭代对象123class dict(**kwarg)class dict(mapping, **kwarg)class dict(iterable, **kwarg)     下面这三种调用方式是可接受的123dic">
+<meta name="twitter:title" content="Rest Api设计">
+<meta name="twitter:description" content="近几年Web程序有种趋势，就是业务逻辑越来越转移到了客户端一侧，开创出了一种称为富互联网应用（RIA） 的架构。在RIA中，服务器的主要功能就是为客户端提高数据存取服务。在这种模式中，服务器变成了Web服务或应用编程接口（API）。 RIA可采用多种协议与Web服务通信。其中最常用的就是REST架构了，因为这种架构建立在大家熟悉的HTTP协议之上。 REST简介REST符合以下6种特征：  客户端">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/13/《Python-cookbook》笔记/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/17/Rest-Api设计/"/>
 
 
 
 
 
-  <title>《Python cookbook》第一章 | 精神书屋</title>
+  <title>Rest Api设计 | 精神书屋</title>
   
 
 
@@ -296,7 +296,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/13/《Python-cookbook》笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/17/Rest-Api设计/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qiuyue">
@@ -313,7 +313,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">《Python cookbook》第一章</h1>
+          <h1 class="post-title" itemprop="name headline">Rest Api设计</h1>
         
 
         <div class="post-meta">
@@ -325,8 +325,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-13T21:32:20+08:00">
-                2018-05-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-17T22:46:01+08:00">
+                2018-05-17
               </time>
             
 
@@ -336,28 +336,6 @@
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -366,8 +344,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/05/13/《Python-cookbook》笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/05/13/《Python-cookbook》笔记/" itemprop="commentCount"></span>
+                <a href="/2018/05/17/Rest-Api设计/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/05/17/Rest-Api设计/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -375,7 +353,7 @@
 
           
           
-             <span id="/2018/05/13/《Python-cookbook》笔记/" class="leancloud_visitors" data-flag-title="《Python cookbook》第一章">
+             <span id="/2018/05/17/Rest-Api设计/" class="leancloud_visitors" data-flag-title="Rest Api设计">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -411,31 +389,56 @@
       
 
       
-        <h1 id="dict"><a href="#dict" class="headerlink" title="dict"></a>dict</h1><ol>
-<li>dict的key是唯一的，而values不保证唯一。</li>
-<li>dict()函数语法：<br>参数说明<ul>
-<li>**kwargs – 关键字</li>
-<li>mapping – 元素的容器。</li>
-<li>iterable – 可迭代对象<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">dict</span><span class="params">(**kwarg)</span></span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">dict</span><span class="params">(mapping, **kwarg)</span></span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">dict</span><span class="params">(iterable, **kwarg)</span></span></span><br></pre></td></tr></table></figure>
+        <p>近几年Web程序有种趋势，就是业务逻辑越来越转移到了客户端一侧，开创出了一种称为<strong>富互联网应用（RIA）</strong> 的架构。在RIA中，服务器的主要功能就是为客户端提高数据存取服务。在这种模式中，服务器变成了<strong>Web服务</strong>或<strong>应用编程接口（API）</strong>。</p>
+<p>RIA可采用多种协议与Web服务通信。其中最常用的就是REST架构了，因为这种架构建立在大家熟悉的HTTP协议之上。</p>
+<h1 id="REST简介"><a href="#REST简介" class="headerlink" title="REST简介"></a>REST简介</h1><p>REST符合以下6种特征：</p>
+<ol>
+<li>客户端-服务器<br>客户端与服务器之间必须有明确的界限。</li>
+<li>无状态<br>客户端发出的请求中必须包含所有必要的信息。服务器不能在两次请求之间 保存客户端的任何状态。</li>
+<li>缓存<br>服务器发出的响应可以标记为可缓存或不可缓存。这样出于优化目的，客户端或客户端与服务器之间的中间服务可以使用缓存。</li>
+<li>接口统一<br>客户端访问服务器资源时使用的协议必须一致，定义良好且已经标准化。REST Web服务最常使用的统一接口是HTTP协议。</li>
+<li>系统分层<br>在客户端与服务器之间可以按需插入代理服务器，缓存或网关义提高性能，稳定性和伸缩性。</li>
+<li>按需代码<br>客户端可以选择从服务器上下载代码，在客户端的环境中执行。</li>
+</ol>
+<h1 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h1><p>当客户端从Web服务获得404与500响应时会有点小麻烦，因为这两个错误是Flask自己生成的，而且一般会返回HTML响应，这可能会让API客户端感到困惑。</p>
+<p>为所有客户端生产响应的一种方法是在错误处理程序中根据客户端请求的格式改写响应。这种技术被称为<strong>内容协商</strong>。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@main.app_errorhandler(404)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">page_not_found</span><span class="params">(error)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> request.accept_mimetypes.accept_json <span class="keyword">and</span> \</span><br><span class="line">            <span class="keyword">not</span> request.accept_mimetypes.accept_html:</span><br><span class="line">        response = jsonify(&#123;<span class="string">'error'</span>: <span class="string">'not found'</span>&#125;)</span><br><span class="line">        response.status_code = <span class="number">404</span></span><br><span class="line">        <span class="keyword">return</span> response</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'404.html'</span>), <span class="number">404</span></span><br></pre></td></tr></table></figure></p>
+<p>Werkzeug将Accept请求首部解码为request.accept_mimetypes,根据首部的值决定客户端期望接收的响应格式。</p>
+<p>其他状态码都是由Web服务生成，因此可在蓝本的errors.py模块作为辅助函数实现。这样Web服务就可以在视图函数中使用这些辅助函数了。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">forbidden</span><span class="params">(message)</span>:</span></span><br><span class="line">    response = jonify(&#123;<span class="string">'error'</span>: <span class="string">'forbidden'</span>, <span class="string">'message'</span>: message&#125;)</span><br><span class="line">    response.status_code = <span class="number">403</span></span><br><span class="line">    <span class="keyword">return</span> response</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用flask-httpauth认证用户"><a href="#使用flask-httpauth认证用户" class="headerlink" title="使用flask-httpauth认证用户"></a>使用flask-httpauth认证用户</h2><p>和普通的Web程序一样，Web服务也需要保护信息，确保未授权用户无法访问。为此RIA必须询问用户的登录密令并将其传给服务器进行询问。</p>
+<p>默认情况下，Flask把会话存在客户端的cookie，因此服务器没有保存任何用户相关的信息，都交给客户端去保存。而然在REST Web服务中使用cookie有点不现实，因为除了Web浏览器之外别的客户端都很难提供对cookie的支持。这样一来，验证信息的处理不得不移交到服务器一端，由于REST是无状态的，每次向服务器发起请求都不得不重新进行验证。</p>
+<p>因为RESET架构基于HTTP协议，所以发送密令的最佳方式是使用HTTP认证，基本认证和摘要认证都可以。在HTTP认证中，用户密令包含在请求的Authorization首部中。</p>
+<ul>
+<li>什么是HTTP认证？<br>HT通过HTTP报文中首部字段（通常是Authorization）的特定值实现认证，不同于使用cookie，这种通过HTTP协议进行身份认证的过程称为HTTP认证。常见的HTTP认证方法有<strong>HTTP基本认证(Http Basic Authentication)</strong> 与<strong>HTTP摘要认证(Http Digest Authentication)</strong>。</li>
+</ul>
+<p>Flask-httpauth通过pip进行安装：<code>pip install flask-httpauth</code>。和Flask-login扩展一样，Flask-httpauth不对验证用户密令所需要的步骤做必要的假设。因此所需的信息在回调函数中提供。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> model <span class="keyword">import</span> User</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> g</span><br><span class="line"><span class="keyword">from</span> flask_httpauth <span class="keyword">import</span> HTTPBasicAuth</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化一个HTTPBasicAuth类</span></span><br><span class="line">auth = HTTPBascicAuth()</span><br><span class="line"></span><br><span class="line"><span class="meta">@auth.verify_password</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">verify_passwrod</span><span class="params">(email, passwd)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> email == <span class="string">''</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">    user = User.query.filter_by(email=email).first()</span><br><span class="line">    <span class="keyword">if</span>  <span class="keyword">not</span> user:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">    g.current_user = user</span><br><span class="line">    <span class="keyword">return</span> user.verify_password(passwd)</span><br></pre></td></tr></table></figure></p>
+<p>如果账号和密码都正确，验证回调函数返回True,否则返回False。同时，验证回调函数把通过认证的用户保存在Flask的全局对象g中，如此一来视图函数便能进行访问。</p>
+<p>如果认证密令不正确，服务器向客户端返回401错误信息。默认情况下Flask_httpauth会自动生成这个状态码，但为了和API返回的其他错误一致我们可以自定义这个错误响应：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> jsonify</span><br><span class="line"></span><br><span class="line"><span class="comment"># Flask_httpauth的错误处理程序</span></span><br><span class="line"><span class="meta">@auth.errorhandler</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">auth_error</span><span class="params">()</span>:</span></span><br><span class="line">    response = jsonify(&#123;<span class="string">'error'</span>: <span class="string">'Unauthorized'</span>, <span class="string">'message'</span>: <span class="string">'密令错误！'</span>&#125;)</span><br><span class="line">    response.status_code = <span class="number">401</span></span><br><span class="line">    <span class="keyword">return</span> response</span><br></pre></td></tr></table></figure></p>
+<p>为了方便我们可以将401，500等错误状态的响应单独写成函数<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">unauthorized</span><span class="params">(message)</span>:</span></span><br><span class="line">    response = jsonify(&#123;<span class="string">'error'</span>: <span class="string">'Unauthorized'</span>, <span class="string">'message'</span>: message&#125;)</span><br><span class="line">    response.status_code = <span class="number">401</span></span><br><span class="line">    <span class="keyword">return</span> response</span><br></pre></td></tr></table></figure></p>
+<p>这样我们的错误处理程序就变得很简洁：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@auth.error_handler</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">auth_error</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> unauthorized(<span class="string">'密令错误！'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>为了保护路由，实现每次访问API时都需要通过认证，可以使用Flask的钩子函数<code>before_request</code><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@api.before_request</span></span><br><span class="line"><span class="meta">@auth.login_required</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">before_request</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> g.current_user:</span><br><span class="line">        <span class="keyword">return</span> unauthorized(<span class="string">'未认证！'</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="基于令牌的验证"><a href="#基于令牌的验证" class="headerlink" title="基于令牌的验证"></a>基于令牌的验证</h3><p>每次请求时，客户端都要发送信息，为了避免总是发送敏感信息，可以提供一种基于令牌的验证方案。</p>
+<p>使用基于令牌的验证方案时，客户端要先把登录密令发送给一个特殊的URL，从而生成认证令牌，一旦客户端获得令牌就可用令牌代替密令完成认证。出于安全考虑令牌总是要设置一个有效期，令牌过期后就必须重新获取一个令牌。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> itsdangerous <span class="keyword">import</span> TimedJSONWebSignatureSerializer <span class="keyword">as</span> Serializer</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span><span class="params">(UserMixin, db.Model)</span>:</span></span><br><span class="line">    <span class="comment"># ...</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">generate_token</span><span class="params">(self,expiration)</span>:</span></span><br><span class="line">        s = Serializer(secret_key=app.config[<span class="string">'SECRET_KEY'</span>], expires_in=<span class="number">3600</span>)</span><br><span class="line">        <span class="comment"># 根据id字段生成令牌</span></span><br><span class="line">        <span class="keyword">return</span> s.dumps(&#123;<span class="string">'id'</span>: self.id&#125;)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">verify_token</span><span class="params">(token)</span>:</span></span><br><span class="line">        s = Serializer(secret_key=app.config[<span class="string">'SECRET_KEY'</span>])</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            id = s.loads(token)[<span class="string">'id'</span>]</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">None</span></span><br><span class="line">        user = User.query.get_or_404(id)</span><br><span class="line">        <span class="keyword">return</span> user</span><br></pre></td></tr></table></figure></p>
+<p>generate_token()方法使用编码后的用户id字段生成一个令牌，还指定了这个令牌的有效时间。verify_token()方法接受一个token，如果令牌可用就返回对应的用户。</p>
+<hr>
+<p>这里扩展一下itsdangerous模块。这个模块可以用来生成各种密令。下面是常用的几个类</p>
+<ul>
+<li>TimedJSONWebSignatureSerializer,根据当前Json签名草案来生成header</li>
+<li><p>TimestampSigner,如果你想要可以过期的签名，可以使用 TimestampSigner 类，它会加入时间戳信息并签名。在反签名时，你可以验证时间戳有没有过期</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> itsdangerous <span class="keyword">import</span> TimestampSigner</span><br><span class="line">s = TimestampSigner(<span class="string">'secret_key'</span>)</span><br><span class="line">data = s.loads(<span class="string">'hello'</span>)</span><br><span class="line"><span class="comment"># max_age表示当前时间与签名时间之差，以s为单位</span></span><br><span class="line">print(s.dumps(data, max_age=<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>URLSafeSerializer,如果能够向只有字符受限的环境中传递可信的字符串的话，将十分有用。因此，itsdangerous也提供了一个URL安全序列化工具</p>
 </li>
 </ul>
-</li>
-</ol>
-<p>下面这三种调用方式是可接受的<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dict(a=<span class="string">'hello'</span>,b=<span class="string">'hi'</span>) <span class="comment"># &#123;'a':'hello','b':'hi'&#125;</span></span><br><span class="line">dict(zip([<span class="string">'a'</span>,<span class="string">'b'</span>],[<span class="string">'hello'</span>,<span class="string">'hi'</span>])) <span class="comment"># 映射函数方式构造字典，zip()返回一个迭代器 &#123;'a':'hello','b':'hi'&#125;</span></span><br><span class="line">dict([(<span class="string">'a'</span>,<span class="string">'hello'</span>),(<span class="string">'b'</span>,<span class="string">'hi'</span>)]) <span class="comment"># &#123;'a':'hello','b':'hi'&#125;</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="让key映射到多个values上"><a href="#让key映射到多个values上" class="headerlink" title="让key映射到多个values上"></a>让key映射到多个values上</h2><p>多数情况下，字典的key与values并不是1对1而是1对多。例如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">d = &#123;</span><br><span class="line">    <span class="string">'a'</span>:[<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>],</span><br><span class="line">    <span class="string">'b'</span>:[<span class="number">3</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">e = &#123;</span><br><span class="line">    <span class="string">'c'</span>:&#123;<span class="number">35</span>,<span class="number">345</span>&#125;,</span><br><span class="line">    <span class="string">'d'</span>: &#123;<span class="number">3222</span>,<span class="number">89</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>values是使用list还是set完全取决于需要，如果要保持顺序就用list，如果要保证唯一性而顺序不是那么重要就用set。<br>如果手动创建一个list或者set来存放values，再将之与key对应起来会使代码很混乱。这时可以用collenctions模块的defaultdict()类。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line">d = defaultdict(list)</span><br><span class="line">d[<span class="string">'a'</span>].append(<span class="number">2</span>)</span><br><span class="line">d[<span class="string">'a'</span>].append(<span class="number">2</span>)</span><br><span class="line">d[<span class="string">'a'</span>].append(<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">e = defaultdict(set)</span><br><span class="line">e[<span class="string">'c'</span>].add(<span class="number">35</span>)</span><br><span class="line">e[<span class="string">'c'</span>].add(<span class="number">345</span>)</span><br></pre></td></tr></table></figure></p>
-<h2 id="让dict保持有序"><a href="#让dict保持有序" class="headerlink" title="让dict保持有序"></a>让dict保持有序</h2><p>通常情况下，当我们对字典做迭代时，并不能保证迭代是按排列顺序进行的。<br>我们想创建一个字典，同时当对字典做迭代或序列化操作时，也能控制其中元素的顺序。<br>可以使用collections模块中的OrderDict类。当对字典做迭代时，它会严格按照元素初始添加的顺序进行。值得一提的是，OrderDict()内部维护了一个双向列表用于记录dict本身与key添加顺序，所以它的大小也是一般dict的两倍多。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> OrderDict</span><br><span class="line">d = OrderDict()</span><br><span class="line">d[<span class="string">'foo'</span>] = <span class="number">1</span></span><br><span class="line">d[<span class="string">'bar'</span>] = <span class="number">2</span></span><br><span class="line">d[<span class="string">'spam'</span>] = <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> d:</span><br><span class="line">    print(d[key])</span><br><span class="line"><span class="comment"># 输出1,2,3</span></span><br></pre></td></tr></table></figure></p>
-<p>这在我们要精确控制json的时候特别有用：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line">json.dumps(d) <span class="comment"># 将一个OrderedDict对象转化为json</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="与字典有关的计算问题"><a href="#与字典有关的计算问题" class="headerlink" title="与字典有关的计算问题"></a>与字典有关的计算问题</h2><p>我们想在字典上进行各式各样的计算，如求最小值、最大值，排序等。假设我们有这样一个字典：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">price = &#123;</span><br><span class="line">    <span class="string">'Apple'</span>: <span class="number">10</span>,</span><br><span class="line">    <span class="string">'Banana'</span>: <span class="number">8</span>,</span><br><span class="line">    <span class="string">'Pear'</span>: <span class="number">12</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>如果尝试在字典上执行常见的数据操作，将发现它们只会处理键，而不是值。例如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">max(price) <span class="comment"># Pear</span></span><br><span class="line">min(price) <span class="comment"># Apple</span></span><br></pre></td></tr></table></figure></p>
-<p>通常这没有意义，因为我们更多时候是想要对values进行处理，当然可以将<code>price.values()</code>作为参数传给比较函数，即使这样也没有意义，因为我们想知道最值对应的key（如最贵的水果是什么）。利用zip(iterable，iterable)函数的解决方案是生成一个values-key生成器。zip有拉链的意思，这个函数就像拉链一样把两个迭代对象的值一一对应起来，每组对应起来的值放在一个二元tuple中。</p>
-<p>在这样的元组中进行比较时，values会先进行比较，然后才是key。例如我们可以这样找出最贵与最便宜的水果：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">max(zip(prices.values(), prices.keys())) <span class="comment"># (12, 'Pear')</span></span><br><span class="line">min(zip(prices.values(), prices.keys())) <span class="comment"># (8, 'Banana')</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="找出两个字典的相同点"><a href="#找出两个字典的相同点" class="headerlink" title="找出两个字典的相同点"></a>找出两个字典的相同点</h2><p>这很像数学上的交集。类似的操作还有求并集，差集。python中的set就是一个典型的集合对象，符合集合的一切特征：无序性，唯一性。（由于集合的无序性，set并不保证元素的顺序是固定的，所以不支持索引操作，类似的dict也是无序的，所以也不支持位置索引）</p>
-<p>考虑下面两个dict<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">a = &#123;</span><br><span class="line">    <span class="string">'x'</span>: <span class="number">100</span>,</span><br><span class="line">    <span class="string">'y'</span>: <span class="number">80</span>,</span><br><span class="line">    <span class="string">'z'</span>: <span class="number">150</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">b = &#123;</span><br><span class="line">    <span class="string">'x'</span>: <span class="number">100</span>,</span><br><span class="line">    <span class="string">'y'</span>: <span class="number">39</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>dict的keys()方法与items()方法返回的都是集合对象，所以可以直接对其应用常用的集合操作。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 找出a与b的交集</span></span><br><span class="line">a.items() &amp; b.items() <span class="comment"># &#123;('x', 100)&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 找出a与b的key交集</span></span><br><span class="line">a.keys() &amp; b.keys() <span class="comment"># &#123;'x', 'y'&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 找出a与b的不同</span></span><br><span class="line">a.items() - b.items() <span class="comment"># &#123;('z': 150), ('y', 80)&#125;</span></span><br></pre></td></tr></table></figure></p>
-<p>dict的<strong>values()方法并不支持集合操作</strong>，这是由dict的values没有唯一性决定的。如果想对values进行集合操作就要先用set()方法将values转化为集合。</p>
-<h2 id="对切片命名"><a href="#对切片命名" class="headerlink" title="对切片命名"></a>对切片命名</h2><p>随着代码越来越复杂，时间越隔越久，当初做切片时为什么要选那几个数字早就想不起来了。这时代码已经无法阅读，到处都是硬编码的切片索引。我们对切片命名，这样大大增加了代码的可阅读性。</p>
-<p>内置的slice()函数会创建一个切片对象，可以用在任何允许进行切片操作的地方。与普通的切片操作一样，slice()的截取是<strong>前闭后开</strong>的<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = slice(<span class="number">6</span>,)</span><br><span class="line">b = slice(<span class="number">0</span>,<span class="keyword">None</span>,<span class="number">2</span>)</span><br><span class="line">x = <span class="string">'hello world'</span></span><br><span class="line">print(x[a]) <span class="comment"># 'world'</span></span><br><span class="line">print(x[b]) <span class="comment"># 'hlowrd'</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>在python3中，loads()方法返回值往往是byte类型</strong></p>
+<hr>
+<p>为了使验证回调函数支持令牌验证，必须要改进它：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@auth.verify_password</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">verify_password</span><span class="params">(email_or_token, passwd)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> email_or_token:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">    <span class="keyword">if</span> passwd:</span><br><span class="line">        user = User.varify_token(email_or_token)</span><br><span class="line">        <span class="keyword">if</span> user:</span><br><span class="line">            g.currnet_user = user</span><br><span class="line">            g.token_used = <span class="keyword">True</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">    user = User.query.filter_by(email=email_or_token).first()</span><br><span class="line">    <span class="keyword">if</span> user:</span><br><span class="line">        g.current_user = user</span><br><span class="line">        g.token_used = <span class="keyword">False</span></span><br><span class="line">        <span class="keyword">return</span> user.verify_password(passwd)</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">False</span></span><br></pre></td></tr></table></figure></p>
+<p>把认证令牌发送给客户端的路由发送到api蓝本中。为了<em>避免客户端使用旧令牌申请新令牌</em>，要在视图函数中验证g.token_used，如果使用了令牌就拒绝请求。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@api.route('/token')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_token</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> g.token_used:</span><br><span class="line">        <span class="keyword">return</span> unauthorized(<span class="string">'令牌已存在'</span>)</span><br><span class="line">    token = g.current_user.generate_token(expiration=<span class="number">3600</span>)</span><br><span class="line">    <span class="keyword">return</span> josnify(&#123;<span class="string">'token'</span>: token.decode(<span class="string">'utf-8'</span>), <span class="string">'expiration'</span>: <span class="number">3600</span>&#125;)</span><br></pre></td></tr></table></figure></p>
+<h2 id="资源和JSON序列化转换"><a href="#资源和JSON序列化转换" class="headerlink" title="资源和JSON序列化转换"></a>资源和JSON序列化转换</h2><p>开发Web服务时，经常需要在资源和json之间进行转换。json是HTTP请求和响应使用的传输格式。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Post</span><span class="params">(db.Model)</span>:</span></span><br><span class="line">    <span class="comment"># ...</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">to_json</span><span class="params">(self)</span>:</span></span><br><span class="line">        json_post = &#123;</span><br><span class="line">            <span class="string">'uri'</span>: url_for(<span class="string">'api.get_post'</span>, id=self.id, _external=<span class="keyword">True</span>),</span><br><span class="line">            <span class="string">'body'</span>: self.body,</span><br><span class="line">            <span class="string">'timestamp'</span>: self.timestamp,</span><br><span class="line">            <span class="string">'author'</span>: url_for(<span class="string">'api.get_user'</span>, id=self.author_id, _external=<span class="keyword">True</span>),</span><br><span class="line">            <span class="string">'comments'</span>: url_for(<span class="string">'api.get_post_comments'</span>, id=self.id, _external=<span class="keyword">True</span>),</span><br><span class="line">            <span class="string">'comment_count'</span>: self.comments.count()</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> json_post</span><br></pre></td></tr></table></figure></p>
+<p>uri,author,comments字段分别返回各自资源url，因此它们使用url_for()函数生成。<strong>所有url_for()方法都指定了_external参数，这样就会生成完整url而不是生成传统Web程序中常用的相对url</strong>。</p>
+<p>同样的，可以构造一个方法把json转换成资源：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Post</span><span class="params">(db.Model)</span>:</span></span><br><span class="line">    <span class="comment"># ...</span></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">from_json</span><span class="params">(json_post)</span>:</span></span><br><span class="line">        body = json_post.get(<span class="string">'body'</span>)</span><br><span class="line">        <span class="keyword">if</span> body <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">or</span> body == <span class="string">''</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'body字段值错误！'</span>)</span><br><span class="line">        <span class="keyword">return</span> Post(body=body)</span><br></pre></td></tr></table></figure></p>
+<p>用get()方法从json获得body字段。永远不要相信客户端送来的值，所以对获得的值进行检查是必须的。当body值为空时抛出ValueError错误，因为此时服务器没有足够的信息来判断到底是哪里有问题，只能抛出错误让客户端来处理。</p>
+<h2 id="实现资源端点"><a href="#实现资源端点" class="headerlink" title="实现资源端点"></a>实现资源端点</h2><p>现在我们需要实现用于处理不同资源的路由。原则上我们需要为api使用@auth.login_requied来保护路由，但是由于前面实现了before_request()就不需要写那么多重复代码了。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@api.route('/posts')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_posts</span><span class="params">()</span>:</span></span><br><span class="line">    posts = Post.query.all()</span><br><span class="line">    <span class="keyword">return</span> jsonify(&#123;<span class="string">'posts'</span>: [post.to_json() <span class="keyword">for</span> post <span class="keyword">in</span> posts]&#125;)</span><br><span class="line"></span><br><span class="line"><span class="meta">@api.route('/user/&lt;int:id&gt;')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_user</span><span class="params">(id)</span>:</span></span><br><span class="line">    user = User.query.get_or_404(id)</span><br><span class="line">    <span class="keyword">return</span> jsonify(&#123;<span class="string">'user'</span>: user.to_json()&#125;)</span><br><span class="line"></span><br><span class="line"><span class="meta">@api.route('/posts',methods=['POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">new_post</span><span class="params">()</span>:</span></span><br><span class="line">    post = Post.from_json(request.json)</span><br><span class="line">    post.author_id = g.current_user.id</span><br><span class="line">    db.session.add(post)</span><br><span class="line">    db.session.commit()</span><br><span class="line">    <span class="keyword">return</span> jsonify(post.to_json())</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意：为了便于客户端操作，响应的主体中包含了新建的资源，这样客户端就无需在创建资源后再发起一个GET请求来获取资源</strong>。</p>
 
       
     </div>
@@ -475,8 +478,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/06/Python常用库/" rel="next" title="Python常用库">
-                <i class="fa fa-chevron-left"></i> Python常用库
+              <a href="/2018/05/13/《Python-cookbook》笔记/" rel="next" title="《Python cookbook》第一章">
+                <i class="fa fa-chevron-left"></i> 《Python cookbook》第一章
               </a>
             
           </div>
@@ -484,10 +487,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/17/Rest-Api设计/" rel="prev" title="Rest Api设计">
-                Rest Api设计 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -648,7 +647,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#dict"><span class="nav-number">1.</span> <span class="nav-text">dict</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#让key映射到多个values上"><span class="nav-number">1.1.</span> <span class="nav-text">让key映射到多个values上</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#让dict保持有序"><span class="nav-number">1.2.</span> <span class="nav-text">让dict保持有序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与字典有关的计算问题"><span class="nav-number">1.3.</span> <span class="nav-text">与字典有关的计算问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#找出两个字典的相同点"><span class="nav-number">1.4.</span> <span class="nav-text">找出两个字典的相同点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对切片命名"><span class="nav-number">1.5.</span> <span class="nav-text">对切片命名</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#REST简介"><span class="nav-number">1.</span> <span class="nav-text">REST简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#错误处理"><span class="nav-number">2.</span> <span class="nav-text">错误处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用flask-httpauth认证用户"><span class="nav-number">2.1.</span> <span class="nav-text">使用flask-httpauth认证用户</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于令牌的验证"><span class="nav-number">2.1.1.</span> <span class="nav-text">基于令牌的验证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#资源和JSON序列化转换"><span class="nav-number">2.2.</span> <span class="nav-text">资源和JSON序列化转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现资源端点"><span class="nav-number">2.3.</span> <span class="nav-text">实现资源端点</span></a></li></ol></li></ol></div>
             
 
           </div>
