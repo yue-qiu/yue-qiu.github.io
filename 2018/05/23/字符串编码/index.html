@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="精神书屋">
 <meta property="og:description" content="不同的编码方式由于计算机是美国人发明的，所以最早的时候只收录了127个字符，包括阿拉伯数字、英文字母大小写和一些常用符号，称为ASCII编码。后来计算机越来越普及，127个字符显然不够。于是各国又制定了自己国家的字符编码。为了避免不同国家之间通信出现乱码的问题，一种同一编码unicode编码诞生了。ASCII用一个字节（byte）来储存一个字符，而unicode用2到6个字节来储存字符，理论上所有">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-23T15:15:43.561Z">
+<meta property="og:updated_time" content="2018-05-23T15:20:22.213Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="字符串编码">
 <meta name="twitter:description" content="不同的编码方式由于计算机是美国人发明的，所以最早的时候只收录了127个字符，包括阿拉伯数字、英文字母大小写和一些常用符号，称为ASCII编码。后来计算机越来越普及，127个字符显然不够。于是各国又制定了自己国家的字符编码。为了避免不同国家之间通信出现乱码的问题，一种同一编码unicode编码诞生了。ASCII用一个字节（byte）来储存一个字符，而unicode用2到6个字节来储存字符，理论上所有">
@@ -416,7 +416,7 @@
 <h1 id="字符与字节"><a href="#字符与字节" class="headerlink" title="字符与字节"></a>字符与字节</h1><p>在python3中，字符默认以<code>unicode</code>方式编码，而在进行网络传输和硬盘保存时，常常将<code>unicode</code>字符串转成<code>utf-8</code>字节。这就要用到<code>encode()</code>方法：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">'hello world'</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'test'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(s.encode(<span class="string">'utf-8'</span>))</span><br></pre></td></tr></table></figure></p>
 <p><code>encode()</code>将字符串转换成字节，而<code>utf-8</code>则指定是以何种编码格式转换。</p>
 <p>当我们从网络上获取数据时，常常也是获取到以<code>UTF-8</code>形式编码的字节，为了方便我们对数据进行处理，用<code>decode()</code>方法：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">b = <span class="string">b'\xe4\xb8\xad\xe6\x96\x87'</span></span><br><span class="line">print(b.decode(<span class="string">'utf-8'</span>)) <span class="comment"># 输出：'中文'</span></span><br></pre></td></tr></table></figure></p>
-<p>在python中，字节的前面会有个前缀<code>b</code>。</p>
+<p>参数<code>utf-8</code>表明将字节以UTF-8的形式解码。在python中，字节的前面会有个前缀<code>b</code>。</p>
 <p><strong>为了避免乱码，应该始终坚持以UTF-8的形式进行字符和字节之间的转换</strong>。</p>
 
       
