@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="两种初始化Flask-SQLAlchemy的方式先给出SQLAlchemy的参数：1flask.ext.sqlalchemy.SQLAlchemy(app=None, use_native_unicode=True, session_options=None, metadata=None, query_class=&a">
+<meta name="description" content="两种初始化Flask-SQLAlchemy的方式先给出SQLAlchemy的参数： flask.ext.sqlalchemy.SQLAlchemy(app=None, use_native_unicode=True, session_options=None, metadata=None, query_class=&a">
 <meta name="keywords" content="数据库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Flask-SQLAlchemy">
 <meta property="og:url" content="http://yoursite.com/2018/05/24/Flask-SQLAlchemy/index.html">
 <meta property="og:site_name" content="精神书屋">
-<meta property="og:description" content="两种初始化Flask-SQLAlchemy的方式先给出SQLAlchemy的参数：1flask.ext.sqlalchemy.SQLAlchemy(app=None, use_native_unicode=True, session_options=None, metadata=None, query_class=&amp;lt;class &apos;flask_sqlalchemy.BaseQuery&apos;&amp;gt;">
+<meta property="og:description" content="两种初始化Flask-SQLAlchemy的方式先给出SQLAlchemy的参数： flask.ext.sqlalchemy.SQLAlchemy(app=None, use_native_unicode=True, session_options=None, metadata=None, query_class=&amp;lt;class &amp;#39;flask_sqlalchemy.BaseQuery&amp;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-24T12:00:21.282Z">
+<meta property="og:updated_time" content="2018-05-24T12:37:32.447Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flask-SQLAlchemy">
-<meta name="twitter:description" content="两种初始化Flask-SQLAlchemy的方式先给出SQLAlchemy的参数：1flask.ext.sqlalchemy.SQLAlchemy(app=None, use_native_unicode=True, session_options=None, metadata=None, query_class=&amp;lt;class &apos;flask_sqlalchemy.BaseQuery&apos;&amp;gt;">
+<meta name="twitter:description" content="两种初始化Flask-SQLAlchemy的方式先给出SQLAlchemy的参数： flask.ext.sqlalchemy.SQLAlchemy(app=None, use_native_unicode=True, session_options=None, metadata=None, query_class=&amp;lt;class &amp;#39;flask_sqlalchemy.BaseQuery&amp;">
 
 
 
@@ -412,7 +412,8 @@
       
 
       
-        <h1 id="两种初始化Flask-SQLAlchemy的方式"><a href="#两种初始化Flask-SQLAlchemy的方式" class="headerlink" title="两种初始化Flask-SQLAlchemy的方式"></a>两种初始化Flask-SQLAlchemy的方式</h1><p>先给出SQLAlchemy的参数：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flask.ext.sqlalchemy.SQLAlchemy(app=None, use_native_unicode=True, session_options=None, metadata=None, query_class=&lt;class 'flask_sqlalchemy.BaseQuery'&gt;, model_class=&lt;class 'flask_sqlalchemy.Model'&gt;)</span><br></pre></td></tr></table></figure></p>
+        <h1 id="两种初始化Flask-SQLAlchemy的方式"><a href="#两种初始化Flask-SQLAlchemy的方式" class="headerlink" title="两种初始化Flask-SQLAlchemy的方式"></a>两种初始化Flask-SQLAlchemy的方式</h1><p>先给出SQLAlchemy的参数：</p>
+<p><code>flask.ext.sqlalchemy.SQLAlchemy(app=None, use_native_unicode=True, session_options=None, metadata=None, query_class=&lt;class &#39;flask_sqlalchemy.BaseQuery&#39;&gt;, model_class=&lt;class &#39;flask_sqlalchemy.Model&#39;&gt;)</code></p>
 <p>有两种方式可以初始化Flask-SQLAlchemy对象：立即使用或根据需要添加Flask应用程序：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"><span class="keyword">from</span> flask_sqlalchemy <span class="keyword">import</span> SQLAlchemy</span><br><span class="line"></span><br><span class="line"><span class="string">"""以下两种方法都可以"""</span></span><br><span class="line"><span class="comment"># 方法一：直接给SQLAlchemy传递app实例</span></span><br><span class="line">app = Flask(__name__)</span><br><span class="line">db = SQLAlchemy(app)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法二：创建对象，在稍后的配置工厂函数里支持它</span></span><br><span class="line">db = SQLAlchemy()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_app</span><span class="params">()</span>:</span></span><br><span class="line">    app = Flask(__name__)</span><br><span class="line">    db.init_app(app)</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
 <p><strong>这两种方式的区别在于：第一种方式的<code>create_all()</code>和<code>drop_all()</code>总是可用的，而第二种方法只有当<code>flask.Flask.app_context()</code>存在时才可以用<code>create_all()</code>和<code>drop_all()</code></strong>。</p>
 <p>实例对象一旦创建，这个对象会包含sqlalchemy和sqlalchemy.orm中的所有函数和助手。此外，它还提供了一个名为 <code>Model</code> 的类，用于作为声明模型时的delarative基类</p>
