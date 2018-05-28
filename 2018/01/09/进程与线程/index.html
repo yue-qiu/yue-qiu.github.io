@@ -82,14 +82,14 @@
 <meta name="description" content="什么是进程/线程众所周知，CPU是计算机的核心，它承担了所有的计算任务。而操作系统是计算机的管理者，是一个大管家，它负责任务的调度，资源的分配和管理，统领整个计算机硬件。应用应用程序是具有某种功能的程序，程序运行与操作系统之上。 进程进程时一个具有一定功能的程序在一个数据集上的一次动态执行过程。进程由程序，数据集合和进">
 <meta name="keywords" content="爬虫">
 <meta property="og:type" content="article">
-<meta property="og:title" content="进程与线程">
+<meta property="og:title" content="进程、线程与协程">
 <meta property="og:url" content="http://yoursite.com/2018/01/09/进程与线程/index.html">
 <meta property="og:site_name" content="精神书屋">
 <meta property="og:description" content="什么是进程/线程众所周知，CPU是计算机的核心，它承担了所有的计算任务。而操作系统是计算机的管理者，是一个大管家，它负责任务的调度，资源的分配和管理，统领整个计算机硬件。应用应用程序是具有某种功能的程序，程序运行与操作系统之上。 进程进程时一个具有一定功能的程序在一个数据集上的一次动态执行过程。进程由程序，数据集合和进程控制块三部分组成。程序用于描述进程要完成的功能，是控制进程执行的指令集；数据集">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-22T14:54:41.336Z">
+<meta property="og:updated_time" content="2018-05-28T11:32:58.496Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="进程与线程">
+<meta name="twitter:title" content="进程、线程与协程">
 <meta name="twitter:description" content="什么是进程/线程众所周知，CPU是计算机的核心，它承担了所有的计算任务。而操作系统是计算机的管理者，是一个大管家，它负责任务的调度，资源的分配和管理，统领整个计算机硬件。应用应用程序是具有某种功能的程序，程序运行与操作系统之上。 进程进程时一个具有一定功能的程序在一个数据集上的一次动态执行过程。进程由程序，数据集合和进程控制块三部分组成。程序用于描述进程要完成的功能，是控制进程执行的指令集；数据集">
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>进程与线程 | 精神书屋</title>
+  <title>进程、线程与协程 | 精神书屋</title>
   
 
 
@@ -314,7 +314,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">进程与线程</h1>
+          <h1 class="post-title" itemprop="name headline">进程、线程与协程</h1>
         
 
         <div class="post-meta">
@@ -376,7 +376,7 @@
 
           
           
-             <span id="/2018/01/09/进程与线程/" class="leancloud_visitors" data-flag-title="进程与线程">
+             <span id="/2018/01/09/进程与线程/" class="leancloud_visitors" data-flag-title="进程、线程与协程">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -459,6 +459,7 @@
 <li>由于存在多个锁，不同的线程持有不同的锁并试图获取对方的锁时，可能造成死锁。  </li>
 </ol>
 <h1 id="守护线程"><a href="#守护线程" class="headerlink" title="守护线程"></a>守护线程</h1><p>线程其实并没有主次的概念，我们一般说的‘主线程’实际上是main函数的线程，而所谓主线程结束子线程也会结束是因为在主线程结束时调用了系统的退出函数。而守护线程是指‘不重要线程’。主线程会等所有‘重要’线程结束后才结束。通常当客户端访问服务器时会为这次访问开启一个守护线程。将setDaemon属性设为True即可将该线程设为守护线程。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line"></span><br><span class="line">n = <span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">count</span><span class="params">(x,y)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> n=x+y</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line"></span><br><span class="line">    t = Thread(target=count,args=(<span class="number">1</span>,<span class="number">2</span>))</span><br><span class="line">    t.setDaemon = <span class="keyword">True</span></span><br><span class="line">    <span class="comment"># ...</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h1><p>要了解协程，首先要了解两个关键字：<code>yield</code> 和<code>yield from</code>：</p>
 
       
     </div>
@@ -677,7 +678,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是进程-线程"><span class="nav-number">1.</span> <span class="nav-text">什么是进程/线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程"><span class="nav-number">1.1.</span> <span class="nav-text">进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程"><span class="nav-number">1.2.</span> <span class="nav-text">线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程与线程的区别"><span class="nav-number">1.3.</span> <span class="nav-text">进程与线程的区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开进程需要时间"><span class="nav-number">2.</span> <span class="nav-text">开进程需要时间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pool进程池"><span class="nav-number">3.</span> <span class="nav-text">Pool进程池</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进程间的通信"><span class="nav-number">4.</span> <span class="nav-text">进程间的通信</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Queue"><span class="nav-number">4.1.</span> <span class="nav-text">Queue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pipe"><span class="nav-number">4.2.</span> <span class="nav-text">Pipe</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制线程"><span class="nav-number">5.</span> <span class="nav-text">控制线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的几种状态"><span class="nav-number">5.1.</span> <span class="nav-text">线程的几种状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程锁"><span class="nav-number">5.2.</span> <span class="nav-text">线程锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#join-方法会阻塞主线程直到子线程全部结束（也就是同步）。"><span class="nav-number">5.3.</span> <span class="nav-text">join()方法会阻塞主线程直到子线程全部结束（也就是同步）。  </span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#守护线程"><span class="nav-number">6.</span> <span class="nav-text">守护线程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是进程-线程"><span class="nav-number">1.</span> <span class="nav-text">什么是进程/线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程"><span class="nav-number">1.1.</span> <span class="nav-text">进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程"><span class="nav-number">1.2.</span> <span class="nav-text">线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程与线程的区别"><span class="nav-number">1.3.</span> <span class="nav-text">进程与线程的区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开进程需要时间"><span class="nav-number">2.</span> <span class="nav-text">开进程需要时间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pool进程池"><span class="nav-number">3.</span> <span class="nav-text">Pool进程池</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进程间的通信"><span class="nav-number">4.</span> <span class="nav-text">进程间的通信</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Queue"><span class="nav-number">4.1.</span> <span class="nav-text">Queue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pipe"><span class="nav-number">4.2.</span> <span class="nav-text">Pipe</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制线程"><span class="nav-number">5.</span> <span class="nav-text">控制线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的几种状态"><span class="nav-number">5.1.</span> <span class="nav-text">线程的几种状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程锁"><span class="nav-number">5.2.</span> <span class="nav-text">线程锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#join-方法会阻塞主线程直到子线程全部结束（也就是同步）。"><span class="nav-number">5.3.</span> <span class="nav-text">join()方法会阻塞主线程直到子线程全部结束（也就是同步）。  </span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#守护线程"><span class="nav-number">6.</span> <span class="nav-text">守护线程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#协程"><span class="nav-number">7.</span> <span class="nav-text">协程</span></a></li></ol></div>
             
 
           </div>
