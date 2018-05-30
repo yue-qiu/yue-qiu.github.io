@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="精神的壳">
 <meta property="og:description" content="索引索引是一种特殊的数据结构，类似于字典里的key。通过索引查询数据库中的内容时，不需要遍历所有数据而是直接指向数据所在的位置，这样就可以快速查询到想要的内容。 索引是把双刃剑，虽然索引可以提高检索数据的速度，提高整体的性能，但是也会带来一些副作用：    额外的物理空间（单列索引至少占原表5%到15%） 额外的创建和维护时间（create、insert、update、delete等）  MySQ">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-30T12:16:02.395Z">
+<meta property="og:updated_time" content="2018-05-30T12:18:24.209Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《MySQL从入门到精通》之索引与范式">
 <meta name="twitter:description" content="索引索引是一种特殊的数据结构，类似于字典里的key。通过索引查询数据库中的内容时，不需要遍历所有数据而是直接指向数据所在的位置，这样就可以快速查询到想要的内容。 索引是把双刃剑，虽然索引可以提高检索数据的速度，提高整体的性能，但是也会带来一些副作用：    额外的物理空间（单列索引至少占原表5%到15%） 额外的创建和维护时间（create、insert、update、delete等）  MySQ">
@@ -430,9 +430,9 @@
 <li>唯一性索引<br>使用<code>unique</code>参数可以设置唯一索引。创建该索引时索引的值必须唯一。通过唯一索引，用户可以快速定位某条数据。<strong>主键是一种特殊的唯一索引</strong>。</li>
 <li>全文索引<br><code>fulltext</code>参数可以设置索引为全文索引。全文索引只能创建在<code>char</code>、<code>varchar</code>、<code>text</code>类型字段上。查询数据量较大的字符串型字段时，使用全文索引可以提高查询速度。<strong>只有MyISAM支持<code>fulltext</code>索引</strong></li>
 <li>单列索引<br>就是只对应一个字段的索引，可以包括以上三种索引方式。</li>
-<li>多列索引<br>在表的多个字段上创建一个索引。该索引指向创建时对应的多个字段。可用通过这几个字段进行查询但是<strong>这几个字段必须包含多列索引的第一个字段，只有这样多列索引才会发挥作用</strong><h2 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h2><h3 id="在建立数据表时创建索引"><a href="#在建立数据表时创建索引" class="headerlink" title="在建立数据表时创建索引"></a>在建立数据表时创建索引</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> table_name (</span><br><span class="line">    create_defination</span><br><span class="line">    [<span class="keyword">unique</span> | fulltext] <span class="keyword">index</span></span><br><span class="line">    [别名](属性名<span class="number">1</span>[(长度)[,属性名<span class="number">2</span>(长度)...]] [<span class="keyword">ASC</span>|<span class="keyword">DESC</span>])</span><br><span class="line">)[table_options];</span><br></pre></td></tr></table></figure>
-</li>
+<li>多列索引<br>在表的多个字段上创建一个索引。该索引指向创建时对应的多个字段。可用通过这几个字段进行查询但是<strong>这几个字段必须包含多列索引的第一个字段，只有这样多列索引才会发挥作用</strong></li>
 </ol>
+<h2 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h2><h3 id="在建立数据表时创建索引"><a href="#在建立数据表时创建索引" class="headerlink" title="在建立数据表时创建索引"></a>在建立数据表时创建索引</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> table_name (</span><br><span class="line">    create_defination</span><br><span class="line">    [<span class="keyword">unique</span> | fulltext] <span class="keyword">index</span></span><br><span class="line">    [别名](属性名<span class="number">1</span>[(长度)[,属性名<span class="number">2</span>(长度)...]] [<span class="keyword">ASC</span>|<span class="keyword">DESC</span>])</span><br><span class="line">)[table_options];</span><br></pre></td></tr></table></figure>
 <p>一个简单的例子：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">users</span> (</span><br><span class="line">    <span class="keyword">id</span> tinyint auto_increment primary <span class="keyword">key</span>,</span><br><span class="line">    <span class="keyword">name</span> <span class="built_in">char</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    age tinyint,</span><br><span class="line">    sex tinyint(<span class="number">1</span>),</span><br><span class="line">    fulltext <span class="keyword">index</span> username(<span class="keyword">name</span>)</span><br><span class="line">)<span class="keyword">engine</span>=MyISAM;</span><br></pre></td></tr></table></figure></p>
 <h3 id="在已建立的数据表中创建索引"><a href="#在已建立的数据表中创建索引" class="headerlink" title="在已建立的数据表中创建索引"></a>在已建立的数据表中创建索引</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> [<span class="keyword">unique</span> | fulltext] <span class="keyword">index</span> index_name </span><br><span class="line"><span class="keyword">on</span> table_name(属性[(长度) [AES|<span class="keyword">DESC</span>]])</span><br></pre></td></tr></table></figure>
 <p>一个简单的例子：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">unique</span> <span class="keyword">index</span> username <span class="keyword">on</span> <span class="keyword">users</span>(<span class="keyword">name</span>);</span><br></pre></td></tr></table></figure></p>
@@ -513,6 +513,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/30/定义完整性约束/" rel="prev" title="《MySQL从入门到精通》之定义完整性约束">
+                《MySQL从入门到精通》之定义完整性约束 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -596,7 +600,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
