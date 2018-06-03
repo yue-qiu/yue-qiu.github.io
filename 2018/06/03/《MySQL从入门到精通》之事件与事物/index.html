@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="数据库,Flask," />
+  <meta name="keywords" content="MySQL," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="两种初始化Flask-SQLAlchemy的方式先给出SQLAlchemy的参数： flask.ext.sqlalchemy.SQLAlchemy(app=None, use_native_unicode=True, session_options=None, metadata=None, query_class=&a">
-<meta name="keywords" content="数据库,Flask">
+<meta name="description" content="事务概述在MySQL中，事务由一条或多条SQL语句组成，在这个事务中，每条MySQL语句是相互依赖的。而整个事务作为一个不可分割的整体，一旦某条MySQL语句执行失败或产生错误，整个事务将会回滚。 只有InnoDB类型的表支持事务。MySQL默认表类型为InnoDB。 事务的基本要素(ACID) 原子性（Atomici">
+<meta name="keywords" content="MySQL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Flask-SQLAlchemy">
-<meta property="og:url" content="http://yoursite.com/2018/05/24/Flask-SQLAlchemy/index.html">
+<meta property="og:title" content="《MySQL从入门到精通》之事件与事物">
+<meta property="og:url" content="http://yoursite.com/2018/06/03/《MySQL从入门到精通》之事件与事物/index.html">
 <meta property="og:site_name" content="精神的壳">
-<meta property="og:description" content="两种初始化Flask-SQLAlchemy的方式先给出SQLAlchemy的参数： flask.ext.sqlalchemy.SQLAlchemy(app=None, use_native_unicode=True, session_options=None, metadata=None, query_class=&amp;lt;class &amp;#39;flask_sqlalchemy.BaseQuery&amp;">
+<meta property="og:description" content="事务概述在MySQL中，事务由一条或多条SQL语句组成，在这个事务中，每条MySQL语句是相互依赖的。而整个事务作为一个不可分割的整体，一旦某条MySQL语句执行失败或产生错误，整个事务将会回滚。 只有InnoDB类型的表支持事务。MySQL默认表类型为InnoDB。 事务的基本要素(ACID) 原子性（Atomicity）：事务开始后所有操作，要么全部做完，要么全部不做，不可能停滞在中间环节。事">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-27T03:46:52.644Z">
+<meta property="og:updated_time" content="2018-06-03T09:33:40.332Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Flask-SQLAlchemy">
-<meta name="twitter:description" content="两种初始化Flask-SQLAlchemy的方式先给出SQLAlchemy的参数： flask.ext.sqlalchemy.SQLAlchemy(app=None, use_native_unicode=True, session_options=None, metadata=None, query_class=&amp;lt;class &amp;#39;flask_sqlalchemy.BaseQuery&amp;">
+<meta name="twitter:title" content="《MySQL从入门到精通》之事件与事物">
+<meta name="twitter:description" content="事务概述在MySQL中，事务由一条或多条SQL语句组成，在这个事务中，每条MySQL语句是相互依赖的。而整个事务作为一个不可分割的整体，一旦某条MySQL语句执行失败或产生错误，整个事务将会回滚。 只有InnoDB类型的表支持事务。MySQL默认表类型为InnoDB。 事务的基本要素(ACID) 原子性（Atomicity）：事务开始后所有操作，要么全部做完，要么全部不做，不可能停滞在中间环节。事">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/24/Flask-SQLAlchemy/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/03/《MySQL从入门到精通》之事件与事物/"/>
 
 
 
 
 
-  <title>Flask-SQLAlchemy | 精神的壳</title>
+  <title>《MySQL从入门到精通》之事件与事物 | 精神的壳</title>
   
 
 
@@ -297,7 +297,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/24/Flask-SQLAlchemy/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/03/《MySQL从入门到精通》之事件与事物/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="路边的土豆">
@@ -314,7 +314,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Flask-SQLAlchemy</h1>
+          <h1 class="post-title" itemprop="name headline">《MySQL从入门到精通》之事件与事物</h1>
         
 
         <div class="post-meta">
@@ -326,8 +326,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-24T14:17:34+08:00">
-                2018-05-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-03T15:03:41+08:00">
+                2018-06-03
               </time>
             
 
@@ -349,8 +349,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web开发/" itemprop="url" rel="index">
-                    <span itemprop="name">Web开发</span>
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
                   </a>
                 </span>
 
@@ -367,8 +367,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/05/24/Flask-SQLAlchemy/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/05/24/Flask-SQLAlchemy/" itemprop="commentCount"></span>
+                <a href="/2018/06/03/《MySQL从入门到精通》之事件与事物/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/06/03/《MySQL从入门到精通》之事件与事物/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -376,7 +376,7 @@
 
           
           
-             <span id="/2018/05/24/Flask-SQLAlchemy/" class="leancloud_visitors" data-flag-title="Flask-SQLAlchemy">
+             <span id="/2018/06/03/《MySQL从入门到精通》之事件与事物/" class="leancloud_visitors" data-flag-title="《MySQL从入门到精通》之事件与事物">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -412,75 +412,73 @@
       
 
       
-        <h1 id="两种初始化Flask-SQLAlchemy的方式"><a href="#两种初始化Flask-SQLAlchemy的方式" class="headerlink" title="两种初始化Flask-SQLAlchemy的方式"></a>两种初始化Flask-SQLAlchemy的方式</h1><p>先给出SQLAlchemy的参数：</p>
-<p><code>flask.ext.sqlalchemy.SQLAlchemy(app=None, use_native_unicode=True, session_options=None, metadata=None, query_class=&lt;class &#39;flask_sqlalchemy.BaseQuery&#39;&gt;, model_class=&lt;class &#39;flask_sqlalchemy.Model&#39;&gt;)</code></p>
-<p>有两种方式可以初始化Flask-SQLAlchemy对象：立即使用或根据需要添加Flask应用程序：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"><span class="keyword">from</span> flask_sqlalchemy <span class="keyword">import</span> SQLAlchemy</span><br><span class="line"></span><br><span class="line"><span class="string">"""以下两种方法都可以"""</span></span><br><span class="line"><span class="comment"># 方法一：直接给SQLAlchemy传递app实例</span></span><br><span class="line">app = Flask(__name__)</span><br><span class="line">db = SQLAlchemy(app)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法二：创建对象，在稍后的配置工厂函数里支持它</span></span><br><span class="line">db = SQLAlchemy()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_app</span><span class="params">()</span>:</span></span><br><span class="line">    app = Flask(__name__)</span><br><span class="line">    db.init_app(app)</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
-<p><strong>这两种方式的区别在于：第一种方式的<code>create_all()</code>和<code>drop_all()</code>总是可用的，而第二种方法只有当<code>flask.Flask.app_context()</code>存在时才可以用<code>create_all()</code>和<code>drop_all()</code></strong>。</p>
-<p>实例对象一旦创建，这个对象会包含sqlalchemy和sqlalchemy.orm中的所有函数和助手。此外，它还提供了一个名为 <code>Model</code> 的类，用于作为声明模型时的delarative基类</p>
-<p>要创建表，可以在shell中导入db实例然后调用<code>create_all()</code>方法：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> app <span class="keyword">import</span> db</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>db.create_all()</span><br></pre></td></tr></table></figure></p>
-<p><strong>这里要注意，此处的python shell必须已经把db相关的model导入context中，否则缺少相关模型create_all()不会成功</strong>。原因前面已经解释过了。</p>
-<p>解决方法有两个：</p>
-<ol>
-<li><p>每次启动shell时将db与app这两个Flask运行相关的运行context加载到shell上下文。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask_script <span class="keyword">import</span> Manager, shell</span><br><span class="line"><span class="keyword">from</span> flask_sqlalchemy <span class="keyword">import</span> SLQAlchemy</span><br><span class="line"><span class="keyword">from</span> app <span class="keyword">import</span> create_app, db</span><br><span class="line"></span><br><span class="line">app = create_app(<span class="string">'Develop'</span>)</span><br><span class="line">app.config[<span class="string">'SECRET_KEY'</span>] = <span class="string">'a secret string'</span></span><br><span class="line">app.config[<span class="string">'SQLALCHEMY_DATABASE_URI'</span>] = <span class="string">'mysql://username:password@hostname:port/databasename'</span></span><br><span class="line"></span><br><span class="line">manager = Manager(app)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.shell_context_processor</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">make_shell_context</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> dict(app=current_app, db=db)</span><br><span class="line"></span><br><span class="line">manager.add_command(<span class="string">"shell"</span>, Shell(make_context=make_shell_context))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    manage.run()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在manage文件里导入相关db模型，然后flask-script添加一个创建数据表的命令</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入所有db模型</span></span><br><span class="line"><span class="keyword">from</span> modle <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> flask_sqlalchemy <span class="keyword">import</span> SLQAlchemy</span><br><span class="line"><span class="keyword">from</span> app <span class="keyword">import</span> create_app, db</span><br><span class="line"></span><br><span class="line">app = create_app(<span class="string">'Develop'</span>)</span><br><span class="line">app.config[<span class="string">'SECRET_KEY'</span>] = <span class="string">'a secret string'</span></span><br><span class="line">app.config[<span class="string">'SQLALCHEMY_DATABASE_URI'</span>] = <span class="string">'mysql://username:password@hostname:port/databasename'</span></span><br><span class="line"></span><br><span class="line">manager = Manager(app)</span><br><span class="line"></span><br><span class="line"><span class="meta">@manager.add_command</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_all</span><span class="params">()</span>:</span></span><br><span class="line">    db.create_all()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    manage.run()</span><br></pre></td></tr></table></figure>
-</li>
+        <h1 id="事务概述"><a href="#事务概述" class="headerlink" title="事务概述"></a>事务概述</h1><p>在MySQL中，事务由一条或多条SQL语句组成，在这个事务中，每条MySQL语句是相互依赖的。而整个事务作为一个不可分割的整体，一旦某条MySQL语句执行失败或产生错误，整个事务将会回滚。</p>
+<p>只有<code>InnoDB</code>类型的表支持事务。MySQL默认表类型为<code>InnoDB</code>。</p>
+<h2 id="事务的基本要素-ACID"><a href="#事务的基本要素-ACID" class="headerlink" title="事务的基本要素(ACID)"></a>事务的基本要素(ACID)</h2><ol>
+<li>原子性（Atomicity）：事务开始后所有操作，要么全部做完，要么全部不做，不可能停滞在中间环节。事务执行过程中出错，会回滚到事务开始前的状态，所有的操作就像没有发生一样。也就是说事务是一个不可分割的整体，就像化学中学过的原子，是物质构成的基本单位。</li>
+<li>一致性（Consistency）：事务开始前和结束后，数据库的完整性约束没有被破坏 。比如A向B转账，不可能A扣了钱，B却没收到。</li>
+<li>孤立性（Isolation）：每个事务在自己的空间内执行，与其他事务隔离，而且事务的结果只有在它被完全执行时才能看到。这样即使一个系统同时发生多个事物，孤立性也可以保证特定的事务在完成之前其结果不被公布。</li>
+<li>持久性（Durability）：事务完成后，事务对数据库的所有更新将被保存到数据库，不能回滚。</li>
 </ol>
-<h1 id="查询方法"><a href="#查询方法" class="headerlink" title="查询方法"></a>查询方法</h1><p>对于一个BaseQuery类，SQLAlchemy提供了一些查询方法用于获得你想要的查询对象。</p>
-<ol>
-<li>all() 会以列表的形式返回所有的查询结果。</li>
-<li>order_by(field[,DESC]) 根据某个字段进行排序，然后返回所有结果。默认按升序排列，如果添加<code>DESC</code>参数则以降序排列</li>
-<li>limit(num) 限制返回查询结果的数量</li>
-<li>offset(num) 根据偏移量返回查询结果。如：总共查询到10个人，偏移量是2，那么就只返回后8个人。</li>
-<li>first() 返回第一个查询结果</li>
-<li>first_or_404() 返回第一个查询结果，如果不存在就抛出404错误</li>
-<li>get(ident) 通过主键查询</li>
-<li>get_or_404(ident) 通过主键查询，如果不存在就抛出404错误</li>
-<li>paginate(page=None, per_page=None, error_out=True)。<code>page</code>指定当前页数，<code>per_page</code>指定每一页有多少查询对象，<code>error_out</code>如果设为True，当请求的页数超出了范围时会抛出404错误。</li>
-</ol>
-<p><code>paginate</code>方法返回的是一个<code>pagination类对象</code>。这个类在Flask-SQLAlchemy中定义，这个对象包含很多属性，用于在模板中生成分页链接，下面介绍几个常用属性：</p>
+<h2 id="事务的创建与存在周期"><a href="#事务的创建与存在周期" class="headerlink" title="事务的创建与存在周期"></a>事务的创建与存在周期</h2><p>创建事务的一般过程是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">初始化事务 ————&gt; 创建事务 ————&gt; 提交或回滚</span><br></pre></td></tr></table></figure></p>
+<p><strong>无论最后是提交还是回滚，都会关闭这个事务</strong>。  </p>
 <ul>
-<li>items 当前页面中的记录</li>
-<li>page 当前页数</li>
-<li>prev_num 上一页的页数</li>
-<li>next_num 下一页的页数</li>
-<li>has_next 如果有下一页返回True</li>
-<li>has_prev 如果有上一页返回True</li>
-<li>pages 查询得到的总页数</li>
-<li>per_page 每页显示的记录数量</li>
-<li>total 查询返回的记录总数</li>
+<li>初始化事务：<code>start transaction;</code>或<code>begin;</code>，MySQL默认是<strong>自动提交</strong>的，所以需要用命令改为手动模式</li>
+<li>创建事务：执行SQL语句</li>
+<li>提交或回滚： 提交<code>commit;</code>，回滚<code>rollback;</code></li>
 </ul>
-<p>在<code>pagination类对象</code>上还可以调用一些方法：</p>
-<ul>
-<li>prev(error_out=False) 上一页的分类对象</li>
-<li>next(error_out=False) 下一页的分类对象</li>
-<li>iter_pages(left_edge=2, left_current=2, right_current=5, right_edge=2) 一个迭代器。返回一个在分页导航中显示的页数列表。这个列表的最左边显示left_edge页，最右边显示right_edge页。当前页的左边显示left_current页，右边显示right_current页。如一个100页的列表中，当前页为第50页。则<code>pagination.iter_pages()</code>返回的列表为[1, 2, None, 48, 49, 50, 51, 52, 53, 54, 55, None, 99, 100]。None表示页数之间的间隔。<h1 id="关系型数据库中表的关系"><a href="#关系型数据库中表的关系" class="headerlink" title="关系型数据库中表的关系"></a>关系型数据库中表的关系</h1><h3 id="一对多"><a href="#一对多" class="headerlink" title="一对多"></a>一对多</h3>考虑下面的代码<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义模型</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Writer</span><span class="params">(db.Model)</span>:</span></span><br><span class="line">    __tablename__ = writers</span><br><span class="line">    id = db.Column(db.Integer,primary_key=<span class="keyword">True</span>)</span><br><span class="line">    name = db.Column(db.String(<span class="number">64</span>),unique=<span class="keyword">True</span>)</span><br><span class="line">    posts = db.relationship(<span class="string">'Article'</span>,backref=<span class="string">'writer'</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Article</span><span class="params">(db.Model)</span>:</span></span><br><span class="line">    __tablename__ = articles</span><br><span class="line">    id = db.Column(db.Integer,primary_key)</span><br><span class="line">    title = db.Column(db.String(<span class="number">64</span>))</span><br><span class="line">    body = db.Column(db.String(<span class="number">2018</span>))</span><br><span class="line">    writer_id = db.Colum(db.Integer,db.ForeignKey(<span class="string">'writers.id'</span>))</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ol>
-<li>在Writer模型中，relationship()定义了两张表之间的关系：<strong>第一个参数是子表模型名</strong>，backref属性相当于在另一张表中也定义了一个相关关系，用于访问父表的模型。这样Writer实例通过posts属性可以访问所有与之相关的Article模型，返回一个关联Article组成的列表。Article实例通过writer属性可以访问对应的Writer模型。</li>
-<li>在Article模型中，writer_id属性被定义为外键，ForeignKey()函数的含义是其所在的列的值域应当被限制在另一个表的指定列的取值范围之内。<br><strong>这里要说明:ForeignKey()函数的参数形式应为’表名.字段名’而不是’Model名.字段名’</strong>  </li>
-<li>一对多关系中，在父表模型中定义db.relationship(),用于指出和子表的关系，在子表模型中定义db.ForeignKey指向父表。</li>
+<h2 id="事务的并发问题"><a href="#事务的并发问题" class="headerlink" title="事务的并发问题"></a>事务的并发问题</h2><ol>
+<li>脏读：事务A读取了事务B更新的数据，然后B回滚操作，那么A读取到的数据是脏数据</li>
+<li>不可重复读：事务 A 多次读取同一数据，事务 B 在事务A多次读取的过程中，对数据作了更新并提交，导致事务A多次读取同一数据时，结果 不一致。</li>
+<li>幻读：系统管理员A将数据库中所有学生的成绩从具体分数改为ABCDE等级，但是系统管理员B就在这个时候插入了一条具体分数的记录，当系统管理员A改结束后发现还有一条记录没有改过来，就好像发生了幻觉一样，这就叫幻读。</li>
 </ol>
-<p>如下例,在实例化Article模型时，由relationship反向定义的writer属性要传入与love_python对应的的Writer实例susan。这样就可以让love_python与susan两个实例关联起来。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">susan = Writer(name=susan)</span><br><span class="line">love_python = Article(title=<span class="string">'love python'</span>,body=<span class="string">'python is easy and elegant'</span>，writer=susan)</span><br></pre></td></tr></table></figure></p>
-<p><strong><em>关系型数据库是通过主键与外键确定两张表的关系的</em></strong>。比如<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">w1 = Writer(<span class="string">'Jack'</span>)</span><br><span class="line">w2 = Writer(<span class="string">'Mike'</span>)</span><br><span class="line">a = Article(<span class="string">'hello'</span>,<span class="string">'world'</span>,writer=w1)、</span><br><span class="line">b = Article(<span class="string">'hi'</span>,<span class="string">'i like python'</span>,writer=w1)</span><br><span class="line">c = Article(<span class="string">'haha'</span>,<span class="string">'i like flask'</span>,writer=w2)</span><br><span class="line">db.session.add_all([w1,w2,a,b,c])</span><br><span class="line">db.session.commit()</span><br><span class="line">print(w.posts) <span class="comment"># 会访问a和b，而不访问c</span></span><br></pre></td></tr></table></figure></p>
-<p><strong><em>当w查询posts时，sqlalchemy会从Article模型中寻找外键与w.id相同的实例</em></strong>并返回这些对象。  </p>
-<h2 id="多对一"><a href="#多对一" class="headerlink" title="多对一"></a>多对一</h2><p>多对一关系中模型的定义与一对多类似，但是要将ForeignKey定义在父表中，即多的一方。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Writer</span><span class="params">(db.Model)</span>:</span></span><br><span class="line">    __tablename__ = writers</span><br><span class="line">    id = db.Column(db.Integer,primary_key=<span class="keyword">True</span>)</span><br><span class="line">    name = db.Column(db.String(<span class="number">64</span>),unique=<span class="keyword">True</span>)</span><br><span class="line">    article_id = db.Column(db.Integer,db.ForeignKey(articles.id)</span><br><span class="line">    posts = db.relationship(<span class="string">'Article'</span>,backref=<span class="string">'writer'</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Article</span><span class="params">(db.model)</span>:</span></span><br><span class="line">    __tablename__ = articles</span><br><span class="line">    id = db.Column(db.Integer,primary_key=<span class="keyword">True</span>)</span><br><span class="line">    title = db.Column(db.String(<span class="number">64</span>))</span><br><span class="line">    body = db.Column(db.String(<span class="number">2018</span>))</span><br></pre></td></tr></table></figure></p>
-<h2 id="一对一"><a href="#一对一" class="headerlink" title="一对一"></a>一对一</h2><p>要让两张表是一对一关系，定义模型方式类似于一对多。只需要在<strong>一</strong>的模型中其relationship()的uselist参数设为False。<br>对于多对一关系，要改成一对一关系也很简单，只要用backref()函数在<strong>一</strong>的一方定义一个关系，并且将urslist设为False即可。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Writer</span><span class="params">(db.Model)</span>:</span></span><br><span class="line">    __tablename__ = writers</span><br><span class="line">    id = db.Column(db.Integer,primary_key=<span class="keyword">True</span>)</span><br><span class="line">    name = db.Column(db.String(<span class="number">64</span>),unique=<span class="keyword">True</span>)</span><br><span class="line">    article_id = db.Column(db.Integer,db.ForeignKey(articles.id)</span><br><span class="line">    posts = db.relationship(<span class="string">'Article'</span>,backref=db.backref(<span class="string">'writer'</span>,uselist=<span class="keyword">False</span>)</span><br></pre></td></tr></table></figure></p>
-<h2 id="多对多"><a href="#多对多" class="headerlink" title="多对多"></a>多对多</h2><p>要定义两张表的多对多关系，这时候光用两张表就不够了。要引入第三张表。<br>举个例子，现在要定义课程与学生之间的关系。由于一个课程对应多个学生，一个学生也对应对个课程，这时候就不再是简单的一对多或者多对一而是多对多关系了。为了解决这个问题，我们引入第三张表Reflection，这张表定义了学生的id，对应的课程id与学生选这门课程的时间。这样一来，如果我们想要知道小明选了什么课，只需要在Reflection中根据小明的id找出对应的课程id，再通过课程id在Class中找到对应课程就OK啦~同时，通过Reflection我们还可以知道小明在什么时候选了这门课。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Reflection</span><span class="params">(db.Model)</span>:</span></span><br><span class="line">    __tablename__ = <span class="string">'reflections'</span></span><br><span class="line">    id = db.Column(db.Integer,primary_key=<span class="keyword">True</span>)</span><br><span class="line">    student_id = db.Column(db.Integer,db.ForeignKey(<span class="string">'students.id'</span>))</span><br><span class="line">    class_id = db.Column(db.Integer,db.ForeignKey(<span class="string">'classes.id'</span>))</span><br><span class="line">    timestamp = db.Column(db.DateTime,default=datetime.utcnow)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(db.Model)</span>:</span></span><br><span class="line">    __tablename__ = <span class="string">'students'</span></span><br><span class="line">    id = db.Column(db.Integer,primary_key=<span class="keyword">True</span>)</span><br><span class="line">    name = db.Column(db.String(<span class="number">64</span>))</span><br><span class="line">    age = db.Column(db.Integer)</span><br><span class="line">    classes = db.relationship(<span class="string">'Reflection'</span>,backref=db.backref(<span class="string">'students'</span>,lazy=<span class="string">'joined'</span>),lazy=<span class="string">'dynamic'</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Class</span><span class="params">(db.Model)</span>:</span></span><br><span class="line">    __tablename__ = <span class="string">'classes'</span></span><br><span class="line">    id = db.Column(db.Integer,primary_key=<span class="keyword">True</span>)</span><br><span class="line">    name = db.Column(db.String(<span class="number">64</span>))</span><br><span class="line">    student = db.relationship(<span class="string">'Reflection'</span>,backref=db.backref(<span class="string">'classes'</span>,lazy=<span class="string">'joined'</span>),lazy=<span class="string">'dynamic'</span>)</span><br></pre></td></tr></table></figure></p>
-<p>值得一提的是，在定义Reflection中回引模型的属性时用了backref()方法，并且将回引属性定义为joined加载。joined加载会在调用Reflection的同时找出对应的Student模型和Class模型，换言之，此时Reflection中的student和class直接指向对应的实例。这样就避免了selected加载导致的仅在调用Reflection.student或Reflection.class才加载相应模型。因为从数据库中加载模型是很耗费时间的，用joined一次就把所有模型都调用出来了，而selected需要调用多次，换言之，这样提高了效率。<br>定义好的模型的关系，我们就可以试着进行操作了：<br>先创建学生和课程实例<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Mike = Student(name=<span class="string">'Mike'</span>,age=<span class="number">18</span>)</span><br><span class="line">English = Class(name=<span class="string">'English'</span>)</span><br><span class="line">db.session.add(Mike)</span><br><span class="line">db.session.add(English)</span><br><span class="line">db.session.commit()</span><br></pre></td></tr></table></figure></p>
-<p>将学生与课程之间的关系添加到Reflection中<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">f = Reflection(students=Mike,classes=English)</span><br><span class="line">db.session.add(f)</span><br><span class="line">db.session.commit()</span><br></pre></td></tr></table></figure></p>
-<p>当我们想要查询学生的课程时，通过Student.classes获取到Reflection对象，再通过Reflection.class就可以查到该学生的课了。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">student = Student.query.filter_by(name=<span class="string">'Mike'</span>).first()</span><br><span class="line">classes = student.classes.<span class="keyword">class</span>.all()</span><br></pre></td></tr></table></figure></p>
-<h1 id="联结查询"><a href="#联结查询" class="headerlink" title="联结查询"></a>联结查询</h1><p>在上面的例子中，我们为了获取学生的课程，执行了多次查询，这样的效率太低了，最好是一次就直接把结果查询出来。我们可以考虑把Class和Reflection结合起来，然后分别过滤Reflection中student_id与class_id，这样就得到一张包含了学生和相应课程的表。这种操作就叫做联结查询。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(db.Model)</span>:</span></span><br><span class="line">    ......</span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getclass</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> Reflection.query.join(Class,Class.id==Reflection.class_id).filter(Reflection.student_id==self.id)</span><br></pre></td></tr></table></figure></p>
-<p>下面对这行代码进行分析：</p>
+<p>小结：不可重复读的和幻读很容易混淆，不可重复读侧重于修改，幻读侧重于新增或删除。解决不可重复读的问题只需锁住满足条件的行，解决幻读需要锁表</p>
+<h2 id="事务的孤立性等级"><a href="#事务的孤立性等级" class="headerlink" title="事务的孤立性等级"></a>事务的孤立性等级</h2><p>事务具有孤立的空间，在MySQL服务器中，用户通过不同的会话执行不同的事务，在多用户环境中，许多RDBMS(关系型数据库管理系统)会话在任意时刻都是活动的。为了使这些事务互不影响，保证数据库性能不受影响，采用事务的孤立等级是很重要的。</p>
+<p>如果没有孤立性，不同的<code>select</code>会在同一事务的环境中检索到不同的结果，这将导致数据的不一致性。</p>
 <ol>
-<li>Reflection.query返回Reflection对象</li>
-<li>join(Class,Class.id==Reflection.class_id) 联结Class与Reflection表，并且将Class.id与Reflection.class_id的值对应起来，相当于sql语句中的on</li>
-<li>filter(Reflection.student_id==self.id) 对这张临时表进行过滤：只有Reflection.student_id与当前学生实例id相同的会留下来  </li>
+<li>序列化(serializable)：以序列的形式对事务进行处理。该孤立级的特定是只有当事务提交后，用户才能从数据库上查看数据的变化。该孤立级会影响MySQL的性能，生产中很少用。</li>
+<li>可重读(repeatale read)：对应于程序的安全性做出部分妥协，以提高性能。事务在孤立级上不会被看成一个序列，不过在当前执行的事务过程中，用户依然看不到事务的过程。直到事务提交为止，用户才能看到事务的变化结果。（客户端A、B同时开启事务，B向表中插入数据行，A在提交事务前是看不到改变的）</li>
+<li>读已提交(read committed)：该孤立级的安全性比可重读低。在这一级事务用户可以看到其他事务添加到新纪录。在事务处理时如果存在其他用户同时对事务的相应表进行修改那么在同一事务的不同时间内，select语句可能返回不同的结果(客户端A、B同时开启事务，B向表中插入数据行且提交后，A可以看到改变)</li>
+<li>读未提交(read uncommitted)：该孤立级提供事务之间最小程度间隔，该孤立级容易产生幻读。其他用户可以在该孤立级上看到未提交的事务。(客户端A、B同时开启事务，B向表中插入数据行且未提交，A也可以看到改变)</li>
 </ol>
-<p>这样，我们就可以使用这样临时的表来获取想要的内容了。</p>
+<table>
+<thead>
+<tr>
+<th>孤立等级</th>
+<th style="text-align:center">脏读</th>
+<th style="text-align:right">不可重复读</th>
+<th style="text-align:right">幻读 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>序列化</td>
+<td style="text-align:center">否</td>
+<td style="text-align:right">否</td>
+<td style="text-align:right">否  </td>
+</tr>
+<tr>
+<td>可重读</td>
+<td style="text-align:center">否</td>
+<td style="text-align:right">否</td>
+<td style="text-align:right">是 </td>
+</tr>
+<tr>
+<td>读已提交</td>
+<td style="text-align:center">否</td>
+<td style="text-align:right">是</td>
+<td style="text-align:right">是</td>
+</tr>
+<tr>
+<td>读未提交</td>
+<td style="text-align:center">是</td>
+<td style="text-align:right">是</td>
+<td style="text-align:right">是</td>
+</tr>
+</tbody>
+</table>
+<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><p>当两个或多个处于不同序列的用户打算同时更新某相同数据库时，因互相等待对方释放权限而导致双方一直处于等待状态。两个不同序列的客户端同时对数据执行操作极有可能产生死锁。更通俗地讲，当两个事物相互等待操作对方释放所持有的资源而导致两个事务都无法操作对方持有的资源，这样无限期的等待称为死锁。</p>
+<p>InnoDB具有检查死锁的功能。如果发现产生了死锁，InnoDB会立刻撤销其中一个任务以便死锁消失。这样就可以使另一个事务获取对方所占有的资源而执行操作逻辑。</p>
 
       
     </div>
@@ -498,9 +496,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/数据库/" rel="tag"># 数据库</a>
-          
-            <a href="/tags/Flask/" rel="tag"># Flask</a>
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
           
         </div>
       
@@ -528,8 +524,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/23/字符串编码/" rel="next" title="字符串编码">
-                <i class="fa fa-chevron-left"></i> 字符串编码
+              <a href="/2018/05/30/定义完整性约束/" rel="next" title="《MySQL从入门到精通》之完整性约束">
+                <i class="fa fa-chevron-left"></i> 《MySQL从入门到精通》之完整性约束
               </a>
             
           </div>
@@ -537,10 +533,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/27/Flask学习/" rel="prev" title="flask学习">
-                flask学习 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -701,7 +693,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#两种初始化Flask-SQLAlchemy的方式"><span class="nav-number">1.</span> <span class="nav-text">两种初始化Flask-SQLAlchemy的方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询方法"><span class="nav-number">2.</span> <span class="nav-text">查询方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关系型数据库中表的关系"><span class="nav-number">3.</span> <span class="nav-text">关系型数据库中表的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一对多"><span class="nav-number">3.0.1.</span> <span class="nav-text">一对多</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多对一"><span class="nav-number">3.1.</span> <span class="nav-text">多对一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一对一"><span class="nav-number">3.2.</span> <span class="nav-text">一对一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多对多"><span class="nav-number">3.3.</span> <span class="nav-text">多对多</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#联结查询"><span class="nav-number">4.</span> <span class="nav-text">联结查询</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#事务概述"><span class="nav-number">1.</span> <span class="nav-text">事务概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#事务的基本要素-ACID"><span class="nav-number">1.1.</span> <span class="nav-text">事务的基本要素(ACID)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务的创建与存在周期"><span class="nav-number">1.2.</span> <span class="nav-text">事务的创建与存在周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务的并发问题"><span class="nav-number">1.3.</span> <span class="nav-text">事务的并发问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务的孤立性等级"><span class="nav-number">1.4.</span> <span class="nav-text">事务的孤立性等级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#死锁"><span class="nav-number">1.5.</span> <span class="nav-text">死锁</span></a></li></ol></li></ol></div>
             
 
           </div>
