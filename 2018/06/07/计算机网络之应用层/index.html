@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="精神的壳">
 <meta property="og:description" content="进程通信一个进程可以理解为运行在端系统中的的一个程序。当进程运行在相同的端系统上时，它们使用进程间通信机制相互通信。而在不同的端系统上，通过跨越计算机网络交换报文实现进程间的通信。 多数应用程序由通信进程对组成，每对中的两个进程互相发送报文，从一个进程向另一个进程发送报文就必须经过下面的计算机网络。进程通过一个被称为套接字的软件接口向网络发送报文和接受报文。套接字类似于一栋屋子的门，无论是要进入屋">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-07T13:55:03.485Z">
+<meta property="og:updated_time" content="2018-06-07T14:00:20.432Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机网络之应用层">
 <meta name="twitter:description" content="进程通信一个进程可以理解为运行在端系统中的的一个程序。当进程运行在相同的端系统上时，它们使用进程间通信机制相互通信。而在不同的端系统上，通过跨越计算机网络交换报文实现进程间的通信。 多数应用程序由通信进程对组成，每对中的两个进程互相发送报文，从一个进程向另一个进程发送报文就必须经过下面的计算机网络。进程通过一个被称为套接字的软件接口向网络发送报文和接受报文。套接字类似于一栋屋子的门，无论是要进入屋">
@@ -424,7 +424,7 @@
 <li>定义在目的端系统中的接收进程的标志符</li>
 </ol>
 <p>端系统地址由<code>IP地址</code>确定，而接收进程标志符由<code>端口</code>确定。</p>
-<h2 id="几种常见的应用层协议"><a href="#几种常见的应用层协议" class="headerlink" title="几种常见的应用层协议"></a>几种常见的应用层协议</h2><h3 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h3><p>HTTP（超文本传输协议）是Web的核心。在Web应用中，客户与服务器之间是通过HTTP报文进行会话的。而HTTP协议定义了报文格式与交换方式。Web服务器实现了HTTP的服务器端，用于存储Web对象，每个对象由url寻址。</p>
+<h1 id="几种常见的应用层协议"><a href="#几种常见的应用层协议" class="headerlink" title="几种常见的应用层协议"></a>几种常见的应用层协议</h1><h2 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h2><p>HTTP（超文本传输协议）是Web的核心。在Web应用中，客户与服务器之间是通过HTTP报文进行会话的。而HTTP协议定义了报文格式与交换方式。Web服务器实现了HTTP的服务器端，用于存储Web对象，每个对象由url寻址。</p>
 <p>HTTP使用<code>TCP</code>作为它的支撑运输协议。一次完整的<code>请求——相应</code>流程是这样的：</p>
 <ol>
 <li>HTTP客户端首先发起一个与服务器的TCP连接，一旦连接建立，该浏览器进程与服务器进程就可以通过套接字接口访问TCP</li>
@@ -432,7 +432,7 @@
 <li>客户端收到请求报文并生成相应的相应报文，通过客户端的<code>套接字</code>发送HTTP响应报文</li>
 <li>客户端从<code>套接字</code>接受响应报文</li>
 </ol>
-<h4 id="Web缓存器"><a href="#Web缓存器" class="headerlink" title="Web缓存器"></a>Web缓存器</h4><p>Web缓存器也叫<code>代理服务器</code>，如Nginx，uwsgi等，它是能够代表初始Web服务器来满足HTTP请求的网络实体。代理服务器有自己的磁盘空间，在存储空间中保存最近请求过的对象的副本。</p>
+<h3 id="Web缓存器"><a href="#Web缓存器" class="headerlink" title="Web缓存器"></a>Web缓存器</h3><p>Web缓存器也叫<code>代理服务器</code>，如Nginx，uwsgi等，它是能够代表初始Web服务器来满足HTTP请求的网络实体。代理服务器有自己的磁盘空间，在存储空间中保存最近请求过的对象的副本。</p>
 <p>在客户端与服务器之间部署一层代理服务器，大大减轻了服务器的负担。在一次请求过后，代理服务器缓存了这次响应对象。对于下一次相同的请求，代理服务器向服务器确认两次响应对象是否相同，如果是一样的则代理服务器直接把上次响应对象返回给客户。</p>
 <h2 id="SMTP"><a href="#SMTP" class="headerlink" title="SMTP"></a>SMTP</h2><p>通过SMTP（简单邮件传输协议）实现发送邮件。因特网电子邮件系统由3部分组成：</p>
 <ul>
@@ -686,7 +686,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#进程通信"><span class="nav-number">1.</span> <span class="nav-text">进程通信</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程寻址"><span class="nav-number">1.1.</span> <span class="nav-text">进程寻址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几种常见的应用层协议"><span class="nav-number">1.2.</span> <span class="nav-text">几种常见的应用层协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP"><span class="nav-number">1.2.1.</span> <span class="nav-text">HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Web缓存器"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">Web缓存器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SMTP"><span class="nav-number">1.3.</span> <span class="nav-text">SMTP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS"><span class="nav-number">1.4.</span> <span class="nav-text">DNS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS工作机理"><span class="nav-number">1.4.1.</span> <span class="nav-text">DNS工作机理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS缓存"><span class="nav-number">1.4.2.</span> <span class="nav-text">DNS缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS记录"><span class="nav-number">1.4.3.</span> <span class="nav-text">DNS记录</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#进程通信"><span class="nav-number">1.</span> <span class="nav-text">进程通信</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程寻址"><span class="nav-number">1.1.</span> <span class="nav-text">进程寻址</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#几种常见的应用层协议"><span class="nav-number">2.</span> <span class="nav-text">几种常见的应用层协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP"><span class="nav-number">2.1.</span> <span class="nav-text">HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Web缓存器"><span class="nav-number">2.1.1.</span> <span class="nav-text">Web缓存器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SMTP"><span class="nav-number">2.2.</span> <span class="nav-text">SMTP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS"><span class="nav-number">2.3.</span> <span class="nav-text">DNS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS工作机理"><span class="nav-number">2.3.1.</span> <span class="nav-text">DNS工作机理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS缓存"><span class="nav-number">2.3.2.</span> <span class="nav-text">DNS缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS记录"><span class="nav-number">2.3.3.</span> <span class="nav-text">DNS记录</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
