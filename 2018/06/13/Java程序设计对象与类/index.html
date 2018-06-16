@@ -82,14 +82,14 @@
 <meta name="description" content="对象与对象变量想使用对象变量，首先要构造对象并指定其初始状态。使用构造器构造新实例，在构造一个新实例时，构造器会运行，将实例域初始化为所希望的状态。构造器是一种特殊的方法，没有返回值。构造器的名字与类名相同。一个类有一个或多个构造器方法。不要在构造器中定义与实例域重名的局部变量，否则编译器会报错。12345678910">
 <meta name="keywords" content="读书体会">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java程序设计——对象与类">
+<meta property="og:title" content="Java程序设计——类">
 <meta property="og:url" content="http://yoursite.com/2018/06/13/Java程序设计对象与类/index.html">
 <meta property="og:site_name" content="精神的壳">
 <meta property="og:description" content="对象与对象变量想使用对象变量，首先要构造对象并指定其初始状态。使用构造器构造新实例，在构造一个新实例时，构造器会运行，将实例域初始化为所希望的状态。构造器是一种特殊的方法，没有返回值。构造器的名字与类名相同。一个类有一个或多个构造器方法。不要在构造器中定义与实例域重名的局部变量，否则编译器会报错。123456789101112class Bird&amp;#123;    private String c">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-15T01:44:51.203Z">
+<meta property="og:updated_time" content="2018-06-16T13:30:51.884Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java程序设计——对象与类">
+<meta name="twitter:title" content="Java程序设计——类">
 <meta name="twitter:description" content="对象与对象变量想使用对象变量，首先要构造对象并指定其初始状态。使用构造器构造新实例，在构造一个新实例时，构造器会运行，将实例域初始化为所希望的状态。构造器是一种特殊的方法，没有返回值。构造器的名字与类名相同。一个类有一个或多个构造器方法。不要在构造器中定义与实例域重名的局部变量，否则编译器会报错。123456789101112class Bird&amp;#123;    private String c">
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>Java程序设计——对象与类 | 精神的壳</title>
+  <title>Java程序设计——类 | 精神的壳</title>
   
 
 
@@ -314,7 +314,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java程序设计——对象与类</h1>
+          <h1 class="post-title" itemprop="name headline">Java程序设计——类</h1>
         
 
         <div class="post-meta">
@@ -376,7 +376,7 @@
 
           
           
-             <span id="/2018/06/13/Java程序设计对象与类/" class="leancloud_visitors" data-flag-title="Java程序设计——对象与类">
+             <span id="/2018/06/13/Java程序设计对象与类/" class="leancloud_visitors" data-flag-title="Java程序设计——类">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -417,9 +417,9 @@
 <p>bird是一个对象变量，并没有实际包含一个对象，而仅仅引用一个对象。<strong>任何对象变量的值都是对存储在另一个地方的一个对象的引用</strong></p>
 <h1 id="更改器方法与访问器方法"><a href="#更改器方法与访问器方法" class="headerlink" title="更改器方法与访问器方法"></a>更改器方法与访问器方法</h1><p>对象的方法会改变原对象的状态，称之为更改器方法。只访问对象而不改变原对象的方法，称之为访问器方法。</p>
 <h1 id="自定义类"><a href="#自定义类" class="headerlink" title="自定义类"></a>自定义类</h1><p>关键字<code>public</code>修饰的类称为共有类。</p>
-<p><strong>在一个源文件中，只能有一个共有类，类名与文件名相同</strong>。但可以有多个非公有类。</p>
-<p>关键字<code>public</code>修饰的方法、字段意味着任何类的任何方法都可以调用这些方法和字段，而<code>private</code>确保只有自身类可以访问这些实例域。（<strong>同属一个类的实例可以互相访问访问私有域</strong>）</p>
-<p>可以把实例域定义为<code>final</code>。构造对象时必须要初始化这样的域，并且在后面的操作中不能再对它进行改变。</p>
+<p><strong>在一个.java源文件（编译单元）中，只能有一个共有类，类名与文件名相同</strong>。可以有多个非公有类。包之外的世界是无法看见这些非公有类的，因为它们不是public类，而且它们主要用来为公有类提供支持。</p>
+<p>关键字<code>public</code>修饰的方法、字段意味着任何类的任何方法都可以通过点操作调用这些方法和字段，而<code>private</code>确保只有自身类可以访问这些实例域或方法。（<strong>同属一个类的实例可以互相访问访问私有域</strong>）</p>
+<p>可以把实例域定义为<code>final</code>。构造对象时必须要初始化这样的域（构造器之前<br>），并且在后面的操作中不能再对它进行改变。</p>
 <h1 id="静态域与静态方法"><a href="#静态域与静态方法" class="headerlink" title="静态域与静态方法"></a>静态域与静态方法</h1><p>关键字<code>static</code>修饰的字段、方法被称为静态域和静态方法</p>
 <h2 id="静态域"><a href="#静态域" class="headerlink" title="静态域"></a>静态域</h2><p>如果将域定义为<code>static</code>，每个类中只有一个这样的域。而每个对象对于所有的实例域却都有自己的一份拷贝。这样就把实例域与静态域区分开来：每个实例有自己的实例域，而各个实例共享一个静态域。</p>
 <h2 id="静态常量"><a href="#静态常量" class="headerlink" title="静态常量"></a>静态常量</h2><p>例如，在Math类中定义圆周率：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Math</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">double</span> PI = <span class="number">3.14159265758</span>;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -522,8 +522,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/06/15/Java程序设计——包/" rel="prev" title="Java程序设计———包">
-                Java程序设计———包 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/06/15/Java程序设计——包/" rel="prev" title="Java程序设计——包">
+                Java程序设计——包 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -608,7 +608,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
