@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="高山仰止，景行行止。虽不能至，心向往之。">
+<meta name="description" content="接口（interface）主要用来描述类具有什么功能，而不给出每个功能的具体实现。这种做法有利于实现类的扩展，因为Java不支持多继承，还有利于多态，因为虽然接口无法构造对象，却能声明接口的变量，且这个变量能引用所有实现了该接口的类对象。 构造一个接口构造接口与构造类相似，只是将class改为interface，此外，">
 <meta name="keywords" content="读书体会">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java程序设计——-接口与内部类">
 <meta property="og:url" content="http://yoursite.com/2018/06/17/Java程序设计——-接口与内部类/index.html">
 <meta property="og:site_name" content="精神的壳">
-<meta property="og:description" content="高山仰止，景行行止。虽不能至，心向往之。">
+<meta property="og:description" content="接口（interface）主要用来描述类具有什么功能，而不给出每个功能的具体实现。这种做法有利于实现类的扩展，因为Java不支持多继承，还有利于多态，因为虽然接口无法构造对象，却能声明接口的变量，且这个变量能引用所有实现了该接口的类对象。 构造一个接口构造接口与构造类相似，只是将class改为interface，此外，还可以将接口定义为泛型，接受类型参数，这样会提高接口的可用性：123456789">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-17T01:03:37.180Z">
+<meta property="og:updated_time" content="2018-06-17T13:09:12.811Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java程序设计——-接口与内部类">
-<meta name="twitter:description" content="高山仰止，景行行止。虽不能至，心向往之。">
+<meta name="twitter:description" content="接口（interface）主要用来描述类具有什么功能，而不给出每个功能的具体实现。这种做法有利于实现类的扩展，因为Java不支持多继承，还有利于多态，因为虽然接口无法构造对象，却能声明接口的变量，且这个变量能引用所有实现了该接口的类对象。 构造一个接口构造接口与构造类相似，只是将class改为interface，此外，还可以将接口定义为泛型，接受类型参数，这样会提高接口的可用性：123456789">
 
 
 
@@ -412,7 +412,27 @@
       
 
       
-        
+        <p>接口（interface）主要用来描述类具有什么功能，而不给出每个功能的具体实现。这种做法有利于实现类的扩展，因为Java不支持多继承，还有利于多态，因为虽然接口无法构造对象，却能声明接口的变量，且这个变量能引用所有实现了该接口的类对象。</p>
+<h1 id="构造一个接口"><a href="#构造一个接口" class="headerlink" title="构造一个接口"></a>构造一个接口</h1><p>构造接口与构造类相似，只是将<code>class</code>改为<code>interface</code>，此外，还可以将接口定义为泛型，接受类型参数，这样会提高接口的可用性：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Compareable</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Object other)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Compareable</span>&lt;<span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(T other)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接口内声明了一些方法，绝不应含有实例域，而实现方法和提供实例域的任务都由实现接口的那个类完成。接口中的方法自动是<code>public</code>，在类中定义这些方法时也应使用<code>public</code></p>
+<h1 id="实现接口"><a href="#实现接口" class="headerlink" title="实现接口"></a>实现接口</h1><p>为了让类实现接口，有两个步骤：</p>
+<ol>
+<li>让类声明为实现给定的接口</li>
+<li>对接口中所有方法进行定义</li>
+</ol>
+<p>将类声明为实现某些接口，使用关键字<code>implement</code>:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span> <span class="title">implement</span> <span class="title">Compareable</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Object otherObject)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Employee other = (Employee) otherObject;</span><br><span class="line">        <span class="keyword">return</span> Double.compare(salary, other.salary);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span> <span class="title">implement</span> <span class="title">Compareable</span>&lt;<span class="title">Employee</span>&gt;</span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Employee other)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Double.compare(salary, other.salary);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接口也可以继承，子接口有父接口中声明的方法和常量：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Moveable</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">time</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">runable</span> <span class="keyword">extends</span> <span class="title">Moveable</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">speed</span><span class="params">()</span></span>; <span class="comment">// 实现runable的类必须实现time()和speed()方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="默认方法"><a href="#默认方法" class="headerlink" title="默认方法"></a>默认方法</h1><p>用<code>default</code>关键字可以在接口中声明方法时进行简单的定义，但不能涉及实例域因为接口没有实例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MouseListener</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">default</span> <span class="keyword">void</span> <span class="title">mouseClcked</span><span class="params">(MouseEvent event)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"鼠标点击"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如此一来，实现这个接口的类可以不覆盖这个默认方法而具有默认方法提供的功能。</p>
+<h2 id="默认方法冲突"><a href="#默认方法冲突" class="headerlink" title="默认方法冲突"></a>默认方法冲突</h2><ol>
+<li>如果接口的默认方法名与超类的方法名冲突了，遵循<code>超类优先</code>原则，即接口提供的默认方法会被忽略。</li>
+<li><p>如果多个接口提供的默认方法名冲突，由类决定使用哪个接口的默认方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Person和Named都有默认方法getName()</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="title">implement</span> <span class="title">Person</span>, <span class="title">Named</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Person.<span class="keyword">super</span>.getName();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果多个接口都没有提供默认方法，那么要么在类中覆盖这个方法，要么这是一个抽象类，把这个方法定义为抽象方法由子类去实现</p>
+</li>
+</ol>
+
       
     </div>
     
@@ -467,6 +487,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/06/17/Python的赋值、引用、拷贝及垃圾回收/" rel="prev" title="理解Python中的赋值、引用、拷贝">
+                理解Python中的赋值、引用、拷贝 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -520,8 +544,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -540,7 +573,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -607,6 +640,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#构造一个接口"><span class="nav-number">1.</span> <span class="nav-text">构造一个接口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现接口"><span class="nav-number">2.</span> <span class="nav-text">实现接口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#默认方法"><span class="nav-number">3.</span> <span class="nav-text">默认方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#默认方法冲突"><span class="nav-number">3.1.</span> <span class="nav-text">默认方法冲突</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
