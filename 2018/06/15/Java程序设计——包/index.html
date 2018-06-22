@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="精神的壳">
 <meta property="og:description" content="包Java允许使用包（package）将类组织起来，使用包的主要原因是确保类名的唯一性。如果有两个名字相同的类，只要把它们放在不同的包中就不会有影响。 从编译器（compiler）的角度看，嵌套的包之间没有任何关系。例如java.util包与java.util包毫无关系，每一个都拥有独立的类集合。 当编译一个.java文件（即一个编译单元）时，在.java文件中的每个类都会有一个输出文件，而该输出">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-18T11:39:26.580Z">
+<meta property="og:updated_time" content="2018-06-21T07:10:56.314Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java程序设计——包">
 <meta name="twitter:description" content="包Java允许使用包（package）将类组织起来，使用包的主要原因是确保类名的唯一性。如果有两个名字相同的类，只要把它们放在不同的包中就不会有影响。 从编译器（compiler）的角度看，嵌套的包之间没有任何关系。例如java.util包与java.util包毫无关系，每一个都拥有独立的类集合。 当编译一个.java文件（即一个编译单元）时，在.java文件中的每个类都会有一个输出文件，而该输出">
@@ -427,7 +427,7 @@
 </ul>
 <h1 id="静态导入"><a href="#静态导入" class="headerlink" title="静态导入"></a>静态导入</h1><p><code>import</code>语句不仅可以导入类，还可以导入类的静态方法和静态域：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导入System类的静态方法和静态域</span></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.Systme.*;</span><br></pre></td></tr></table></figure></p>
 <p>这样就可以使用System类的静态方法和域，而不用加前缀：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">out.println(<span class="string">"Hello World!"</span>); <span class="comment">// System.out.println()</span></span><br><span class="line">exit(<span class="number">0</span>); <span class="comment">// System.exit()</span></span><br></pre></td></tr></table></figure></p>
-<h1 id="包作用域"><a href="#包作用域" class="headerlink" title="包作用域"></a>包作用域</h1><p>一个类、方法或变量如果没有指定<code>private</code>或<code>public</code>，则可以被同一个包中的所有方法访问（如非公有类）。</p>
+<h1 id="包作用域"><a href="#包作用域" class="headerlink" title="包作用域"></a>包作用域</h1><p>一个类、方法或变量如果没有指定<code>private</code>或<code>public</code>，则可以被同一个包中的所有方法访问（如非公）。</p>
 <h1 id="类路径"><a href="#类路径" class="headerlink" title="类路径"></a>类路径</h1><p>javac编译器要查询一个编译单元，会先从当前包开始，然后查询所有<code>import</code>语句，确定<code>import</code>语句导入的包中是否包含所需要的类。</p>
 <p>java虚拟机（jvm）查询类文件时，它首先在jre/lib和jre/lib/ext目录下的归档文件中所存放的系统类文件里找，如果找不到再从环境变量CLASSPATH（可以通过操作系统来设置）里面找。CLASSPATH包含一个或多个目录，用作查找.class文件的根目录。从根目录开始，解释器获取包名称并将每个句点替换成反斜杠，以从CLASSPATH根中产生一个路径（例如，package fruit.Apple就变成为fruit/Apple或fruit/Apple或其他，这将取决于操作系统）。得到的路径会与CLASSPATH中的各个不同的根目录路径相连接以获得一个完整的目录路径，解释器就在这些目录中查找与你所需要的类名称相同的.class文件。</p>
 <p>类文件默认与java文件处于同一位置，但也可以存储在jar（java归档）文件中。jar文件是多个压缩形式的类文件和子目录的集合。通过使用jar文件可以使类被多个程序共享。为了达到这个目的，需要做到以下几点：</p>
