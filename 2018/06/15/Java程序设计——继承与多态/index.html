@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="精神的壳">
 <meta property="og:description" content="修饰符extends表示继承，子类会继承超类的域和方法。例如子类Manager继承超类Employee：1234public class Manager extends Employee&amp;#123;    // 添加新的域或方法&amp;#125; 覆盖方法想要访问超类的私域，需要使用修饰符super。例如：重写Manager的getsalary接口为基本工资+奖金。而salsry是private的，只有">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-24T03:57:04.556Z">
+<meta property="og:updated_time" content="2018-07-02T09:23:52.688Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java程序设计—继承与多态">
 <meta name="twitter:description" content="修饰符extends表示继承，子类会继承超类的域和方法。例如子类Manager继承超类Employee：1234public class Manager extends Employee&amp;#123;    // 添加新的域或方法&amp;#125; 覆盖方法想要访问超类的私域，需要使用修饰符super。例如：重写Manager的getsalary接口为基本工资+奖金。而salsry是private的，只有">
@@ -434,12 +434,6 @@
 <li>对本包和所有子类可见——protected</li>
 <li>仅对本包可见——默认，不需要修饰符</li>
 </ol>
-<h1 id="泛型数组列表"><a href="#泛型数组列表" class="headerlink" title="泛型数组列表"></a>泛型数组列表</h1><p>在Java中，可以用变量来确定数组的大小：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Employee staff[] = <span class="keyword">new</span> Employee[num];</span><br></pre></td></tr></table></figure></p>
-<p>为了达到数组动态变长/缩短的效果，使用泛型数组列表<code>ArrayList</code>。<em>泛型</em>即“参数化类型”、将类型参数化，类似于方法中的变量参数，只是此时类型也定义成参数形式（又称为类型参数）。为了指定数组列表保存的元素对象类型，需要用一对尖括号将类名括起来加在后面：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;Employee&gt; staff = <span class="keyword">new</span> ArrayList&lt;Employee&gt;();</span><br></pre></td></tr></table></figure></p>
-<p>用<code>add([int index,]obj)</code>方法往数组列表添加元素，不指定索引则默认加到末尾。<code>remove(int index)</code>删除元素，<code>get(int index)</code>按索引获取元素，<code>set(int index, obj)</code>重置对应索引的元素（不能用于添加元素），<code>size()</code>方法获取ArrayList长度。</p>
-<h2 id="将数组列表拷贝到数组"><a href="#将数组列表拷贝到数组" class="headerlink" title="将数组列表拷贝到数组"></a>将数组列表拷贝到数组</h2><p>用<code>toArray()</code>方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X[] a = <span class="keyword">new</span> X[list.size()];</span><br><span class="line">list.toArray(a);</span><br></pre></td></tr></table></figure></p>
-<h2 id="泛型化与原始数组列表之间的兼容性"><a href="#泛型化与原始数组列表之间的兼容性" class="headerlink" title="泛型化与原始数组列表之间的兼容性"></a>泛型化与原始数组列表之间的兼容性</h2><p>在编译之后程序会采取去泛型化的措施。也就是说Java中的泛型，只在编译阶段有效。在编译过程中，正确检验泛型结果后，会将泛型的相关信息擦除，并且在对象进入和离开方法的边界处添加类型检查和类型转换的方法。也就是说，泛型信息不会进入到运行时阶段。</p>
-<p>对此总结成一句话：泛型类型在逻辑上看以看成是多个不同的类型，实际上都是相同的基本类型ArrayList。</p>
 <h1 id="对象包装器"><a href="#对象包装器" class="headerlink" title="对象包装器"></a>对象包装器</h1><p>Java不是完全的面向对象语言，其基本类型：boolean、char、short、int、long、float、double的值都不是对象。而这些基本类型都有与之对应的类。如int对应Integer，char对应Character，void对应Void…对象包装类包装的值都是不变的。</p>
 <p>要定义一个整形数组列表，只要：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br></pre></td></tr></table></figure></p>
 <p>此时，调用：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.add(<span class="number">3</span>)</span><br></pre></td></tr></table></figure></p>
@@ -586,7 +580,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -608,7 +602,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -663,7 +657,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#覆盖方法"><span class="nav-number">1.</span> <span class="nav-text">覆盖方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#子类构造器"><span class="nav-number">2.</span> <span class="nav-text">子类构造器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方法调用与多态"><span class="nav-number">3.</span> <span class="nav-text">方法调用与多态</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#理解方法调用"><span class="nav-number">3.1.</span> <span class="nav-text">理解方法调用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#阻止继承：final类和方法"><span class="nav-number">4.</span> <span class="nav-text">阻止继承：final类和方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#受保护访问"><span class="nav-number">5.</span> <span class="nav-text">受保护访问</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#泛型数组列表"><span class="nav-number">6.</span> <span class="nav-text">泛型数组列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#将数组列表拷贝到数组"><span class="nav-number">6.1.</span> <span class="nav-text">将数组列表拷贝到数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泛型化与原始数组列表之间的兼容性"><span class="nav-number">6.2.</span> <span class="nav-text">泛型化与原始数组列表之间的兼容性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对象包装器"><span class="nav-number">7.</span> <span class="nav-text">对象包装器</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#覆盖方法"><span class="nav-number">1.</span> <span class="nav-text">覆盖方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#子类构造器"><span class="nav-number">2.</span> <span class="nav-text">子类构造器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方法调用与多态"><span class="nav-number">3.</span> <span class="nav-text">方法调用与多态</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#理解方法调用"><span class="nav-number">3.1.</span> <span class="nav-text">理解方法调用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#阻止继承：final类和方法"><span class="nav-number">4.</span> <span class="nav-text">阻止继承：final类和方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#受保护访问"><span class="nav-number">5.</span> <span class="nav-text">受保护访问</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对象包装器"><span class="nav-number">6.</span> <span class="nav-text">对象包装器</span></a></li></ol></div>
             
 
           </div>
