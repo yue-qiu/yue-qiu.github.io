@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="精神的壳">
 <meta property="og:description" content="堆（heap）和栈（stack）都是数据结构。在运行程序时，需要在内存中开辟相应的空间。同理，运行JVM也是需要内存空间的，启动时在自己的内存空间中进行更细致的划分。因为虚拟机中每一篇内存处理的方式都不同，所以要单独进行管理。 JVM内存的划分有五片：寄存器，本地方法区，方法区，堆内存和栈内存。 堆内存堆存放在二级缓存中，储存数组和对象（数组本质上也是对象）。Java用new关键字创建一个对象，换">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-18T09:35:14.365Z">
+<meta property="og:updated_time" content="2018-07-18T10:09:58.127Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解堆和栈">
 <meta name="twitter:description" content="堆（heap）和栈（stack）都是数据结构。在运行程序时，需要在内存中开辟相应的空间。同理，运行JVM也是需要内存空间的，启动时在自己的内存空间中进行更细致的划分。因为虚拟机中每一篇内存处理的方式都不同，所以要单独进行管理。 JVM内存的划分有五片：寄存器，本地方法区，方法区，堆内存和栈内存。 堆内存堆存放在二级缓存中，储存数组和对象（数组本质上也是对象）。Java用new关键字创建一个对象，换">
@@ -419,7 +419,7 @@
 <p>b指向一个String类对象，而a呢？java将其转化为以下几个步骤：</p>
 <ol>
 <li>定义一个名为a的String类的对象引用变量：String a</li>
-<li>在<strong>栈</strong>中查找是否有”hello”的地址，如果没有则开辟一个存放字面值为”hello”的地址，接着创建一个新的String类的对象o，并将o的字符串值指向这个地址，而且在栈中这个地址旁边记下这个引用的对象o。如果已经有了值为”hello”的地址，则查找对象o，并返回o的地址。】[此处数据不是通过new（）创建的]</li>
+<li>在<strong>栈</strong>中查找是否有”hello”的地址，如果没有则开辟一个存放字面值为”hello”的地址，接着创建一个新的String类的对象o，并将o的字符串值指向这个地址，而且在栈中这个地址旁边记下这个引用的对象o。如果已经有了值为”hello”的地址，则查找对象o，并返回o的地址。[此处数据不是通过new（）创建的]</li>
 <li>将a指向对象o的地址</li>
 </ol>
 <p>equals方法检查两个对象值是否相等，而<code>==</code>检查内存地址是否相等。所以此时equals与==会结果不同</p>
