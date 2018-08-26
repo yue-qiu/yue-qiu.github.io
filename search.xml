@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[常用术语中英对照表]]></title>
     <url>%2F2018%2F08%2F22%2F%E5%B8%B8%E7%94%A8%E6%9C%AF%E8%AF%AD%E4%B8%AD%E8%8B%B1%E5%AF%B9%E7%85%A7%E8%A1%A8%2F</url>
-    <content type="text"><![CDATA[中文 英文 读音 接口 interface [‘ɪntɚ’fes] 代理 proxy [‘prɑksi] 浏览器 browser [‘braʊzɚ] 协议 protocol [‘protə’kɔl] 可查异常 CheckedException 运行时异常 RuntimeException 迭代器 Iterator [ɪtə’retɚ] 生成器 Generator [‘dʒɛnəretɚ] 构造器 Constructor [kənˈstrʌktər] 产生 yield [jild] 解析 parse [pɑrs] 缓存 buffer [‘bʌfɚ] 序列化 serialize [‘sɪrɪəlaɪz] 参数 param/parameter [ˌpærəˈm]/[pə’ræmɪtɚ] 容量 capacity [kə’pæsəti]]]></content>
+    <content type="text"><![CDATA[中文 英文 读音 接口 interface [‘ɪntɚ’fes] 代理 proxy [‘prɑksi] 浏览器 browser [‘braʊzɚ] 协议 protocol [‘protə’kɔl] 可查异常 CheckedException 运行时异常 RuntimeException 迭代器 Iterator [ɪtə’retɚ] 生成器 Generator [‘dʒɛnəretɚ] 构造器 Constructor [kənˈstrʌktər] 产生 yield [jild] 解析 parse [pɑrs] 缓存 buffer [‘bʌfɚ] 序列化 serialize [‘sɪrɪəlaɪz] 参数 param/parameter [ˌpærəˈm]/[pə’ræmɪtɚ] 容量 capacity [kə’pæsəti] 双端队列 deque [dek] 队列 queue [kjuː]]]></content>
       <categories>
         <category>计算机系统</category>
       </categories>
