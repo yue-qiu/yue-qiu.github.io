@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[网络那些事儿]]></title>
+    <url>%2F2018%2F10%2F12%2F%E7%BD%91%E7%BB%9C%E9%82%A3%E4%BA%9B%E4%BA%8B%2F</url>
+    <content type="text"><![CDATA[IPv4遵循IPv4协议的报文首部多为20个byte，其中目标IP地址与源IP地址各占32bit。当路由器发现数据报大小超过链路MTU时会进行分片。 IPv4地址采用点分十进制记法：xxx.xxx.xxx.xxx。IP地址对应的是网络接口而不是某个设备。 由于不同IP地址的高位可能是相同的，如：172.33.4.1 和 172.33.4.5。通常这表示使用这些地址的接口处于同一个网络中，而相同的高位被称为网络号(NetID)，不同的地位称为主机号(HostID)。具有相同网络号的接口组成了一个IP子网。 分类IP地址IP地址也是有分类的，根据网络号大小可以将IP地址分为5类。其中A, B, C 类最常见，占了整个IPv4地址的 85%。 A类(0xxxxxxx, xxxxxxxx, xxxxxxxx, xxxxxxxx)：8位NetID，24位HostID。范围：0.0.0.0 —— 127.255.255.255 B类(10xxxxxx, xxxxxxxx, xxxxxxxx, xxxxxxxx)：16位NetID，16位HostID。范围：128.0.0.0 —— 191.255.255.255 C类(110xxxxx, xxxxxxxx, xxxxxxxx, xxxxxxxx)：24位NetID，8位HostID。范围：192.0.0.0 —— 223.255.255.255 D、E类无NetID、HostID 私有IP地址私有地址公网不可见，只用于内部网络。在公网上这些IP地址不会被使用 A类：NetID= 10，如：10.23.35.1 B类：NetID= 172.16 —— 172.31，如 172.16.34.1 C类：NetID= 192.168.0 —— 192.168.255 如 192.168.168.42 特殊IP地址有些IP地址有特定的作用，如：0.0.0.0、127.0.0.1等，列举如下： 子网掩码子网掩码确定网络号、子网号、主机号，长度为 32bit。路由器通过将子网地址与子网掩码进行与运算确定子网大小 子网掩码计算：IP地址网络号、子网号位全置 1，主机号置 0。A类掩码 255.0.0.0，B类 255.255.0.0，C类 255.255.255.0 例：B类划 3bit 为子网号，如 128.255.224.3(10000000, 11111111, 11100000, 00000011)，则掩码为 255.255.224.0（11111111, 11111111, 11100000, 00000000） DNS劫持与污染DNS污染是指服务器检测到用户访问特定的主机时，伪装成 DNS 服务器向用户返回错误IP地址。国内用户访问youtube等网站时就会遇到这种情况 DNS劫持是通过劫持特定的DNS服务器，在DNS服务器里存放错误的缓存信息，这样DNS服务器就会向用户返回错误的IP地址 对于DNS劫持，可用采用更换默认DNS服务器的方式解决。而DNS污染只能通过修改hosts文件、VPN等方式绕过服务器 网关在一个局域网内互相通信是不需要用到网关的，而局域网内的接口要访问外网时，则需要把请求发送到网关上，由网关负责向外发送流量。同理，外网的信息也是通过网关再传达给内网接口]]></content>
+      <categories>
+        <category>计算机网络</category>
+      </categories>
+      <tags>
+        <tag>计算机网络</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[常用术语中英对照表]]></title>
     <url>%2F2018%2F08%2F22%2F%E5%B8%B8%E7%94%A8%E6%9C%AF%E8%AF%AD%E4%B8%AD%E8%8B%B1%E5%AF%B9%E7%85%A7%E8%A1%A8%2F</url>
     <content type="text"><![CDATA[中文 英文 读音 接口 interface [‘ɪntɚ’fes] 代理 proxy [‘prɑksi] 浏览器 browser [‘braʊzɚ] 协议 protocol [‘protə’kɔl] 可查异常 CheckedException 运行时异常 RuntimeException 迭代器 Iterator [ɪtə’retɚ] 生成器 Generator [‘dʒɛnəretɚ] 构造器 Constructor [kənˈstrʌktər] 产生 yield [jild] 解析 parse [pɑrs] 缓存 buffer [‘bʌfɚ] 序列化 serialize [‘sɪrɪəlaɪz] 参数 param/parameter [ˌpærəˈm]/[pə’ræmɪtɚ] 容量 capacity [kə’pæsəti] 双端队列 deque [dek] 队列 queue [kjuː] 并发性 concurrency [kən’kʌrənsi] 同步 synchronize [‘sɪŋkrənaɪz] 模式 pattern [ˈpætərn] 降序 desc/descending [dɪ’sɛndɪŋ] 升序 asc/ascending [ə’sɛndɪŋ] 枢纽 pivot [‘pɪvət] 优先 priority [praɪ’ɔrəti] 堆 heap [hip] 栈 stack [stæk] 仓库 repository [rɪ’pɑzə’tɔri] 旋转 rotate [‘rotet] 反馈 feedback [‘fidbæk]]]></content>
