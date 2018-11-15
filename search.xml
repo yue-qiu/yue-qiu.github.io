@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[Flask学习]]></title>
+    <title><![CDATA[Flask——启动吧，Flask！]]></title>
     <url>%2F2018%2F11%2F15%2FFlask%E5%AD%A6%E4%B9%A0%2F</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[新一代虚拟环境工具：pipenv以前虚拟环境主要靠 virtualenv， 配合 requirements.txt 做到一键安装依赖的效果。但是 requirements.txt 需要手动管理包记录，每次安装新的包之后都要更新这个文件，很麻烦。现在有了新的工具 pipenv。pipenv 将虚拟环境配置与依赖包管理整合在一起，并自动记录依赖包的安装、更新与卸载。真正做到了”一键使用“。pipenv 的用法参考这篇文章。 启动Flask在 Flask 更新到版本 1.0 以后，不再推荐使用下面的方式启动 Flask 1app.run() 取而代之的是命令 1flask run Flask 根据以下规则会自动探测程序实例： 从当前目录寻找 app.py 或 wsgi.py 模块，并从中寻找名为 app 或 application 的实例 从环境变量 FLASK_APP 对应的值寻找名为 app 或 application 的实例 例如，如果 Flask 实例 app 位于 hello.py，将 FLASK_APP 设为 hello，Flask 就会在当前目录的 hello.py 模块寻找实例 Flask 默认为生产模式(production mode), 通过环境变量 FLASK_ENV 可以修改为开发模式(debug mode)： 1FLASK_ENV = development 利用 –host 与 –port 参数可以修改 Flask 运行主机与端口 12flask run --host=0.0.0.0flask run --port=9000 也可以通过环境变量 FLASK_RUN_HOST 与 FLASK_RUN_PORT 设置。 可以通过 flask --help 查看所有可用命令 管理环境变量如果安装了 python-dotenv 包， Flask 会从 .env 文件 和 .flaskenv 文件中加载环境变量。此时 Flask 加载环境变量的优先级是：系统环境变量 &gt; .env 中的环境变量 &gt; .flaskenv 中的环境变量 .env 用于存放公开环境变量, 如 FLAKS_APP, .flaskenv 用于存放敏感环境变量如 Email 账号密码： 1234!# MyFlask/.env# 这是注释FLASK_APP = hello Shell用如下命令可以启动带有上下文的 Python Shell 环境： 1flask shell 和其他 flask 命令相同，在执行这个命令前要确保 Flask 实例可以被找到 flask 命令通过为一个函数添加 @app.cli.command() 装饰器，可以注册一个 flask 命令。函数的名称即为命令名，也可以通过给装饰器传参的方式命名： 123@app.cli.command('greet')def hello(): click.echo('hello!') flask 命令是通过 Click 包实现的，更多关于自定义命令的设置和功能请看Click文档]]></content>
+      <categories>
+        <category>Web开发</category>
+      </categories>
+      <tags>
+        <tag>Flask</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[网络那些事儿]]></title>
