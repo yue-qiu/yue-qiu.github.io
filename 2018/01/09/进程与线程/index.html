@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="什么是进程/线程众所周知，CPU是计算机的核心，它承担了所有的计算任务。而操作系统是计算机的管理者，是一个大管家，它负责任务的调度，资源的分配和管理，统领整个计算机硬件。应用应用程序是具有某种功能的程序，程序运行与操作系统之上。 进程进程时一个具有一定功能的程序在一个数据集上的一次动态执行过程。进程由程序，数据集合和进程控制块三部分组成。程序用于描述进程要完成的功能，是控制进程执行的指令集；数据集">
+<meta name="keywords" content="爬虫">
+<meta property="og:type" content="article">
+<meta property="og:title" content="进程与线程">
+<meta property="og:url" content="http://yoursite.com/2018/01/09/进程与线程/index.html">
+<meta property="og:site_name" content="精神的壳">
+<meta property="og:description" content="什么是进程/线程众所周知，CPU是计算机的核心，它承担了所有的计算任务。而操作系统是计算机的管理者，是一个大管家，它负责任务的调度，资源的分配和管理，统领整个计算机硬件。应用应用程序是具有某种功能的程序，程序运行与操作系统之上。 进程进程时一个具有一定功能的程序在一个数据集上的一次动态执行过程。进程由程序，数据集合和进程控制块三部分组成。程序用于描述进程要完成的功能，是控制进程执行的指令集；数据集">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-30T13:56:16.548Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="进程与线程">
+<meta name="twitter:description" content="什么是进程/线程众所周知，CPU是计算机的核心，它承担了所有的计算任务。而操作系统是计算机的管理者，是一个大管家，它负责任务的调度，资源的分配和管理，统领整个计算机硬件。应用应用程序是具有某种功能的程序，程序运行与操作系统之上。 进程进程时一个具有一定功能的程序在一个数据集上的一次动态执行过程。进程由程序，数据集合和进程控制块三部分组成。程序用于描述进程要完成的功能，是控制进程执行的指令集；数据集">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/09/进程与线程/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>进程与线程 | 精神的壳</title>
+  
+
+
+
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?847f7a1169508eb118c64f7719e8a4cf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion .logo-line-before i { left: initial; }
+    .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">精神的壳</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/09/进程与线程/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Author">
+      <meta itemprop="description" content="高山仰止，景行行止。虽不能至，心向往之。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="精神的壳">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">进程与线程
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-01-09 21:18:09" itemprop="dateCreated datePublished" datetime="2018-01-09T21:18:09+08:00">2018-01-09</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-05-30 21:56:16" itemprop="dateModified" datetime="2018-05-30T21:56:16+08:00">2018-05-30</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Web开发/" itemprop="url" rel="index"><span itemprop="name">Web开发</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/01/09/进程与线程/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/2018/01/09/进程与线程/" itemprop="commentCount">0</span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/01/09/进程与线程/" class="leancloud_visitors" data-flag-title="进程与线程">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="什么是进程-线程"><a href="#什么是进程-线程" class="headerlink" title="什么是进程/线程"></a>什么是进程/线程</h1><p>众所周知，CPU是计算机的核心，它承担了所有的计算任务。而操作系统是计算机的管理者，是一个大管家，它负责任务的调度，资源的分配和管理，统领整个计算机硬件。应用应用程序是具有某种功能的程序，程序运行与操作系统之上。</p>
+<h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><p>进程时一个具有一定功能的程序在一个数据集上的一次动态执行过程。进程由程序，数据集合和进程控制块三部分组成。程序用于描述进程要完成的功能，是控制进程执行的指令集；数据集合是程序在执行时需要的数据和工作区；程序控制块（PCB）包含程序的描述信息和控制信息，是进程存在的唯一标志。  </p>
+<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><p>在很早的时候计算机并没有线程这个概念，但是随着时代的发展，只用进程来处理程序出现很多的不足。如当一个进程堵塞时，整个程序会停止在堵塞处，并且如果频繁的切换进程，会浪费系统资源。所以线程出现了。<br>线程是能拥有资源和独立运行的最小单位，也是程序执行的最小单位。一个进程可以拥有多个线程，而且属于同一个进程的多个线程间会共享该进行的资源。</p>
+<h2 id="进程与线程的区别"><a href="#进程与线程的区别" class="headerlink" title="进程与线程的区别"></a>进程与线程的区别</h2><ol>
+<li>一个进程由一个或者多个线程组成，线程是一个进程中代码的不同执行路线。</li>
+<li>切换进程需要的资源比切换线程的要多的多。</li>
+<li>进程之间相互独立，而同一个进程下的线程共享程序的内存空间（如代码段，数据集，堆栈等）。某进程内的线程在其他进程不可见。换言之，线程共享同一片内存空间，而进程各有独立的内存空间。<br>以下是作者在知乎上看到的关于进程与线程的讨论，其中一个作者感觉很有道理，摘抄如下：<blockquote>
+<p>作者：zhonyong<br>链接：<a href="https://www.zhihu.com/question/25532384/answer/81152571" target="_blank" rel="noopener">https://www.zhihu.com/question/25532384/answer/81152571</a>  </p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>首先来一句概括的总论：进程和线程都是一个时间段的描述，是CPU工作时间段的描述。下面细说背景：CPU+RAM+各种资源（比如显卡，光驱，键盘，GPS, 等等外设）构成我们的电脑，但是电脑的运行，实际就是CPU和相关寄存器以及RAM之间的事情。一个最最基础的事实：CPU太快，太快，太快了，寄存器仅仅能够追的上他的脚步，RAM和别的挂在各总线上的设备完全是望其项背。那当多个任务要执行的时候怎么办呢？轮流着来?或者谁优先级高谁来？不管怎么样的策略，一句话就是在CPU看来就是轮流着来。一个必须知道的事实：执行一段程序代码，实现一个功能的过程介绍 ，当得到CPU的时候，相关的资源必须也已经就位，就是显卡啊，GPS啊什么的必须就位，然后CPU开始执行。这里除了CPU以外所有的就构成了这个程序的执行环境，也就是我们所定义的程序上下文。当这个程序执行完了，或者分配给他的CPU执行时间用完了，那它就要被切换出去，等待下一次CPU的临幸。在被切换出去的最后一步工作就是保存程序上下文，因为这个是下次他被CPU临幸的运行环境，必须保存。串联起来的事实：前面讲过在CPU看来所有的任务都是一个一个的轮流执行的，具体的轮流方法就是：先加载程序A的上下文，然后开始执行A，保存程序A的上下文，调入下一个要执行的程序B的程序上下文，然后开始执行B,保存程序B的上下文。。。。<br>========= 重要的东西出现了========<br>进程和线程就是这样的背景出来的，两个名词不过是对应的CPU时间段的描述，名词就是这样的功能。进程就是包换上下文切换的程序执行时间总和 = CPU加载上下文+CPU执行+CPU保存上下文线程是什么呢？进程的颗粒度太大，每次都要有上下的调入，保存，调出。如果我们把进程比喻为一个运行在电脑上的软件，那么一个软件的执行不可能是一条逻辑执行的，必定有多个分支和多个程序段，就好比要实现程序A，实际分成 a，b，c等多个块组合而成。那么这里具体的执行就可能变成：程序A得到CPU =》CPU加载上下文，开始执行程序A的a小段，然后执行A的b小段，然后再执行A的c小段，最后CPU保存A的上下文。这里a，b，c的执行是共享了A的上下文，CPU在执行的时候没有进行上下文切换的。这里的a，b，c就是线程，也就是说线程是共享了进程的上下文环境，的更为细小的CPU时间段。到此全文结束，再一个总结：进程和线程都是一个时间段的描述，是CPU工作时间段的描述，不过是颗粒大小不同。  </p>
+</blockquote>
+<h1 id="开进程需要时间"><a href="#开进程需要时间" class="headerlink" title="开进程需要时间"></a>开进程需要时间</h1><p>学习《python爬虫开发与项目实践》时，执行下面一段代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run_process</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">"Child process %s (%s) is running"</span> % (name,os.getpid()))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    print(<span class="string">"parant process %s "</span> % os.getpid())</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">        p = Process(target=run_process, args=(str(i),))</span><br><span class="line">        print(<span class="string">"process will start"</span>)</span><br><span class="line">        p.start()</span><br><span class="line">    p.join()</span><br><span class="line">    print(<span class="string">"process end"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>显示的结果是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">parant process 6332 </span><br><span class="line">process will start</span><br><span class="line">process will start</span><br><span class="line">process will start</span><br><span class="line">process will start</span><br><span class="line">process will start</span><br><span class="line">Child process 2 (9896) is running</span><br><span class="line">Child process 0 (11208) is running</span><br><span class="line">Child process 3 (5464) is running</span><br><span class="line">Child process 1 (10208) is running</span><br><span class="line">Child process 4 (12596) is running</span><br><span class="line">process end</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，程序在执行完<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print (&quot;parant process %s &quot; % os.getpid())</span><br></pre></td></tr></table></figure></p>
+<p>没有接着马上执行run_process()，而是先打印process will start，最后把子进程一起执行。这是因为子进程的创建是需要时间的，在这个空闲时间里父进程继续执行代码，而子进程在创建完成后显示。    </p>
+<h1 id="Pool进程池"><a href="#Pool进程池" class="headerlink" title="Pool进程池"></a>Pool进程池</h1><p>需要创建多个进程时，可以使用multiprocessing中的Pool类开进程池。Pool()默认开启数量等于当前cpu核心数的子进程（当然可以手动改变）<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">(i)</span>:</span></span><br><span class="line">    print(<span class="string">"hello ,this is the %d process"</span> % i)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    p = Pool()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">5</span>):</span><br><span class="line">        p.apply_async(target=hell0,args=(i,))</span><br><span class="line">    p.close    </span><br><span class="line">    p.join</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure></p>
+<p>apply_async表示在开进程时不阻塞主进程，是异步IO的一种方式之一。targe参数传入要在子线程中执行的<strong>函数对象</strong>，args以元组的方式传入函数的参数。<br>join会等待线程池中的每一个线程执行完毕，在调用join之前必须要先调用close，close表示不能再向线程池中添加新的process了。</p>
+<h1 id="进程间的通信"><a href="#进程间的通信" class="headerlink" title="进程间的通信"></a>进程间的通信</h1><p>每个进程各自有不同的用户地址空间,任何一个进程的全局变量在另一个进程中都看不到，所以进程之间要交换数据必须通过内核,在内核中开辟一块缓冲区,进程A把数据从用户空间拷到内核缓冲区,进程B再从内核缓冲区把数据读走,内核提供的这种机制称为进程间通信。假如创建了多个进程，那么进程间的通信是必不可少的。Python提供了多种进程通信的方式，其中以Queue和Pipe用得最多。下面分别介绍这两种模式。</p>
+<h2 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h2><p>Queue是一种<strong>多进程</strong>安全的队列。实现多进程间的通信有两种方法：</p>
+<ul>
+<li>get() 用于向队列中加入数据。有两个属性：blocked和timeout。blocked为true时（默认为True）且timeout为正值时，如果当队列已满会阻塞timeout时间，在这个时间内如果队列有空位会加入，如果超过时间仍然没有空位会抛出Queue.Full异常。</li>
+<li>put() 用于从队列中获取一个数据并将其从队列中删除。有两个属性：blocked和timeout。blocked为true（默认为True）且timeout为正值时，如果当前队列为空会阻塞timeout时间，在这个时间内如果队列有新数据会获取，如果超过时间仍然没有新数据会抛出Queue.Empty异常。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process,Queue</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">put_data</span><span class="params">(q,nums)</span>:</span></span><br><span class="line">    print(<span class="string">'现在的进程编号为：%s，这是一个put进程'</span> % os.getpid())</span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">        q.put(num)</span><br><span class="line">        print(<span class="string">'%d已经放入队列中啦！'</span> % num)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_data</span><span class="params">(q)</span>:</span></span><br><span class="line">    print(<span class="string">'现在的进程编号为：%s，这是一个get进程'</span> % os.getpid())</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        print(<span class="string">'已经从队列中获取%s并从中删除'</span> % q.get())</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    q = Queue()</span><br><span class="line">    p1 = Process(target=put_data,args=(q,[<span class="string">'1'</span>,<span class="string">'2'</span>,<span class="string">'3'</span>],))</span><br><span class="line">    p2 = Process(target=put_data,args=(q,[<span class="string">'4'</span>,<span class="string">'5'</span>,<span class="string">'6'</span>],))</span><br><span class="line">    p3 = Process(target=get_data,args=(q,))</span><br><span class="line">    p1.start()</span><br><span class="line">    p2.start()</span><br><span class="line">    p3.start()</span><br><span class="line">    p1.join()</span><br><span class="line">    p2.join()</span><br><span class="line">    <span class="comment"># p3是个死循环，需要手动结束这个进程</span></span><br><span class="line">    p3.terminate()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>我们来看一下运行结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">现在的进程编号为：10336，这是一个put进程</span><br><span class="line">1已经放入队列中啦！</span><br><span class="line">2已经放入队列中啦！</span><br><span class="line">3已经放入队列中啦！</span><br><span class="line">现在的进程编号为：9116，这是一个get进程</span><br><span class="line">已经从队列中获取1,并从中删除</span><br><span class="line">已经从队列中获取2并从中删除</span><br><span class="line">已经从队列中获取3并从中删除</span><br><span class="line">现在的进程编号为：2732，这是一个put进程</span><br><span class="line">4已经放入队列中啦！</span><br><span class="line">5已经放入队列中啦！</span><br><span class="line">已经从队列中获取4,并从中删除</span><br><span class="line">6已经放入队列中啦！</span><br><span class="line">已经从队列中获取5并从中删除</span><br><span class="line">已经从队列中获取6并从中删除</span><br></pre></td></tr></table></figure></p>
+<h2 id="Pipe"><a href="#Pipe" class="headerlink" title="Pipe"></a>Pipe</h2><p>Pipe与Queue不同之处在于Pipe是用于<strong>两个进程</strong>之间的通信。就像进程位于一根水管的两端。让我们看看Pipe官方文档的描述：  </p>
+<blockquote>
+<p>Returns a pair (conn1, conn2) of Connection objects representing the ends of a pipe.</p>
+</blockquote>
+<p>Piep返回conn1和conn2代表水管的两端。Pipe还有一个参数duplex（adj. 二倍的，双重的 n. 双工；占两层楼的公寓套房），默认为True。当duplex为True时，开启双工模式，此时水管的两边都可以进行收发。当duplex为False，那么<strong>conn1只负责接受信息，conn2只负责发送信息。</strong><br>conn通过send()和recv()来发送和接受信息。值得注意的是，如果管道中没有信息可接受，recv()会一直阻塞直到管道关闭（任意一端进程接结束则管道关闭）。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process,Pipe</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">put_data</span><span class="params">(p,nums)</span>:</span></span><br><span class="line">    print(<span class="string">'现在的进程编号为：%s，这个一个send进程'</span> % os.getpid())</span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">        p.send(num)</span><br><span class="line">        print(<span class="string">'%s已经放入管道中啦！'</span> % num)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_data</span><span class="params">(p)</span>:</span></span><br><span class="line">    print(<span class="string">'现在的进程编号为：%s，这个一个recv进程'</span> % os.getpid())</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        print(<span class="string">'已经从管道中获取%s并从中删除'</span> % p.recv())</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    p = Pipe(duplex=<span class="keyword">False</span>)</span><br><span class="line">    <span class="comment"># 此时Pipe[1]即是Pipe返回的conn2</span></span><br><span class="line">    p1 = Process(target=put_data,args=(p[<span class="number">1</span>],[<span class="string">'1'</span>,<span class="string">'2'</span>,<span class="string">'3'</span>],))</span><br><span class="line">    <span class="comment"># 此时Pipe[0]即是Pipe返回的conn1</span></span><br><span class="line">    p3 = Process(target=get_data,args=(p[<span class="number">0</span>],))</span><br><span class="line">    p1.start()</span><br><span class="line">    p3.start()</span><br><span class="line">    p1.join()</span><br><span class="line">    p3.terminate()</span><br></pre></td></tr></table></figure></p>
+<p>让我们看一下输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">现在的进程编号为：9868，这个一个recv进程</span><br><span class="line">现在的进程编号为：9072，这个一个send进程</span><br><span class="line">1已经放入管道中啦！</span><br><span class="line">已经从管道中获取1,并从中删除</span><br><span class="line">2已经放入管道中啦！</span><br><span class="line">已经从管道中获取2并从中删除</span><br><span class="line">3已经放入管道中啦！</span><br><span class="line">已经从管道中获取3并从中删除</span><br></pre></td></tr></table></figure></p>
+<h1 id="控制线程"><a href="#控制线程" class="headerlink" title="控制线程"></a>控制线程</h1><p>我们是没有办法完全人为控制线程的，因为线程由系统控制。但是可以用一些方式来影响线程的调用，比如互斥锁，sleep（阻塞），死锁等。</p>
+<h2 id="线程的几种状态"><a href="#线程的几种状态" class="headerlink" title="线程的几种状态"></a>线程的几种状态</h2><p>新建—–就绪——————运行—–死亡<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;等待（阻塞）<br>线程的生命周期由run方法决定，当run方法结束时线程死亡。可以通过继承Thread，重写run方法改变Thread的功能，最后还是通过start()方法开线程。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyThread</span><span class="params">(Thread)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'i am sorry'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    t = MyThread()</span><br><span class="line">    t.start()</span><br><span class="line">```  </span><br><span class="line">通过args参数以一个元组的方式给线程中的函数传参。   </span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sorry</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">'i am sorry'</span>,name)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:  </span><br><span class="line">    t = Thread(target=sorry,args=(<span class="string">'mike'</span>))</span><br><span class="line">    t.start()</span><br></pre></td></tr></table></figure></p>
+<h2 id="线程锁"><a href="#线程锁" class="headerlink" title="线程锁"></a>线程锁</h2><p>多线程中任务中，可能会发生多个线程同时对一个公共资源（如全局变量）进行操作的情况，这是就会发生混乱。为了避免这种情况，需要引入线程锁的概念。只有一个线程能处于上锁状态，当一个线程上锁之后，如果有另外一个线程试图获得锁，该线程就会挂起直到拥有锁的线程将锁释放。这样就保证了同时只有一个线程对公共资源进行访问或修改。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread,Lock</span><br><span class="line"></span><br><span class="line">num = <span class="number">0</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">puls</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># 获得一个锁</span></span><br><span class="line">    lock = Lock()</span><br><span class="line">    <span class="keyword">global</span> num</span><br><span class="line">    <span class="comment"># acquire()方法上锁</span></span><br><span class="line">    lock.acquire()</span><br><span class="line">    num += <span class="number">1</span></span><br><span class="line">    print(num)</span><br><span class="line">    <span class="comment"># release()方法解锁</span></span><br><span class="line">    lock.release()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">        t = Thread(target=plus)</span><br><span class="line">        t.start()</span><br><span class="line">    t.join()</span><br></pre></td></tr></table></figure></p>
+<h2 id="join-方法会阻塞主线程直到子线程全部结束（也就是同步）。"><a href="#join-方法会阻塞主线程直到子线程全部结束（也就是同步）。" class="headerlink" title="join()方法会阻塞主线程直到子线程全部结束（也就是同步）。  "></a>join()方法会阻塞主线程直到子线程全部结束（也就是同步）。  </h2><p>锁的用处:</p>
+<ol>
+<li>确保某段关键代码只能由一个线程从头到尾执行，保证了数据的唯一性。  </li>
+</ol>
+<p>锁的坏处:  </p>
+<ol>
+<li>阻止了多线程并发执行，效率大大降低。</li>
+<li>由于存在多个锁，不同的线程持有不同的锁并试图获取对方的锁时，可能造成死锁。  </li>
+</ol>
+<h1 id="守护线程"><a href="#守护线程" class="headerlink" title="守护线程"></a>守护线程</h1><p>线程其实并没有主次的概念，我们一般说的‘主线程’实际上是main函数的线程，而所谓主线程结束子线程也会结束是因为在主线程结束时调用了系统的退出函数。而守护线程是指‘不重要线程’。主线程会等所有‘重要’线程结束后才结束。通常当客户端访问服务器时会为这次访问开启一个守护线程。将setDaemon属性设为True即可将该线程设为守护线程。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line"></span><br><span class="line">n = <span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">count</span><span class="params">(x,y)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> n=x+y</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line"></span><br><span class="line">    t = Thread(target=count,args=(<span class="number">1</span>,<span class="number">2</span>))</span><br><span class="line">    t.setDaemon = <span class="keyword">True</span></span><br><span class="line">    <span class="comment"># ...</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/爬虫/" rel="tag"># 爬虫</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/02/重新开始/" rel="next" title="重新开始">
+                <i class="fa fa-chevron-left"></i> 重新开始
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/24/python爬虫之爬取静态网页实战篇/" rel="prev" title="python爬虫之爬取静态网页（实战篇）">
+                python爬虫之爬取静态网页（实战篇） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Author</p>
+              <p class="site-description motion-element" itemprop="description">高山仰止，景行行止。虽不能至，心向往之。</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/yue-qiu" title="GitHub &rarr; https://github.com/yue-qiu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:qiuyue9971@126.com" title="E-Mail &rarr; mailto:qiuyue9971@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/qiu-yue-37-3" title="知乎 &rarr; https://www.zhihu.com/people/qiu-yue-37-3" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是进程-线程"><span class="nav-number">1.</span> <span class="nav-text">什么是进程/线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程"><span class="nav-number">1.1.</span> <span class="nav-text">进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程"><span class="nav-number">1.2.</span> <span class="nav-text">线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程与线程的区别"><span class="nav-number">1.3.</span> <span class="nav-text">进程与线程的区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开进程需要时间"><span class="nav-number">2.</span> <span class="nav-text">开进程需要时间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pool进程池"><span class="nav-number">3.</span> <span class="nav-text">Pool进程池</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进程间的通信"><span class="nav-number">4.</span> <span class="nav-text">进程间的通信</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Queue"><span class="nav-number">4.1.</span> <span class="nav-text">Queue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pipe"><span class="nav-number">4.2.</span> <span class="nav-text">Pipe</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制线程"><span class="nav-number">5.</span> <span class="nav-text">控制线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的几种状态"><span class="nav-number">5.1.</span> <span class="nav-text">线程的几种状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程锁"><span class="nav-number">5.2.</span> <span class="nav-text">线程锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#join-方法会阻塞主线程直到子线程全部结束（也就是同步）。"><span class="nav-number">5.3.</span> <span class="nav-text">join()方法会阻塞主线程直到子线程全部结束（也就是同步）。  </span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#守护线程"><span class="nav-number">6.</span> <span class="nav-text">守护线程</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-[object Object]"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">路边的土豆</span>
+
+  
+</div>
+
+
+<div class="powered-by">
+  Hosted by  
+  <a class="theme-link" href="https://pages.coding.me">
+    Coding Pages
+  </a>   
+</div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "aMaKMjBVPa5XOf0bdfaeqpy5-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "aMaKMjBVPa5XOf0bdfaeqpy5-gzGzoHsz",
+                'X-LC-Key': "NUE5wMDsMaQAeYjT5C9KmT3s",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

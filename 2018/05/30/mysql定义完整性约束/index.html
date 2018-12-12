@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="MySQL提供了多种完整性约束，作为数据库关系模式定义的一部分，可以通过create table或alter table语句来定义。一旦定义了完整性约束，MySQL服务器会随时检测处于更新状态的数据库内容是否符合相关的完整性约束，从而保证数据的一致性与正确性。 在关系模型中，提供了实体完整性、参照完整性和用户完整性3项规则。 实体完整性实体是一个数据对象，是指客观存在并可以相互区分的事物，如一个教">
+<meta name="keywords" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL之完整性约束">
+<meta property="og:url" content="http://yoursite.com/2018/05/30/mysql定义完整性约束/index.html">
+<meta property="og:site_name" content="精神的壳">
+<meta property="og:description" content="MySQL提供了多种完整性约束，作为数据库关系模式定义的一部分，可以通过create table或alter table语句来定义。一旦定义了完整性约束，MySQL服务器会随时检测处于更新状态的数据库内容是否符合相关的完整性约束，从而保证数据的一致性与正确性。 在关系模型中，提供了实体完整性、参照完整性和用户完整性3项规则。 实体完整性实体是一个数据对象，是指客观存在并可以相互区分的事物，如一个教">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-06-18T12:03:32.926Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL之完整性约束">
+<meta name="twitter:description" content="MySQL提供了多种完整性约束，作为数据库关系模式定义的一部分，可以通过create table或alter table语句来定义。一旦定义了完整性约束，MySQL服务器会随时检测处于更新状态的数据库内容是否符合相关的完整性约束，从而保证数据的一致性与正确性。 在关系模型中，提供了实体完整性、参照完整性和用户完整性3项规则。 实体完整性实体是一个数据对象，是指客观存在并可以相互区分的事物，如一个教">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/30/mysql定义完整性约束/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>MySQL之完整性约束 | 精神的壳</title>
+  
+
+
+
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?847f7a1169508eb118c64f7719e8a4cf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion .logo-line-before i { left: initial; }
+    .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">精神的壳</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/30/mysql定义完整性约束/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Author">
+      <meta itemprop="description" content="高山仰止，景行行止。虽不能至，心向往之。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="精神的壳">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MySQL之完整性约束
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-05-30 20:19:42" itemprop="dateCreated datePublished" datetime="2018-05-30T20:19:42+08:00">2018-05-30</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-06-18 20:03:32" itemprop="dateModified" datetime="2018-06-18T20:03:32+08:00">2018-06-18</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/30/mysql定义完整性约束/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/2018/05/30/mysql定义完整性约束/" itemprop="commentCount">0</span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/05/30/mysql定义完整性约束/" class="leancloud_visitors" data-flag-title="MySQL之完整性约束">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>MySQL提供了多种完整性约束，作为数据库关系模式定义的一部分，可以通过<code>create table</code>或<code>alter table</code>语句来定义。一旦定义了完整性约束，MySQL服务器会随时检测处于更新状态的数据库内容是否符合相关的完整性约束，从而保证数据的一致性与正确性。</p>
+<p>在关系模型中，提供了实体完整性、参照完整性和用户完整性3项规则。</p>
+<h1 id="实体完整性"><a href="#实体完整性" class="headerlink" title="实体完整性"></a>实体完整性</h1><p><code>实体</code>是一个数据对象，是指客观存在并可以相互区分的事物，如一个教师、一个学生等。一个实体在数据库中表现为一条记录。</p>
+<p>实体完整性是指关系的主属性及主键的组成不能为空。也就是主键不能使空值null。关系对应于现实世界的实体集，而现实世界的实体是可以区分的，即说明每个实例具有唯一性标识。在关系模型中，是使用主键作为唯一性标识的。</p>
+<p>先来认识一下关系型数据库中重要的三个键：</p>
+<ul>
+<li>超键(super key):在关系中能唯一标识元组的属性集称为关系模式的超键 </li>
+<li>候选键(candidate key):不含有多余属性的超键称为候选键 </li>
+<li>主键(primary key):用户选作元组标识的一个候选键程序主键</li>
+</ul>
+<p>在MySQL中，实体完整性是通过<em>主键约束</em>和<em>候选键约束</em>实现的。</p>
+<h2 id="主键约束"><a href="#主键约束" class="headerlink" title="主键约束"></a>主键约束</h2><p>主键可以是表中的某一列，也可以是表中多个列所构成的一个组合。其中多个列组合而成的主键也被称为复合主键。在MySQL中，主键必须遵循如下规则：</p>
+<ol>
+<li>每个表只能定义一个主键</li>
+<li>主键必须能唯一标识表中的每一行记录并且不能为null</li>
+<li>复合主键不能包含不必要的多余列</li>
+<li>一个列名在复合主键的列表中只能出现一次</li>
+</ol>
+<h3 id="作为列的主键约束"><a href="#作为列的主键约束" class="headerlink" title="作为列的主键约束"></a>作为列的主键约束</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">users</span> (</span><br><span class="line">    <span class="keyword">id</span> tinyint auto_increment primary <span class="keyword">key</span>,</span><br><span class="line">    <span class="keyword">name</span> <span class="built_in">char</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="literal">null</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="作为表的主键约束"><a href="#作为表的主键约束" class="headerlink" title="作为表的主键约束"></a>作为表的主键约束</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">users</span> (</span><br><span class="line">    <span class="keyword">id</span> tinyint auto_increment,</span><br><span class="line">    <span class="keyword">name</span> <span class="built_in">char</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    age tinyint,</span><br><span class="line">    primary <span class="keyword">key</span> (<span class="keyword">id</span>,<span class="keyword">name</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p><strong>如果主键仅由表中的某一列构成，以上两种方法均可以定义主键。如果主键由表中多个列组成，那么只能有第二种方法定义主键约束。</strong></p>
+<h2 id="候选键约束"><a href="#候选键约束" class="headerlink" title="候选键约束"></a>候选键约束</h2><p>如果一个属性集能<strong>唯一标识元组</strong>而又<strong>不含有多余的属性</strong>，那么这个属性集称为关系的候选键，用关键字<code>unique</code>来定义。</p>
+<p>候选键可以是表中的某一列，也可以是表中多个列所构成的一个组合。<strong>任何时候，候选键的值必须是唯一的且不能为空</strong>。定义方法类似于主键：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">users</span> (</span><br><span class="line">    <span class="keyword">id</span> tinyint auto_increment primary <span class="keyword">key</span>,</span><br><span class="line">    <span class="keyword">name</span> <span class="built_in">char</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="literal">null</span> <span class="keyword">unique</span>,</span><br><span class="line">    age tinyint</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">users</span> (</span><br><span class="line">    <span class="keyword">id</span> tinyint auto_increment primary <span class="keyword">key</span>,</span><br><span class="line">    <span class="keyword">name</span> <span class="built_in">char</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    age tinyint,</span><br><span class="line">    <span class="keyword">unique</span> (<span class="keyword">name</span>,age)</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<p>候选键与主键的区别在于：</p>
+<ol>
+<li>一个表只能创建一个主键，但是可以有多个候选键</li>
+<li>定义主键约束时，系统会自动创建<code>primary key</code>索引，定义候选键约束时，系统会自动创建<code>unique</code>索引</li>
+</ol>
+<h1 id="参照完整性"><a href="#参照完整性" class="headerlink" title="参照完整性"></a>参照完整性</h1><p>现实世界的实体之间往往存在着某种联系，在关系模型中，实体及实体间的联系都是用关系来描述的，那么自然就存在关系与关系间的引用。</p>
+<p><strong>参照完整性就是定义外键与主键之间的引用关系</strong>的。参照完整性的定义为：</p>
+<blockquote>
+<p>若属性（或属性组）F是基本关系R的外键，它与基本关系S的主键K对应，则对于R中的每个元组在F上的值只允许两种可能：要么取空值，要么等于S中某个元组的主键值，其中R与S可以是不同的关系，也可以是同一是关系，而F和K定义在同一个域中。</p>
+</blockquote>
+<p>声明外键的基本语法如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[constraint [symbol]] foreign key (index_col_name,...) reference_defination</span><br></pre></td></tr></table></figure></p>
+<p><code>reference_defination</code>主要用于定义外键所参照的表、列，它的基本语法格式如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">references tbl_name [(index_col_name,...)]</span><br><span class="line">[match full | match pratial | match simple]</span><br><span class="line">[on <span class="keyword">delete</span> reference_options]</span><br><span class="line">[<span class="keyword">on</span> <span class="keyword">update</span> reference_options]</span><br></pre></td></tr></table></figure></p>
+<p><code>tbl_name</code>指定外键所参照的表名，这个表称为<code>被参照表</code>或<code>父表</code>，外键所在的表被称为<code>参照表</code>或<code>子表</code>。 </p>
+<p><code>index_col_name</code>指定被参照表中与外键相关联的列，<strong>必须是父表的主键或候选键</strong>，格式语法如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">col_name [(length)] [ASC|DESC]</span><br></pre></td></tr></table></figure></p>
+<p><code>reference_options</code>指定参照完整性约束的实现策略，默认为<code>restrict</code>。语法格式如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">restrict | cascade | <span class="keyword">set</span> <span class="literal">null</span> | <span class="keyword">no</span> <span class="keyword">action</span></span><br></pre></td></tr></table></figure></p>
+<p>cascade：瀑布、级联</p>
+<ul>
+<li>restrict 限制策略：当要删除或更新被参照表中被参照列上，并在外键中出现的值时，系统拒绝对被参照表的删除和更新</li>
+<li>no action 不采取措施策略：一个相关的外键值在被参照表中时，删除或更新被参照表中的键值动作不被允许。类似于restrict</li>
+<li>cascade 级联策略：从被参照表中删除或更新纪录行时，自动删除或更新参照表匹配的记录行</li>
+<li>set null 制空策略：从被参照表中删除或更新纪录行时，设置参照表中与之对应的外键列的值为null。这个策略需要被参照表中的外键没有声明限定词not null</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">users</span> (</span><br><span class="line">    <span class="keyword">id</span> tinyint auto_increment primary <span class="keyword">key</span>,</span><br><span class="line">    <span class="keyword">name</span> <span class="built_in">char</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    class_id tinyint <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    <span class="keyword">constraint</span> <span class="keyword">class</span> <span class="keyword">foreign</span> <span class="keyword">key</span> (class_id) <span class="keyword">references</span> <span class="keyword">class</span>(<span class="keyword">id</span>)</span><br><span class="line">    <span class="keyword">on</span> <span class="keyword">delete</span> <span class="keyword">cascade</span></span><br><span class="line">    <span class="keyword">on</span> <span class="keyword">update</span> <span class="keyword">cascade</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p><strong>当父子表是同一张表时，MySQL不允许指定<code>on update cascade</code>与<code>on update set null</code></strong>，相关联的两个字段类型必须一致。</p>
+<h1 id="用户定义完整性"><a href="#用户定义完整性" class="headerlink" title="用户定义完整性"></a>用户定义完整性</h1><p>用户定义完整性是针对某一应用环境的完整性约束条件，它反映了某一具体应用所涉及的数据应满足的要求，关系模型提供定义和检查这类完整性规则的机制。</p>
+<p>MySQL提供了<strong>非空约束</strong>，<strong>check约束</strong>和<strong>触发器</strong>3种用户自定义完整性约束。</p>
+<h2 id="非空约束"><a href="#非空约束" class="headerlink" title="非空约束"></a>非空约束</h2><p>通过<code>create table</code>或<code>alter table</code>语句将某个列加上关键字<code>not null</code>可以实现非空约束。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> <span class="keyword">users</span> <span class="keyword">modify</span> age tinyint <span class="keyword">not</span> <span class="literal">null</span>;</span><br></pre></td></tr></table></figure></p>
+<h2 id="check约束"><a href="#check约束" class="headerlink" title="check约束"></a>check约束</h2><p>可以对列或表使用<code>check</code>约束，语法如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">check</span> (expr)</span><br></pre></td></tr></table></figure></p>
+<p><code>expr</code>是一个SQL表达式，用于指定需要检查的限定条件。更新数据时MySQL会检查更新后的数据行是否满足<code>check</code>约束中的限定条件。该条件可以是表达式，也可以是子查询。</p>
+<h3 id="对列使用check约束"><a href="#对列使用check约束" class="headerlink" title="对列使用check约束"></a>对列使用check约束</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">users</span> (</span><br><span class="line">    <span class="keyword">id</span> tinyint auto_increment primary <span class="keyword">key</span>,</span><br><span class="line">    <span class="keyword">name</span> <span class="built_in">char</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    age tinyint <span class="keyword">check</span>(age&gt;<span class="number">6</span> <span class="keyword">and</span> age&lt;<span class="number">19</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="对表使用check约束"><a href="#对表使用check约束" class="headerlink" title="对表使用check约束"></a>对表使用check约束</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">users</span>(</span><br><span class="line">    <span class="keyword">id</span> tinyint auto_increment primary <span class="keyword">key</span>,</span><br><span class="line">    <span class="keyword">name</span> <span class="built_in">char</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    age tinyint,</span><br><span class="line">    <span class="keyword">check</span>(<span class="keyword">name</span> <span class="keyword">in</span> (<span class="keyword">select</span> <span class="keyword">name</span> <span class="keyword">from</span> students))</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h2 id="触发器约束"><a href="#触发器约束" class="headerlink" title="触发器约束"></a>触发器约束</h2><p>触发器由MySQL的基本命令事件来触发的某种特定操作，这些基本的命令有<code>insert</code>、<code>update</code>、<code>delete</code>等事件来触发某些特定的操作。满足触发器的触发条件时，数据库系统会自动执行触发器中定义的程序语句。</p>
+<h3 id="创建单行触发器"><a href="#创建单行触发器" class="headerlink" title="创建单行触发器"></a>创建单行触发器</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> 触发器名 <span class="keyword">before</span>|<span class="keyword">after</span> 触发事件</span><br><span class="line"><span class="keyword">on</span> 表名 <span class="keyword">for</span> <span class="keyword">each</span> <span class="keyword">row</span> 执行语句;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>before|after 指定触发器执行时间是在触发事件之前还是之后</li>
+<li>触发事件 <code>insert</code>、<code>delete</code>、<code>update</code>等都是触发事件</li>
+<li>执行语句 当满足条件时执行的触发器语句</li>
+</ul>
+<p>创建一个触发器，自动在用户向users表插入数据行之前向日志插入当前时间：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> userstime <span class="keyword">before</span> <span class="keyword">insert</span></span><br><span class="line"><span class="keyword">on</span> <span class="keyword">users</span> <span class="keyword">for</span> <span class="keyword">each</span> <span class="keyword">row</span> </span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> userslog <span class="keyword">values</span> (<span class="literal">null</span>, <span class="keyword">now</span>());</span><br></pre></td></tr></table></figure></p>
+<h3 id="创建多行触发器"><a href="#创建多行触发器" class="headerlink" title="创建多行触发器"></a>创建多行触发器</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> 触发器名称 <span class="keyword">before</span>|<span class="keyword">after</span> 触发事件</span><br><span class="line"><span class="keyword">on</span> 表名 <span class="keyword">for</span> <span class="keyword">each</span> <span class="keyword">row</span> </span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">执行语句列表</span><br><span class="line"><span class="keyword">end</span>\g</span><br></pre></td></tr></table></figure>
+<p>要执行的多条语句放入<code>begin</code>和<code>end</code>中，用<code>;</code>分隔。</p>
+<h3 id="查看触发器："><a href="#查看触发器：" class="headerlink" title="查看触发器："></a>查看触发器：</h3><p>查看所有触发器：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">triggers</span>;</span><br></pre></td></tr></table></figure></p>
+<p>根据名字查看触发器：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> infomation_schema.triggers <span class="keyword">where</span> trigger_name=触发器名;</span><br></pre></td></tr></table></figure></p>
+<h3 id="删除触发器"><a href="#删除触发器" class="headerlink" title="删除触发器"></a>删除触发器</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">trigger</span> 触发器名称;</span><br></pre></td></tr></table></figure>
+<h1 id="命名完整性约束"><a href="#命名完整性约束" class="headerlink" title="命名完整性约束"></a>命名完整性约束</h1><p>可以对完整性使用添加，删除和修改等操作。为了删除和修改完整性约束，需要在定义约束的同时对其进行命名。命名完整性约束是在各种完整性约束的定义说明之前加上<code>constraint</code>字句实现的：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">constraint &lt;symbol&gt; [primary key | foreign key | check]</span><br></pre></td></tr></table></figure></p>
+<p>对users表添加外键约束并命名为class：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> <span class="keyword">users</span> <span class="keyword">add</span> <span class="keyword">constraint</span> <span class="keyword">class</span> <span class="keyword">foreign</span> <span class="keyword">key</span> (class_id)</span><br><span class="line"><span class="keyword">references</span> <span class="keyword">class</span>(<span class="keyword">id</span>)</span><br><span class="line"><span class="keyword">on</span> <span class="keyword">update</span> <span class="keyword">cascade</span></span><br><span class="line"><span class="keyword">on</span> <span class="keyword">delete</span> <span class="keyword">cascade</span>;</span><br></pre></td></tr></table></figure></p>
+<h1 id="更新完整性约束"><a href="#更新完整性约束" class="headerlink" title="更新完整性约束"></a>更新完整性约束</h1><p>对各种约束命名后就可以用<code>alter table</code>语句来更新或删除。</p>
+<h2 id="删除完整性约束"><a href="#删除完整性约束" class="headerlink" title="删除完整性约束"></a>删除完整性约束</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> [<span class="keyword">foreign</span> <span class="keyword">key</span> | <span class="keyword">index</span> | &lt;symbol&gt;] | primary <span class="keyword">key</span>;</span><br></pre></td></tr></table></figure>
+<p>在删除主键时，必须在创建一个主键否则不会成功。</p>
+<p>删除users表的名为class的外键：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> <span class="keyword">users</span> <span class="keyword">drop</span> <span class="keyword">foreign</span> <span class="keyword">key</span> <span class="keyword">class</span>;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/30/《MySQL从入门到精通》之索引与视图/" rel="next" title="MySQL之索引与范式">
+                <i class="fa fa-chevron-left"></i> MySQL之索引与范式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/03/《MySQL从入门到精通》之事件与优化/" rel="prev" title="MySQL之事务与优化">
+                MySQL之事务与优化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Author</p>
+              <p class="site-description motion-element" itemprop="description">高山仰止，景行行止。虽不能至，心向往之。</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/yue-qiu" title="GitHub &rarr; https://github.com/yue-qiu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:qiuyue9971@126.com" title="E-Mail &rarr; mailto:qiuyue9971@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/qiu-yue-37-3" title="知乎 &rarr; https://www.zhihu.com/people/qiu-yue-37-3" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实体完整性"><span class="nav-number">1.</span> <span class="nav-text">实体完整性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#主键约束"><span class="nav-number">1.1.</span> <span class="nav-text">主键约束</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#作为列的主键约束"><span class="nav-number">1.1.1.</span> <span class="nav-text">作为列的主键约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作为表的主键约束"><span class="nav-number">1.1.2.</span> <span class="nav-text">作为表的主键约束</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#候选键约束"><span class="nav-number">1.2.</span> <span class="nav-text">候选键约束</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参照完整性"><span class="nav-number">2.</span> <span class="nav-text">参照完整性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用户定义完整性"><span class="nav-number">3.</span> <span class="nav-text">用户定义完整性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#非空约束"><span class="nav-number">3.1.</span> <span class="nav-text">非空约束</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#check约束"><span class="nav-number">3.2.</span> <span class="nav-text">check约束</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对列使用check约束"><span class="nav-number">3.2.1.</span> <span class="nav-text">对列使用check约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对表使用check约束"><span class="nav-number">3.2.2.</span> <span class="nav-text">对表使用check约束</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#触发器约束"><span class="nav-number">3.3.</span> <span class="nav-text">触发器约束</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建单行触发器"><span class="nav-number">3.3.1.</span> <span class="nav-text">创建单行触发器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建多行触发器"><span class="nav-number">3.3.2.</span> <span class="nav-text">创建多行触发器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看触发器："><span class="nav-number">3.3.3.</span> <span class="nav-text">查看触发器：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除触发器"><span class="nav-number">3.3.4.</span> <span class="nav-text">删除触发器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#命名完整性约束"><span class="nav-number">4.</span> <span class="nav-text">命名完整性约束</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#更新完整性约束"><span class="nav-number">5.</span> <span class="nav-text">更新完整性约束</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#删除完整性约束"><span class="nav-number">5.1.</span> <span class="nav-text">删除完整性约束</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-[object Object]"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">路边的土豆</span>
+
+  
+</div>
+
+
+<div class="powered-by">
+  Hosted by  
+  <a class="theme-link" href="https://pages.coding.me">
+    Coding Pages
+  </a>   
+</div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "aMaKMjBVPa5XOf0bdfaeqpy5-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "aMaKMjBVPa5XOf0bdfaeqpy5-gzGzoHsz",
+                'X-LC-Key': "NUE5wMDsMaQAeYjT5C9KmT3s",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
