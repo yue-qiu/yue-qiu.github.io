@@ -261,6 +261,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[Linux]]></title>
+    <url>%2F2018%2F03%2F21%2FLinux%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95%2F</url>
+    <content type="text"><![CDATA[Linux常用命令文件操作命令1ls [-a -l -h -i -d] [dirname] ls：list，以列表的形式查询文件/目录信息 a：all，显示隐藏文件 l：long，显示文件/目录的长信息（完整信息） i：inode，显示文件/目录的i节点 h：human，以人性化的方式显示长信息，如以K为单位显示文件大小（默认单位为字节） d：directory，显示某个文件夹的信息，而不是显示该文件夹下的文件信息 1cd [dirpath] cd：change directory。移动到这个目录。 1pwd pwd：print working directory，显示当前目录的绝对路径 123mkdir [-p]# 如果没有Japan目录，命令mkdir /etc/Japan/boduoye会报错# 此时加上-p选项就OK，mkdir -p /etc/Japan/boduoye会同时创建Japan和boduoye两个目录 mkdir:makr directory,在当前目录下创建目录 p：以递归的形式创建目录 1rmdir [dirpath] rmdir：remove directory，移除目录。注意，这个命令只能移除空目录。 1rm [-r -f] [path] rm：remove，删除文件。 r：移除目录 f：force，强制删除，不经过确认。 rf：强制删除一个目录下的所有文件而不经过逐次询问 1cp [-r -p] [oldpath] [newpath] cp：copy，复制文件一个文件到另一个目录中 r：复制一个目录到另一个目录中 p：复制时保留文件/目录的属性如果是把当前目录复制到另一目录，则可以省略当前目录的路径，即写成cp -r[newpath]的形式。 1mv [-f] [oldpath] [newpath] mv：move,将文件/目录剪切到另一个目录或着给文件/目录改名 f：force，强制剪切，不经过确认mv命令和cp命令都可以在执行时给新的目录重命名。只需要在newpath中加上新名字就可以了。例如：当前目录下有两个文件，一个是hello，一个是hi。将hello改名为wow只需要mv hello wow。其实也很容易理解，在当前目录下把一个东西剪切到当前目录，那不就是改名吗？哈哈]]></content>
+      <categories>
+        <category>Web开发</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[一点感想]]></title>
     <url>%2F2018%2F03%2F08%2F%E4%B8%80%E7%82%B9%E6%84%9F%E6%83%B3%2F</url>
     <content type="text"><![CDATA[今天开了个学情分析会，说实话我觉得很无聊。本来大学里的学习就不应该再像中学似的一切绕着成绩转，当然不是说成绩就不重要了，只是我想到了现在更重要的是磨炼自己的技能，增长见识。其实以前也好，现在也好，成绩讲究的是一个够用，这个标准自然因人而异：考二本的400+够用，要考清北的670+够用，想要混过4年的不挂科就够用，想要保研的3.5+才够用……对我而言，上学期的成绩是否够用还是个未知数，一切还要再等3个月才能知晓。不过不管是不是够用，大概都是有一个遗憾的：最重视的数学和英语学的并不好，这点倒是令我挺难受。其他的课程学的好也罢，差也罢，我并不是很在乎，唯独这两门我是没办法做到不在意的。还有就是写代码这件事了。接触这行也是机缘巧合。后来学得多了些，慢慢地也开始体会到乐趣所在，现在是CS的黄金年代，大量的人一拥而入，这是很正常的。但是不得不说如今的CS已经积累到了量变的程度，人工智能,区块链，云计算……这些方向都是多学科交叉的，统计学，数学，计算机科学，甚至物理学…以前那种能写些网站和app，会调个库，但是对底层一无所知还能被称为程序员的的时代已经快要过去了，未来必定会要求程序员对数据结构，算法，各种协议甚至硬件有更深的理解。路还很长，要努力啊]]></content>
