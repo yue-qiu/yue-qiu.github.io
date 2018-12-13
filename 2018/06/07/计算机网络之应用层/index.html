@@ -148,6 +148,8 @@
 
 </head>
 
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","tagMode":true,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"pluginJsPath":"lib/","pluginRootPath":"live2dw/"});</script>
+
 <body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
@@ -469,11 +471,11 @@
 <h3 id="DNS工作机理"><a href="#DNS工作机理" class="headerlink" title="DNS工作机理"></a>DNS工作机理</h3><p>DNS是分层的，它们之间的层级关系如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">根DNS服务器 ————&gt; 顶级域名DNS服务器 ————&gt; 权威服务器（通常为机构DNS服务器）</span><br></pre></td></tr></table></figure></p>
 <p>DNS查询方式有两种：<code>迭代查询</code>与<code>递归查询</code></p>
 <h4 id="迭代查询"><a href="#迭代查询" class="headerlink" title="迭代查询"></a>迭代查询</h4><p>客户首先与根DNS服务器联系，根据域名后缀，根DNS返回相应的顶级域名DNS服务器地址，客户再与顶级DNS服务器联系，顶级域名DNS服务器根据域名返回权威服务器IP地址以此类推。</p>
-<p>举个例子：想要查询 www.qiuyueqy.com 的IP地址。需要经过如下几个步骤：</p>
+<p>举个例子：想要查询 <a href="http://www.qiuyueqy.com" target="_blank" rel="noopener">www.qiuyueqy.com</a> 的IP地址。需要经过如下几个步骤：</p>
 <ol>
 <li>客户向根DNS服务器发送请求，根服务器根据<code>com</code>返回comDNS服务器的IP地址</li>
 <li>客户向comDNS服务器发送请求，comDNS服务器根据<code>qiuyueqy</code>返回qiuyueqy.comDNS服务器的IP地址</li>
-<li>客户向qiuyueqy.comDNS服务器发送请求，qiuyueqy.comDNS服务器根据<code>www</code>返回www.qiuyueqy.com的IP地址</li>
+<li>客户向qiuyueqy.comDNS服务器发送请求，qiuyueqy.comDNS服务器根据<code>www</code>返回<a href="http://www.qiuyueqy.com的IP地址" target="_blank" rel="noopener">www.qiuyueqy.com的IP地址</a></li>
 </ol>
 <h4 id="递归查询"><a href="#递归查询" class="headerlink" title="递归查询"></a>递归查询</h4><p>与迭代查询不同之处在于递归查询是客户向根DNS发请求，根DNS向顶级域名DNS发请求，顶级域名DNS向权威DNS发请求……最后的结果是层层传回给客户。</p>
 <h3 id="本地DNS服务器"><a href="#本地DNS服务器" class="headerlink" title="本地DNS服务器"></a>本地DNS服务器</h3><p>本地DNS服务器不属于DNS层级结构。每个ISP都有一个本地DNS服务器，当 主机进行DNS查询时，查询被发送到本地DNS服务器，本地DNS服务器作为代理将查询转发给层级DNS服务器。</p>
@@ -1451,5 +1453,5 @@
 
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</body>
 </html>
