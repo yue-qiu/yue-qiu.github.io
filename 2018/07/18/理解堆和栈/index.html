@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="精神的壳">
 <meta property="og:description" content="堆（heap）和栈（stack）都是数据结构。在运行程序时，需要在内存中开辟相应的空间。同理，运行JVM也是需要内存空间的，启动时在自己的内存空间中进行更细致的划分。因为虚拟机中每一篇内存处理的方式都不同，所以要单独进行管理。 JVM内存的划分有五片：寄存器，本地方法区，方法区，堆内存和栈内存。 堆内存堆存放在二级缓存中，储存数组和对象（数组本质上也是对象）。Java用new关键字创建一个对象，换">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-18T10:09:58.127Z">
+<meta property="og:updated_time" content="2019-01-27T10:16:03.286Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解堆和栈">
 <meta name="twitter:description" content="堆（heap）和栈（stack）都是数据结构。在运行程序时，需要在内存中开辟相应的空间。同理，运行JVM也是需要内存空间的，启动时在自己的内存空间中进行更细致的划分。因为虚拟机中每一篇内存处理的方式都不同，所以要单独进行管理。 JVM内存的划分有五片：寄存器，本地方法区，方法区，堆内存和栈内存。 堆内存堆存放在二级缓存中，储存数组和对象（数组本质上也是对象）。Java用new关键字创建一个对象，换">
@@ -423,7 +423,7 @@
 <li>将a指向对象o的地址</li>
 </ol>
 <p>equals方法检查两个对象值是否相等，而<code>==</code>检查内存地址是否相等。所以此时equals与==会结果不同</p>
-<h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><p>下面总结一下栈内存和队内存的区别：</p>
+<h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><p>下面总结一下栈内存和堆内存的区别：</p>
 <ol>
 <li>栈内存存储的是局部变量而堆内存存储的是实体</li>
 <li>栈内存的更新速度要快于堆内存，因为局部变量的生命周期很短</li>
