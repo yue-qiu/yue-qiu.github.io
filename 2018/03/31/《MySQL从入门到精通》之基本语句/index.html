@@ -91,8 +91,8 @@
 <meta property="og:image" content="http://ke.dajiangtai.com/content/411/2.png">
 <meta property="og:image" content="http://ke.dajiangtai.com/content/411/3.png">
 <meta property="og:image" content="http://ke.dajiangtai.com/content/411/4.png">
-<meta property="og:image" content="https://images0.cnblogs.com/i/243280/201406/082230505368061.png">
-<meta property="og:updated_time" content="2018-12-11T14:22:32.034Z">
+<meta property="og:image" content="https://i.loli.net/2019/02/24/5c720eb160e17.jpg">
+<meta property="og:updated_time" content="2019-02-24T03:35:32.972Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL之基础语法">
 <meta name="twitter:description" content="数据库常用对象在MySQL中，表、视图、存储过程和索引等具体存储数据或对数据进行操作的实体都被称为数据库对象。 表表是包含数据库中所有数据的数据库对象，由行和列组成，用于组织和存储数据类型 字段表中每列被称为一个字段，字段具有自己的属性，如字段类型、字段大小等。其中，字段类型是字段最重要的属性，它决定了字段能存储哪种数据。 索引索引是一个单独的、物理的数据结构。它是依赖于表建立的，在数据库中索引使">
@@ -595,7 +595,7 @@
 <p>MySQL中正则表达式格式与普通格式是一样的。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">id</span>,<span class="keyword">name</span> <span class="keyword">from</span> <span class="keyword">users</span> <span class="keyword">where</span> <span class="keyword">name</span> regexp <span class="string">'^M.*e [JS].+o&#123;2,4&#125;y$'</span>;</span><br></pre></td></tr></table></figure>
 <h1 id="语句执行顺序"><a href="#语句执行顺序" class="headerlink" title="语句执行顺序"></a>语句执行顺序</h1><p>MySQL的语句一共分为11步，如下图所标注的那样，最先执行的总是FROM操作，最后执行的是LIMIT操作。其中每一个操作都会产生一张虚拟的表，这个虚拟的表作为一个处理的输入，只是这些虚拟的表对用户来说是透明的，但是只有最后一个虚拟的表才会被作为结果返回。如果没有在语句中指定某一个子句，那么将会跳过相应的步骤。  </p>
-<p><img src="https://images0.cnblogs.com/i/243280/201406/082230505368061.png" alt="执行顺序">  </p>
+<p><img src="https://i.loli.net/2019/02/24/5c720eb160e17.jpg" alt="执行顺序">  </p>
 <p>下面来分析一下这些语句：  </p>
 <ol>
 <li>FORM: 对FROM的左边的表和右边的表计算笛卡尔积。产生虚表VT1</li>
@@ -610,7 +610,8 @@
 <li>ORDER BY: 将虚拟表VT9中的记录按照&lt;order_by_list&gt;进行排序操作，产生虚拟表VT10.</li>
 <li>LIMIT：取出指定行的记录，产生虚拟表VT11, 并将结果返回。  </li>
 </ol>
-<p><strong>where和having的区别</strong>：where是在分组之前进行过滤，而having是在分组之后对条件进行判断。这里要提醒一下:<strong>select中的选择字段除非使用了聚合函数如SUM(),AVG()等，必须是group_by中的分组字段，否则会报错。这是因为在MYSQL5.7版本中，默认设置了sql_mode=only_full_group_by，这会导致select选择字段必须是group_by分组字段。要解决这个问题也很简单，只要使用命令<code>SET sql_mode=(SELECT REPLACE(@@sql_mode,&#39;ONLY_FULL_GROUP_BY&#39;,&#39;&#39;));</code>，或者在配置文件my.ini中将sql_mode修改为：’STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION’</strong></p>
+<p><strong>where和having的区别</strong>：where是在分组之前进行过滤，而having是在分组之后对条件进行判断。这里要提醒一下: </p>
+<p><strong>select 中的选择字段除非使用了聚合函数如SUM(), AVG() 等，必须是 group_by 中的分组字段，否则 select 选择字段必须是group_by分组字段。要解决这个问题也很简单，只要使用命令 <code>SET sql_mode=(SELECT REPLACE(@@sql_mode,&#39;ONLY_FULL_GROUP_BY&#39;,&#39;&#39;));</code>，或者在配置文件my.ini中将sql_mode修改为：’STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION’</strong></p>
 
       
     </div>
