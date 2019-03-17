@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[为啥?：Java 禁止创建泛型数组]]></title>
+    <title><![CDATA[Java 禁止创建泛型数组]]></title>
     <url>%2F2019%2F01%2F27%2FJava%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94%E6%B3%9B%E5%9E%8B%E6%95%B0%E7%BB%84%2F</url>
     <content type="text"><![CDATA[java 不允许直接创建泛型数组，也不允许创建泛型实例。也就是说下面这种情况是不被允许的： 12345public class Test&lt;T&gt; &#123; private T[] a = new T[1]; // error private T t = new T(); // error ...&#125; java 的泛型只停留在了编译层，编译器在编译完成后，会把泛型信息擦除，用第一个限定类型来替代，没有指定限定类型的泛型参数则用 Object 类替代： 1234567891011// 指定了泛型参数的限定类型public &lt;T extends Comparable&gt; void test1() &#123;...&#125;// 经编译器类型擦除后public &lt;Comparable&gt; void test1() &#123;...&#125;// 无限定类型public &lt;T&gt; void test2() &#123;...&#125;// 经编译器类型擦除后public &lt;Object&gt; void test2() &#123;...&#125; 经过类型擦除后，拥有不同泛型参数的泛型类在虚拟机眼中就是一样的了： 123Test&lt;String&gt; t1 = new Test&lt;&gt;();Test&lt;Integer&gt; t2 = new Test&lt;&gt;();t1.getClass() == t2.getClass(); // true java 允许父类的引用类型指向子类实例，而 Object[ ] 是任何数组的父类，这个时候如果我们往里面放不同于原始数据类型 但是满足后来使用的父类类型的话，编译不会有问题。如果是普通类，这样做也不会有什么问题，因为在运行时会检查加入数组的对象的类型，所以下面这段代码运行时会报错 ArrayStoreException： 1234String[] s = new String[10];Object[] o = s; // OKInteger i = new Integer(2);o[0] = i; // throws ArrayStoreException 如果可以创建泛型数组，那么一个 Object 数组引用类型指向这个泛型数组实例是可行的： 12Test&lt;String&gt;[] tarr = new Test&lt;&gt;[10]; // 实际不行，假设可行Object[] o = tarr; 编译器编译时会根据引用类型进行类型检查，所以以下代码可以通过编译。在运行时会检查加入数组的对象的类型，但由于类型擦除，不同泛型参数的泛型类在虚拟机眼里是类型相同的，那么在运行时一个 Test 实例成功被放进 Test[ ] 中了： 12Test&lt;Integer&gt; t = new Test&lt;&gt;();o[0] = t; 一个与泛型数组类型不同的实例可以被加入数组中而 java 无法检测到这一错误。那么很显然无法保证泛型数组元素类型的一致性，其后果不言而喻。]]></content>
       <categories>
