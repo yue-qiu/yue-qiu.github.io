@@ -79,21 +79,24 @@
 
 
 
-<meta name="description" content="端系统间的进程通信一个进程可以理解为运行在端系统中的的一个程序。当进程运行在相同的端系统上时，它们使用进程间通信机制相互通信。而在不同的端系统上，通过跨越计算机网络交换报文实现进程间的通信。 多数应用程序由通信进程对组成，每对中的两个进程互相发送报文，从一个进程向另一个进程发送报文就必须经过下面的计算机网络。进程通过一个被称为套接字的软件接口向网络发送报文和接受报文。套接字类似于一栋屋子的门，无论">
+<meta name="description" content="网络应用结构 客户机/服务器结构（C/S） 点对点结构（P2P） 混合结构（综合 C/S 与 P2P）  应用层是程序员最常接触的层次，应当非常熟悉。 端系统间的进程通信一个进程可以理解为运行在端系统中的的一个程序。当进程运行在相同的端系统上时，它们使用进程间通信机制相互通信。而在不同的端系统上，通过跨越计算机网络交换报文实现进程间的通信。 多数应用程序由通信进程对组成，每对中的两个进程互相发送报">
 <meta name="keywords" content="应用层">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网络那些事之应用层">
 <meta property="og:url" content="http://yoursite.com/2018/06/07/网络那些事应用层/index.html">
 <meta property="og:site_name" content="精神的壳">
-<meta property="og:description" content="端系统间的进程通信一个进程可以理解为运行在端系统中的的一个程序。当进程运行在相同的端系统上时，它们使用进程间通信机制相互通信。而在不同的端系统上，通过跨越计算机网络交换报文实现进程间的通信。 多数应用程序由通信进程对组成，每对中的两个进程互相发送报文，从一个进程向另一个进程发送报文就必须经过下面的计算机网络。进程通过一个被称为套接字的软件接口向网络发送报文和接受报文。套接字类似于一栋屋子的门，无论">
+<meta property="og:description" content="网络应用结构 客户机/服务器结构（C/S） 点对点结构（P2P） 混合结构（综合 C/S 与 P2P）  应用层是程序员最常接触的层次，应当非常熟悉。 端系统间的进程通信一个进程可以理解为运行在端系统中的的一个程序。当进程运行在相同的端系统上时，它们使用进程间通信机制相互通信。而在不同的端系统上，通过跨越计算机网络交换报文实现进程间的通信。 多数应用程序由通信进程对组成，每对中的两个进程互相发送报">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2019/12/21/LEHvFzdNowkq6Bc.png">
 <meta property="og:image" content="https://i.loli.net/2019/12/21/4vTABxRFnmIgh9Q.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/20/9MTnkYv5yfxOL1u.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/20/StgFZXMs5GIbwYc.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/20/wvu6zqyA9rKFDib.png">
 <meta property="og:image" content="https://i.loli.net/2019/12/21/gXAveHhuimtyWl5.png">
-<meta property="og:updated_time" content="2020-01-19T05:06:30.175Z">
+<meta property="og:updated_time" content="2020-01-20T10:17:58.474Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络那些事之应用层">
-<meta name="twitter:description" content="端系统间的进程通信一个进程可以理解为运行在端系统中的的一个程序。当进程运行在相同的端系统上时，它们使用进程间通信机制相互通信。而在不同的端系统上，通过跨越计算机网络交换报文实现进程间的通信。 多数应用程序由通信进程对组成，每对中的两个进程互相发送报文，从一个进程向另一个进程发送报文就必须经过下面的计算机网络。进程通过一个被称为套接字的软件接口向网络发送报文和接受报文。套接字类似于一栋屋子的门，无论">
+<meta name="twitter:description" content="网络应用结构 客户机/服务器结构（C/S） 点对点结构（P2P） 混合结构（综合 C/S 与 P2P）  应用层是程序员最常接触的层次，应当非常熟悉。 端系统间的进程通信一个进程可以理解为运行在端系统中的的一个程序。当进程运行在相同的端系统上时，它们使用进程间通信机制相互通信。而在不同的端系统上，通过跨越计算机网络交换报文实现进程间的通信。 多数应用程序由通信进程对组成，每对中的两个进程互相发送报">
 <meta name="twitter:image" content="https://i.loli.net/2019/12/21/LEHvFzdNowkq6Bc.png">
 
 
@@ -416,38 +419,50 @@
       
 
       
-        <h1 id="端系统间的进程通信"><a href="#端系统间的进程通信" class="headerlink" title="端系统间的进程通信"></a>端系统间的进程通信</h1><p>一个进程可以理解为运行在端系统中的的一个程序。当进程运行在相同的端系统上时，它们使用进程间通信机制相互通信。而在不同的端系统上，通过跨越计算机网络交换<code>报文</code>实现进程间的通信。</p>
+        <h1 id="网络应用结构"><a href="#网络应用结构" class="headerlink" title="网络应用结构"></a>网络应用结构</h1><ul>
+<li>客户机/服务器结构（C/S）</li>
+<li>点对点结构（P2P）</li>
+<li>混合结构（综合 C/S 与 P2P）</li>
+</ul>
+<p>应用层是程序员最常接触的层次，应当非常熟悉。</p>
+<h2 id="端系统间的进程通信"><a href="#端系统间的进程通信" class="headerlink" title="端系统间的进程通信"></a>端系统间的进程通信</h2><p>一个进程可以理解为运行在端系统中的的一个程序。当进程运行在相同的端系统上时，它们使用进程间通信机制相互通信。而在不同的端系统上，通过跨越计算机网络交换<code>报文</code>实现进程间的通信。</p>
 <p>多数应用程序由通信进程对组成，每对中的两个进程互相发送报文，从一个进程向另一个进程发送报文就必须经过下面的计算机网络。进程通过一个被称为<code>套接字</code>的软件接口向网络发送报文和接受报文。<code>套接字</code>类似于一栋屋子的门，无论是要进入屋子还是离开屋子，都要进过门。<code>套接字</code>是应用层与运输层的接口。在运输层，开发者对于<code>套接字</code>几乎没有控制权，只能</p>
 <ol>
 <li>选择运输层协议</li>
 <li>设定几个参数，如最大缓存、最大报文段长度等</li>
 </ol>
-<h2 id="套接字（Socket）"><a href="#套接字（Socket）" class="headerlink" title="套接字（Socket）"></a>套接字（Socket）</h2><p>套接字是一种应用编程接口（API），不同主机的应用进程间通信的抽象机制。应用进程通过套接字将控制权转移给操作系统，以实现信息从应用层到传输层的转换。</p>
-<h2 id="进程寻址"><a href="#进程寻址" class="headerlink" title="进程寻址"></a>进程寻址</h2><p>为了与另一个端系统通信，必须知道：</p>
+<h3 id="套接字（Socket）"><a href="#套接字（Socket）" class="headerlink" title="套接字（Socket）"></a>套接字（Socket）</h3><p>套接字是一种应用编程接口（API），不同主机的应用进程间通信的抽象机制。应用进程通过套接字将数据控制权转移给操作系统，以实现信息从应用层到传输层的转换。</p>
+<h3 id="端口号"><a href="#端口号" class="headerlink" title="端口号"></a>端口号</h3><p>每个应用进程都可能对应一个或多个套接字。为了区分不同套接字，操作系统给每个套接字绑定一个 16 位整数（0——65535），称之为<strong>端口号（port）</strong>。</p>
+<p>对外标识通信端点：IP Address + port。</p>
+<h3 id="进程寻址"><a href="#进程寻址" class="headerlink" title="进程寻址"></a>进程寻址</h3><p>为了与另一个端系统通信，必须知道：</p>
 <ol>
 <li>另一端系统的地址</li>
 <li>定义在目的端系统中的接收进程的标志符</li>
 </ol>
 <p>端系统地址由<code>IP地址</code>确定，而接收进程标志符由<code>端口</code>确定。</p>
-<h3 id="端口号"><a href="#端口号" class="headerlink" title="端口号"></a>端口号</h3><p>每个应用进程都可能对应一个或多个套接字。为了区分不同套接字，给每个套接字绑定一个 16 位整数，称之为<strong>端口号（port）</strong>。</p>
-<p>对外标识通信端点：IP Address + port。</p>
 <p>操作系统对内标识套接字：<strong>套接字描述符（socket descriptor）</strong>，非常类似于文件的抽象机制。每个进程有一个套接字描述符表，进程每创建一个套接字都会在表里增加一个条目，每个条目对应一个套接字数据结构指针。</p>
 <p><img src="https://i.loli.net/2019/12/21/LEHvFzdNowkq6Bc.png" alt="套接字描述符表"></p>
 <p>地址族（family）：不同传输协议下主机的端点形式不同，用地址族区分不同的传输协议。</p>
 <p>类型（service）：区分某一传输协议下的不同协议。</p>
 <p><img src="https://i.loli.net/2019/12/21/4vTABxRFnmIgh9Q.png" alt="协议类型"></p>
-<h2 id="几种常见的应用层协议"><a href="#几种常见的应用层协议" class="headerlink" title="几种常见的应用层协议"></a>几种常见的应用层协议</h2><h3 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h3><p>HTTP（超文本传输协议）是Web的核心。在Web应用中，客户与服务器之间是通过HTTP报文进行会话的。而HTTP协议定义了报文格式与交换方式。Web服务器实现了HTTP的服务器端，用于存储Web对象，每个对象由url寻址。</p>
-<p>HTTP使用<code>TCP</code>作为它的支撑运输协议。一次完整的<code>请求——相应</code>流程是这样的：</p>
+<h2 id="几种常见的应用层协议"><a href="#几种常见的应用层协议" class="headerlink" title="几种常见的应用层协议"></a>几种常见的应用层协议</h2><h3 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h3><p>HTTP（超文本传输协议）是 Web 的核心。在 Web 应用中，客户与服务器之间是通过 HTTP 报文进行会话的。而HTTP协议定义了报文格式与交换方式。Web 服务器实现了 HTTP 的服务器端，用于存储 Web 对象，每个对象由 url 寻址。</p>
+<p><img src="https://i.loli.net/2020/01/20/9MTnkYv5yfxOL1u.png" alt="HTTP请求格式"></p>
+<p><img src="https://i.loli.net/2020/01/20/StgFZXMs5GIbwYc.png" alt="HTTP响应格式"></p>
+<p>HTTP 使用<code>TCP</code>作为它的支撑运输协议，默认采用<code>带流水机制的持久性连接</code>。 一次完整的<code>请求——响应</code>流程是这样的：</p>
 <ol>
-<li>HTTP客户端首先发起一个与服务器的TCP连接，一旦连接建立，该浏览器进程与服务器进程就可以通过套接字接口访问TCP</li>
-<li>客户向它的<code>套接字</code>接口发送HTTP请求报文</li>
-<li>客户端收到请求报文并生成相应的相应报文，通过客户端的<code>套接字</code>发送HTTP响应报文</li>
-<li>客户端从<code>套接字</code>接受响应报文</li>
+<li>HTTP客户端首先发起一个与服务器的 TCP 连接，一旦连接建立，该客户端进程与服务器进程就可以通过套接字接口通信。</li>
+<li>客户端向它的<code>套接字</code>接口发送 HTTP 请求报文。</li>
+<li>服务器收到 HTTP 请求报文并生成相应的响应报文，通过服务器的<code>套接字</code>发送响应报文。</li>
+<li>客户端从<code>套接字</code>接受响应报文。</li>
+<li>所有报文传输结束，关闭 TCP 连接。</li>
 </ol>
-<h2 id="SMTP"><a href="#SMTP" class="headerlink" title="SMTP"></a>SMTP</h2><p>通过 SMTP（简单邮件传输协议）实现发送邮件。因特网电子邮件系统由 3 部分组成：</p>
+<h4 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h4><p>HTTP 是无状态协议，不记录客户端的历史行为，换言之对服务器而言每个 HTTP 请求都是独立的，不和历史请求有任何关系。为了辨别用户身份，维持 session，cookie 应运而生，它是一小段储存在客户端且通常经过加密的数据。</p>
+<p>Cookie 在 HTTP 协议中以头部行的形式传输，由服务器设置，被客户端（通常是浏览器）保存在本地。</p>
+<p><img src="https://i.loli.net/2020/01/20/wvu6zqyA9rKFDib.png" alt="Cookie原理"></p>
+<h3 id="SMTP"><a href="#SMTP" class="headerlink" title="SMTP"></a>SMTP</h3><p>通过 SMTP（简单邮件传输协议）实现发送邮件。因特网电子邮件系统由 3 部分组成：</p>
 <ul>
 <li>用户代理。常见的邮件客户端如 Outlook 等都是用户代理，如果是通过 Web 端发送邮件，那么浏览器是用户代理。用户代理负责读写邮件、与邮件服务器交互</li>
-<li>邮件服务器。通常由企业提供，如 QQ 邮箱的服务器<code>smtp.qq.com</code>，126邮箱服务器<code>smtp.126.com</code></li>
+<li>邮件服务器。通常由企业提供，如 QQ 邮箱的服务器<code>smtp.qq.com</code>，126 邮箱服务器<code>smtp.126.com</code></li>
 <li>SMTP。负责在邮件服务器之间发送邮件</li>
 </ul>
 <p>一个典型的发送邮件的过程是：</p>
@@ -456,9 +471,9 @@
 <li>从发送方的邮件服务器发到接收方的邮件服务器，然后被分发到接收方的邮箱中</li>
 <li>接收方通过用户代理从邮箱获取邮件</li>
 </ol>
-<p>SMTP是因特网电子协议中的主要应用层协议，它是用TCP可靠数据传输服务。</p>
-<p>SMTP规定邮件报文首部必须包含关键字<code>From:</code>与<code>To:</code>，可以包含关键字<code>Subject:</code>。</p>
-<h2 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h2><p>如果把客户向服务器发送报文比作打电话，那么服务器的IP地址是电话号码，域名是号码主人的姓名，而DNS（Domain Name System域名系统）就是电话簿，把姓名和电话号码联系起来。</p>
+<p>SMTP 是因特网电子协议中的主要应用层协议，它用 TCP 提供可靠数据传输服务。</p>
+<p>SMTP 规定邮件报文首部必须包含关键字<code>From:</code>与<code>To:</code>，可以包含关键字<code>Subject:</code>。</p>
+<h3 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h3><p>如果把客户向服务器发送报文比作打电话，那么服务器的IP地址是电话号码，域名是号码主人的姓名，而 DNS（Domain Name System 域名系统）就是电话簿，把姓名和电话号码联系起来。</p>
 <p>DNS是：</p>
 <ol>
 <li>一个由分层的DNS服务器实现的分布式数据库</li>
@@ -471,14 +486,14 @@
 <li>邮件服务器别名服务</li>
 <li>负载均衡。将一个域名与多个IP地址对应起来，当客户对域名发出一个DNS请求时，每次响应都循环<br>这些IP地址的次序。由于客户总是向排在最前面的IP地址发送HTTP请求，由此实现了负载均衡。</li>
 </ul>
-<p>获得一个域名的IP地址的过程如下：</p>
+<p>获得一个域名的 IP 地址的过程如下：</p>
 <ol>
 <li>浏览器把域名发送到用户主机上的DNS客户端 </li>
-<li>DNS客户端向DNS服务器发送一个包含主机名的请求</li>
-<li>DNS服务器通过查询相应的域名——&gt;IP地址间的映射关系，生成一个响应报文并返回</li>
-<li>DNS客户端收到响应报文，把报文中的IP地址传给浏览器</li>
+<li>DNS 客户端向 DNS 服务器发送一个包含主机名的请求</li>
+<li>DNS 服务器通过查询相应的域名——&gt; I 地址间的映射关系，生成一个响应报文并返回</li>
+<li>DNS 客户端收到响应报文，把报文中的IP地址传给浏览器</li>
 </ol>
-<h3 id="实质"><a href="#实质" class="headerlink" title="实质"></a>实质</h3><p>多层命名服务器构成的<strong>分布式</strong>数据库。属于应用层协议，负责域名解析功能。  </p>
+<h4 id="实质"><a href="#实质" class="headerlink" title="实质"></a>实质</h4><p>多层命名服务器构成的<strong>分布式</strong>数据库。属于应用层协议，负责域名解析功能。  </p>
 <h4 id="分层式层次式数据库"><a href="#分层式层次式数据库" class="headerlink" title="分层式层次式数据库"></a>分层式层次式数据库</h4><p>第一层：根域名服务器（root）</p>
 <p>第二层：顶级域名服务器（top-level domain，TLD），负责 com，org，cn，jp 等</p>
 <p>第三层：权威域名服务器（authoritative），负责组织域名解析，如 alibaba，baidu 等</p>
@@ -490,40 +505,40 @@
 <li>向 baidu.com 域名服务器发送查询请求。baidu.com 域名服务器返回 w<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a> 地址。</li>
 </ol>
 <p><strong>本地域名服务器：</strong> 不严格属于层级体系，每个 ISP 有一个本地域名服务器，是该 ISP 用户的默认域名解析服务器。作为代理将该 ISP 用户的查询转发给域名解析服务器系统。</p>
-<h3 id="为什么不用采用集中式架构"><a href="#为什么不用采用集中式架构" class="headerlink" title="为什么不用采用集中式架构"></a>为什么不用采用集中式架构</h3><ul>
+<h4 id="为什么不用采用集中式架构"><a href="#为什么不用采用集中式架构" class="headerlink" title="为什么不用采用集中式架构"></a>为什么不用采用集中式架构</h4><ul>
 <li>单点失败问题</li>
 <li>流量问题</li>
 <li>距离问题</li>
 <li>维护性问题</li>
 </ul>
 <p>不可伸缩！</p>
-<h3 id="DNS-查询方式"><a href="#DNS-查询方式" class="headerlink" title="DNS 查询方式"></a>DNS 查询方式</h3><ul>
+<h4 id="DNS-查询方式"><a href="#DNS-查询方式" class="headerlink" title="DNS 查询方式"></a>DNS 查询方式</h4><ul>
 <li><p>迭代查询。用户的查询被转发到本地域名服务器上，本地域名服务器依次访问 3 层域名解析服务器系统。</p>
 </li>
 <li><p>递归查询。用户的查询被转发到本地域名服务器上，本地域名服务器访问根域名服务器，根域名服务器访问顶级域名服务器，顶级域名服务器访问权威域名服务器。最后的查询结果依次返回给上一层。</p>
 </li>
 </ul>
-<h3 id="DNS-缓存与更新"><a href="#DNS-缓存与更新" class="headerlink" title="DNS 缓存与更新"></a>DNS 缓存与更新</h3><p>一段时间后，缓存条目会失效。本地域名服务器一般会缓存顶级域名服务器地址，所以根域名服务器较少被访问。</p>
-<h3 id="DNS-记录与格式"><a href="#DNS-记录与格式" class="headerlink" title="DNS 记录与格式"></a>DNS 记录与格式</h3><p>DNS 记录又称资源记录（RR，Resource Record）。是一个四元组：<strong>（name，value，type，ttl）</strong>。</p>
+<h4 id="DNS-缓存与更新"><a href="#DNS-缓存与更新" class="headerlink" title="DNS 缓存与更新"></a>DNS 缓存与更新</h4><p>一段时间后，缓存条目会失效。本地域名服务器一般会缓存顶级域名服务器地址，所以根域名服务器较少被访问。</p>
+<h4 id="DNS-记录与格式"><a href="#DNS-记录与格式" class="headerlink" title="DNS 记录与格式"></a>DNS 记录与格式</h4><p>DNS 记录又称资源记录（RR，Resource Record）。是一个四元组：<strong>（name，value，type，ttl）</strong>。</p>
 <ul>
 <li>type=A：name=主机域名，value=IP 地址。</li>
 <li>type=NS：name=域（edu.cn、qiuyueqy.com），value=该域的权威域名解析服务器的主机域名。</li>
 <li>type=CNAME：name=某真实域名的别名，value=真实域名。</li>
 <li>type=MX：name=域（126.com，163.com）,value=与name对应的邮件服务器.</li>
 </ul>
-<h3 id="为什么在应用层实现"><a href="#为什么在应用层实现" class="headerlink" title="为什么在应用层实现"></a>为什么在应用层实现</h3><p>我们希望把复杂的东西尽量放在端系统实现。在应用层实现 DNS 协议有利于降低网络核心的复杂度。</p>
-<h3 id="DNS缓存"><a href="#DNS缓存" class="headerlink" title="DNS缓存"></a>DNS缓存</h3><p>由上可知，为了获取一个DNS地址进行了很多次请求，这就影响了速度。为了加快响应速度，DNS服务器有缓存机制：在一个请求链中，当某DNS服务器接收到一个DNS回答，它能将该回答中的信息缓存到本地存储器中，类似于Web缓存器。在一段时间（默认为两天）后将缓存信息丢弃。</p>
-<h3 id="DNS劫持与污染"><a href="#DNS劫持与污染" class="headerlink" title="DNS劫持与污染"></a>DNS劫持与污染</h3><p>DNS 污染是指服务器检测到用户访问特定的主机时，伪装成 DNS 服务器向用户返回错误IP地址。国内用户访问 youtube 等网站时就会遇到这种情况</p>
+<h4 id="为什么在应用层实现"><a href="#为什么在应用层实现" class="headerlink" title="为什么在应用层实现"></a>为什么在应用层实现</h4><p>我们希望把复杂的东西尽量放在端系统实现。在应用层实现 DNS 协议有利于降低网络核心的复杂度。</p>
+<h4 id="DNS缓存"><a href="#DNS缓存" class="headerlink" title="DNS缓存"></a>DNS缓存</h4><p>由上可知，为了获取一个DNS地址进行了很多次请求，这就影响了速度。为了加快响应速度，DNS服务器有缓存机制：在一个请求链中，当某DNS服务器接收到一个DNS回答，它能将该回答中的信息缓存到本地存储器中，类似于Web缓存器。在一段时间（默认为两天）后将缓存信息丢弃。</p>
+<h4 id="DNS劫持与污染"><a href="#DNS劫持与污染" class="headerlink" title="DNS劫持与污染"></a>DNS劫持与污染</h4><p>DNS 污染是指服务器检测到用户访问特定的主机时，伪装成 DNS 服务器向用户返回错误IP地址。国内用户访问 youtube 等网站时就会遇到这种情况</p>
 <p>DNS 劫持是通过劫持特定的DNS服务器，在 DNS 服务器里存放错误的缓存信息，这样 DNS 服务器就会向用户返回错误的 IP 地址</p>
 <p>对于 DNS 劫持，可用采用更换默认 DNS 服务器的方式解决。而 DNS 污染只能通过修改 hosts 文件、VPN 等方式绕过服务器</p>
-<h2 id="P2P"><a href="#P2P" class="headerlink" title="P2P"></a>P2P</h2><p>P2P（Peer to Peer）应用的几个特点：</p>
+<h3 id="P2P"><a href="#P2P" class="headerlink" title="P2P"></a>P2P</h3><p>P2P（Peer to Peer）应用的几个特点：</p>
 <ul>
 <li>没有服务器</li>
 <li>任意端系统之间直接互联</li>
 <li>节点阶段性接入Intent</li>
 <li>节点可能更换IP地址</li>
 </ul>
-<h2 id="网关-gateway"><a href="#网关-gateway" class="headerlink" title="网关(gateway)"></a>网关(gateway)</h2><p>在一个局域网内互相通信是不需要用到网关的，而局域网内的接口要访问外网时，则需要把请求发送到网关上，由网关负责向外发送流量。同理，外网的信息也是通过网关再传达给内网接口</p>
+<h3 id="网关-gateway"><a href="#网关-gateway" class="headerlink" title="网关(gateway)"></a>网关(gateway)</h3><p>在一个局域网内互相通信是不需要用到网关的，而局域网内的接口要访问外网时，则需要把请求发送到网关上，由网关负责向外发送流量。同理，外网的信息也是通过网关再传达给内网接口</p>
 
       
     </div>
@@ -740,7 +755,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#端系统间的进程通信"><span class="nav-number">1.</span> <span class="nav-text">端系统间的进程通信</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#套接字（Socket）"><span class="nav-number">1.1.</span> <span class="nav-text">套接字（Socket）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程寻址"><span class="nav-number">1.2.</span> <span class="nav-text">进程寻址</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#端口号"><span class="nav-number">1.2.1.</span> <span class="nav-text">端口号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几种常见的应用层协议"><span class="nav-number">1.3.</span> <span class="nav-text">几种常见的应用层协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP"><span class="nav-number">1.3.1.</span> <span class="nav-text">HTTP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SMTP"><span class="nav-number">1.4.</span> <span class="nav-text">SMTP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS"><span class="nav-number">1.5.</span> <span class="nav-text">DNS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实质"><span class="nav-number">1.5.1.</span> <span class="nav-text">实质</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#分层式层次式数据库"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">分层式层次式数据库</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么不用采用集中式架构"><span class="nav-number">1.5.2.</span> <span class="nav-text">为什么不用采用集中式架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS-查询方式"><span class="nav-number">1.5.3.</span> <span class="nav-text">DNS 查询方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS-缓存与更新"><span class="nav-number">1.5.4.</span> <span class="nav-text">DNS 缓存与更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS-记录与格式"><span class="nav-number">1.5.5.</span> <span class="nav-text">DNS 记录与格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么在应用层实现"><span class="nav-number">1.5.6.</span> <span class="nav-text">为什么在应用层实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS缓存"><span class="nav-number">1.5.7.</span> <span class="nav-text">DNS缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS劫持与污染"><span class="nav-number">1.5.8.</span> <span class="nav-text">DNS劫持与污染</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P2P"><span class="nav-number">1.6.</span> <span class="nav-text">P2P</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网关-gateway"><span class="nav-number">1.7.</span> <span class="nav-text">网关(gateway)</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#网络应用结构"><span class="nav-number">1.</span> <span class="nav-text">网络应用结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#端系统间的进程通信"><span class="nav-number">1.1.</span> <span class="nav-text">端系统间的进程通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#套接字（Socket）"><span class="nav-number">1.1.1.</span> <span class="nav-text">套接字（Socket）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#端口号"><span class="nav-number">1.1.2.</span> <span class="nav-text">端口号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程寻址"><span class="nav-number">1.1.3.</span> <span class="nav-text">进程寻址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几种常见的应用层协议"><span class="nav-number">1.2.</span> <span class="nav-text">几种常见的应用层协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP"><span class="nav-number">1.2.1.</span> <span class="nav-text">HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Cookie"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">Cookie</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SMTP"><span class="nav-number">1.2.2.</span> <span class="nav-text">SMTP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS"><span class="nav-number">1.2.3.</span> <span class="nav-text">DNS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实质"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">实质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分层式层次式数据库"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">分层式层次式数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么不用采用集中式架构"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">为什么不用采用集中式架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS-查询方式"><span class="nav-number">1.2.3.4.</span> <span class="nav-text">DNS 查询方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS-缓存与更新"><span class="nav-number">1.2.3.5.</span> <span class="nav-text">DNS 缓存与更新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS-记录与格式"><span class="nav-number">1.2.3.6.</span> <span class="nav-text">DNS 记录与格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么在应用层实现"><span class="nav-number">1.2.3.7.</span> <span class="nav-text">为什么在应用层实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS缓存"><span class="nav-number">1.2.3.8.</span> <span class="nav-text">DNS缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS劫持与污染"><span class="nav-number">1.2.3.9.</span> <span class="nav-text">DNS劫持与污染</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#P2P"><span class="nav-number">1.2.4.</span> <span class="nav-text">P2P</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网关-gateway"><span class="nav-number">1.2.5.</span> <span class="nav-text">网关(gateway)</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
