@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="应用层,">
+  <meta name="keywords" content="传输层,">
 
 
 
@@ -79,25 +79,36 @@
 
 
 
-<meta name="description" content="网络应用结构 客户机/服务器结构（C/S） 点对点结构（P2P） 混合结构（综合 C/S 与 P2P）  应用层是程序员最常接触的层次，应当非常熟悉。 端系统间的进程通信一个进程可以理解为运行在端系统中的的一个程序。当进程运行在相同的端系统上时，它们使用进程间通信机制相互通信。而在不同的端系统上，通过跨越计算机网络交换报文实现进程间的通信。 多数应用程序由通信进程对组成，每对中的两个进程互相发送报">
-<meta name="keywords" content="应用层">
+<meta name="description" content="概览本层将会涉及：  复用/分用 可靠数据传输 流量控制 拥塞控制 TCP/UDP  传输层传输层协议为运行在不同 Host 上的进程提供了一种逻辑通信机制。所谓逻辑通信，指发送方接收方像是直接通信，下面的协议是透明的。 传输层与网络层不同在于传输层提供进程之间逻辑通信，网络层提供主机之间逻辑通信。 多路复用与多路分用某层一个协议直接对应上层多个协议/实体，则需要复用/分用。  多路复用：传输层从">
+<meta name="keywords" content="传输层">
 <meta property="og:type" content="article">
-<meta property="og:title" content="网络那些事之应用层">
-<meta property="og:url" content="http://yoursite.com/2018/06/07/网络那些事应用层/index.html">
+<meta property="og:title" content="网络那些事之传输层">
+<meta property="og:url" content="http://yoursite.com/2020/01/22/网络那些事之传输层/index.html">
 <meta property="og:site_name" content="精神的壳">
-<meta property="og:description" content="网络应用结构 客户机/服务器结构（C/S） 点对点结构（P2P） 混合结构（综合 C/S 与 P2P）  应用层是程序员最常接触的层次，应当非常熟悉。 端系统间的进程通信一个进程可以理解为运行在端系统中的的一个程序。当进程运行在相同的端系统上时，它们使用进程间通信机制相互通信。而在不同的端系统上，通过跨越计算机网络交换报文实现进程间的通信。 多数应用程序由通信进程对组成，每对中的两个进程互相发送报">
+<meta property="og:description" content="概览本层将会涉及：  复用/分用 可靠数据传输 流量控制 拥塞控制 TCP/UDP  传输层传输层协议为运行在不同 Host 上的进程提供了一种逻辑通信机制。所谓逻辑通信，指发送方接收方像是直接通信，下面的协议是透明的。 传输层与网络层不同在于传输层提供进程之间逻辑通信，网络层提供主机之间逻辑通信。 多路复用与多路分用某层一个协议直接对应上层多个协议/实体，则需要复用/分用。  多路复用：传输层从">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.loli.net/2019/12/21/LEHvFzdNowkq6Bc.png">
-<meta property="og:image" content="https://i.loli.net/2019/12/21/4vTABxRFnmIgh9Q.png">
-<meta property="og:image" content="https://i.loli.net/2020/01/20/9MTnkYv5yfxOL1u.png">
-<meta property="og:image" content="https://i.loli.net/2020/01/20/StgFZXMs5GIbwYc.png">
-<meta property="og:image" content="https://i.loli.net/2020/01/20/wvu6zqyA9rKFDib.png">
-<meta property="og:image" content="https://i.loli.net/2019/12/21/gXAveHhuimtyWl5.png">
-<meta property="og:updated_time" content="2020-01-20T10:17:58.474Z">
+<meta property="og:image" content="https://i.loli.net/2020/01/23/ubYceGtf5DmOdLH.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/23/AL6TqEfa3YwcnVh.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/23/3qEVYFGcfWjK1I5.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/23/RbD1VtK29OyFfQW.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/23/GAiYTnW2vMxeUoX.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/23/tzYge7b6PmEK2CD.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/23/tROCeGoPl3svUqp.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/23/thXiMKGmVSgLpqN.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/24/wyvrUqoTia52AuN.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/24/dYT7Aiw95bBxcKN.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/24/HZdy1zDrj56MXFc.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/24/EJGCumZoVlyWIpe.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/24/sA8wQaBl3V9PjZI.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/24/jKaRhulIT8k9D5A.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/24/PV2D49ulaBKycgo.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/25/AIB1lpe8UntPEu2.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/25/Sw6VbWrPgDziBFX.png">
+<meta property="og:updated_time" content="2020-01-25T08:16:39.199Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="网络那些事之应用层">
-<meta name="twitter:description" content="网络应用结构 客户机/服务器结构（C/S） 点对点结构（P2P） 混合结构（综合 C/S 与 P2P）  应用层是程序员最常接触的层次，应当非常熟悉。 端系统间的进程通信一个进程可以理解为运行在端系统中的的一个程序。当进程运行在相同的端系统上时，它们使用进程间通信机制相互通信。而在不同的端系统上，通过跨越计算机网络交换报文实现进程间的通信。 多数应用程序由通信进程对组成，每对中的两个进程互相发送报">
-<meta name="twitter:image" content="https://i.loli.net/2019/12/21/LEHvFzdNowkq6Bc.png">
+<meta name="twitter:title" content="网络那些事之传输层">
+<meta name="twitter:description" content="概览本层将会涉及：  复用/分用 可靠数据传输 流量控制 拥塞控制 TCP/UDP  传输层传输层协议为运行在不同 Host 上的进程提供了一种逻辑通信机制。所谓逻辑通信，指发送方接收方像是直接通信，下面的协议是透明的。 传输层与网络层不同在于传输层提供进程之间逻辑通信，网络层提供主机之间逻辑通信。 多路复用与多路分用某层一个协议直接对应上层多个协议/实体，则需要复用/分用。  多路复用：传输层从">
+<meta name="twitter:image" content="https://i.loli.net/2020/01/23/ubYceGtf5DmOdLH.png">
 
 
 
@@ -127,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/07/网络那些事应用层/">
+  <link rel="canonical" href="http://yoursite.com/2020/01/22/网络那些事之传输层/">
 
 
 
 
 
-  <title>网络那些事之应用层 | 精神的壳</title>
+  <title>网络那些事之传输层 | 精神的壳</title>
   
 
 
@@ -304,7 +315,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/07/网络那些事应用层/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/22/网络那些事之传输层/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="路边的土豆">
@@ -321,7 +332,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">网络那些事之应用层</h1>
+          <h1 class="post-title" itemprop="name headline">网络那些事之传输层</h1>
         
 
         <div class="post-meta">
@@ -333,8 +344,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-07T21:53:17+08:00">
-                2018-06-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-22T18:39:56+08:00">
+                2020-01-22
               </time>
             
 
@@ -374,8 +385,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/06/07/网络那些事应用层/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/06/07/网络那些事应用层/" itemprop="commentCount"></span>
+                <a href="/2020/01/22/网络那些事之传输层/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/01/22/网络那些事之传输层/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -383,7 +394,7 @@
 
           
           
-             <span id="/2018/06/07/网络那些事应用层/" class="leancloud_visitors" data-flag-title="网络那些事之应用层">
+             <span id="/2020/01/22/网络那些事之传输层/" class="leancloud_visitors" data-flag-title="网络那些事之传输层">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -419,126 +430,140 @@
       
 
       
-        <h1 id="网络应用结构"><a href="#网络应用结构" class="headerlink" title="网络应用结构"></a>网络应用结构</h1><ul>
-<li>客户机/服务器结构（C/S）</li>
-<li>点对点结构（P2P）</li>
-<li>混合结构（综合 C/S 与 P2P）</li>
-</ul>
-<p>应用层是程序员最常接触的层次，应当非常熟悉。</p>
-<h2 id="端系统间的进程通信"><a href="#端系统间的进程通信" class="headerlink" title="端系统间的进程通信"></a>端系统间的进程通信</h2><p>一个进程可以理解为运行在端系统中的的一个程序。当进程运行在相同的端系统上时，它们使用进程间通信机制相互通信。而在不同的端系统上，通过跨越计算机网络交换<code>报文</code>实现进程间的通信。</p>
-<p>多数应用程序由通信进程对组成，每对中的两个进程互相发送报文，从一个进程向另一个进程发送报文就必须经过下面的计算机网络。进程通过一个被称为<code>套接字</code>的软件接口向网络发送报文和接受报文。<code>套接字</code>类似于一栋屋子的门，无论是要进入屋子还是离开屋子，都要进过门。<code>套接字</code>是应用层与运输层的接口。在运输层，开发者对于<code>套接字</code>几乎没有控制权，只能</p>
-<ol>
-<li>选择运输层协议</li>
-<li>设定几个参数，如最大缓存、最大报文段长度等</li>
-</ol>
-<h3 id="套接字（Socket）"><a href="#套接字（Socket）" class="headerlink" title="套接字（Socket）"></a>套接字（Socket）</h3><p>套接字是一种应用编程接口（API），不同主机的应用进程间通信的抽象机制。应用进程通过套接字将数据控制权转移给操作系统，以实现信息从应用层到传输层的转换。</p>
-<h3 id="端口号"><a href="#端口号" class="headerlink" title="端口号"></a>端口号</h3><p>每个应用进程都可能对应一个或多个套接字。为了区分不同套接字，操作系统给每个套接字绑定一个 16 位整数（0——65535），称之为<strong>端口号（port）</strong>。</p>
-<p>对外标识通信端点：IP Address + port。</p>
-<h3 id="进程寻址"><a href="#进程寻址" class="headerlink" title="进程寻址"></a>进程寻址</h3><p>为了与另一个端系统通信，必须知道：</p>
-<ol>
-<li>另一端系统的地址</li>
-<li>定义在目的端系统中的接收进程的标志符</li>
-</ol>
-<p>端系统地址由<code>IP地址</code>确定，而接收进程标志符由<code>端口</code>确定。</p>
-<p>操作系统对内标识套接字：<strong>套接字描述符（socket descriptor）</strong>，非常类似于文件的抽象机制。每个进程有一个套接字描述符表，进程每创建一个套接字都会在表里增加一个条目，每个条目对应一个套接字数据结构指针。</p>
-<p><img src="https://i.loli.net/2019/12/21/LEHvFzdNowkq6Bc.png" alt="套接字描述符表"></p>
-<p>地址族（family）：不同传输协议下主机的端点形式不同，用地址族区分不同的传输协议。</p>
-<p>类型（service）：区分某一传输协议下的不同协议。</p>
-<p><img src="https://i.loli.net/2019/12/21/4vTABxRFnmIgh9Q.png" alt="协议类型"></p>
-<h2 id="几种常见的应用层协议"><a href="#几种常见的应用层协议" class="headerlink" title="几种常见的应用层协议"></a>几种常见的应用层协议</h2><h3 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h3><p>HTTP（超文本传输协议）是 Web 的核心。在 Web 应用中，客户与服务器之间是通过 HTTP 报文进行会话的。而HTTP协议定义了报文格式与交换方式。Web 服务器实现了 HTTP 的服务器端，用于存储 Web 对象，每个对象由 url 寻址。</p>
-<p><img src="https://i.loli.net/2020/01/20/9MTnkYv5yfxOL1u.png" alt="HTTP请求格式"></p>
-<p><img src="https://i.loli.net/2020/01/20/StgFZXMs5GIbwYc.png" alt="HTTP响应格式"></p>
-<p>HTTP 使用<code>TCP</code>作为它的支撑运输协议，默认采用<code>带流水机制的持久性连接</code>。 一次完整的<code>请求——响应</code>流程是这样的：</p>
-<ol>
-<li>HTTP客户端首先发起一个与服务器的 TCP 连接，一旦连接建立，该客户端进程与服务器进程就可以通过套接字接口通信。</li>
-<li>客户端向它的<code>套接字</code>接口发送 HTTP 请求报文。</li>
-<li>服务器收到 HTTP 请求报文并生成相应的响应报文，通过服务器的<code>套接字</code>发送响应报文。</li>
-<li>客户端从<code>套接字</code>接受响应报文。</li>
-<li>所有报文传输结束，关闭 TCP 连接。</li>
-</ol>
-<h4 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h4><p>HTTP 是无状态协议，不记录客户端的历史行为，换言之对服务器而言每个 HTTP 请求都是独立的，不和历史请求有任何关系。为了辨别用户身份，维持 session，cookie 应运而生，它是一小段储存在客户端且通常经过加密的数据。</p>
-<p>Cookie 在 HTTP 协议中以头部行的形式传输，由服务器设置，被客户端（通常是浏览器）保存在本地。</p>
-<p><img src="https://i.loli.net/2020/01/20/wvu6zqyA9rKFDib.png" alt="Cookie原理"></p>
-<h3 id="SMTP"><a href="#SMTP" class="headerlink" title="SMTP"></a>SMTP</h3><p>通过 SMTP（简单邮件传输协议）实现发送邮件。因特网电子邮件系统由 3 部分组成：</p>
+        <h1 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h1><p>本层将会涉及：</p>
 <ul>
-<li>用户代理。常见的邮件客户端如 Outlook 等都是用户代理，如果是通过 Web 端发送邮件，那么浏览器是用户代理。用户代理负责读写邮件、与邮件服务器交互</li>
-<li>邮件服务器。通常由企业提供，如 QQ 邮箱的服务器<code>smtp.qq.com</code>，126 邮箱服务器<code>smtp.126.com</code></li>
-<li>SMTP。负责在邮件服务器之间发送邮件</li>
+<li>复用/分用</li>
+<li>可靠数据传输</li>
+<li>流量控制</li>
+<li>拥塞控制</li>
+<li>TCP/UDP</li>
 </ul>
-<p>一个典型的发送邮件的过程是：</p>
-<ol>
-<li>从发送方的用户代理开始，传输到发送方的邮件服务器</li>
-<li>从发送方的邮件服务器发到接收方的邮件服务器，然后被分发到接收方的邮箱中</li>
-<li>接收方通过用户代理从邮箱获取邮件</li>
-</ol>
-<p>SMTP 是因特网电子协议中的主要应用层协议，它用 TCP 提供可靠数据传输服务。</p>
-<p>SMTP 规定邮件报文首部必须包含关键字<code>From:</code>与<code>To:</code>，可以包含关键字<code>Subject:</code>。</p>
-<h3 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h3><p>如果把客户向服务器发送报文比作打电话，那么服务器的IP地址是电话号码，域名是号码主人的姓名，而 DNS（Domain Name System 域名系统）就是电话簿，把姓名和电话号码联系起来。</p>
-<p>DNS是：</p>
-<ol>
-<li>一个由分层的DNS服务器实现的分布式数据库</li>
-<li>一个使主机能够查询分布式数据库的应用层协议</li>
-</ol>
-<p>DNS提供的服务有：</p>
+<h2 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h2><p>传输层协议为运行在不同 Host 上的<strong>进程</strong>提供了一种逻辑通信机制。所谓逻辑通信，指发送方接收方像是直接通信，下面的协议是透明的。</p>
+<p>传输层与网络层不同在于传输层提供进程之间逻辑通信，网络层提供主机之间逻辑通信。</p>
+<h2 id="多路复用与多路分用"><a href="#多路复用与多路分用" class="headerlink" title="多路复用与多路分用"></a>多路复用与多路分用</h2><p>某层一个协议直接对应上层多个协议/实体，则需要复用/分用。</p>
 <ul>
-<li>域名解析服务</li>
-<li>主机别名服务</li>
-<li>邮件服务器别名服务</li>
-<li>负载均衡。将一个域名与多个IP地址对应起来，当客户对域名发出一个DNS请求时，每次响应都循环<br>这些IP地址的次序。由于客户总是向排在最前面的IP地址发送HTTP请求，由此实现了负载均衡。</li>
+<li>多路复用：传输层从多个 socket 接收数据，进行头部封装后交给网络层。</li>
+<li>多路分用：传输层从网络层接收数据，根据头部信息分发给多个 socket。</li>
 </ul>
-<p>获得一个域名的 IP 地址的过程如下：</p>
-<ol>
-<li>浏览器把域名发送到用户主机上的DNS客户端 </li>
-<li>DNS 客户端向 DNS 服务器发送一个包含主机名的请求</li>
-<li>DNS 服务器通过查询相应的域名——&gt; I 地址间的映射关系，生成一个响应报文并返回</li>
-<li>DNS 客户端收到响应报文，把报文中的IP地址传给浏览器</li>
-</ol>
-<h4 id="实质"><a href="#实质" class="headerlink" title="实质"></a>实质</h4><p>多层命名服务器构成的<strong>分布式</strong>数据库。属于应用层协议，负责域名解析功能。  </p>
-<h4 id="分层式层次式数据库"><a href="#分层式层次式数据库" class="headerlink" title="分层式层次式数据库"></a>分层式层次式数据库</h4><p>第一层：根域名服务器（root）</p>
-<p>第二层：顶级域名服务器（top-level domain，TLD），负责 com，org，cn，jp 等</p>
-<p>第三层：权威域名服务器（authoritative），负责组织域名解析，如 alibaba，baidu 等</p>
-<p><img src="https://i.loli.net/2019/12/21/gXAveHhuimtyWl5.png" alt="分层结构"></p>
-<p>举个例子：客户端访问 <a href="www.baidu.com">www.baidu.com</a>。</p>
-<ol>
-<li>向根域名服务器发送查询请求。根域名服务器返回 com 域名服务器地址。</li>
-<li>向 com 域名服务器发送查询请求。com 域名服务器返回 baidu.com 域名服务器地址。</li>
-<li>向 baidu.com 域名服务器发送查询请求。baidu.com 域名服务器返回 w<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a> 地址。</li>
-</ol>
-<p><strong>本地域名服务器：</strong> 不严格属于层级体系，每个 ISP 有一个本地域名服务器，是该 ISP 用户的默认域名解析服务器。作为代理将该 ISP 用户的查询转发给域名解析服务器系统。</p>
-<h4 id="为什么不用采用集中式架构"><a href="#为什么不用采用集中式架构" class="headerlink" title="为什么不用采用集中式架构"></a>为什么不用采用集中式架构</h4><ul>
-<li>单点失败问题</li>
-<li>流量问题</li>
-<li>距离问题</li>
-<li>维护性问题</li>
+<h2 id="TCP-UDP-的多路复用分用"><a href="#TCP-UDP-的多路复用分用" class="headerlink" title="TCP/UDP 的多路复用分用"></a>TCP/UDP 的多路复用分用</h2><p>UDP socket 通过<strong>目的端口号</strong>唯一确定，来自不同客户端有相同目的端口的 UDP 报文会被发到相同的服务器 socket 上。</p>
+<p>TCP socket 通过<strong>原IP，目的IP， 原端口号，目的端口号</strong>唯一确定，来自不同客户端有相同目的端口的 TCP 报文会被发到不同的服务器 socket 上。</p>
+<h2 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h2><ul>
+<li>复用/分用</li>
+<li>错误校验（无纠错）</li>
 </ul>
-<p>不可伸缩！</p>
-<h4 id="DNS-查询方式"><a href="#DNS-查询方式" class="headerlink" title="DNS 查询方式"></a>DNS 查询方式</h4><ul>
-<li><p>迭代查询。用户的查询被转发到本地域名服务器上，本地域名服务器依次访问 3 层域名解析服务器系统。</p>
-</li>
-<li><p>递归查询。用户的查询被转发到本地域名服务器上，本地域名服务器访问根域名服务器，根域名服务器访问顶级域名服务器，顶级域名服务器访问权威域名服务器。最后的查询结果依次返回给上一层。</p>
-</li>
+<p>属于<code>无连接</code>协议，提供<code>尽力而为</code>的服务。报文可能丢失，可能非按序到达。</p>
+<p><img src="https://i.loli.net/2020/01/23/ubYceGtf5DmOdLH.png" alt="UDP报文格式"></p>
+<p>checksum：校验和。负责错误校验。</p>
+<p><img src="https://i.loli.net/2020/01/23/AL6TqEfa3YwcnVh.png" alt="计算校验和"></p>
+<p><img src="https://i.loli.net/2020/01/23/3qEVYFGcfWjK1I5.png" alt="计算示例"></p>
+<h3 id="为什么在传输层做链路检测"><a href="#为什么在传输层做链路检测" class="headerlink" title="为什么在传输层做链路检测"></a>为什么在传输层做链路检测</h3><p>传输层是端到端协议，不能确保这层以下的层次都有错误校验机制。因此需要在离应用层最近的这一层做错误校验。</p>
+<h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><ul>
+<li>延迟低（无连接）。</li>
+<li>实现简单（不维护连接状态）。</li>
+<li>头部开销少（只需 8bytes，而 TCP 头部需要 20bytes）。</li>
+<li>没有拥塞控制，可以控制发送时间和速率。</li>
 </ul>
-<h4 id="DNS-缓存与更新"><a href="#DNS-缓存与更新" class="headerlink" title="DNS 缓存与更新"></a>DNS 缓存与更新</h4><p>一段时间后，缓存条目会失效。本地域名服务器一般会缓存顶级域名服务器地址，所以根域名服务器较少被访问。</p>
-<h4 id="DNS-记录与格式"><a href="#DNS-记录与格式" class="headerlink" title="DNS 记录与格式"></a>DNS 记录与格式</h4><p>DNS 记录又称资源记录（RR，Resource Record）。是一个四元组：<strong>（name，value，type，ttl）</strong>。</p>
+<h2 id="可靠数据传输"><a href="#可靠数据传输" class="headerlink" title="可靠数据传输"></a>可靠数据传输</h2><p>可靠：<strong>不错（带纠错）</strong>，<strong>不丢</strong>，<strong>不乱</strong>。</p>
+<h3 id="不错"><a href="#不错" class="headerlink" title="不错"></a>不错</h3><p>利用<strong>校验和</strong>检测位错误。如果有错误，尝试进行恢复。</p>
+<h4 id="如何从错误中恢复"><a href="#如何从错误中恢复" class="headerlink" title="如何从错误中恢复"></a>如何从错误中恢复</h4><p><strong>确认（Acknowledgements，ACK）</strong>：接收方显示告知发送方分组已正确接收。</p>
+<p><strong>NAK</strong>：接收方显示告知发送方分组错误。</p>
+<p>发送方收到 NAK 后，<strong>重传</strong>分组。如果收到的 ACK/NAK 坏掉，<strong>重传</strong>分组。</p>
+<h4 id="解决重传分组重复问题"><a href="#解决重传分组重复问题" class="headerlink" title="解决重传分组重复问题"></a>解决重传分组重复问题</h4><p><strong>序列号</strong>：发送方给每个分组增加序列号。接收方丢弃重复分组。</p>
+<p>如果接收方用 ACK 告知最后一个正确接收分组的序列号，可以不使用 NAK。</p>
+<h3 id="不丢"><a href="#不丢" class="headerlink" title="不丢"></a>不丢</h3><p>发送方等待“<strong>合理</strong>”时间，这个时间内没收到 ACK，<strong>重传</strong>分组。如果这个时间设置过短，依然能正常通信，但是会产生冗余包：</p>
+<p><img src="https://i.loli.net/2020/01/23/RbD1VtK29OyFfQW.png" alt="等待时间过短"></p>
+<h3 id="提高性能（不乱）"><a href="#提高性能（不乱）" class="headerlink" title="提高性能（不乱）"></a>提高性能（不乱）</h3><p>利用<strong>流水线机制</strong>与<strong>滑动窗口协议</strong>。为了实现流水线机制，我们需要：</p>
 <ul>
-<li>type=A：name=主机域名，value=IP 地址。</li>
-<li>type=NS：name=域（edu.cn、qiuyueqy.com），value=该域的权威域名解析服务器的主机域名。</li>
-<li>type=CNAME：name=某真实域名的别名，value=真实域名。</li>
-<li>type=MX：name=域（126.com，163.com）,value=与name对应的邮件服务器.</li>
+<li>更大的<strong>序列号范围</strong></li>
+<li>更大的存储空间以<strong>缓存分组</strong></li>
 </ul>
-<h4 id="为什么在应用层实现"><a href="#为什么在应用层实现" class="headerlink" title="为什么在应用层实现"></a>为什么在应用层实现</h4><p>我们希望把复杂的东西尽量放在端系统实现。在应用层实现 DNS 协议有利于降低网络核心的复杂度。</p>
-<h4 id="DNS缓存"><a href="#DNS缓存" class="headerlink" title="DNS缓存"></a>DNS缓存</h4><p>由上可知，为了获取一个DNS地址进行了很多次请求，这就影响了速度。为了加快响应速度，DNS服务器有缓存机制：在一个请求链中，当某DNS服务器接收到一个DNS回答，它能将该回答中的信息缓存到本地存储器中，类似于Web缓存器。在一段时间（默认为两天）后将缓存信息丢弃。</p>
-<h4 id="DNS劫持与污染"><a href="#DNS劫持与污染" class="headerlink" title="DNS劫持与污染"></a>DNS劫持与污染</h4><p>DNS 污染是指服务器检测到用户访问特定的主机时，伪装成 DNS 服务器向用户返回错误IP地址。国内用户访问 youtube 等网站时就会遇到这种情况</p>
-<p>DNS 劫持是通过劫持特定的DNS服务器，在 DNS 服务器里存放错误的缓存信息，这样 DNS 服务器就会向用户返回错误的 IP 地址</p>
-<p>对于 DNS 劫持，可用采用更换默认 DNS 服务器的方式解决。而 DNS 污染只能通过修改 hosts 文件、VPN 等方式绕过服务器</p>
-<h3 id="P2P"><a href="#P2P" class="headerlink" title="P2P"></a>P2P</h3><p>P2P（Peer to Peer）应用的几个特点：</p>
+<h4 id="滑动窗口协议"><a href="#滑动窗口协议" class="headerlink" title="滑动窗口协议"></a>滑动窗口协议</h4><p>窗口：允许使用的序列号范围 N。</p>
+<p>滑动窗口：随着协议的运行，窗口在序列号空间内<strong>向前滑动</strong>。</p>
+<p><img src="https://i.loli.net/2020/01/23/GAiYTnW2vMxeUoX.png" alt="滑动窗口"></p>
+<h5 id="GBN（后退N帧）-协议"><a href="#GBN（后退N帧）-协议" class="headerlink" title="GBN（后退N帧） 协议"></a>GBN（后退N帧） 协议</h5><p>采用<strong>累积确认机制</strong>，ACK(n)：确认到序列号 n（包含n）的分组已被正确接受。为分组设置<strong>定时器</strong>。</p>
+<p>超时事件Timeout(n)：重传序列号大于等于 n 的所有未确认分组。</p>
+<p>发送方维护两个变量：base and nextseqnum：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (nextseqnum &lt; base + N) &#123;    <span class="comment">// 如果有窗口内有可用序列号</span></span><br><span class="line">    udt_send(packet[nextseqnum])    <span class="comment">// 发送编号为 nextseqnum 的数据</span></span><br><span class="line">    <span class="keyword">if</span> (base == nextseqnum)</span><br><span class="line">        start_timer;    <span class="comment">// 开始定时器</span></span><br><span class="line">    nextseqnum++;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    refuse_data(data);  <span class="comment">// 拒绝发送</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">if</span> timeout <span class="keyword">or</span> <span class="title">corrupt</span><span class="params">(rcvpkt)</span> </span>&#123; <span class="comment">// 如果超时或收到损坏的 ACK</span></span><br><span class="line">        start_timer;    <span class="comment">// 重置定时器</span></span><br><span class="line">        udt_send(data[base])</span><br><span class="line">        ...</span><br><span class="line">        udt_send(data[nextseqnum<span class="number">-1</span>])    <span class="comment">// 重传所有未确认分组</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">if</span> <span class="title">notcorrupt</span><span class="params">(rcvpkt)</span> </span>&#123; <span class="comment">// 如果正常收到 ACK</span></span><br><span class="line">    base = getacknum(rcvpkt) + <span class="number">1</span>;   <span class="comment">// 更新 base，窗口向前滑动！</span></span><br><span class="line">    <span class="keyword">if</span> (base == nextseqnum) <span class="comment">// 所有已发送分组均被正确接收</span></span><br><span class="line">        stop_timer;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        start_timer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接收方值只记住一个变量 expectedseqnum：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> !corrupt(rcvpkt) <span class="function"><span class="keyword">and</span> <span class="title">hasseqnum</span><span class="params">(rcvpkt, expectedseqnum)</span> </span>&#123; <span class="comment">// 如果正确接收分组</span></span><br><span class="line">    data = extract(rcvpkt);</span><br><span class="line">    deliver(data);  <span class="comment">// 向应用层传递数据</span></span><br><span class="line">    udt_send(expectednum, ACK, checksum);   <span class="comment">// 发送 ACK(expectedseqnum)</span></span><br><span class="line">    expectednum++;  <span class="comment">// 更新 expectedseqnum</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;    <span class="comment">// 分组损坏 or 乱序到达：直接丢弃</span></span><br><span class="line">    udt_send(expectednum, ACK, checksum);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2020/01/23/tzYge7b6PmEK2CD.png" alt="GBN示例"></p>
+<h5 id="SR（选择重传）协议"><a href="#SR（选择重传）协议" class="headerlink" title="SR（选择重传）协议"></a>SR（选择重传）协议</h5><p>接收方对每个分组<strong>单独确认</strong>，设置<strong>缓存机制</strong>，缓存乱序到达分组。发送方只重传没收到 ACK 的分组，为每个分组都设置定时器。</p>
+<p>在接收方，我们也设置一个窗口：<br><img src="https://i.loli.net/2020/01/23/tROCeGoPl3svUqp.png" alt="SR发送接收窗口"></p>
+<p><img src="https://i.loli.net/2020/01/23/thXiMKGmVSgLpqN.png" alt="SR发送接收分工"></p>
+<h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><p>TCP 的可靠数据传输，<strong>既不是 GBN，也不是 SR</strong>！</p>
 <ul>
-<li>没有服务器</li>
-<li>任意端系统之间直接互联</li>
-<li>节点阶段性接入Intent</li>
-<li>节点可能更换IP地址</li>
+<li>复用/分用</li>
+<li>点对点传输</li>
+<li>流水线机制</li>
+<li>发送方/接收方缓存（SR）</li>
+<li>双全工</li>
+<li>面向连接</li>
+<li>流量控制</li>
 </ul>
-<h3 id="网关-gateway"><a href="#网关-gateway" class="headerlink" title="网关(gateway)"></a>网关(gateway)</h3><p>在一个局域网内互相通信是不需要用到网关的，而局域网内的接口要访问外网时，则需要把请求发送到网关上，由网关负责向外发送流量。同理，外网的信息也是通过网关再传达给内网接口</p>
+<p><img src="https://i.loli.net/2020/01/24/wyvrUqoTia52AuN.png" alt="TCP格式"></p>
+<p>序列号指 segment 中第一个字节的编号而不是 segment 的编号，建立 TCP 连接时，双方随机选择序列号。</p>
+<p>ACKs 指希望收到的下一字节序列号，使用<strong>累计确认</strong>机制（GBN）。</p>
+<h3 id="触发重传的事件"><a href="#触发重传的事件" class="headerlink" title="触发重传的事件"></a>触发重传的事件</h3><ul>
+<li>超时</li>
+<li>收到重复 ACK</li>
+</ul>
+<p>TCP 只使用<strong>一个计时器</strong>。</p>
+<h3 id="设置定时器超时时间"><a href="#设置定时器超时时间" class="headerlink" title="设置定时器超时时间"></a>设置定时器超时时间</h3><p>SampleRTT：从段发出到收到 ACK 用时。</p>
+<p>EstimatedRTT：多个 SampleRTT 加权平均值。</p>
+<p>超时时间间隔（TimeoutInterval） = EstimatedRTT + 安全边界（DevRTT）</p>
+<p><img src="https://i.loli.net/2020/01/24/dYT7Aiw95bBxcKN.png" alt="EstimatedRTT求值"></p>
+<p><img src="https://i.loli.net/2020/01/24/HZdy1zDrj56MXFc.png" alt="DevRTT求值"></p>
+<p><img src="https://i.loli.net/2020/01/24/EJGCumZoVlyWIpe.png" alt="超时时间间隔求值"></p>
+<h3 id="快速重传"><a href="#快速重传" class="headerlink" title="快速重传"></a>快速重传</h3><p>通过检测多个重复的 ACK，发送方确认某个分组已经丢失。快速重传可以在定时器超时之前即进行重传。</p>
+<p>如果发送方收到对某一数据的 3 个 ACK，则启动快速重传机制。</p>
+<h3 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h3><p>本质上，流量控制是一种<strong>速度匹配</strong>机制。</p>
+<p>接收方为 TCP 连接分配 Buffer：</p>
+<p><img src="https://i.loli.net/2020/01/24/sA8wQaBl3V9PjZI.png" alt="接收方Buffer"></p>
+<p>接收方通过在 Segment 头部字段将 RcvWindow 告诉发送方。发送方已发送但未接收 ACK 的数据量不超过 RcvWindow。</p>
+<p>RcvWindow = 0，发送方仍然可以发送一个很小的段来更新 RcvWindow 值。</p>
+<h3 id="TCP-连接管理"><a href="#TCP-连接管理" class="headerlink" title="TCP 连接管理"></a>TCP 连接管理</h3><p>三次握手：</p>
+<ol>
+<li>客户端发送 SYN 报文。</li>
+<li>服务器发送 SYN/ACK 报文</li>
+<li>客户端发送 ACK 报文，此时可以包含数据。</li>
+</ol>
+<p><img src="https://i.loli.net/2020/01/24/jKaRhulIT8k9D5A.png" alt="三次握手"></p>
+<p>四次挥手：</p>
+<ol>
+<li>客户端发送 FIN 报文</li>
+<li>服务器发送 ACK。发送 FIN</li>
+<li>客户端收到 FIN，回复 ACK，进入等待状态（确保服务器正确关闭资源）</li>
+<li>服务器收到 ACK，连接关闭</li>
+</ol>
+<p><img src="https://i.loli.net/2020/01/24/PV2D49ulaBKycgo.png" alt="四次挥手"></p>
+<h3 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h3><p>与流量控制考虑端到端时延不同，拥塞控制是出于避免发出过多报文导致网络拥塞的考虑。如果说流量控制是小乘佛法，那么拥塞控制就是大乘佛法。</p>
+<p>网络层不显式提供拥塞控制支持，端系统通过观察丢失、时延等网络行为判断是否发生拥塞。</p>
+<h4 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h4><p>发送方设置一个变量 CongWin，动态调整变量以改变发送速率。保证：</p>
+<p>LastByteSend - LastByteAcked &lt;= CongWin</p>
+<p>rate = CongWin/RTT</p>
+<h4 id="如何感知网络拥塞"><a href="#如何感知网络拥塞" class="headerlink" title="如何感知网络拥塞"></a>如何感知网络拥塞</h4><p>发生 Loss 事件（超时或收到 3 个重复 ACK）后，发送方调整速率。</p>
+<h4 id="如何调整速率"><a href="#如何调整速率" class="headerlink" title="如何调整速率"></a>如何调整速率</h4><h5 id="加性增-乘性减（拥塞避免）"><a href="#加性增-乘性减（拥塞避免）" class="headerlink" title="加性增-乘性减（拥塞避免）"></a>加性增-乘性减（拥塞避免）</h5><p>逐渐增加发送速率，直到发生 Loss。</p>
+<p>方法：AIMD（Additive Increase，Mutiplicative Decrease）：</p>
+<ul>
+<li>Additive Increase：每个 RTT 将 CongWin 增大一个 MSS（Max Segment Size）</li>
+<li>Mutiplicative Decrease：发生 Loss 后将 CongWin 减半</li>
+</ul>
+<p><img src="https://i.loli.net/2020/01/25/AIB1lpe8UntPEu2.png" alt="AIMD"></p>
+<h5 id="慢启动"><a href="#慢启动" class="headerlink" title="慢启动"></a>慢启动</h5><p>TCP 连接建立时，CongWin = 1。此阶段可用带宽远高于初始速率。</p>
+<p>原理：每收到一个 ACK，执行 CongWin++（指数增长，<strong>每次翻倍</strong>）。记录一个变量 Threshold = CongWinSize(Loss)。CongWinSize 超过 Threshold 后由指数增长变为线性增长。</p>
+<p><img src="https://i.loli.net/2020/01/25/Sw6VbWrPgDziBFX.png" alt="慢启动"></p>
+<p>Loss 处理：</p>
+<ul>
+<li>3 个重复 ACK：CongWinSize /= 2，然后线性增长</li>
+<li>Timeout：CongWinSize = 1，然后指数增长（达到 Threshold 后再线性增长）</li>
+</ul>
+<p><strong>Timeout 比重复 ACK 更严重！</strong></p>
+<ol>
+<li>CongWinSize &lt; Threshold，CongWinSize 指数增长</li>
+<li>CongWinSize &gt; Threshold，CongWinSize 线性增长</li>
+<li>收到 3 个重复 ACK，Threshold = CongWinSize / 2，CongWinSize /= 2（Threshold == CongWinSize）</li>
+<li>发生 Timeout，Threshold = CongWinSize / 2，CongWinSize = 1</li>
+</ol>
 
       
     </div>
@@ -556,7 +581,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/应用层/" rel="tag"># 应用层</a>
+            <a href="/tags/传输层/" rel="tag"># 传输层</a>
           
         </div>
       
@@ -584,8 +609,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/04/网络那些事基本概念/" rel="next" title="网络那些事——基本概念">
-                <i class="fa fa-chevron-left"></i> 网络那些事——基本概念
+              <a href="/2020/01/19/递归、迭代与回溯/" rel="next" title="递归、迭代与回溯">
+                <i class="fa fa-chevron-left"></i> 递归、迭代与回溯
               </a>
             
           </div>
@@ -593,10 +618,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/06/10/Python合并列表、格式化输出与代码思路/" rel="prev" title="Python合并列表、格式化输出与代码思路">
-                Python合并列表、格式化输出与代码思路 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -755,7 +776,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#网络应用结构"><span class="nav-number">1.</span> <span class="nav-text">网络应用结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#端系统间的进程通信"><span class="nav-number">1.1.</span> <span class="nav-text">端系统间的进程通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#套接字（Socket）"><span class="nav-number">1.1.1.</span> <span class="nav-text">套接字（Socket）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#端口号"><span class="nav-number">1.1.2.</span> <span class="nav-text">端口号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程寻址"><span class="nav-number">1.1.3.</span> <span class="nav-text">进程寻址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几种常见的应用层协议"><span class="nav-number">1.2.</span> <span class="nav-text">几种常见的应用层协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP"><span class="nav-number">1.2.1.</span> <span class="nav-text">HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Cookie"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">Cookie</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SMTP"><span class="nav-number">1.2.2.</span> <span class="nav-text">SMTP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS"><span class="nav-number">1.2.3.</span> <span class="nav-text">DNS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实质"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">实质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分层式层次式数据库"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">分层式层次式数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么不用采用集中式架构"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">为什么不用采用集中式架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS-查询方式"><span class="nav-number">1.2.3.4.</span> <span class="nav-text">DNS 查询方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS-缓存与更新"><span class="nav-number">1.2.3.5.</span> <span class="nav-text">DNS 缓存与更新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS-记录与格式"><span class="nav-number">1.2.3.6.</span> <span class="nav-text">DNS 记录与格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么在应用层实现"><span class="nav-number">1.2.3.7.</span> <span class="nav-text">为什么在应用层实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS缓存"><span class="nav-number">1.2.3.8.</span> <span class="nav-text">DNS缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS劫持与污染"><span class="nav-number">1.2.3.9.</span> <span class="nav-text">DNS劫持与污染</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#P2P"><span class="nav-number">1.2.4.</span> <span class="nav-text">P2P</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网关-gateway"><span class="nav-number">1.2.5.</span> <span class="nav-text">网关(gateway)</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#传输层"><span class="nav-number">1.1.</span> <span class="nav-text">传输层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多路复用与多路分用"><span class="nav-number">1.2.</span> <span class="nav-text">多路复用与多路分用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP-UDP-的多路复用分用"><span class="nav-number">1.3.</span> <span class="nav-text">TCP/UDP 的多路复用分用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UDP"><span class="nav-number">1.4.</span> <span class="nav-text">UDP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么在传输层做链路检测"><span class="nav-number">1.4.1.</span> <span class="nav-text">为什么在传输层做链路检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优势"><span class="nav-number">1.4.2.</span> <span class="nav-text">优势</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可靠数据传输"><span class="nav-number">1.5.</span> <span class="nav-text">可靠数据传输</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#不错"><span class="nav-number">1.5.1.</span> <span class="nav-text">不错</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#如何从错误中恢复"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">如何从错误中恢复</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决重传分组重复问题"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">解决重传分组重复问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不丢"><span class="nav-number">1.5.2.</span> <span class="nav-text">不丢</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提高性能（不乱）"><span class="nav-number">1.5.3.</span> <span class="nav-text">提高性能（不乱）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#滑动窗口协议"><span class="nav-number">1.5.3.1.</span> <span class="nav-text">滑动窗口协议</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#GBN（后退N帧）-协议"><span class="nav-number">1.5.3.1.1.</span> <span class="nav-text">GBN（后退N帧） 协议</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SR（选择重传）协议"><span class="nav-number">1.5.3.1.2.</span> <span class="nav-text">SR（选择重传）协议</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP"><span class="nav-number">1.6.</span> <span class="nav-text">TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#触发重传的事件"><span class="nav-number">1.6.1.</span> <span class="nav-text">触发重传的事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置定时器超时时间"><span class="nav-number">1.6.2.</span> <span class="nav-text">设置定时器超时时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速重传"><span class="nav-number">1.6.3.</span> <span class="nav-text">快速重传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流量控制"><span class="nav-number">1.6.4.</span> <span class="nav-text">流量控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-连接管理"><span class="nav-number">1.6.5.</span> <span class="nav-text">TCP 连接管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拥塞控制"><span class="nav-number">1.6.6.</span> <span class="nav-text">拥塞控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本原理"><span class="nav-number">1.6.6.1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何感知网络拥塞"><span class="nav-number">1.6.6.2.</span> <span class="nav-text">如何感知网络拥塞</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何调整速率"><span class="nav-number">1.6.6.3.</span> <span class="nav-text">如何调整速率</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#加性增-乘性减（拥塞避免）"><span class="nav-number">1.6.6.3.1.</span> <span class="nav-text">加性增-乘性减（拥塞避免）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#慢启动"><span class="nav-number">1.6.6.3.2.</span> <span class="nav-text">慢启动</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
