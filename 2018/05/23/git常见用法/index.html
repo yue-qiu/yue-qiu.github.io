@@ -6,7 +6,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -152,9 +152,9 @@
 
 </head>
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","tagMode":true,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"pluginJsPath":"lib/","pluginRootPath":"live2dw/"});</script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","tagMode":true,"log":false,"model":{"jsonPath":"live2d-widget-model-koharu"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"pluginJsPath":"lib/","pluginRootPath":"live2dw/"});</script>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -164,7 +164,7 @@
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
@@ -296,20 +296,20 @@
   
   
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/23/git常见用法/">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="路边的土豆">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/images/惊讶猫.jpg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="精神的壳">
     </span>
 
@@ -401,9 +401,9 @@
 <p>有时候我们发现自己的账户和邮箱配置错了，重设我们的账户和邮箱：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global --replace-all user.username &quot;new name&quot;</span><br><span class="line">git config --global --replace-all user.email &quot;new email&quot;</span><br></pre></td></tr></table></figure></p>
 <h1 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h1><p><code>cd</code>到目标文件夹下，打开<code>git bash</code>或在终端输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure></p>
 <p>这就创建了一个版本库，<strong>有了版本库就可以开始使用git的各项功能了</strong>。</p>
-<h1 id="git分区"><a href="#git分区" class="headerlink" title="git分区"></a>git分区</h1><p>git有分区的概念，平时我们新建、删除、修改文件都是在工作区，通过<code>git add</code>命令把工作区的变动提交到暂存区(stage)，再用<code>git commit</code>把stage的内容提交到分支。<br><img src="http://p1csf090h.bkt.clouddn.com/git/git%E5%8E%9F%E7%90%86.jpg" alt=""></p>
+<h1 id="git分区"><a href="#git分区" class="headerlink" title="git分区"></a>git分区</h1><p>git有分区的概念，平时我们新建、删除、修改文件都是在工作区，通过<code>git add</code>命令把工作区的变动提交到暂存区(stage)，再用<code>git commit</code>把stage的内容提交到分支。<br><img src="http://p1csf090h.bkt.clouddn.com/git/git%E5%8E%9F%E7%90%86.jpg" alt></p>
 <h1 id="查看git状态"><a href="#查看git状态" class="headerlink" title="查看git状态"></a>查看git状态</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git status #查看当前仓库的状态（是否有文件被修改，有文件没有commit等）</span><br><span class="line">git diff file #用于比较工作区版本与缓存区版本的不同</span><br></pre></td></tr></table></figure>
-<p><img src="http://p1csf090h.bkt.clouddn.com/git/status.png" alt=""><br>git指出有一个modified：learngit.txt,且not staged(没有提交至暂存区)</p>
+<p><img src="http://p1csf090h.bkt.clouddn.com/git/status.png" alt><br>git指出有一个modified：learngit.txt,且not staged(没有提交至暂存区)</p>
 <h1 id="添加远程仓库"><a href="#添加远程仓库" class="headerlink" title="添加远程仓库"></a>添加远程仓库</h1><p>想把github中的仓库和本地仓库关联起来，就要先在github中添加这台机器的ssh。可以通过</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;email&quot;</span><br></pre></td></tr></table></figure>
 <p>来获得本机的ssh密钥，这条命令会在当前文件夹下生成<code>.ssh</code>文件夹，里面有两个文件：<code>id_rsa</code>和<code>id_rsa.pub</code>。带pub的是公钥，把<code>id_rsa.pub</code>里的内容添加到github上。</p>
@@ -415,11 +415,11 @@
 <h1 id="抓取远程库内容"><a href="#抓取远程库内容" class="headerlink" title="抓取远程库内容"></a>抓取远程库内容</h1><p>抓取远程仓库内容并merge到本地<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin</span><br></pre></td></tr></table></figure></p>
 <h1 id="克隆一份仓库"><a href="#克隆一份仓库" class="headerlink" title="克隆一份仓库"></a>克隆一份仓库</h1><p>有时候我们在github上可能看到一些很有意思的库，可以用这个命令把它下载到本地，其中”url”是这个仓库的网址：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone &quot;url&quot;</span><br></pre></td></tr></table></figure></p>
 <h1 id="显示过往提交记录"><a href="#显示过往提交记录" class="headerlink" title="显示过往提交记录"></a>显示过往提交记录</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git log # 显示提交日志，每次提交会有一个专属的版本号，通过版本号可回溯至本次提交</span><br><span class="line">git log --pretty=oneline # 在log显示信息过乱时可以加 --pretty=online参数，只显示提交记录及其版本号</span><br></pre></td></tr></table></figure>
-<p><img src="http://p1csf090h.bkt.clouddn.com/git/log.png" alt=""><br>HEAD表示这是当前版本，可以用HEAD^表示上一版本，HEAD^表示上上版本…HEAD~100表示第前100个版本。</p>
+<p><img src="http://p1csf090h.bkt.clouddn.com/git/log.png" alt><br>HEAD表示这是当前版本，可以用HEAD^表示上一版本，HEAD^表示上上版本…HEAD~100表示第前100个版本。</p>
 <h1 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h1><p>使用git的一个主要好用就是git提供方便的版本控制，可以在需要的时候回退到任意版本。</p>
 <p>版本回退命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard &apos;版本号&apos;</span><br></pre></td></tr></table></figure></p>
 <p>版本号可以用<code>git log</code>查询，结合这两个命令就可以实现版本回退啦~</p>
-<p>但是这里有个问题：当我们回到历史版本后，<code>git log</code>命令就无法显示最新版本的版本号。相当于我们穿越到过去，却没办法回来了。幸好<code>git relog</code>命令可以解决这个问题，<code>git relog</code>记录了每一次命令：<br><img src="http://p1csf090h.bkt.clouddn.com/git/relog.png" alt=""></p>
+<p>但是这里有个问题：当我们回到历史版本后，<code>git log</code>命令就无法显示最新版本的版本号。相当于我们穿越到过去，却没办法回来了。幸好<code>git relog</code>命令可以解决这个问题，<code>git relog</code>记录了每一次命令：<br><img src="http://p1csf090h.bkt.clouddn.com/git/relog.png" alt></p>
 <p>在这个例子中，可以通过<code>git reset --hard 78ab7e9</code>从be2a4ae回退到78ab7e9版本。</p>
 <h1 id="管理修改"><a href="#管理修改" class="headerlink" title="管理修改"></a>管理修改</h1><p>有时我们修改了工作区或暂存区的文件，过了一会儿又后悔了，可以用下面的命令撤销这些修改：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout file</span><br></pre></td></tr></table></figure></p>
 <p>如果文件已经commit到了暂存区，想要把它从暂存区里撤下来也是可以的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD file</span><br></pre></td></tr></table></figure></p>
@@ -542,7 +542,7 @@
 
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image" src="/images/惊讶猫.jpg" alt="路边的土豆">
             

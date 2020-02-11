@@ -6,7 +6,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -154,9 +154,9 @@
 
 </head>
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","tagMode":true,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"pluginJsPath":"lib/","pluginRootPath":"live2dw/"});</script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","tagMode":true,"log":false,"model":{"jsonPath":"live2d-widget-model-koharu"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"pluginJsPath":"lib/","pluginRootPath":"live2dw/"});</script>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -166,7 +166,7 @@
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
@@ -298,20 +298,20 @@
   
   
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/31/《MySQL从入门到精通》之基本语句/">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="路边的土豆">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/images/惊讶猫.jpg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="精神的壳">
     </span>
 
@@ -354,7 +354,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/数据库/" itemprop="url" rel="index">
                     <span itemprop="name">数据库</span>
                   </a>
@@ -438,8 +438,8 @@
 <h2 id="MyISAM引擎"><a href="#MyISAM引擎" class="headerlink" title="MyISAM引擎"></a>MyISAM引擎</h2><p>MyISAM引擎的优点在于占用空间小，处理速度快；缺点是不支持事务的完整性和并发性。</p>
 <h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><p>MySQL支持5中基本字段类型：数值型，字符型，文本型，逻辑型和日期时间型。</p>
 <h2 id="数值型"><a href="#数值型" class="headerlink" title="数值型"></a>数值型</h2><p>MySQL支持所有标准SQL数值数据类型。这些数值类型包括严格数值数据类型(INTEGER、SMALLINT、DECIMAL和NUMERIC)，以及近似数值数据类型(FLOAT、REAL和DOUBLE PRECISION)。<br>关键字INT是INTEGER的同义词，关键字DEC是DECIMAL的同义词。</p>
-<h3 id="整数型"><a href="#整数型" class="headerlink" title="整数型"></a>整数型</h3><p><img src="http://ke.dajiangtai.com/content/411/1.png" alt=""></p>
-<h3 id="浮点数型"><a href="#浮点数型" class="headerlink" title="浮点数型"></a>浮点数型</h3><p><img src="http://ke.dajiangtai.com/content/411/2.png" alt=""></p>
+<h3 id="整数型"><a href="#整数型" class="headerlink" title="整数型"></a>整数型</h3><p><img src="http://ke.dajiangtai.com/content/411/1.png" alt></p>
+<h3 id="浮点数型"><a href="#浮点数型" class="headerlink" title="浮点数型"></a>浮点数型</h3><p><img src="http://ke.dajiangtai.com/content/411/2.png" alt></p>
 <h2 id="时间日期型"><a href="#时间日期型" class="headerlink" title="时间日期型"></a>时间日期型</h2><p>表示时间值的日期和时间类型为DATETIME、DATE、TIMESTAMP、TIME和YEAR。</p>
 <p>每个时间类型有一个有效值范围和一个”零”值，当指定不合法的MySQL不能表示的值时使用”零”值。</p>
 <p>TIMESTAMP类型有专有的自动更新特性。</p>
@@ -479,7 +479,7 @@
 <p>col_name type [not null | null] [default default_value] [auto_increment] [primary key] [reference_defination]</p>
 </blockquote>
 <p>下面是例子：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">test</span> (</span><br><span class="line">    <span class="keyword">id</span> tinyint <span class="keyword">not</span> <span class="literal">null</span> auto_increment primary <span class="keyword">key</span>,</span><br><span class="line">    <span class="keyword">name</span> <span class="built_in">char</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    age tinyint,</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">test</span> (</span><br><span class="line">    <span class="keyword">id</span> <span class="built_in">tinyint</span> <span class="keyword">not</span> <span class="literal">null</span> auto_increment primary <span class="keyword">key</span>,</span><br><span class="line">    <span class="keyword">name</span> <span class="built_in">char</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    age <span class="built_in">tinyint</span>,</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 <h2 id="查看表结构"><a href="#查看表结构" class="headerlink" title="查看表结构"></a>查看表结构</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;describe | desc&#125; 数据表名 [列名];</span><br></pre></td></tr></table></figure>
 <h2 id="修改表结构"><a href="#修改表结构" class="headerlink" title="修改表结构"></a>修改表结构</h2><p>修改表结构指增加或删除字段、修改字段名称或字段类型、设置取消主键外键、设置取消索引等</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 数据表名 alter_spec[,alter_spec] | table_options</span><br></pre></td></tr></table></figure>
@@ -590,7 +590,7 @@
 <h3 id="带关键字any、all的子查询"><a href="#带关键字any、all的子查询" class="headerlink" title="带关键字any、all的子查询"></a>带关键字any、all的子查询</h3><p>这两个关键字多用于比较运算。<code>any</code>表示满足其中任意一个条件，只要满足内层查询语句返回的结果中的任意一个，就可以通过该条件来执行外层查询。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">users</span> <span class="keyword">where</span> <span class="keyword">id</span> &gt; <span class="keyword">any</span>(<span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> students);</span><br></pre></td></tr></table></figure>
 <p><code>all</code>表示满足所有条件，只有满足内层查询语句返回的所有结果，才可以执行外层查询。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">users</span> <span class="keyword">where</span> <span class="keyword">id</span> &gt; all(<span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> students);</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">users</span> <span class="keyword">where</span> <span class="keyword">id</span> &gt; <span class="keyword">all</span>(<span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> students);</span><br></pre></td></tr></table></figure>
 <h2 id="使用正则表达式查询"><a href="#使用正则表达式查询" class="headerlink" title="使用正则表达式查询"></a>使用正则表达式查询</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">字段名 regexp</span><br></pre></td></tr></table></figure>
 <p>MySQL中正则表达式格式与普通格式是一样的。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">id</span>,<span class="keyword">name</span> <span class="keyword">from</span> <span class="keyword">users</span> <span class="keyword">where</span> <span class="keyword">name</span> regexp <span class="string">'^M.*e [JS].+o&#123;2,4&#125;y$'</span>;</span><br></pre></td></tr></table></figure>
@@ -736,7 +736,7 @@
 
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image" src="/images/惊讶猫.jpg" alt="路边的土豆">
             
