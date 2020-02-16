@@ -1676,49 +1676,78 @@
     <url>/2018/05/23/git%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95/</url>
     <content><![CDATA[<p>使用git也有一段时间了，一直没有做总结，在这里记录一下方便以后查看。</p>
 <h1 id="配置git"><a href="#配置git" class="headerlink" title="配置git"></a>配置git</h1><p>windows下直接从<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">官网</a>下载就可以了，安装过程是傻瓜式的，一路点确定就OK。安装完成后发现多了个叫<code>git bash</code>的程序，打开程序会弹出一个命令行窗口就可以了。</p>
-<p>linux下安装git很简单，直接在终端输入<code>git</code>，系统会告诉你是否已经安装。如果没有安装还会告诉你安装方法。Debian和Ubantu下通过<code>sudo apt-get install git</code>就可以进行安装。</p>
+<p>linux下安装git很简单，直接在终端输入 <code>git</code>，系统会告诉你是否已经安装。如果没有安装还会告诉你安装方法。Debian 和 Ubantu 下通过 <code>sudo apt-get install git</code> 就可以进行安装。</p>
 <p>由于git是分布式版本控制系统，所以必须指出每台机器的身份。这就要配置git相关变量：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.username <span class="string">"name"</span></span><br><span class="line">git config --global user.email <span class="string">"email"</span></span><br></pre></td></tr></table></figure>
 <p>有时候我们发现自己的账户和邮箱配置错了，重设我们的账户和邮箱：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global --replace-all user.username <span class="string">"new name"</span></span><br><span class="line">git config --global --replace-all user.email <span class="string">"new email"</span></span><br></pre></td></tr></table></figure>
-<h1 id="常见用法"><a href="#常见用法" class="headerlink" title="常见用法"></a>常见用法</h1><h2 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h2><p><code>cd</code>到目标文件夹下，打开<code>git bash</code>或在终端输入：</p>
+<h1 id="常见用法"><a href="#常见用法" class="headerlink" title="常见用法"></a>常见用法</h1><h2 id="版本控制"><a href="#版本控制" class="headerlink" title="版本控制"></a>版本控制</h2><h3 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h3><p>目标文件夹下，打开终端输入：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
 <p>这就为这个文件夹创建了一个版本库，有了版本库就可以开始使用 git 的各项功能了。</p>
-<h2 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h2><p>git 有分区的概念，平时我们新建、删除、修改文件都是在<code>工作区</code>，通过 <code>git add</code> 命令把工作区的变动提交到<code>暂存区</code>（stage），再用 <code>git commit</code> 把stage的内容提交到<code>分支</code>（branch）。</p>
-<h2 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a>查看状态</h2><p>每次我们对版本库中的文件进行修改，都会改变 git 的状态。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git status <span class="comment">#查看当前仓库的状态（是否有文件被修改，有文件没有commit等）</span></span><br><span class="line">git diff file <span class="comment">#用于比较工作区版本与缓存区版本的不同</span></span><br></pre></td></tr></table></figure>
-<h2 id="添加远程仓库"><a href="#添加远程仓库" class="headerlink" title="添加远程仓库"></a>添加远程仓库</h2><p>要先在 Github 中添加这台机器的 ssh 密钥以允许你把本地文件传到 Github 上。执行：</p>
+<h3 id="状态"><a href="#状态" class="headerlink" title="状态"></a>状态</h3><p>git 有分区的概念，平时我们新建、删除、修改文件都是在<code>工作区</code>，通过 <code>git add</code> 命令把工作区的变动提交到<code>暂存区</code>（stage），再用 <code>git commit</code> 把stage的内容提交到<code>分支</code>（branch）。</p>
+<p>每次我们对文件进行修改，都会改变 git 的状态。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git status <span class="comment">#查看当前仓库的状态（是否有文件被修改，有文件没有commit等）</span></span><br><span class="line">git diff file <span class="comment">#比较工作区与缓存区的不同</span></span><br><span class="line">git diff head  <span class="comment"># 比较工作区与分支的不同</span></span><br></pre></td></tr></table></figure>
+<h3 id="显示过往提交记录"><a href="#显示过往提交记录" class="headerlink" title="显示过往提交记录"></a>显示过往提交记录</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">log</span> <span class="comment"># 显示提交日志，每次提交会有一个专属的版本号，通过版本号可回溯至本次提交</span></span><br><span class="line">git <span class="built_in">log</span> --oneline <span class="comment"># 在 log 显示信息过乱时可以加 --oneline 只显示提交记录及其版本号</span></span><br><span class="line">git <span class="built_in">log</span> --graph --oneline <span class="comment"># 把分支记录以时间线的形式显示</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2020/02/16/U5lM6bayKAHwX1r.png" alt="log"><br><img src="https://i.loli.net/2020/02/16/mO2ACVn9jQaMZJg.png" alt="log--oneline"></p>
+<p>HEAD 表示当前版本，可以用 HEAD^ 表示上一版本，HEAD^^ 表示上上版本… HEAD~100 表示第前 100 个版本。</p>
+<h3 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h3><p>使用 git 的一个主要好处就是 git 提供方便的版本控制，可以在需要的时候回退到任意版本。</p>
+<p>版本回退命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset --hard 版本号</span><br></pre></td></tr></table></figure>
+<p>但是这里有个问题：当我们回到历史版本后，<code>git log</code> 命令就无法显示最新版本的版本号。相当于我们穿越到过去，却没办法回来了。幸好 <code>git relog</code> 命令可以解决这个问题，<code>git reflog</code> 记录了我们每次在版本间的移动：</p>
+<p><img src="https://i.loli.net/2020/02/16/BFnk1zxTIN7Khly.png" alt="reflog"></p>
+<p>可以看到，我通过 checkout 从 174e8dc 来到 e346f09，这样就不怕穿越不回现代啦~</p>
+<h3 id="管理修改"><a href="#管理修改" class="headerlink" title="管理修改"></a>管理修改</h3><p>有时我们修改了工作区或暂存区的文件，过了一会儿又后悔了，可以用下面的命令撤销这些修改，<strong>相当于 git add 的反向命令，即把暂存区最新版本转移到工作区</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout -- file</span><br></pre></td></tr></table></figure>
+<p>如果文件已经 add 到了暂存区，想要把它从暂存区里撤下来也是可以的，<strong>相当于 git commit 的反向命令，即把分支最新版本转移到暂存区</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset HEAD file</span><br></pre></td></tr></table></figure>
+<p>那如果文件已经 commit 了怎么版本？还记得前面的版本回退命令吗？直接回退就好啦！</p>
+<h3 id="显示提交记录"><a href="#显示提交记录" class="headerlink" title="显示提交记录"></a>显示提交记录</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">log</span> <span class="comment"># 显示提交日志，每次提交会有一个专属的版本号，通过版本号可回溯至本次提交</span></span><br><span class="line">git <span class="built_in">log</span> --oneline <span class="comment"># 在 log 显示信息过乱时可以加 --oneline 只显示提交记录及其版本号</span></span><br><span class="line">git <span class="built_in">log</span> --graph --oneline <span class="comment"># 把分支记录以时间线的形式显示</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2020/02/16/U5lM6bayKAHwX1r.png" alt="log"><br><img src="https://i.loli.net/2020/02/16/mO2ACVn9jQaMZJg.png" alt="log--oneline"></p>
+<p>HEAD 表示当前版本，可以用 HEAD^ 表示上一版本，HEAD^^ 表示上上版本… HEAD~100 表示第前 100 个版本。</p>
+<h3 id="版本回退-1"><a href="#版本回退-1" class="headerlink" title="版本回退"></a>版本回退</h3><p>使用 git 的一个主要好处就是 git 提供方便的版本控制，可以在需要的时候回退到任意版本。</p>
+<p>版本回退命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset --hard 版本号</span><br></pre></td></tr></table></figure>
+<p>但是这里有个问题：当我们回到历史版本后，<code>git log</code> 命令就无法显示最新版本的版本号。相当于我们穿越到过去，却没办法回来了。幸好 <code>git relog</code> 命令可以解决这个问题，<code>git reflog</code> 记录了我们每次在版本间的移动：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reflog</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2020/02/16/BFnk1zxTIN7Khly.png" alt="reflog"></p>
+<p>可以看到，我通过 checkout 从 174e8dc 来到 e346f09，这样就不怕穿越不回现代啦~</p>
+<h3 id="管理修改-1"><a href="#管理修改-1" class="headerlink" title="管理修改"></a>管理修改</h3><p>有时我们修改了工作区或暂存区的文件，过了一会儿又后悔了，可以用下面的命令撤销这些修改：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout -- file</span><br></pre></td></tr></table></figure>
+<p>如果文件已经 add 到了暂存区，想要把它从暂存区里撤下来也是可以的：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset HEAD file</span><br></pre></td></tr></table></figure>
+<p>那如果文件已经 commit 了怎么版本？还记得前面的版本回退命令吗？直接回退就好啦！</p>
+<h2 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h2><p>要先在 Github 中添加这台机器的 ssh 密钥以允许你把本地文件传到 Github 上。执行：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"email"</span></span><br></pre></td></tr></table></figure>
 <p>这条命令会在当前文件夹下生成 <code>.ssh</code> 文件夹，里面有两个文件：<code>id_rsa</code> 和 <code>id_rsa.pub</code>。带 pub 的是公钥，把 <code>id_rsa.pub</code> 里的内容添加到 Github 上。</p>
-<p>想把 Github 中的仓库和本地仓库关联起来，通过这条命令可以实现，xxxx 是远程仓库的地址：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote add origin xxxxxx</span><br></pre></td></tr></table></figure>
+<p>想把 Github 中的仓库和本地仓库关联起来，通过这条命令可以实现，xxxxx 是远程仓库的地址：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote add origin xxxxx</span><br></pre></td></tr></table></figure>
 <p>origin 是这个 git 本地仓库对远程仓库的称呼，也可以用别的名字如 dev、test 等，但是通常都用origin。</p>
 <p>删除本地仓库与远程仓库的关联也很简单：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote remove origin</span><br></pre></td></tr></table></figure>
-<h2 id="把本地库内容推送到远程"><a href="#把本地库内容推送到远程" class="headerlink" title="把本地库内容推送到远程"></a>把本地库内容推送到远程</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
-<p>如果是第一次推送，可以为push加上 <code>-u</code> 参数，这样以后推送的时候就不用再输入 Github 的账号和密码了。<br>master 代表远程仓库的主分支，如果要推送到其他分支就换成其他分支名。</p>
-<h2 id="抓取远程库内容"><a href="#抓取远程库内容" class="headerlink" title="抓取远程库内容"></a>抓取远程库内容</h2><p>抓取远程仓库内容并 merge 到本地</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git pull origin</span><br></pre></td></tr></table></figure>
-<h2 id="克隆一份仓库"><a href="#克隆一份仓库" class="headerlink" title="克隆一份仓库"></a>克隆一份仓库</h2><p>有时候我们在 Github 上可能看到一些很有意思的库，可以用这个命令把它下载到本地，其中 xxxxx 是这个仓库的网址：</p>
+<h3 id="克隆远程仓库"><a href="#克隆远程仓库" class="headerlink" title="克隆远程仓库"></a>克隆远程仓库</h3><p>有时候我们在 Github 上可能看到一些很有意思的库，可以用这个命令把它下载到本地，其中 xxxxx 是这个仓库的网址：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> xxxxx</span><br></pre></td></tr></table></figure>
-<h2 id="显示过往提交记录"><a href="#显示过往提交记录" class="headerlink" title="显示过往提交记录"></a>显示过往提交记录</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">log</span> <span class="comment"># 显示提交日志，每次提交会有一个专属的版本号，通过版本号可回溯至本次提交</span></span><br><span class="line">git <span class="built_in">log</span> --oneline <span class="comment"># 在 log 显示信息过乱时可以加 --oneline 只显示提交记录及其版本号</span></span><br></pre></td></tr></table></figure>
-<p>HEAD 表示当前版本，可以用 HEAD^ 表示上一版本，HEAD^^ 表示上上版本… HEAD~100 表示第前 100 个版本。</p>
-<h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h2><p>使用 git 的一个主要好处就是 git 提供方便的版本控制，可以在需要的时候回退到任意版本。</p>
-<p>版本回退命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset --hard 版本号</span><br></pre></td></tr></table></figure>
-<p>但是这里有个问题：当我们回到历史版本后，<code>git log</code> 命令就无法显示最新版本的版本号。相当于我们穿越到过去，却没办法回来了。幸好 <code>git relog</code> 命令可以解决这个问题，<code>git reflog</code> 记录了每一次命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reflog</span><br></pre></td></tr></table></figure>
-<p>通过 <code>git reflog</code>，我们就可以找回执行版本回退命令时的版本号啦~</p>
-<h2 id="管理修改"><a href="#管理修改" class="headerlink" title="管理修改"></a>管理修改</h2><p>有时我们修改了工作区或暂存区的文件，过了一会儿又后悔了，可以用下面的命令撤销这些修改：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout file</span><br></pre></td></tr></table></figure>
-<p>如果文件已经 commit 到了暂存区，想要把它从暂存区里撤下来也是可以的：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset HEAD file</span><br></pre></td></tr></table></figure>
-<h2 id="处理冲突"><a href="#处理冲突" class="headerlink" title="处理冲突"></a>处理冲突</h2><p>在合并分支时，可能会遇到两个分支的内容有冲突而导致合并失败的现象（这在执行 pull 操作时尤其常见，特别是当你在 Github 上在线修改了一个文件，而本地没有修改时）。git 会在冲突文件中用 &lt;&lt;&lt;&lt;&lt;&lt;&lt;，=======，&gt;&gt;&gt;&gt;&gt;&gt;&gt; 标记出不同内容的分支。我们需要将文件进行修改后再执行 commit：</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 可以看到，本地 HEAD 和远程分支冲突了</span></span><br><span class="line">&lt;&lt;&lt;&lt;&lt;&lt;HEAD</span><br><span class="line">git is good</span><br><span class="line">=======</span><br><span class="line">git is very good</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;branch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将文件修改一下</span></span><br><span class="line">git is very good</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交</span></span><br><span class="line">git add test.txt</span><br><span class="line">git commit -m "解决冲突"</span><br></pre></td></tr></table></figure>
-<h2 id="删除远程仓库中的内容"><a href="#删除远程仓库中的内容" class="headerlink" title="删除远程仓库中的内容"></a>删除远程仓库中的内容</h2><p>很多时候随着项目的进行，远程仓库中一些文件不再被使用，或者干脆就是不小心提交了没啥用的文件。当然，可以在 Github 点击删除按钮进行删除，但是目前 Github 只提供了单个文件的删除，如果想要删除一个文件夹及其下的所有文件那工作量简直令人崩溃 orz。</p>
+<h3 id="把本地库内容推送到远程"><a href="#把本地库内容推送到远程" class="headerlink" title="把本地库内容推送到远程"></a>把本地库内容推送到远程</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+<p>如果是第一次推送，可以为push加上 <code>-u</code> 参数，这样以后推送的时候就不用再输入 Github 的账号和密码了。master 代表远程仓库的主分支，如果要推送到其他分支就换成其他分支名。</p>
+<h3 id="抓取远程库内容"><a href="#抓取远程库内容" class="headerlink" title="抓取远程库内容"></a>抓取远程库内容</h3><p>抓取远程仓库内容并 merge 到本地</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git pull <span class="comment"># 默认抓取 origin 中和当前分支关联的远程分支</span></span><br></pre></td></tr></table></figure>
+<h3 id="删除远程仓库中的文件"><a href="#删除远程仓库中的文件" class="headerlink" title="删除远程仓库中的文件"></a>删除远程仓库中的文件</h3><p>很多时候随着项目的进行，远程仓库中一些文件不再被使用，或者干脆就是不小心提交了没啥用的文件。当然，可以在 Github 点击删除按钮进行删除，但是目前 Github 只提供了单个文件的删除，如果想要删除一个文件夹及其下的所有文件那工作量简直令人崩溃 orz。</p>
 <p>其实，我们可以通过从版本库中删除这个文件再推送到 Github 的方式删除远程仓库中的内容：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git rm -r --cached file</span><br><span class="line">git commit -m <span class="string">"delete file"</span></span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
 <p><code>-r</code> 表示递归删除，这在 file 表示文件夹时尤其有用。<code>--cached</code> 表示对版本库中的缓存进行操作，这样就不会把本地文件给删除了~</p>
+<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><p>创建新分支：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch 分支名</span><br></pre></td></tr></table></figure>
+<p>移动到一个分支：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout 分支名</span><br></pre></td></tr></table></figure>
+<p>创建并移动到一个新分支：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout -b 分支名</span><br></pre></td></tr></table></figure>
+<p>创建并移动到一个和远程分支对应的分支：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout -b 分支名 origin/远程分支</span><br></pre></td></tr></table></figure>
+<p>建立本地分支对远程分支的关联：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch --<span class="built_in">set</span>-upstream 本地分支 origin/远程分支</span><br></pre></td></tr></table></figure>
+<p>将当前分支与另一分支合并：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git merge 分支名</span><br></pre></td></tr></table></figure>
+<h3 id="处理分支冲突"><a href="#处理分支冲突" class="headerlink" title="处理分支冲突"></a>处理分支冲突</h3><p>合并分支时，可能会遇到因两个分支的内容有冲突而导致合并失败的现象（这在执行 pull 操作时尤其常见，特别是当你在 Github 上在线修改了一个文件，而本地没有修改时）。git 会在冲突文件中用 &lt;&lt;&lt;&lt;&lt;&lt;&lt;，=======，&gt;&gt;&gt;&gt;&gt;&gt;&gt; 标记出不同内容的分支。我们需要将文件进行修改后再执行 commit：</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 可以看到，本地 HEAD 和远程分支冲突了</span></span><br><span class="line">&lt;&lt;&lt;&lt;&lt;&lt;HEAD</span><br><span class="line">git is good</span><br><span class="line">=======</span><br><span class="line">git is very good</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;branch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将文件修改一下</span></span><br><span class="line">git is very good</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交</span></span><br><span class="line">git add test.txt</span><br><span class="line">git commit -m "解决冲突"</span><br></pre></td></tr></table></figure>
 <h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><p>当项目开发到一定阶段，我们会给它打上一个<code>标签</code>（tag）表示达到了某种程度。就像很多软件经常会说：我们升级到 v7.0.1 版本啦，快来升级哟~ 这里的 v7.0.1 就是一个标签。</p>
 <p>查看当前版本库中所有标签：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git tag</span><br></pre></td></tr></table></figure>
@@ -1730,6 +1759,12 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git show 标签名</span><br></pre></td></tr></table></figure>
 <p>签出一个标签：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout 标签名</span><br></pre></td></tr></table></figure>
+<p>删除本地标签：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git tag -d 标签名</span><br></pre></td></tr></table></figure>
+<p>推送本地标签到远程仓库：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin --tags</span><br></pre></td></tr></table></figure>
+<p>删除远程仓库中的标签：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin :refs/tags/标签名</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
         <tag>git</tag>
