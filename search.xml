@@ -31,7 +31,7 @@
     <title>网络那些事之URI</title>
     <url>/2020/02/13/URI%E4%B8%8EURL/</url>
     <content><![CDATA[<h1 id="什么是-URI"><a href="#什么是-URI" class="headerlink" title="什么是 URI"></a>什么是 URI</h1><p>URI(Uniform Resource Identifier)：统一资源标识符，用于<strong>唯一标识一个资源</strong>。</p>
-<p>URL(Uniform Resource Locator)：统一资源定位符，表明在一个资源在网络中的访问方式</p>
+<p>URL(Uniform Resource Locator)：统一资源定位符，表明在一个资源在网络中的访问方式。通常表现为 <code>协议+路径+参数</code></p>
 <p>URN(Uniform Resource Name)：统一资源定位名称，通过某个命名空间中的唯一 ID 来标识一个资源</p>
 <p><img src="https://i.loli.net/2020/02/13/2XjAU6Phz9ONJQq.png" alt="URI"></p>
 <p>举个例子：小红的学号是 123456，这个学号就是 URN，能对应到小红这个人；小红的家庭住址是翻斗大街翻斗花园二号楼一零零一室，这个地址就是 URL，去那里就能找到小红。小红的学号、小红的住址都属于 URI。</p>
@@ -41,6 +41,15 @@
 <li>opaque 指 scheme-specific-part 不以 / 开头，是一个整体。呈 [scheme]:opaque[?query][#fragment] 的形式。如：mailto:<a href="mailto:qiuyue9971@126.com" target="_blank" rel="noopener">qiuyue9971@126.com</a>，<a href="http://www.google.com:443" target="_blank" rel="noopener">www.google.com:443</a>, opaque 必须是绝对的。</li>
 <li>hierarchical 指 scheme-specific-part 以 / 开头且可以划分为好几部分。呈 [scheme:][//[userinfo@]host[:port]]path[?query][#fragment] 的形式。如：<a href="http://qiuyueqy.com/categories/" target="_blank" rel="noopener">http://qiuyueqy.com/categories/</a>, hierarchical 可以是绝对的，也可以是相对的，如：<a href="https://github.com/yue-qiu/CUG_EmptyClassroom" target="_blank" rel="noopener">https://github.com/yue-qiu/CUG_EmptyClassroom</a>, ../../static/verify.js</li>
 </ul>
+<h1 id="谈谈-URI-编码"><a href="#谈谈-URI-编码" class="headerlink" title="谈谈 URI 编码"></a>谈谈 URI 编码</h1><p>利用 URI 传参时，如果某些 URI 组件字符（如 /:?@&amp;=+$,#）同时也是参数的一部分会导致 URI 歧义。此外，URI 只支持 ASCII 编码，对于茫茫多的特殊字符（如：广东省）如何表示？</p>
+<p>所谓办法总比困难多，为了解决这些问题，URI 编码应运而生。举个栗子，对下面这个未经编码的 URI：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http://qiuyueqy.com/?page=2&amp;category=广东</span><br></pre></td></tr></table></figure>
+<p>要表示特殊字符，我们把它按某个字符集（通常是 UTF-8）编码成十六进制的 %hh 形式：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http://qiuyueqy.com?page=2&amp;category=%E5%B9%BF%E4%B8%9C</span><br></pre></td></tr></table></figure>
+<p>如果这个 URI 是另一个 URI 的参数，如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">httpw://www.google.com?callback=http://qiuyueqy.com/?page=2&amp;category=广东</span><br></pre></td></tr></table></figure>
+<p>显然，由于参数中 /、? 等组件字符的存在，上面这个 URI 的解释是有歧义的。这时，我们把整个回调 URI（包括它的组件字符）进行编码，再作为参数就没问题了：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">httpw://www.google.com?callback=http%3A%2F%2Fqiuyueqy.com%2F%3Fpage%3D2%26category%3D%E5%B9%BF%E4%B8%9C</span><br></pre></td></tr></table></figure>
 <h1 id="golang-对-URL-的实现"><a href="#golang-对-URL-的实现" class="headerlink" title="golang 对 URL 的实现"></a>golang 对 URL 的实现</h1><figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> URL <span class="keyword">struct</span> &#123;</span><br><span class="line">    Scheme   <span class="keyword">string</span>    <span class="comment">//具体指访问服务器上的资源使用的哪种协议</span></span><br><span class="line">    Opaque   <span class="keyword">string</span>    <span class="comment">// 编码后的不透明数据</span></span><br><span class="line">    User     *Userinfo <span class="comment">// 用户名和密码信息,有些协议需要传入明文用户名和密码来获取资源，比如 FTP</span></span><br><span class="line">    Host     <span class="keyword">string</span>    <span class="comment">// host或host:port，服务器地址，可以是 IP 地址，也可以是域名信息</span></span><br><span class="line">    Path     <span class="keyword">string</span>  <span class="comment">//路径，使用"/"分隔</span></span><br><span class="line">    RawQuery <span class="keyword">string</span> <span class="comment">// 编码后的查询字符串，没有'?'</span></span><br><span class="line">    Fragment <span class="keyword">string</span> <span class="comment">// 引用的片段（文档位置），没有'#'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>计算机网络</category>
@@ -828,7 +837,7 @@
 <p>可以通过 <code>flask --help</code> 查看所有可用命令</p>
 <h1 id="管理环境变量"><a href="#管理环境变量" class="headerlink" title="管理环境变量"></a>管理环境变量</h1><p>如果安装了 python-dotenv 包， Flask 会从 .env 文件 和 .flaskenv 文件中加载环境变量。此时 Flask 加载环境变量的优先级是：系统环境变量 &gt; .env 中的环境变量 &gt; .flaskenv 中的环境变量</p>
 <p>.env 用于存放公开环境变量, 如 FLAKS_APP, .flaskenv 用于存放敏感环境变量如 Email 账号密码：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">!# MyFlask/.env</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 这是注释</span><br><span class="line">FLASK_APP = hello</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">!# MyFlask/.env</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这是注释</span></span><br><span class="line">FLASK_APP = hello</span><br></pre></td></tr></table></figure>
 <h1 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h1><p>用如下命令可以启动带有上下文的 Python Shell 环境：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">flask shell</span><br></pre></td></tr></table></figure>
 <p>和其他 flask 命令相同，在执行这个命令前要确保 Flask 实例可以被找到</p>

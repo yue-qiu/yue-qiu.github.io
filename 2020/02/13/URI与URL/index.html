@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="什么是 URIURI(Uniform Resource Identifier)：统一资源标识符，用于唯一标识一个资源。 URL(Uniform Resource Locator)：统一资源定位符，表明在一个资源在网络中的访问方式 URN(Uniform Resource Name)：统一资源定位名称，通过某个命名空间中的唯一 ID 来标识一个资源  举个例子：小红的学号是 123456，这个学号就">
+<meta name="description" content="什么是 URIURI(Uniform Resource Identifier)：统一资源标识符，用于唯一标识一个资源。 URL(Uniform Resource Locator)：统一资源定位符，表明在一个资源在网络中的访问方式。通常表现为 协议+路径+参数 URN(Uniform Resource Name)：统一资源定位名称，通过某个命名空间中的唯一 ID 来标识一个资源  举个例子：小红的学">
 <meta name="keywords" content="应用层">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网络那些事之URI">
 <meta property="og:url" content="http://yoursite.com/2020/02/13/URI与URL/index.html">
 <meta property="og:site_name" content="精神的壳">
-<meta property="og:description" content="什么是 URIURI(Uniform Resource Identifier)：统一资源标识符，用于唯一标识一个资源。 URL(Uniform Resource Locator)：统一资源定位符，表明在一个资源在网络中的访问方式 URN(Uniform Resource Name)：统一资源定位名称，通过某个命名空间中的唯一 ID 来标识一个资源  举个例子：小红的学号是 123456，这个学号就">
+<meta property="og:description" content="什么是 URIURI(Uniform Resource Identifier)：统一资源标识符，用于唯一标识一个资源。 URL(Uniform Resource Locator)：统一资源定位符，表明在一个资源在网络中的访问方式。通常表现为 协议+路径+参数 URN(Uniform Resource Name)：统一资源定位名称，通过某个命名空间中的唯一 ID 来标识一个资源  举个例子：小红的学">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2020/02/13/2XjAU6Phz9ONJQq.png">
-<meta property="og:updated_time" content="2020-02-17T06:10:58.892Z">
+<meta property="og:updated_time" content="2020-02-18T16:44:42.732Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络那些事之URI">
-<meta name="twitter:description" content="什么是 URIURI(Uniform Resource Identifier)：统一资源标识符，用于唯一标识一个资源。 URL(Uniform Resource Locator)：统一资源定位符，表明在一个资源在网络中的访问方式 URN(Uniform Resource Name)：统一资源定位名称，通过某个命名空间中的唯一 ID 来标识一个资源  举个例子：小红的学号是 123456，这个学号就">
+<meta name="twitter:description" content="什么是 URIURI(Uniform Resource Identifier)：统一资源标识符，用于唯一标识一个资源。 URL(Uniform Resource Locator)：统一资源定位符，表明在一个资源在网络中的访问方式。通常表现为 协议+路径+参数 URN(Uniform Resource Name)：统一资源定位名称，通过某个命名空间中的唯一 ID 来标识一个资源  举个例子：小红的学">
 <meta name="twitter:image" content="https://i.loli.net/2020/02/13/2XjAU6Phz9ONJQq.png">
 
 
@@ -415,7 +415,7 @@
 
       
         <h1 id="什么是-URI"><a href="#什么是-URI" class="headerlink" title="什么是 URI"></a>什么是 URI</h1><p>URI(Uniform Resource Identifier)：统一资源标识符，用于<strong>唯一标识一个资源</strong>。</p>
-<p>URL(Uniform Resource Locator)：统一资源定位符，表明在一个资源在网络中的访问方式</p>
+<p>URL(Uniform Resource Locator)：统一资源定位符，表明在一个资源在网络中的访问方式。通常表现为 <code>协议+路径+参数</code></p>
 <p>URN(Uniform Resource Name)：统一资源定位名称，通过某个命名空间中的唯一 ID 来标识一个资源</p>
 <p><img src="https://i.loli.net/2020/02/13/2XjAU6Phz9ONJQq.png" alt="URI"></p>
 <p>举个例子：小红的学号是 123456，这个学号就是 URN，能对应到小红这个人；小红的家庭住址是翻斗大街翻斗花园二号楼一零零一室，这个地址就是 URL，去那里就能找到小红。小红的学号、小红的住址都属于 URI。</p>
@@ -425,6 +425,15 @@
 <li>opaque 指 scheme-specific-part 不以 / 开头，是一个整体。呈 [scheme]:opaque[?query][#fragment] 的形式。如：mailto:<a href="mailto:qiuyue9971@126.com" target="_blank" rel="noopener">qiuyue9971@126.com</a>，<a href="http://www.google.com:443" target="_blank" rel="noopener">www.google.com:443</a>, opaque 必须是绝对的。</li>
 <li>hierarchical 指 scheme-specific-part 以 / 开头且可以划分为好几部分。呈 [scheme:][//[userinfo@]host[:port]]path[?query][#fragment] 的形式。如：<a href="http://qiuyueqy.com/categories/" target="_blank" rel="noopener">http://qiuyueqy.com/categories/</a>, hierarchical 可以是绝对的，也可以是相对的，如：<a href="https://github.com/yue-qiu/CUG_EmptyClassroom" target="_blank" rel="noopener">https://github.com/yue-qiu/CUG_EmptyClassroom</a>, ../../static/verify.js</li>
 </ul>
+<h1 id="谈谈-URI-编码"><a href="#谈谈-URI-编码" class="headerlink" title="谈谈 URI 编码"></a>谈谈 URI 编码</h1><p>利用 URI 传参时，如果某些 URI 组件字符（如 /:?@&amp;=+$,#）同时也是参数的一部分会导致 URI 歧义。此外，URI 只支持 ASCII 编码，对于茫茫多的特殊字符（如：广东省）如何表示？</p>
+<p>所谓办法总比困难多，为了解决这些问题，URI 编码应运而生。举个栗子，对下面这个未经编码的 URI：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://qiuyueqy.com/?page=2&amp;category=广东</span><br></pre></td></tr></table></figure>
+<p>要表示特殊字符，我们把它按某个字符集（通常是 UTF-8）编码成十六进制的 %hh 形式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://qiuyueqy.com?page=2&amp;category=%E5%B9%BF%E4%B8%9C</span><br></pre></td></tr></table></figure>
+<p>如果这个 URI 是另一个 URI 的参数，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">httpw://www.google.com?callback=http://qiuyueqy.com/?page=2&amp;category=广东</span><br></pre></td></tr></table></figure>
+<p>显然，由于参数中 /、? 等组件字符的存在，上面这个 URI 的解释是有歧义的。这时，我们把整个回调 URI（包括它的组件字符）进行编码，再作为参数就没问题了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">httpw://www.google.com?callback=http%3A%2F%2Fqiuyueqy.com%2F%3Fpage%3D2%26category%3D%E5%B9%BF%E4%B8%9C</span><br></pre></td></tr></table></figure>
 <h1 id="golang-对-URL-的实现"><a href="#golang-对-URL-的实现" class="headerlink" title="golang 对 URL 的实现"></a>golang 对 URL 的实现</h1><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> URL <span class="keyword">struct</span> &#123;</span><br><span class="line">    Scheme   <span class="keyword">string</span>    <span class="comment">//具体指访问服务器上的资源使用的哪种协议</span></span><br><span class="line">    Opaque   <span class="keyword">string</span>    <span class="comment">// 编码后的不透明数据</span></span><br><span class="line">    User     *Userinfo <span class="comment">// 用户名和密码信息,有些协议需要传入明文用户名和密码来获取资源，比如 FTP</span></span><br><span class="line">    Host     <span class="keyword">string</span>    <span class="comment">// host或host:port，服务器地址，可以是 IP 地址，也可以是域名信息</span></span><br><span class="line">    Path     <span class="keyword">string</span>  <span class="comment">//路径，使用"/"分隔</span></span><br><span class="line">    RawQuery <span class="keyword">string</span> <span class="comment">// 编码后的查询字符串，没有'?'</span></span><br><span class="line">    Fragment <span class="keyword">string</span> <span class="comment">// 引用的片段（文档位置），没有'#'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
@@ -641,7 +650,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是-URI"><span class="nav-number">1.</span> <span class="nav-text">什么是 URI</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#URI-的格式"><span class="nav-number">2.</span> <span class="nav-text">URI 的格式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#golang-对-URL-的实现"><span class="nav-number">3.</span> <span class="nav-text">golang 对 URL 的实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是-URI"><span class="nav-number">1.</span> <span class="nav-text">什么是 URI</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#URI-的格式"><span class="nav-number">2.</span> <span class="nav-text">URI 的格式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#谈谈-URI-编码"><span class="nav-number">3.</span> <span class="nav-text">谈谈 URI 编码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#golang-对-URL-的实现"><span class="nav-number">4.</span> <span class="nav-text">golang 对 URL 的实现</span></a></li></ol></div>
             
 
           </div>
