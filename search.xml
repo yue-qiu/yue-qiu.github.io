@@ -1,6 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>开始你的Go Module之路</title>
+    <url>/2020/02/21/%E5%BC%80%E5%A7%8B%E4%BD%A0%E7%9A%84Go-Module%E4%B9%8B%E8%B7%AF/</url>
+    <content><![CDATA[<p>在 go 的历史上出现过一大批包管理工具，如 dep，vendor 等。自 go1.12 以来官方引入了 go module 来解决这个乱象。</p>
+<h1 id="从-GOPATH-说起"><a href="#从-GOPATH-说起" class="headerlink" title="从 GOPATH 说起"></a>从 GOPATH 说起</h1><p>GOPATH 是最早的 go 包管理方案，安装 golang 之后需要配置两个环境变量 <code>GOROOT</code> 与 <code>GOPATH</code>, 前者是 go 安装目录，后者是开发者自定义的用于存放代码的地方。GOPATH 下存在三个目录：</p>
+<ul>
+<li>bin: 存放编译后的可执行文件</li>
+<li>pkg: 存放 go 的链接文件(suffix = .a)</li>
+<li>src: 存放源代码</li>
+</ul>
+<p>平时我们的项目就放在 src 下，每个项目一个文件夹：</p>
+<p><img src="https://i.loli.net/2020/02/21/hZ9YsEtfLw42Tkb.png" alt="src"></p>
+<p>每当我们使用 import 语句导入包，go 会从 <code>$GOROOT/src</code> 和 <code>$GOPATH/src</code> 查找匹配的目录。举个栗子，假设我的 GOPATH 是 E:\go，我们在 src 下创建一个项目 service，里面有个 main.go 文件和 test 包：</p>
+<p><img src="https://i.loli.net/2020/02/21/B9VCsnjychDQTJ4.png" alt="service"></p>
+<p>main.go 文件内容如下：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"github.com/ramya-rao-a/go-outline"</span></span><br><span class="line">    <span class="string">"./test"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// your code</span></span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+<p>fmt 是 go 自带的包，位于 $GOROOT/src/fmt；github.com/ramya-rao-a/go-outline 是第三方包，位于 $GOPATH/src/github.com/ramya-rao-a/go-outline；test 是自定义包，<code>.</code> 表示 mian.go 所在文件夹，位于 $GOPATH/src/service/test</p>
+<h1 id="升级，Go-module！"><a href="#升级，Go-module！" class="headerlink" title="升级，Go module！"></a>升级，Go module！</h1><p>讲了一大堆，是时候进入正题了。前面讲利用 GOPATH 进行包管理这个方法是在是太麻烦了，每个项目都要配一个专属的 GOPATH，不然各个项目的包就会混在一起。</p>
+<p>go1.12 后，设置环境变量 <code>GO111MODULE=on</code>，每个软件包都可以声明为一个 module。每个 module 的依赖包都会放在 $GOPATH/pkg/mod 下。如果没有设置 GOPATH 也没关系，go 会在用户的 $home 目录下创建一个 go 文件夹作为默认的 GOPATH</p>
+<h2 id="声明-module"><a href="#声明-module" class="headerlink" title="声明 module"></a>声明 module</h2><p>modulename 是任意的。如果想把这个包发布出去，最好还是按 github.com/user/xxxx 的形式：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">go mod init &lt;modulename&gt;</span><br></pre></td></tr></table></figure>
+<p>举个栗子，还是那个 service 项目：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">go mod init github.com/yue-qiu/service</span><br></pre></td></tr></table></figure>
+<p>现在，在这个项目里，github.com/yue-qiu/service 就是这个项目的根目录。main.go 改写为：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"github.com/ramya-rao-a/go-outline"</span></span><br><span class="line">    <span class="string">"github.com/yue-qiu/service/test"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// your code</span></span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>go mod 命令提供了一系列与 module 相关的用法：</p>
+<p><img src="https://i.loli.net/2020/02/22/qk9bN2IMT48OSza.png" alt="module"></p>
+<ul>
+<li>go mod download: 根据 go.mod 中的内容拉取依赖包到本地</li>
+<li>go mod tidy: 根据项目的导入信息往 go.mod 中添加、删除依赖包记录。建议少用，因为它会自动把所有依赖包升级到最新版本</li>
+<li>go mod graph: 打印项目的依赖关系图</li>
+<li>go mod vendor: 将 go.mod 中记录的依赖包缓存到一个 vendor 目录，这样在没网的情况下也能编译项目了</li>
+<li>go mod edit [flag]: [flag] 又分好几种：<ul>
+<li>fmt: 格式化 go.mod</li>
+<li>require=path@version or droprequire=path@version: 添加依赖 or 删除依赖</li>
+<li>replace=oldpath=newpath or droprequire=oldpath: 替换依赖</li>
+</ul>
+</li>
+</ul>
+<p>这里重点说下 -replace 选项，因为在生产中经常遇到的一种情况是由于这样那样的原因我们需要 fork 一个私有仓库去改动第三方开源库，例如有个小哥针对 logrus 做了二次开发 github.com/gogap/logrus，这个时候就需要用 github.com/gogap/logrus 替换之前的第三方开源库 github.com/sirupsen/logrus，操作如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ go mod edit -replace=<span class="string">"github.com/sirupsen/logrus=github.com/gogap/logrus@v0.8.2"</span></span><br><span class="line"></span><br><span class="line">$ cat go.mod</span><br><span class="line"></span><br><span class="line">module <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line">go 1.12</span><br><span class="line"></span><br><span class="line">require github.com/sirupsen/logrus v1.4.2</span><br><span class="line"></span><br><span class="line">replace github.com/sirupsen/logrus =&gt; github.com/gogap/logrus v0.8.2</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>语言</category>
+      </categories>
+      <tags>
+        <tag>go</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>回车 or 换行？</title>
     <url>/2020/02/16/%E5%9B%9E%E8%BD%A6-or-%E6%8D%A2%E8%A1%8C%EF%BC%9F/</url>
     <content><![CDATA[<p>以前编程的时候一直没注意回车符与换行符的区别，只是大概知道一个是 \r 一个是 \n。今天心血来潮查了一下，发现这还蛮有趣的~</p>
@@ -837,7 +886,7 @@
 <p>可以通过 <code>flask --help</code> 查看所有可用命令</p>
 <h1 id="管理环境变量"><a href="#管理环境变量" class="headerlink" title="管理环境变量"></a>管理环境变量</h1><p>如果安装了 python-dotenv 包， Flask 会从 .env 文件 和 .flaskenv 文件中加载环境变量。此时 Flask 加载环境变量的优先级是：系统环境变量 &gt; .env 中的环境变量 &gt; .flaskenv 中的环境变量</p>
 <p>.env 用于存放公开环境变量, 如 FLAKS_APP, .flaskenv 用于存放敏感环境变量如 Email 账号密码：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">!# MyFlask/.env</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 这是注释</span><br><span class="line">FLASK_APP = hello</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">!# MyFlask/.env</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这是注释</span></span><br><span class="line">FLASK_APP = hello</span><br></pre></td></tr></table></figure>
 <h1 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h1><p>用如下命令可以启动带有上下文的 Python Shell 环境：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">flask shell</span><br></pre></td></tr></table></figure>
 <p>和其他 flask 命令相同，在执行这个命令前要确保 Flask 实例可以被找到</p>
@@ -876,10 +925,10 @@
 <h1 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h1><p>队列可以在尾部添加一个元素，在头部删除一个元素。有两个端头的队列称为<code>双端队列</code>，可以在头部和尾部同时添加或删除元素。不支持在队列中间插入元素。java提供了<code>Deque</code>接口并由<code>ArrayDeque</code>和<code>LinkedList</code>类实现，这两个类都提供了双端队列。</p>
 ]]></content>
       <categories>
-        <category>Java</category>
+        <category>语言</category>
       </categories>
       <tags>
-        <tag>读书心得</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -900,10 +949,10 @@
 <p>在方法声明中，也可以抛出Throwable类异常，由这个方法的调用者处理：<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> <span class="keyword">throws</span> Throwable</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> Throwable;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        test();</span><br><span class="line">    &#125;<span class="keyword">catch</span>(Throwable t) &#123;</span><br><span class="line">        t.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 ]]></content>
       <categories>
-        <category>Java</category>
+        <category>语言</category>
       </categories>
       <tags>
-        <tag>读书体会</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -948,55 +997,56 @@
 <p>这种行为称为<code>自动装箱</code>，与之对应的还有<code>自动拆箱</code>。手动拆箱的方法为<code>Integer.parseInt(Integer obj)</code></p>
 ]]></content>
       <categories>
-        <category>Java</category>
+        <category>语言</category>
       </categories>
       <tags>
-        <tag>读书体会</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
     <title>Java基础—包</title>
     <url>/2018/06/15/Java%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E2%80%94%E2%80%94%E5%8C%85/</url>
-    <content><![CDATA[<h1 id="包"><a href="#包" class="headerlink" title="包"></a>包</h1><p>Java允许使用包（package）将类组织起来，使用包的主要原因是确保类名的唯一性。如果有两个名字相同的类，只要把它们放在不同的包中就不会有影响。</p>
-<p>从编译器（compiler）的角度看，嵌套的包之间没有任何关系。例如java.util包与java.util包毫无关系，每一个都拥有独立的类集合。</p>
-<p>当编译一个.java文件（即一个编译单元）时，在.java文件中的每个类都会有一个输出文件，而该输出文件的名称与.java文件中每个类的名称相同，只是多了一个后缀名.class。因此在编译少量.java文件之后，会得到大量的.class文件。每一个.java文件编译以后都会有一个public类，以及任意数量的非public类。因此每个.java文件都是一个构件，如果希望许许多多的这样的构件从属于同一个群组，就可以在每一个.java文件中使用关键字package。而这个群组就是一个类库。</p>
-<p>就表示你在声明该编译单元是名为fruit的类库的一部分，或者换句话说，你正在声明该编译单元中的public类名称是位于fruit名称的保护伞下，由fruit名称罩着。任何想要使用该public类名称的人都必须指定全名或者与fruit结合使用关键字import。</p>
-<h1 id="将类放入包中"><a href="#将类放入包中" class="headerlink" title="将类放入包中"></a>将类放入包中</h1><p>要想将类放入包中，就必须将包的名字放在源文件的开头。包中定义类的代码之前。使用关键字<code>package</code>：<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 文件名为Employee.java，位于目录com/qiuyueqy/learnjava下</span></span><br><span class="line"><span class="keyword">package</span> com.qiuyueqy.learnjava;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Employee</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>上面代码表明编译单元位于com.qiuyueqy.learnjava的保护伞下，任何想要使用该public类的人必须指定全名或使用修饰符<code>import</code></p>
-<p>如果没有在源文件中放置package语句，这个源文件中的类就被放置在一个默认包（default package）中。默认包是一个没有名字的包</p>
-<p><strong>编译器对文件（以.java为扩展名）进行操作，而java解释器加载类（以.class为扩展名）</strong></p>
-<h1 id="类的导入"><a href="#类的导入" class="headerlink" title="类的导入"></a>类的导入</h1><p>一个类可以使用所属包中所有的类，一起其他包的公有类。可以用两种方式访问其他包的公有类：</p>
+    <content><![CDATA[<p>Java 允许使用包（package）将类组织起来，使用包的主要原因是确保类名的唯一性。如果有两个名字相同的类，只要把它们放在不同的包中就不会有影响。</p>
+<p>从编译器（compiler）的角度看，嵌套的包之间没有任何关系。例如java.util包与 java.util 包毫无关系，每一个都拥有独立的类集合。</p>
+<p>当编译一个 .java 文件（即一个编译单元）时，在.java文件中的每个类都会有一个输出文件，而该输出文件的名称与 .java 文件中每个类的名称相同，只是多了一个后缀名 .class。因此在编译少量 .java 文件之后，会得到大量的 .class 文件。每一个 .java 文件编译以后都会有一个 public 类，以及任意数量的非 public 类。因此每个 .java 文件都是一个构件，如果希望许许多多的这样的构件从属于同一个群组，就可以在每一个 .java 文件中使用关键字 package。而这个群组就是一个类库。</p>
+<p>就表示你在声明该编译单元是名为 fruit 的类库的一部分，或者换句话说，你正在声明该编译单元中的 public 类名称是位于 fruit 名称的保护伞下，由 fruit 名称罩着。任何想要使用该 public 类名称的人都必须指定全名或者与 fruit 结合使用关键字 import。</p>
+<h1 id="包作用域"><a href="#包作用域" class="headerlink" title="包作用域"></a>包作用域</h1><p>一个类、方法或变量如果没有指定 <code>private</code> 或 <code>public</code>，则可以被同一个包中的所有方法访问（如非公）。</p>
+<h1 id="将类放入包中"><a href="#将类放入包中" class="headerlink" title="将类放入包中"></a>将类放入包中</h1><p>要想将类放入包中，就必须将包的名字放在源文件的开头。包中定义类的代码之前。使用关键字 <code>package</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 文件名为Employee.java，位于目录com/qiuyueqy/learnjava下</span></span><br><span class="line"><span class="keyword">package</span> com.qiuyueqy.learnjava;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Employee</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面代码表明编译单元位于 com.qiuyueqy.learnjava 的保护伞下，任何想要使用该 public 类的人必须指定全名或使用修饰符 <code>import</code></p>
+<p>如果没有在源文件中放置 package 语句，这个源文件中的类就被放置在一个默认包（default package）中。默认包是一个没有名字的包</p>
+<p><strong>编译器对文件（以 .java 为扩展名）进行操作，而java解释器加载类（以. class 为扩展名）</strong></p>
+<h2 id="类的导入"><a href="#类的导入" class="headerlink" title="类的导入"></a>类的导入</h2><p>一个类可以使用所属包中所有的类，一起其他包的公有类。可以用两种方式访问其他包的公有类：</p>
 <ul>
-<li>在类名前加上完整的包名<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">java.time.LocalDate date = <span class="keyword">new</span> java.time.LoalcDate.now();</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">- 通过关键字`<span class="keyword">import</span>`导入，**`<span class="keyword">import</span>`必须在`<span class="keyword">package</span>`之后**</span><br><span class="line">```java</span><br><span class="line"><span class="keyword">package</span> com.qiuyueqy.learnjava;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.time.*;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br></pre></td></tr></table></figure>
+<li>在类名前加上完整的包名<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">java.time.LocalDate date = <span class="keyword">new</span> java.time.LoalcDate.now();</span><br><span class="line">``` </span><br><span class="line">- 通过关键字`<span class="keyword">import</span>`导入，**`<span class="keyword">import</span>`必须在`<span class="keyword">package</span>`之后**</span><br><span class="line">```java</span><br><span class="line"><span class="keyword">package</span> com.qiuyueqy.learnjava;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.time.*;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h1 id="静态导入"><a href="#静态导入" class="headerlink" title="静态导入"></a>静态导入</h1><p><code>import</code>语句不仅可以导入类，还可以导入类的静态方法和静态域：<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 导入System类的静态方法和静态域</span></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.Systme.*;</span><br></pre></td></tr></table></figure></p>
+<h2 id="静态导入"><a href="#静态导入" class="headerlink" title="静态导入"></a>静态导入</h2><p><code>import</code>语句不仅可以导入类，还可以导入类的静态方法和静态域：<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 导入System类的静态方法和静态域</span></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.Systme.*;</span><br></pre></td></tr></table></figure></p>
 <p>这样就可以使用System类的静态方法和域，而不用加前缀：<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">out.println(<span class="string">"Hello World!"</span>); <span class="comment">// System.out.println()</span></span><br><span class="line">exit(<span class="number">0</span>); <span class="comment">// System.exit()</span></span><br></pre></td></tr></table></figure></p>
-<h1 id="包作用域"><a href="#包作用域" class="headerlink" title="包作用域"></a>包作用域</h1><p>一个类、方法或变量如果没有指定<code>private</code>或<code>public</code>，则可以被同一个包中的所有方法访问（如非公）。</p>
-<h1 id="类路径"><a href="#类路径" class="headerlink" title="类路径"></a>类路径</h1><p>javac编译器要查询一个编译单元，会先从当前包开始，然后查询所有<code>import</code>语句，确定<code>import</code>语句导入的包中是否包含所需要的类。</p>
-<p>java虚拟机（jvm）查询类文件时，它首先在jre/lib和jre/lib/ext目录下的归档文件中所存放的系统类文件里找，如果找不到再从环境变量CLASSPATH（可以通过操作系统来设置）里面找。CLASSPATH包含一个或多个目录，用作查找.class文件的根目录。从根目录开始，解释器获取包名称并将每个句点替换成反斜杠，以从CLASSPATH根中产生一个路径（例如，package fruit.Apple就变成为fruit/Apple或fruit/Apple或其他，这将取决于操作系统）。得到的路径会与CLASSPATH中的各个不同的根目录路径相连接以获得一个完整的目录路径，解释器就在这些目录中查找与你所需要的类名称相同的.class文件。</p>
-<p>类文件默认与java文件处于同一位置，但也可以存储在jar（java归档）文件中。jar文件是多个压缩形式的类文件和子目录的集合。通过使用jar文件可以使类被多个程序共享。为了达到这个目的，需要做到以下几点：</p>
+<h2 id="类路径"><a href="#类路径" class="headerlink" title="类路径"></a>类路径</h2><p>javac 编译器要查询一个编译单元，会先从当前包开始，然后查询所有 <code>import</code> 语句，确定<code>import</code>语句导入的包中是否包含所需要的类。</p>
+<p>java 虚拟机（jvm）查询类文件时，它首先在 jre/lib 和 jre/lib/ext 目录下的归档文件中所存放的系统类文件里找，如果找不到再从环境变量 CLASSPATH（可以通过操作系统来设置）里面找。CLASSPATH包含一个或多个目录，用作查找 .class 文件的根目录。从根目录开始，解释器获取包名称并将每个句点替换成反斜杠，以从 CLASSPATH 根中产生一个路径（例如，package fruit.Apple 就变成为 fruit/Apple 或 fruit/Apple 或其他，这将取决于操作系统）。得到的路径会与 CLASSPATH 中的各个不同的根目录路径相连接以获得一个完整的目录路径，解释器就在这些目录中查找与你所需要的类名称相同的 .class 文件。</p>
+<p>类文件默认与 java 文件处于同一位置，但也可以存储在 jar（java 归档）文件中。jar 文件是多个压缩形式的类文件和子目录的集合。通过使用 jar 文件可以使类被多个程序共享。为了达到这个目的，需要做到以下几点：</p>
 <ol>
-<li>把类放到一个目录中。这个目录是一个树状结构的基目录。例如：<strong>如果希望将com.qiuyueqy.learnjava类添加到其中，这个learnjava.class类文件就必须位于子目录/home/user/classdir/com/qiuyueqy中</strong></li>
+<li>把类放到一个目录中。这个目录是一个树状结构的基目录。例如：<strong>如果希望将com.qiuyueqy.learnjava类添加到其中，这个 learnjava.class 类文件就必须位于子目录 /home/user/classdir/com/qiuyueqy中</strong></li>
 <li>将jar文件放在非类路径中，如：/home/user/archives</li>
 <li>设置类路径（class path）。<strong>类路径是所有包含类文件的路径的集合</strong>。<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/home/user/classdir:.:/home/user/archives/archives.jar // Linux下</span><br><span class="line"></span><br><span class="line">C:\classdir;.;C:\archives\archives.jar // windows下</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>类路径包括：</p>
 <ul>
-<li>基目录: 如/home/user/classdir和C:\classdir</li>
+<li>基目录: 如 /home/user/classdir和C:\classdir</li>
 <li>当前目录: .</li>
-<li>jar文件： 如/home/user/archives/archives.jar或C:\archives\archives.jar</li>
+<li>jar文件： 如 /home/user/archives/archives.jar 或 C:\archives\archives.jar</li>
 </ul>
 <h2 id="设置类路径"><a href="#设置类路径" class="headerlink" title="设置类路径"></a>设置类路径</h2><p>最好通过<code>-classpath</code>或<code>-cp</code>选项指定类路径，例如要执行Employee.class：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java -classpath /home/user/classdir:.:/home/user/archives/archives.jar Employee</span><br></pre></td></tr></table></figure></p>
 <p>也可以通过设置环境变量<code>CLASSPAHT</code>。默认CLASSPATH为<code>.</code>，改为我们需要的路径集合:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">set CLASSPATH=C:\classdir;.;C:\archives\archives.jar //windows下</span><br><span class="line"></span><br><span class="line">export CLASSPATH=/home/user/classdir:.:/home/user/archives/archives.jar // Linux下</span><br></pre></td></tr></table></figure></p>
 <p>这样在shell退出前CLASSPATH变量都有效</p>
 ]]></content>
       <categories>
-        <category>Java</category>
+        <category>语言</category>
       </categories>
       <tags>
-        <tag>读书体会</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -1129,10 +1179,10 @@
 <p>两种方法各有优劣， 用Comparable 简单， 只要实现Comparable 接口的对象直接就成为一个可以比较的对象，但是需要修改源代码。 用Comparator 的好处是不需要修改源代码， 而是另外实现一个比较器， 当某个自定义的对象需要作比较的时候，把比较器和对象一起传递过去就可以比大小了， 并且在Comparator 里面用户可以自己实现复杂的可以通用的逻辑，使其可以匹配一些比较简单的对象，那样就可以节省很多重复劳动了。<br>（二者的使用实例见：<a href="https://www.cnblogs.com/xujian2014/p/5215082.html" target="_blank" rel="noopener">参考博客</a>）</p>
 ]]></content>
       <categories>
-        <category>Java</category>
+        <category>语言</category>
       </categories>
       <tags>
-        <tag>读书体会</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
