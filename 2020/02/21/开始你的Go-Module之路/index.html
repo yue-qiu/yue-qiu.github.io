@@ -87,14 +87,13 @@
 <meta property="og:site_name" content="精神的壳">
 <meta property="og:description" content="在 go 的历史上出现过一大批包管理工具，如 dep，vendor 等。自 go1.12 以来官方引入了 go module 来解决这个乱象。 从 GOPATH 说起GOPATH 是最早的 go 包管理方案，安装 golang 之后需要配置两个环境变量 GOROOT 与 GOPATH, 前者是 go 安装目录，后者是开发者自定义的用于存放代码的地方。GOPATH 下存在三个目录：  bin: 存放">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.loli.net/2020/02/21/hZ9YsEtfLw42Tkb.png">
 <meta property="og:image" content="https://i.loli.net/2020/02/21/B9VCsnjychDQTJ4.png">
 <meta property="og:image" content="https://i.loli.net/2020/02/22/qk9bN2IMT48OSza.png">
-<meta property="og:updated_time" content="2020-02-21T17:06:26.720Z">
+<meta property="og:updated_time" content="2020-02-22T04:14:27.756Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="开始你的Go Module之路">
 <meta name="twitter:description" content="在 go 的历史上出现过一大批包管理工具，如 dep，vendor 等。自 go1.12 以来官方引入了 go module 来解决这个乱象。 从 GOPATH 说起GOPATH 是最早的 go 包管理方案，安装 golang 之后需要配置两个环境变量 GOROOT 与 GOPATH, 前者是 go 安装目录，后者是开发者自定义的用于存放代码的地方。GOPATH 下存在三个目录：  bin: 存放">
-<meta name="twitter:image" content="https://i.loli.net/2020/02/21/hZ9YsEtfLw42Tkb.png">
+<meta name="twitter:image" content="https://i.loli.net/2020/02/21/B9VCsnjychDQTJ4.png">
 
 
 
@@ -423,9 +422,7 @@
 <li>pkg: 存放 go 的链接文件(suffix = .a)</li>
 <li>src: 存放源代码</li>
 </ul>
-<p>平时我们的项目就放在 src 下，每个项目一个文件夹：</p>
-<p><img src="https://i.loli.net/2020/02/21/hZ9YsEtfLw42Tkb.png" alt="src"></p>
-<p>每当我们使用 import 语句导入包，go 会从 <code>$GOROOT/src</code> 和 <code>$GOPATH/src</code> 查找匹配的目录。举个栗子，假设我的 GOPATH 是 E:\go，我们在 src 下创建一个项目 service，里面有个 main.go 文件和 test 包：</p>
+<p>平时我们的项目就放在 src 下，每个项目一个文件夹。每当我们用 import 语句导入包，go 会从 <code>$GOROOT/src</code> 和 <code>$GOPATH/src</code> 查找匹配的目录。举个栗子，假设我的 GOPATH 是 E:\go，在 src 下创建一个项目 service，里面有个 main.go 文件和 test 包：</p>
 <p><img src="https://i.loli.net/2020/02/21/B9VCsnjychDQTJ4.png" alt="service"></p>
 <p>main.go 文件内容如下：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"github.com/ramya-rao-a/go-outline"</span></span><br><span class="line">    <span class="string">"./test"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// your code</span></span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
