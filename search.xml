@@ -1,6 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>也说进程、线程与协程</title>
+    <url>/2020/03/02/%E4%B9%9F%E8%B0%88%E8%BF%9B%E7%A8%8B%E3%80%81%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%8D%8F%E7%A8%8B/</url>
+    <content><![CDATA[<h1 id="从-CPU-谈起"><a href="#从-CPU-谈起" class="headerlink" title="从 CPU 谈起"></a>从 CPU 谈起</h1><p>CPU 被誉为“计算机的大脑”，这个比喻可以说是很恰当了。计算机无论是进行 IO 还是计算都要在 CPU 的控制下完成。如此一来，一个强大的“大脑”对于整个系统而言就是非常重要的了，这也是为什么我们总能看到厂家不断地宣传自己 CPU 的主频有多高，核心有多大。</p>
+<h2 id="多核-CPU"><a href="#多核-CPU" class="headerlink" title="多核 CPU"></a>多核 CPU</h2><p>要提高 CPU 的性能，最直接的方法当然是不断增强单个处理器的性能，让处理器频率更高。就像要举起一块石头，让自己变得足够强壮就可以了。</p>
+<p>但是这种方法很快就受制于物理定律：当前技术条件下无限提高频率是不可能的，而且过高的频率也会导致发热量过大。因此，工程师们只好退而求其次，转而增加一个 CPU 内的处理器数量。还是要举起石头，一个人无论如何也举不起来，那多喊几个小弟帮忙总可以吧？</p>
+<p>有了多核 CPU，程序就可以被划分为相对独立的几个部分，每一部分运行在不同的处理器上。当然，这样做也会带来额外的开销。如果操作系统和程序不能很好地协调多处理器，那么执行速度未必就有明显提高（乃至降低也说不定~）。</p>
+<h1 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h1><p>下面给出进程的定义：</p>
+<blockquote>
+<p>进程是具有一定独立功能的程序在一个数据集合上的一次动态执行过程</p>
+</blockquote>
+<p>进程是操作系统<strong>分配资源</strong>的最小单位，拥有代码文本、被分配的系统资源、独立的虚拟内存地址、堆栈空间：</p>
+<p><img src="https://i.loli.net/2020/03/02/qz7MdhlxtQmK8pI.png" alt="进程内存空间"></p>
+<p>操作系统为每个进程维护了一个程序控制块（PCB, Process Contral Block），用来保存该进程的状态信息（进程标识、寄存器、系统资源、调度信息等）。PCB 是进程存在的唯一标识。</p>
+<p>进程在整个生命周期期间处于以下五个状态之一：</p>
+<p><img src="https://i.loli.net/2020/03/02/dY1JoNBIRLCFE4G.png" alt="进程状态"></p>
+<ul>
+<li>NULL -&gt; 创建：一个新进程被产生出来执行一个程序</li>
+<li>创建 -&gt; 就绪：当进程被创建完成并初始化后，一切就绪准备运行时，变为就绪状态</li>
+<li>就绪 -&gt; 运行：处于就绪状态的进程被进程调度程序选中后，就分配到处理机上来运行</li>
+<li>运行 -&gt; 结束：当进程表示它已经完成或者因出错，当前运行进程会由操作系统作结束处理</li>
+<li>运行 -&gt; 就绪：处于运行状态的进程在其运行过程中，由于分配给它的处理机时间片用完而让出处理机</li>
+<li>运行 -&gt; 等待：当进程请求某资源且必须等待时</li>
+<li>等待 -&gt; 就绪：当进程要等待某事件到来时，它从阻塞状态变到就绪状态</li>
+</ul>
+<h1 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h1><p>线程是进程的一部分，描述一段指令流的执行状态，是系统<strong>调度</strong>的基本单位。每个线程拥有自己的线程控制块（TCB, Thread Contral Block），保存了线程标识、从属进程、寄存器状态等信息。</p>
+<p><img src="https://i.loli.net/2020/03/02/P6MXJ5WHtQNp4x1.png" alt="线程内存空间"></p>
+<p>如前面所言，程序被划分为几部分跑在不同处理器上，这些被划分出来的“部分”就可以看做一个个的线程。</p>
+<h1 id="进程与线程的区别"><a href="#进程与线程的区别" class="headerlink" title="进程与线程的区别"></a>进程与线程的区别</h1><ul>
+<li>地址空间：同一进程的线程共享本进程的地址空间，而进程之间则是独立的地址空间</li>
+<li>资源分配：同一进程内的线程共享本进程的资源如内存、I/O、cpu等，但是进程之间的资源是独立的</li>
+<li>程序入口：每个独立的进程有一个程序运行的入口、顺序执行序列和程序的出口。而线程不能够独立执行，必须依存在进程中，由进程对多个线程执行控制。</li>
+<li>健壮性：一个进程崩溃后，在保护模式下不会对其他进程产生影响，但是一个线程崩溃整个进程都死掉。所以多进程要比多线程健壮</li>
+</ul>
+<h1 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h1><p><strong>协程是编译器级的，进程是和线程是操作系统级的</strong></p>
+<p>协程（Coroutine）是比线程更轻量级的存在，从属于线程。它更像是一个函数，只是这个函数可以像线程那样中途等待，满足某种条件后又从等待的地方继续运行。</p>
+<p>它比线程拥有更少的资源（必要的寄存器信息，堆栈指针等），而且<strong>仅由用户态控制</strong>，对于操作系统是透明的，所以协程间的切换非常快。但这也导致协程无法充分利用多核 CPU，因为协程再多，在操作系统眼里也只有一个线程在运行罢了。</p>
+<p><img src="https://i.loli.net/2020/03/02/X3jbaStuZRByIdw.png" alt="协程"></p>
+<p>协程实现的是<strong>非抢占式</strong>的调度，即由当前协程切换到其他协程由当前协程来控制。目前的协程框架一般都是设计成 1:N 模式。所谓 1:N 就是一个线程作为一个容器里面放置多个协程。那么谁来适时的切换这些协程？答案是由协程自己主动让出 CPU，也就是每个协程池里面有一个调度器，这个调度器是被动调度的。意思就是他不会主动调度。而且当一个协程发现自己执行不下去了（比如异步等待网络的数据回来，但是当前还没有数据到)，这个时候就可以由这个协程通知调度器，这个时候执行到调度器的代码，调度器根据事先设计好的调度算法找到当前最需要 CPU 的协程。切换这个协程的 CPU 上下文把 CPU 的运行权交个这个协程，直到这个协程出现执行不下去需要等等的情况，或者它调用主动让出 CPU 的 API 之类，触发下一次调度。</p>
+<p>以 go 为例，在一个线程里面开启多个协程：</p>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"sync"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> wg = sync.WaitGroup&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">        wg.Add(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(n <span class="keyword">int</span>)</span></span> &#123;    <span class="comment">// 开启一个新的协程</span></span><br><span class="line">            <span class="keyword">defer</span> wg.Done()</span><br><span class="line">            fmt.Printf(<span class="string">"%v: Hello World!\n"</span>, n)</span><br><span class="line">        &#125;(i)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    wg.Wait()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="协程的优点"><a href="#协程的优点" class="headerlink" title="协程的优点"></a>协程的优点</h2><ol>
+<li>创建成本低。在 go 里每个协程大约只占用 4k 的内存。</li>
+<li>调度成本低。协程属于用户态，不需要经过操作系统管理</li>
+<li>减少上锁频率。因为协程都是跑在一个线程里的，所以不用担心指令执行到一半被夺去运行权限的问题。但是如果协程间存在竞争，并不能保证临界区，所以并不是完全不需要锁。</li>
+</ol>
+<h2 id="协程的缺点"><a href="#协程的缺点" class="headerlink" title="协程的缺点"></a>协程的缺点</h2><ol>
+<li>协程执行中不能有阻塞，否则整个线程会被阻塞（阻塞是操作系统级的）</li>
+<li>需要特别关注全境变量、对象引用</li>
+<li>不适合 CPU 密集型应用。因为协程调度不是抢占式的，一个协程如果一直在计算就不会主动让出执行权限，其他协程就会一直处于饥饿状态。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>计算机系统</category>
+      </categories>
+      <tags>
+        <tag>并发编程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>开始你的Go Module之路</title>
     <url>/2020/02/21/%E5%BC%80%E5%A7%8B%E4%BD%A0%E7%9A%84Go-Module%E4%B9%8B%E8%B7%AF/</url>
     <content><![CDATA[<p>在 go 的历史上出现过一大批包管理工具，如 dep，vendor 等。自 go1.12 以来官方引入了 go module 来解决这个乱象。</p>
@@ -884,7 +943,7 @@
 <p>可以通过 <code>flask --help</code> 查看所有可用命令</p>
 <h1 id="管理环境变量"><a href="#管理环境变量" class="headerlink" title="管理环境变量"></a>管理环境变量</h1><p>如果安装了 python-dotenv 包， Flask 会从 .env 文件 和 .flaskenv 文件中加载环境变量。此时 Flask 加载环境变量的优先级是：系统环境变量 &gt; .env 中的环境变量 &gt; .flaskenv 中的环境变量</p>
 <p>.env 用于存放公开环境变量, 如 FLAKS_APP, .flaskenv 用于存放敏感环境变量如 Email 账号密码：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">!# MyFlask/.env</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 这是注释</span><br><span class="line">FLASK_APP = hello</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">!# MyFlask/.env</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这是注释</span></span><br><span class="line">FLASK_APP = hello</span><br></pre></td></tr></table></figure>
 <h1 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h1><p>用如下命令可以启动带有上下文的 Python Shell 环境：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">flask shell</span><br></pre></td></tr></table></figure>
 <p>和其他 flask 命令相同，在执行这个命令前要确保 Flask 实例可以被找到</p>
