@@ -916,10 +916,10 @@
 <p>一个与泛型数组类型不同的实例可以被加入数组中而 java 无法检测到这一错误。那么很显然无法保证泛型数组元素类型的一致性，其后果不言而喻。</p>
 ]]></content>
       <categories>
-        <category>Java</category>
+        <category>语言</category>
       </categories>
       <tags>
-        <tag>读书体会</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -1777,7 +1777,7 @@
       </tags>
   </entry>
   <entry>
-    <title>unittest单元测试</title>
+    <title>unittest简介</title>
     <url>/2018/05/23/unittest%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</url>
     <content><![CDATA[<p>有个词叫TDD(Tset Driven Development)，测试驱动开发。一个好的开发人员不仅要懂开发，还要懂得一定的测试技巧。python自带了很多的测试库，比如unittest，coverage….介绍一下unittest的使用。</p>
 <h1 id="unittests四个重要的概念"><a href="#unittests四个重要的概念" class="headerlink" title="unittests四个重要的概念"></a>unittests四个重要的概念</h1><p>unittest有四个重要的面向对象概念：</p>
@@ -1809,10 +1809,10 @@
 <h1 id="跳过测试"><a href="#跳过测试" class="headerlink" title="跳过测试"></a>跳过测试</h1><p>unittest提供3种跳过测试的装饰器：skip([reason])、skipIf(condtion[,reason])，skipUnless(conditon[,reason])。<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> mathfunc <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestMath</span><span class="params">(unittest.TestCase)</span>:</span></span><br><span class="line"><span class="meta">    @unittest.skip('跳过add函数')</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_add</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.assertTrue(<span class="number">1</span>+<span class="number">2</span>, add(<span class="number">1</span>, <span class="number">2</span>))</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_minus</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.assertEqual(<span class="number">2</span><span class="number">-1</span>, minus(<span class="number">2</span>, <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_string</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.assertIn(<span class="string">'h'</span> <span class="keyword">in</span> string(<span class="string">'hello'</span>))</span><br></pre></td></tr></table></figure></p>
 ]]></content>
       <categories>
-        <category>python</category>
+        <category>语言</category>
       </categories>
       <tags>
-        <tag>单元测试</tag>
+        <tag>Python</tag>
       </tags>
   </entry>
   <entry>
