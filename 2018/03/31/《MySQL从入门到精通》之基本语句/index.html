@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://ke.dajiangtai.com/content/411/3.png">
 <meta property="og:image" content="http://ke.dajiangtai.com/content/411/4.png">
 <meta property="og:image" content="https://i.loli.net/2019/02/24/5c720eb160e17.jpg">
-<meta property="og:updated_time" content="2020-03-12T00:52:41.712Z">
+<meta property="og:updated_time" content="2020-03-12T01:01:33.163Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL之基础语法">
 <meta name="twitter:description" content="数据库常用对象在MySQL中，表、视图、存储过程和索引等具体存储数据或对数据进行操作的实体都被称为数据库对象。 表表是包含数据库中所有数据的数据库对象，由行和列组成，用于组织和存储数据类型 字段表中每列被称为一个字段，字段具有自己的属性，如字段类型、字段大小等。其中，字段类型是字段最重要的属性，它决定了字段能存储哪种数据。 索引索引是一个单独的、物理的数据结构。它是依赖于表建立的，在数据库中索引使">
@@ -611,7 +611,14 @@
 <li>LIMIT：取出指定行的记录，产生虚拟表VT11, 并将结果返回。  </li>
 </ol>
 <p><strong>where和having的区别</strong>：where是在分组之前进行过滤，而having是在分组之后对条件进行判断。这里要提醒一下: </p>
-<p><strong>select 中的选择字段除非使用了聚合函数如SUM(), AVG() 等，否则 select 选择字段必须是group_by分组字段</strong>。要解决这个问题也很简单，只要使用命令 SET sql_mode=(SELECT REPLACE(@@sql_mode,’ONLY_FULL_GROUP_BY’,’’)); 或者在配置文件 my.ini 中将 sql_mode 修改为：STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION’</p>
+<p><strong>select 中的选择字段除非使用了聚合函数如SUM(), AVG() 等，否则 select 选择字段必须是group_by分组字段</strong>。要解决这个问题也很简单，只要使用命令 </p>
+<blockquote>
+<p>SET sql_mode=(SELECT REPLACE(@@sql_mode,’ONLY_FULL_GROUP_BY’,’’)); </p>
+</blockquote>
+<p>或者在配置文件 my.ini 中将 sql_mode 修改为：</p>
+<blockquote>
+<p>STRICT_TRANS_TABLES, NO_ZERO_IN_DATE,NO_ZERO_DATE, ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER, NO_ENGINE_SUBSTITUTION’</p>
+</blockquote>
 
       
     </div>
@@ -751,7 +758,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
