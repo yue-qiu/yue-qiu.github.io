@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="索引索引是一种特殊的数据结构，类似于字典里的key。通过索引查询数据库中的内容时，不需要遍历所有数据而是直接指向数据所在的位置，这样就可以快速查询到想要的内容。 索引是把双刃剑，虽然索引可以提高检索数据的速度，提高整体的性能，但是也会带来一些副作用：    额外的物理空间（单列索引至少占原表5%到15%） 额外的创建和维护时间（create、insert、update、delete等）  MySQ">
+<meta name="description" content="索引索引是一种特殊的数据结构，类似于字典里的 key。通过索引查询数据库中的内容时，不需要遍历所有数据而是直接指向数据所在的位置，这样就可以快速查询到想要的内容。 索引是把双刃剑，虽然索引可以提高检索数据的速度，提高整体的性能，但是也会带来一些副作用：    额外的物理空间（单列索引至少占原表5%到15%） 额外的创建和维护时间（create、insert、update、delete等）  MyS">
 <meta name="keywords" content="MySQL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL之索引与范式">
 <meta property="og:url" content="http://yoursite.com/2018/05/30/《MySQL从入门到精通》之索引与视图/index.html">
 <meta property="og:site_name" content="精神的壳">
-<meta property="og:description" content="索引索引是一种特殊的数据结构，类似于字典里的key。通过索引查询数据库中的内容时，不需要遍历所有数据而是直接指向数据所在的位置，这样就可以快速查询到想要的内容。 索引是把双刃剑，虽然索引可以提高检索数据的速度，提高整体的性能，但是也会带来一些副作用：    额外的物理空间（单列索引至少占原表5%到15%） 额外的创建和维护时间（create、insert、update、delete等）  MySQ">
+<meta property="og:description" content="索引索引是一种特殊的数据结构，类似于字典里的 key。通过索引查询数据库中的内容时，不需要遍历所有数据而是直接指向数据所在的位置，这样就可以快速查询到想要的内容。 索引是把双刃剑，虽然索引可以提高检索数据的速度，提高整体的性能，但是也会带来一些副作用：    额外的物理空间（单列索引至少占原表5%到15%） 额外的创建和维护时间（create、insert、update、delete等）  MyS">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-18T04:14:49.480Z">
+<meta property="og:updated_time" content="2020-03-12T00:58:04.140Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL之索引与范式">
-<meta name="twitter:description" content="索引索引是一种特殊的数据结构，类似于字典里的key。通过索引查询数据库中的内容时，不需要遍历所有数据而是直接指向数据所在的位置，这样就可以快速查询到想要的内容。 索引是把双刃剑，虽然索引可以提高检索数据的速度，提高整体的性能，但是也会带来一些副作用：    额外的物理空间（单列索引至少占原表5%到15%） 额外的创建和维护时间（create、insert、update、delete等）  MySQ">
+<meta name="twitter:description" content="索引索引是一种特殊的数据结构，类似于字典里的 key。通过索引查询数据库中的内容时，不需要遍历所有数据而是直接指向数据所在的位置，这样就可以快速查询到想要的内容。 索引是把双刃剑，虽然索引可以提高检索数据的速度，提高整体的性能，但是也会带来一些副作用：    额外的物理空间（单列索引至少占原表5%到15%） 额外的创建和维护时间（create、insert、update、delete等）  MyS">
 
 
 
@@ -412,13 +412,13 @@
       
 
       
-        <h1 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h1><p>索引是一种特殊的数据结构，类似于字典里的<code>key</code>。通过索引查询数据库中的内容时，不需要遍历所有数据而是直接指向数据所在的位置，这样就可以快速查询到想要的内容。</p>
+        <h1 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h1><p>索引是一种特殊的数据结构，类似于字典里的 key。通过索引查询数据库中的内容时，不需要遍历所有数据而是直接指向数据所在的位置，这样就可以快速查询到想要的内容。</p>
 <p>索引是把双刃剑，虽然索引可以提高检索数据的速度，提高整体的性能，但是也会带来一些副作用：  </p>
 <ol>
 <li>额外的物理空间（单列索引至少占原表5%到15%）</li>
 <li>额外的创建和维护时间（create、insert、update、delete等）</li>
 </ol>
-<p>MySQL支持很多数据类型，选择合适的数据类型存储数据对性能有很大的影响。通常来说，可以遵循以下一些指导原则：</p>
+<p>MySQL 支持很多数据类型，选择合适的数据类型存储数据对性能有很大的影响。通常来说，可以遵循以下一些指导原则：</p>
 <ol>
 <li>越小的数据类型通常更好：越小的数据类型通常在磁盘、内存和CPU缓存中都需要更少的空间，处理起来更快。</li>
 <li>简单的数据类型更好：整型数据比起字符，处理开销更小，因为字符串的比较更复杂。在MySQL中，应该用内置的日期和时间数据类型，而不是用字符串来存储时间；以及用整型数据类型存储IP地址。</li>
@@ -426,16 +426,18 @@
 </ol>
 <h2 id="索引分类"><a href="#索引分类" class="headerlink" title="索引分类"></a>索引分类</h2><p>常见的索引包括普通索引、唯一性索引、全文索引、单列索引、多列索引等</p>
 <ol>
-<li>普通索引<br>即不应用任何限制条件的索引，该索引可以在任何数据类型中创建。字段本身的约束条件可以判断其值是否为空或唯一。</li>
-<li>唯一性索引<br>使用<code>unique</code>参数可以设置唯一索引。创建该索引时索引的值必须唯一。通过唯一索引，用户可以快速定位某条数据。<strong>主键是一种特殊的唯一索引</strong>。</li>
-<li>全文索引<br><code>fulltext</code>参数可以设置索引为全文索引。全文索引只能创建在<code>char</code>、<code>varchar</code>、<code>text</code>类型字段上。查询数据量较大的字符串型字段时，使用全文索引可以提高查询速度。<strong>只有MyISAM支持<code>fulltext</code>索引</strong></li>
-<li>单列索引<br>就是只对应一个字段的索引，可以包括以上三种索引方式。</li>
-<li>多列索引<br>在表的多个字段上创建一个索引。该索引指向创建时对应的多个字段。可用通过这几个字段进行查询但是<strong>这几个字段必须包含多列索引的第一个字段，只有这样多列索引才会发挥作用</strong></li>
+<li>普通索引：即不应用任何限制条件的索引，该索引可以在任何数据类型中创建。字段本身的约束条件可以判断其值是否为空或唯一。</li>
+<li>唯一性索引：使用 <code>unique</code> 参数可以设置唯一索引。创建该索引时索引的值必须唯一。通过唯一索引，用户可以快速定位某条数据。<strong>主键是一种特殊的唯一索引</strong>。</li>
+<li>全文索引：<code>fulltext</code> 参数可以设置索引为全文索引。全文索引只能创建在 <code>char</code>、<code>varchar</code>、<code>text</code> 类型字段上。查询数据量较大的字符串型字段时，使用全文索引可以提高查询速度。<strong>只有 MyISAM 支持 <code>fulltext</code> 索引</strong></li>
+<li>单列索引：就是只对应一个字段的索引，可以包括以上三种索引方式。</li>
+<li>多列索引：在表的多个字段上创建一个索引。该索引指向创建时对应的多个字段。可用通过这几个字段进行查询但是<strong>这几个字段必须包含多列索引的第一个字段，只有这样多列索引才会发挥作用</strong></li>
 </ol>
 <h2 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h2><h3 id="在建立数据表时创建索引"><a href="#在建立数据表时创建索引" class="headerlink" title="在建立数据表时创建索引"></a>在建立数据表时创建索引</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> table_name (</span><br><span class="line">    create_defination</span><br><span class="line">    [<span class="keyword">unique</span> | fulltext] <span class="keyword">index</span></span><br><span class="line">    [别名](属性名<span class="number">1</span>[(长度)[,属性名<span class="number">2</span>(长度)...]] [<span class="keyword">ASC</span>|<span class="keyword">DESC</span>])</span><br><span class="line">)[table_options];</span><br></pre></td></tr></table></figure>
-<p>一个简单的例子：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">users</span> (</span><br><span class="line">    <span class="keyword">id</span> <span class="built_in">tinyint</span> auto_increment primary <span class="keyword">key</span>,</span><br><span class="line">    <span class="keyword">name</span> <span class="built_in">char</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    age <span class="built_in">tinyint</span>,</span><br><span class="line">    sex <span class="built_in">tinyint</span>(<span class="number">1</span>),</span><br><span class="line">    fulltext <span class="keyword">index</span> username(<span class="keyword">name</span>)</span><br><span class="line">)<span class="keyword">engine</span>=MyISAM;</span><br></pre></td></tr></table></figure></p>
+<p>一个简单的例子：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">users</span> (</span><br><span class="line">    <span class="keyword">id</span> <span class="built_in">tinyint</span> auto_increment primary <span class="keyword">key</span>,</span><br><span class="line">    <span class="keyword">name</span> <span class="built_in">char</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    age <span class="built_in">tinyint</span>,</span><br><span class="line">    sex <span class="built_in">tinyint</span>(<span class="number">1</span>),</span><br><span class="line">    fulltext <span class="keyword">index</span> username(<span class="keyword">name</span>)</span><br><span class="line">)<span class="keyword">engine</span>=MyISAM;</span><br></pre></td></tr></table></figure>
 <h3 id="在已建立的数据表中创建索引"><a href="#在已建立的数据表中创建索引" class="headerlink" title="在已建立的数据表中创建索引"></a>在已建立的数据表中创建索引</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> [<span class="keyword">unique</span> | fulltext] <span class="keyword">index</span> index_name </span><br><span class="line"><span class="keyword">on</span> table_name(属性[(长度) [AES|<span class="keyword">DESC</span>]])</span><br></pre></td></tr></table></figure>
-<p>一个简单的例子：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">unique</span> <span class="keyword">index</span> username <span class="keyword">on</span> <span class="keyword">users</span>(<span class="keyword">name</span>);</span><br></pre></td></tr></table></figure></p>
+<p>一个简单的例子：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">unique</span> <span class="keyword">index</span> username <span class="keyword">on</span> <span class="keyword">users</span>(<span class="keyword">name</span>);</span><br></pre></td></tr></table></figure>
 <p>也可以通过修改表结构的方式创建索引，参见《MySQL从入门到精通》之基本语句。</p>
 <h1 id="范式-Normal-Form"><a href="#范式-Normal-Form" class="headerlink" title="范式(Normal Form)"></a>范式(Normal Form)</h1><p>关系型数据库的规范化理论为：关系数据库中的每一个关系都要满足一定的规范。根据满足规范的条件不同，可以分为5个等级，一般只要把数据库规范到第三等级就足够了。</p>
 <h2 id="第一范式-1NF"><a href="#第一范式-1NF" class="headerlink" title="第一范式(1NF)"></a>第一范式(1NF)</h2><p>第一范式包括下列指导原则：</p>
@@ -451,7 +453,7 @@
 <blockquote>
 <p>(员工编码) ——&gt; (决定) (员工姓名、年龄、部门编码、部门经理)  </p>
 </blockquote>
-<p>上面这个关系表是符合第二范式的，但是不符合第三范式，因为该关系表内部隐含着如下关系：   </p>
+<p>上面这个关系表是符合第二范式的，但是不符合第三范式，因为该关系表内部隐含着如下关系：</p>
 <blockquote>
 <p>(员工编码) ——&gt; (决定) (部门编码) ——&gt; (决定) (部门经理)  </p>
 </blockquote>
@@ -598,7 +600,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
