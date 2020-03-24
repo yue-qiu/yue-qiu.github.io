@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Go,">
 
 
 
@@ -79,16 +79,18 @@
 
 
 
-<meta name="description" content="高山仰止，景行行止。虽不能至，心向往之。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="精神的壳">
-<meta property="og:url" content="http://yoursite.com/archives/2019/01/index.html">
+<meta name="description" content="所谓并发(concurrency) 是指几段程序在同一时间段内交错执行，当我们无法肯定一个事件一定会会先于另一个事件发生，那么就可以说这几个时间是“并发”的。如果一个函数在并发调用时仍能正确执行，这个函数就是并发安全的；如果一个类型的所有可访问方法和操作都是并发安全的，则它就是一个并发安全的类型。 本文主要介绍了几种并发编程中常见的问题及对策，所有的例子都会用 Go 语言来描述，还会涉及到一些 G">
+<meta name="keywords" content="Go">
+<meta property="og:type" content="article">
+<meta property="og:title" content="并发编程-以 Go 为例">
+<meta property="og:url" content="http://yoursite.com/2020/03/24/并发编程-以Go为例/index.html">
 <meta property="og:site_name" content="精神的壳">
-<meta property="og:description" content="高山仰止，景行行止。虽不能至，心向往之。">
+<meta property="og:description" content="所谓并发(concurrency) 是指几段程序在同一时间段内交错执行，当我们无法肯定一个事件一定会会先于另一个事件发生，那么就可以说这几个时间是“并发”的。如果一个函数在并发调用时仍能正确执行，这个函数就是并发安全的；如果一个类型的所有可访问方法和操作都是并发安全的，则它就是一个并发安全的类型。 本文主要介绍了几种并发编程中常见的问题及对策，所有的例子都会用 Go 语言来描述，还会涉及到一些 G">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-24T17:06:34.484Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="精神的壳">
-<meta name="twitter:description" content="高山仰止，景行行止。虽不能至，心向往之。">
+<meta name="twitter:title" content="并发编程-以 Go 为例">
+<meta name="twitter:description" content="所谓并发(concurrency) 是指几段程序在同一时间段内交错执行，当我们无法肯定一个事件一定会会先于另一个事件发生，那么就可以说这几个时间是“并发”的。如果一个函数在并发调用时仍能正确执行，这个函数就是并发安全的；如果一个类型的所有可访问方法和操作都是并发安全的，则它就是一个并发安全的类型。 本文主要介绍了几种并发编程中常见的问题及对策，所有的例子都会用 Go 语言来描述，还会涉及到一些 G">
 
 
 
@@ -118,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2019/01/">
+  <link rel="canonical" href="http://yoursite.com/2020/03/24/并发编程-以Go为例/">
 
 
 
 
 
-  <title>归档 | 精神的壳</title>
+  <title>并发编程-以 Go 为例 | 精神的壳</title>
   
 
 
@@ -155,7 +157,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -281,72 +283,229 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        嗯..! 目前共计 30 篇日志。 继续努力。
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
-
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/24/并发编程-以Go为例/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="路边的土豆">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/惊讶猫.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="精神的壳">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/01/27/Java基础——泛型数组/" itemprop="url">
-              
-                <span itemprop="name">Java 禁止创建泛型数组</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">并发编程-以 Go 为例</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-01-27T18:00:45+08:00" content="2019-01-27">
-          01-27
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-24T23:49:51+08:00">
+                2020-03-24
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/03/24/并发编程-以Go为例/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/03/24/并发编程-以Go为例/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/03/24/并发编程-以Go为例/" class="leancloud_visitors" data-flag-title="并发编程-以 Go 为例">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+      
 
+      
+        <p>所谓<code>并发</code>(concurrency) 是指几段程序在同一时间段内交错执行，当我们无法肯定一个事件一定会会先于另一个事件发生，那么就可以说这几个时间是“并发”的。如果一个函数在并发调用时仍能正确执行，这个函数就是<code>并发安全</code>的；如果一个类型的所有可访问方法和操作都是并发安全的，则它就是一个并发安全的类型。</p>
+<p>本文主要介绍了几种并发编程中常见的问题及对策，所有的例子都会用 Go 语言来描述，还会涉及到一些 Go 对并发编程的支持。</p>
+<h1 id="竞态"><a href="#竞态" class="headerlink" title="竞态"></a>竞态</h1><p>竞态是指多个 goroutine 并发执行时，程序无法给出正确结果。比如多个 goroutine 同时修改了一个包级别变量的值，那么很可能导致某一个 goroutine 的修改对另一个 goroutine 不可见：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> amount = <span class="number">0</span></span><br><span class="line"><span class="keyword">var</span> done <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        amount += <span class="number">100</span></span><br><span class="line">        done &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        amount += <span class="number">200</span></span><br><span class="line">        done &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &lt;- done</span><br><span class="line">    &lt;- done</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面这段代码执行以后，balance 有几种可能取值：300，200，100。程序中的这种状态称为<code>数据竞态</code>，是竞态的一种。数据竞态发生在多个 goroutine 并发读写同一个变量并且至少一个为写操作的时候。</p>
+<p>有三种方法可以避免数据竞态：</p>
+<ol>
+<li>不对变量做写操作。如果没有 goroutine 对变量的值进行修改，那么数据竞态自然无从说起。</li>
+<li>避免多个 goroutine 对一个变量进行访问。简言之就是这个变量的所有操作都在一个<code>监控 goroutine</code> 内执行，由于一个 goroutine 内的结果是<code>串行一致</code>的，也就不会产生修改不可见的问题。<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> amount = <span class="number">0</span> <span class="comment">// amount 读写操作都在 monitor 内执行</span></span><br><span class="line"><span class="keyword">var</span> deposit = <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>) <span class="comment">// 其它 goroutine 通过这个通道间接写 amount</span></span><br><span class="line"><span class="keyword">var</span> balance = <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>) <span class="comment">// 其它 goroutine 通过这个通道间接读 amount</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">go</span> monitor</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">monitor</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        <span class="keyword">select</span> &#123;</span><br><span class="line">            <span class="keyword">case</span> count := &lt;- deposit:</span><br><span class="line">                amount += count</span><br><span class="line">            <span class="keyword">case</span> balance &lt;- amount:</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Deposit</span><span class="params">(count <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    deposit &lt;- count</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Balance</span><span class="params">()</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &lt;- balance</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>即使一个变量无法被完全限制在一个 goroutine 内，也可以把对这个变量的操作划分为好几个阶段，只要每个阶段被限制在一个 goroutine 内访问就可以了：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Book <span class="keyword">struct</span> &#123;</span><br><span class="line">    content <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">write</span><span class="params">(origin <span class="keyword">chan</span>&lt;- *Book)</span></span> &#123;</span><br><span class="line">    book = <span class="built_in">new</span>(Book)</span><br><span class="line">    book.content = <span class="string">"hello world"</span></span><br><span class="line">    origin &lt;- book</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">revise</span><span class="params">(origin &lt;- <span class="keyword">chan</span> *Book, corrected <span class="keyword">chan</span>&lt;- *Book)</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> book := <span class="keyword">range</span> origin &#123;</span><br><span class="line">        book.content += <span class="string">"!"</span></span><br><span class="line">        corrected &lt;- book</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ol start="3">
+<li>在一个时刻只允许一个 goroutine 操作这个变量。这种方法称为<code>互斥机制</code>。我们可以使用带一个缓冲的通道来实现：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> amount = <span class="number">0</span></span><br><span class="line"><span class="keyword">var</span> sema = <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Deposit</span><span class="params">(count <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    sema &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125; <span class="comment">// 获取信号量</span></span><br><span class="line">    amount += count</span><br><span class="line">    &lt;- sema <span class="comment">// 释放信号量</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>当然，这是一个非常简陋的实现。Go 已经为我们造好了完备的轮子：sync.Mutex。有了互斥锁，代码就可以写成这个样子：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"sync"</span></span><br><span class="line"><span class="keyword">var</span> (</span><br><span class="line">    mu sync.Mutex</span><br><span class="line">    amount <span class="keyword">int</span> <span class="comment">// 通常被保护变量放在锁后面声明</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Deposit</span><span class="params">(count <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    mu.Lock()</span><br><span class="line">    amount += count</span><br><span class="line">    mu.Unlock()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Balance</span><span class="params">()</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    mu.Lock()</span><br><span class="line">    <span class="keyword">defer</span> mu.Unlock()</span><br><span class="line">    <span class="keyword">return</span> amount</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>要注意的是，sync.Mutex 是“不可再入”的。</p>
+<h1 id="内存同步"><a href="#内存同步" class="headerlink" title="内存同步"></a>内存同步</h1><p>即使是一个只包含单个操作的只读操作，上锁也是必要的。一是为了防止这个操作被插入到对该变量的写入操作中，二是将处理器缓存中的内容刷入内存。</p>
+<p>现代计算机一般会有多个处理器，每个处理器都有自己的缓存。对变量的写操作通常不会直接写入内存，而是先记录在处理器缓存中，在操作系统认为必要的时候再刷回内存。而通道通信和互斥锁这样的同步原语都会强制刷回内存，如此一来在这之前的 goroutine 的执行结果就对当前 goroutine 可见了。</p>
+
+      
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Go/" rel="tag"># Go</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/02/也谈进程、线程与协程/" rel="next" title="也说进程、线程与协程">
+                <i class="fa fa-chevron-left"></i> 也说进程、线程与协程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -354,6 +513,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -374,8 +540,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -459,6 +634,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#竞态"><span class="nav-number">1.</span> <span class="nav-text">竞态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#内存同步"><span class="nav-number">2.</span> <span class="nav-text">内存同步</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -644,6 +835,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
@@ -1184,26 +1379,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
