@@ -91,7 +91,7 @@
 <meta property="og:image" content="https://i.loli.net/2020/03/02/dY1JoNBIRLCFE4G.png">
 <meta property="og:image" content="https://i.loli.net/2020/03/02/P6MXJ5WHtQNp4x1.png">
 <meta property="og:image" content="https://i.loli.net/2020/03/02/X3jbaStuZRByIdw.png">
-<meta property="og:updated_time" content="2020-03-02T13:03:10.445Z">
+<meta property="og:updated_time" content="2020-04-25T15:49:52.771Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="也说进程、线程与协程">
 <meta name="twitter:description" content="从 CPU 谈起CPU 被誉为“计算机的大脑”，这个比喻可以说是很恰当了。计算机无论是进行 IO 还是计算都要在 CPU 的控制下完成。如此一来，一个强大的“大脑”对于整个系统而言就是非常重要的了，这也是为什么我们总能看到厂家不断地宣传自己 CPU 的主频有多高，核心有多大。 多核 CPU要提高 CPU 的性能，最直接的方法当然是不断增强单个处理器的性能，让处理器频率更高。就像要举起一块石头，让自">
@@ -453,18 +453,13 @@
 <p>协程（Coroutine）是比线程更轻量级的存在，可以说是一种<strong>用户态线程</strong>。它更像是一个函数，只是这个函数可以像线程那样中途让出执行权，满足某种条件后又从等待的地方继续运行。</p>
 <p>它比线程拥有更少的资源（必要的寄存器信息，堆栈指针等），<strong>切换策略仅由用户态控制</strong>，对于操作系统是透明的，所以协程间的切换非常快。但这也导致协程无法充分利用多核 CPU，因为协程再多，在操作系统眼里也只有一个线程在运行罢了。</p>
 <p><img src="https://i.loli.net/2020/03/02/X3jbaStuZRByIdw.png" alt="协程"></p>
-<p>协程实现的是<strong>非抢占式</strong>的调度，即由当前协程切换到其他协程由当前协程来控制。目前的协程框架一般都是设计成 1:N 模式。所谓 1:N 就是一个线程作为一个容器里面放置多个协程。那么谁来适时的切换这些协程？答案是由协程自己主动让出 CPU，也就是每个协程池里面有一个调度器，这个调度器是被动调度的。意思就是他不会主动调度。而且当一个协程发现自己执行不下去了（比如异步等待网络的数据回来，但是当前还没有数据到)，这个时候就可以由这个协程通知调度器，这个时候执行到调度器的代码，调度器根据事先设计好的调度算法找到当前最需要 CPU 的协程。切换这个协程的 CPU 上下文把 CPU 的运行权交个这个协程，直到这个协程出现执行不下去需要等等的情况，或者它调用主动让出 CPU 的 API 之类，触发下一次调度。</p>
+<p>Go 的调度器使用 m:n 调度，其中 m 是 goroutine 数，n 是活跃线程数（由 GOMAXPROCS 决定，默认等于处理器核心数）。当一个 goroutine 陷入休眠或阻塞在一次管道通信上，调度器会把它的状态设为 <code>_Gwaiting</code> 并解除它与线程的绑定（相当于让出线程，随后就可以执行一次 goroutine 调度），等待状态的 goroutine 不占用线程；而如果 goroutine 阻塞在一次 IO 或其它系统调用上调度器会更新 goroutine 状态为 <code>_Gsyscall</code> 并解除线程和处理器的绑定（相当于让出处理器，这样处理器就可以绑定到其它线程上。这个过程触发一次线程切换的系统调用）。</p>
 <p>以 go 为例，在一个线程里面开启多个协程：</p>
 <figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"sync"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> wg = sync.WaitGroup&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">        wg.Add(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(n <span class="keyword">int</span>)</span></span> &#123;    <span class="comment">// 开启一个新的协程</span></span><br><span class="line">            <span class="keyword">defer</span> wg.Done()</span><br><span class="line">            fmt.Printf(<span class="string">"%v: Hello World!\n"</span>, n)</span><br><span class="line">        &#125;(i)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    wg.Wait()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="协程的优点"><a href="#协程的优点" class="headerlink" title="协程的优点"></a>协程的优点</h2><ol>
-<li>创建成本低。在 go 里每个协程大约只占用 4k 的内存。</li>
+<li>创建成本低。在 go 里每个协程大约只占用 1k 的内存。</li>
 <li>调度成本低。协程属于用户态，不需要经过操作系统管理</li>
 <li>减少上锁频率。因为协程都是跑在一个线程里的，所以不用担心指令执行到一半被夺去运行权限的问题。但是如果协程间存在竞争，并不能保证临界区，所以并不是完全不需要锁。</li>
-</ol>
-<h2 id="协程的缺点"><a href="#协程的缺点" class="headerlink" title="协程的缺点"></a>协程的缺点</h2><ol>
-<li>协程执行中不能有阻塞，否则整个线程会被阻塞（阻塞是操作系统级的）</li>
-<li>需要特别关注全境变量、对象引用</li>
-<li>不适合 CPU 密集型应用。因为协程调度不是抢占式的，一个协程如果一直在计算就不会主动让出执行权限，其他协程就会一直处于饥饿状态。</li>
 </ol>
 
       
@@ -682,7 +677,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#从-CPU-谈起"><span class="nav-number">1.</span> <span class="nav-text">从 CPU 谈起</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#多核-CPU"><span class="nav-number">1.1.</span> <span class="nav-text">多核 CPU</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进程"><span class="nav-number">2.</span> <span class="nav-text">进程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程"><span class="nav-number">3.</span> <span class="nav-text">线程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进程与线程的异同"><span class="nav-number">4.</span> <span class="nav-text">进程与线程的异同</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#协程"><span class="nav-number">5.</span> <span class="nav-text">协程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#协程的优点"><span class="nav-number">5.1.</span> <span class="nav-text">协程的优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#协程的缺点"><span class="nav-number">5.2.</span> <span class="nav-text">协程的缺点</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#从-CPU-谈起"><span class="nav-number">1.</span> <span class="nav-text">从 CPU 谈起</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#多核-CPU"><span class="nav-number">1.1.</span> <span class="nav-text">多核 CPU</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进程"><span class="nav-number">2.</span> <span class="nav-text">进程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程"><span class="nav-number">3.</span> <span class="nav-text">线程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进程与线程的异同"><span class="nav-number">4.</span> <span class="nav-text">进程与线程的异同</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#协程"><span class="nav-number">5.</span> <span class="nav-text">协程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#协程的优点"><span class="nav-number">5.1.</span> <span class="nav-text">协程的优点</span></a></li></ol></li></ol></div>
             
 
           </div>
