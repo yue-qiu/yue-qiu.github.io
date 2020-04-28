@@ -5,12 +5,6 @@
     <url>/2020/04/27/%E8%B0%83%E5%BA%A6%E5%99%A8%E2%80%94Go%E8%AF%AD%E8%A8%80%E7%9A%84%E5%A4%A7%E7%AE%A1%E5%AE%B6/</url>
     <content><![CDATA[<p>虽然线程比较轻量，但是在调度时也有比较大的额外开销。每个线程会都占用 1M 以上的内存空间，在对线程进行切换时不止会消耗较多的内存，恢复寄存器中的内容还需要向操作系统申请或者销毁对应的资源，每一次线程上下文的切换都需要消耗 1us 左右的时间。而 Go 调度器对 Goroutine 的上下文切换约为 0.2us，减少了 80% 的额外开销</p>
 <p>Go 语言的调度器通过使用与 CPU 数量相等的线程减少线程频繁切换的内存开销，同时在每一个线程上执行额外开销更低的 Goroutine 来降低操作系统和硬件的负载。</p>
-<h2 id="设计原理"><a href="#设计原理" class="headerlink" title="设计原理"></a>设计原理</h2><p>总结起来三个特点：多线程、任务窃取、抢占式：</p>
-<ol>
-<li>多线程：进程中可以同时存在多个活跃线程。多线程调度器引入了 GOMAXPROCS 变量帮助我们灵活控制程序中的最大处理器数，即活跃线程数</li>
-<li>任务窃取：进行 goroutine 调度时，调度器会先从当前处理器或全局待运行队列中获得一个 goroutine；如果获取失败，则从其它处理器的待运行队列中随机获取 goroutine</li>
-<li>抢占式：STW 和栈扫描时会触发抢占。当前 goroutine 被设为 _Gpreempted，调度器进行一次 goroutine 调度</li>
-</ol>
 <h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>调度器的三个组成部分：G(Goroutine)，P(处理器)，M(线程)</p>
 <ul>
 <li>G：代表 Goroutine，是一个待执行的任务</li>
@@ -54,6 +48,12 @@
 <h3 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h3><p>当 goroutine 阻塞在一次 IO 或其它系统调用上调度器会更新 goroutine 状态为 <code>_Gsyscall</code> 并<strong>解除线程和处理器的绑定</strong>（相当于让出处理器，这样处理器就可以绑定到其它线程上。原线程陷入系统调用等待返回。这个过程触发一次线程切换的系统调用）。</p>
 <p>系统调用结束后，为这个 goroutine 重新分配资源并更新其状态为 <code>_Grunnable</code>，找到一个可用的处理器与这个 goroutine 绑定。</p>
 <h3 id="抢占"><a href="#抢占" class="headerlink" title="抢占"></a>抢占</h3><p>运行时会更新 Goroutine 的状态到 <code>_Grunnable</code>，让出当前的处理器并将这个 Goroutine 放回全局队列。最后，调用 runtime.schedule 触发调度。</p>
+<h2 id="设计原理"><a href="#设计原理" class="headerlink" title="设计原理"></a>设计原理</h2><p>总结起来三个特点：多线程、任务窃取、抢占式：</p>
+<ol>
+<li>多线程：进程中可以同时存在多个活跃线程。多线程调度器引入了 GOMAXPROCS 变量帮助我们灵活控制程序中的最大处理器数，即活跃线程数</li>
+<li>任务窃取：进行 goroutine 调度时，调度器会先从当前处理器或全局待运行队列中获得一个 goroutine；如果获取失败，则从其它处理器的待运行队列中随机获取 goroutine</li>
+<li>抢占式：STW 和栈扫描时会触发抢占。当前 goroutine 被设为 _Gpreempted，调度器进行一次 goroutine 调度</li>
+</ol>
 ]]></content>
       <categories>
         <category>语言</category>
