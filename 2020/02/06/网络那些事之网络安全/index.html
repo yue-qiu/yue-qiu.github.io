@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="网络安全,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="网络安全的基本属性 机密性：发送方加密，预定接收方解密 身份认证：发送方与预定接收方能确定彼此身份 完整性：信息不会被篡改，即使被篡改了也可以被检测出来  常见攻击手段 映射（Mapping）：利用 ping 确定网络上运行主机的地址，再通过端口扫描依次尝试与每个端口建立 TCP 连接，找出主机在运行的服务 嗅探（sniffing）：在共享介质网络中，攻击方接收所有经过它的分组，层层解析后得到数据">
+<meta name="keywords" content="网络安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络那些事之网络安全">
+<meta property="og:url" content="http://yoursite.com/2020/02/06/网络那些事之网络安全/index.html">
+<meta property="og:site_name" content="精神的壳">
+<meta property="og:description" content="网络安全的基本属性 机密性：发送方加密，预定接收方解密 身份认证：发送方与预定接收方能确定彼此身份 完整性：信息不会被篡改，即使被篡改了也可以被检测出来  常见攻击手段 映射（Mapping）：利用 ping 确定网络上运行主机的地址，再通过端口扫描依次尝试与每个端口建立 TCP 连接，找出主机在运行的服务 嗅探（sniffing）：在共享介质网络中，攻击方接收所有经过它的分组，层层解析后得到数据">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2020/02/06/s8lqcjTVEtJ4f5M.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/06/CearKxmuZjUF1fz.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/06/TgOkCnZjJm1BEwX.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/07/HOK1XPzD7aq8Ckc.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/07/JOH4tvB5z1qgnU8.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/07/KQu1WXrx9wV4Dfj.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/07/c9g7j84hTADVRG5.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/08/5nhQBRmlwc8ApJY.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/08/piZw95RkYKrS8a4.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/08/nlT748VJQMcCpHW.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/08/uBWcYDPXKn4Mepv.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/08/SDnVh2NzTKMeAu5.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/09/Zv6k1a8u2Oc3SCI.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/09/PpZgjnTwkQEJ5RN.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/09/Wp6jCXhdVsRDKr3.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/09/UrEF6ADhgWdI8qj.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/10/3e8GhFqg5BADw1s.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/10/slABwdEjWJz3MhL.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/10/KcMzgYaHW9FmZnf.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/10/tKvBjaneT8SxqPi.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/11/YHNn6CbAxr58pGM.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/11/vjBYzwEKF8de9N2.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/11/AleEbu4oYGrnH6v.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/11/HKMmj89w2WpdXG1.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/10/3IexuNEcTjdCKpv.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/10/SRnjU6oa45tBFWC.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/10/Ay3ohPu6sZIarG2.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/11/cPOTpuCNy6EUd4F.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/11/i87WYut32LzXHVG.png">
+<meta property="og:updated_time" content="2020-02-11T08:47:10.304Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网络那些事之网络安全">
+<meta name="twitter:description" content="网络安全的基本属性 机密性：发送方加密，预定接收方解密 身份认证：发送方与预定接收方能确定彼此身份 完整性：信息不会被篡改，即使被篡改了也可以被检测出来  常见攻击手段 映射（Mapping）：利用 ping 确定网络上运行主机的地址，再通过端口扫描依次尝试与每个端口建立 TCP 连接，找出主机在运行的服务 嗅探（sniffing）：在共享介质网络中，攻击方接收所有经过它的分组，层层解析后得到数据">
+<meta name="twitter:image" content="https://i.loli.net/2020/02/06/s8lqcjTVEtJ4f5M.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/02/06/网络那些事之网络安全/">
+
+
+
+
+
+  <title>网络那些事之网络安全 | 精神的壳</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?847f7a1169508eb118c64f7719e8a4cf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","tagMode":true,"log":false,"model":{"jsonPath":"live2d-widget-model-koharu"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"pluginJsPath":"lib/","pluginRootPath":"live2dw/"});</script>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">精神的壳</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/06/网络那些事之网络安全/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="路边的土豆">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/惊讶猫.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="精神的壳">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">网络那些事之网络安全</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-06T15:09:10+08:00">
+                2020-02-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机网络</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/02/06/网络那些事之网络安全/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/02/06/网络那些事之网络安全/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/02/06/网络那些事之网络安全/" class="leancloud_visitors" data-flag-title="网络那些事之网络安全">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="网络安全的基本属性"><a href="#网络安全的基本属性" class="headerlink" title="网络安全的基本属性"></a>网络安全的基本属性</h1><ul>
+<li>机密性：发送方加密，预定接收方解密</li>
+<li>身份认证：发送方与预定接收方能确定彼此身份</li>
+<li>完整性：信息不会被篡改，即使被篡改了也可以被检测出来</li>
+</ul>
+<h1 id="常见攻击手段"><a href="#常见攻击手段" class="headerlink" title="常见攻击手段"></a>常见攻击手段</h1><ul>
+<li>映射（Mapping）：利用 ping 确定网络上运行主机的地址，再通过<strong>端口扫描</strong>依次尝试与每个端口建立 TCP 连接，找出主机在运行的服务</li>
+<li>嗅探（sniffing）：在共享介质网络中，攻击方接收所有经过它的分组，层层解析后得到数据<br><img src="https://i.loli.net/2020/02/06/s8lqcjTVEtJ4f5M.png" alt="分组嗅探"></li>
+<li>IP 欺骗：修改分组的源 IP 地址，冒充发送方</li>
+<li>拒绝服务（DoS）：向接收方恶意泛洪分组，淹没接收方（带宽耗尽、资源耗尽）<br><img src="https://i.loli.net/2020/02/06/CearKxmuZjUF1fz.png" alt="DDoS"><br><img src="https://i.loli.net/2020/02/06/TgOkCnZjJm1BEwX.png" alt="反射DDos"></li>
+<li>中间人攻击：对源主机伪装成目的主机，对目的主机伪装成源主机</li>
+</ul>
+<h1 id="密码学基础"><a href="#密码学基础" class="headerlink" title="密码学基础"></a>密码学基础</h1><h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><ul>
+<li>明文：没有进过加密的数据</li>
+<li>密文：进过加密算法加密的数据</li>
+<li>加密、解密密钥：用于辅助加密、解密的参数</li>
+</ul>
+<p>按加密密钥与解密密钥是否相同，将加密算法分为两大类：<strong>对称加密</strong>（加解密钥相同）与<strong>非对称加密</strong>（每方有公开、私有两个密钥）</p>
+<h2 id="传统加密方法"><a href="#传统加密方法" class="headerlink" title="传统加密方法"></a>传统加密方法</h2><ul>
+<li>替代密码：用一种东西替代另一种东西（单码替代、多字母替代等）</li>
+<li>换位密码：重新排列明文中的字母（置换法等）</li>
+</ul>
+<h2 id="现代加密方法"><a href="#现代加密方法" class="headerlink" title="现代加密方法"></a>现代加密方法</h2><p>现代技术不再针对字母，而是针对<strong>二进制位</strong>进行操作，其原理既包括替代，又包括换位：</p>
+<ul>
+<li>对称加密<ul>
+<li>流密码：密钥产生密钥流，由密钥流对数据流进行加解密<br><img src="https://i.loli.net/2020/02/07/HOK1XPzD7aq8Ckc.png" alt="流密码"></li>
+<li>分组密码：将明文序列划分为若干长为 M 的明文组，各明文组利用长为 i 的密钥组变换得到若干长度为 N 的密文组。通常分组长度取 64 bits<br><img src="https://i.loli.net/2020/02/07/JOH4tvB5z1qgnU8.png" alt="Feistel分组密码"></li>
+</ul>
+</li>
+<li>非对称加密</li>
+</ul>
+<h3 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h3><h4 id="分组密码例子：DES"><a href="#分组密码例子：DES" class="headerlink" title="分组密码例子：DES"></a>分组密码例子：DES</h4><p>DES：数据加密标准（Data Encryption Standand），本质是 16 轮的 Feistel 分组密码，分组长度为 64 bits，密钥长度为 56 bits，每轮产生一个 48 bits 的子密钥：</p>
+<p><img src="https://i.loli.net/2020/02/07/KQu1WXrx9wV4Dfj.png" alt="DES加密"></p>
+<p><img src="https://i.loli.net/2020/02/07/c9g7j84hTADVRG5.png" alt="子密钥生成"></p>
+<p>IP 置换：把输入数据的<strong>排列顺序打乱</strong></p>
+<h4 id="分组密码例子：AES"><a href="#分组密码例子：AES" class="headerlink" title="分组密码例子：AES"></a>分组密码例子：AES</h4><p>AES：高级加密标准（Advanced Encryption Standand），分组长度 128/192/256 bits，可提供 128/192/256 bits 密钥，循环次数在一定范围内可变，与 DES 相比安全得多。</p>
+<h3 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h3><p>公钥加密算法的需求：</p>
+<ul>
+<li>公钥加密 K<sub>B</sub><sup>+</sup> 和私钥解密 K<sub>B</sub><sup>-</sup> 要满足：K<sub>B</sub><sup>-</sup>(K<sub>B</sub><sup>+</sup>(m)) = m</li>
+<li>给定公钥 K<sub>B</sub><sup>+</sup>，不可能计算得到 K<sub>B</sub><sup>-</sup></li>
+</ul>
+<h4 id="非对称加密例子：RSA"><a href="#非对称加密例子：RSA" class="headerlink" title="非对称加密例子：RSA"></a>非对称加密例子：RSA</h4><p>任何信息在计算机中都以比特流的形式表示，每个比特流可以表示为一个唯一的整数，因此<strong>加密一个报文就等于加密一个整数</strong>。</p>
+<p>RSA 公钥/私钥生成过程：</p>
+<ol>
+<li>选择 2 个大质数 p 和 q</li>
+<li>计算 n = pq，z = (p-1)(q-1)</li>
+<li>选择 e(e &lt; n)，使 e 与 z 互质</li>
+<li>选择 d 使 ed mod z = 1</li>
+<li>得到公钥 (n,e)，私钥（n,d）</li>
+</ol>
+<p>给定公钥 (n,e)和私钥(n,d)，RSA 加密过程：</p>
+<ol>
+<li>加密报文 m 时，计算 c = m<sup>e</sup> mod n</li>
+<li>解密报文 c 时，计算 m = c<sup>d</sup> mod n</li>
+</ol>
+<p>总结：<strong>m = (m<sup>e</sup> mod n)<sup>d</sup> mod n = m<sup>ed</sup> mod n = m<sup>ed mod z</sup> mod n</strong></p>
+<p>RSA 的公钥密钥是相对的，即可以用公钥加密私钥解密，也可以用私钥加密公钥解密：K<sub>B</sub><sup>-</sup>(K<sub>B</sub><sup>+</sup>(m)) = m = K<sub>B</sub><sup>+</sup>(K<sub>B</sub><sup>-</sup>(m))</p>
+<p>由于 RSA 运算强度超高，实际应用中几乎不可能用于加密大报文，所以常常与对称加密结合使用。即用 RSA 解决对称加密中密钥分发问题，再利用对称加密算法对数据进行加密。这种方式分发的密钥称为<strong>会话密钥</strong>。</p>
+<h1 id="报文完整性"><a href="#报文完整性" class="headerlink" title="报文完整性"></a>报文完整性</h1><p>报文完整性也称为报文认证，目标有：</p>
+<ul>
+<li>证明报文确实来自<strong>声称的发送方</strong></li>
+<li>验证报文<strong>没有被篡改</strong></li>
+<li>预防报文的<strong>时间、顺讯、持有期被修改</strong></li>
+</ul>
+<p>对报文应用散列函数 H 得到一个<strong>固定长度</strong>的散列码。这个散列码称为<strong>报文摘要</strong>，相当于源报文的数字指纹，可以用于报文认证。</p>
+<p>散列函数算法例子：</p>
+<ul>
+<li>MD5：对任意长度的报文输入，计算输出 128 bits 散列值</li>
+<li>SHA-1（Secure Hash Algorithm）：要求输入长度 &lt; 2<sup>64</sup>，计算输出 160 bits 散列值。速度较慢但是安全性高于 MD5</li>
+</ul>
+<p><img src="https://i.loli.net/2020/02/08/5nhQBRmlwc8ApJY.png" alt="报文认证"></p>
+<p>这种报文认证方法虽然能验证报文完整性，但是无法解决否认（发送方不承认自己发送过某一报文）、伪造（接收方伪造一份报文并声称来自发送方）、篡改（接收方对收到的信息进行修改）等问题，由此衍生了现实中广泛使用的数字签名（Digital Signatures）技术</p>
+<h2 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h2><p>数字签名是实现安全电子交易的核心技术之一，特点是：</p>
+<ul>
+<li>可验证性：可以验证发送方身份、报文是否被篡改</li>
+<li>不可伪造性：接收方无法伪造报文</li>
+<li>不可抵赖性：发送方无法否认曾经发送过这样一个报文</li>
+</ul>
+<p>要实现数字签名，必须依赖于加密技术。但是为了确保接收方不可能伪造报文，无法使用对称加密技术。</p>
+<p>签名过程举例：Bob 作为发送方给 Alice 发消息</p>
+<p><img src="https://i.loli.net/2020/02/08/piZw95RkYKrS8a4.png" alt="签名报文摘要"></p>
+<p>经过加密的报文摘要称为<strong>报文认证码（MAC）</strong>，是基于密钥和消息摘要所获得的一个值，可用于数据源认证和完整性校验。</p>
+<h1 id="密钥分发中心（KDC）"><a href="#密钥分发中心（KDC）" class="headerlink" title="密钥分发中心（KDC）"></a>密钥分发中心（KDC）</h1><p>解决两个实体在网上共享对称密钥的问题，由此引入“可信任的密钥分发中心（Key Distribution Center）”作为两实体间的中介。</p>
+<p>KDC 本质上是一个服务器，每个使用共享密钥服务的用户都要在此注册一个专属密钥。</p>
+<p>密钥分发举例：Alice 与 Bob 使用 KDC 为中介共享密钥，R 即是 Alice 与 Bob 间的会话密钥</p>
+<p><img src="https://i.loli.net/2020/02/08/nlT748VJQMcCpHW.png" alt="密钥分发"></p>
+<h1 id="认证中心（CA）"><a href="#认证中心（CA）" class="headerlink" title="认证中心（CA）"></a>认证中心（CA）</h1><p>CA 负责公钥分发（保证公钥的来源可信），实现特定实体与其公钥的绑定：</p>
+<p>假设 Bob 在 CA 注册他的公钥信息：</p>
+<ol>
+<li>Bob 向 CA 提供身份证明</li>
+<li>CA 创建绑定 Bob 身份及其公钥的证书</li>
+<li>证书包含 CA 签名的 Bob 的公钥</li>
+</ol>
+<p><img src="https://i.loli.net/2020/02/08/uBWcYDPXKn4Mepv.png" alt="CA认证"></p>
+<p>Alice 想要得到 Bob 的公钥：</p>
+<ol>
+<li>获得 Bob 的公钥证书</li>
+<li>应用 CA 的公钥解密，获得 Bob 的公钥</li>
+</ol>
+<p><img src="https://i.loli.net/2020/02/08/SDnVh2NzTKMeAu5.png" alt="CA解密"></p>
+<p>一张公钥证书包含的要素有：</p>
+<ul>
+<li>序列号：唯一发行号</li>
+<li>持有人信息：机构名，机构公钥，签名算法</li>
+<li>发行者信息</li>
+<li>有效期：保证在这个时间内从 CA  获得的公钥是有效的</li>
+<li>发行者数字签名</li>
+</ul>
+<p><img src="https://i.loli.net/2020/02/09/Zv6k1a8u2Oc3SCI.png" alt="公钥证书"></p>
+<h1 id="SSL"><a href="#SSL" class="headerlink" title="SSL"></a>SSL</h1><p>安全套接字层（SSL）或传输层安全（TLS） 可作为基础协议栈的组成部分，对应用透明。使用 SSL 后，传送 的应用层数据会被加密：</p>
+<p><img src="https://i.loli.net/2020/02/09/PpZgjnTwkQEJ5RN.png" alt="SSL/TLS"></p>
+<p>所谓 HTTPS 就是套了一层 SSL 的 HTTP 协议，保证信息的机密性和完整性，提供服务器认证功能。</p>
+<h2 id="SSL-通信概览"><a href="#SSL-通信概览" class="headerlink" title="SSL 通信概览"></a>SSL 通信概览</h2><p>以 Alice 向 Bob 建立一个 SSL 连接为例：</p>
+<p>TCP 连接建立完成后，就要开始<strong>建立 SSL 连接</strong></p>
+<ol>
+<li>Alice 向 Bob 发送请求</li>
+<li>Bob 回应他的公钥证书</li>
+<li>Alice 获得 Bob 的公钥，利用这个公钥加密一个随机产生的主密钥 MS 表示为 EMS（加密过的主密钥）</li>
+</ol>
+<p>不同的加密操作使用不同的密钥会更安全（如：报文认证码 MAC 密钥与数据加密密钥），所以 SSL 会通过主密钥 MS <strong>派生出一组密钥</strong>：</p>
+<ul>
+<li>K<sub>c</sub>：加密客户端向服务器发送数据的密钥</li>
+<li>M<sub>c</sub>：加密客户端向服务器发送数据的 MAC 密钥</li>
+<li>K<sub>s</sub>：加密服务器向客户端发送数据的密钥</li>
+<li>M<sub>s</sub>：加密服务器向客户端发送数据的 MAC 密钥</li>
+</ul>
+<p>SSL 将字节流<strong>分割</strong>为一系列记录，每个记录携带自己的 MAC。在 MAC 中有记录的<strong>序列号</strong>和<strong>一次性随机数</strong>，防止攻击者重排或重放记录。同时还要添加<strong>记录类型</strong>，防止攻击者伪造 TCP 断连，type=0 用于数据记录，type=1 用于断连。即：MAC = MAC(key, sequence||type||digest)</p>
+<p><img src="https://i.loli.net/2020/02/09/Wp6jCXhdVsRDKr3.png" alt="SSL记录"></p>
+<p>一次简化的 SSL 通信过程如下：</p>
+<p><img src="https://i.loli.net/2020/02/09/UrEF6ADhgWdI8qj.png" alt="SSL通信过程"></p>
+<h2 id="现实中的-SSL-协议栈"><a href="#现实中的-SSL-协议栈" class="headerlink" title="现实中的 SSL 协议栈"></a>现实中的 SSL 协议栈</h2><p>SSL 支持客户与服务器商定各自使用的<strong>密码组</strong>（加密算法及密钥），通常是客户端提供选项，服务器从中挑选。</p>
+<p>SSL 不是一个单独的协议，而是两层共四个协议：</p>
+<p><img src="https://i.loli.net/2020/02/10/3e8GhFqg5BADw1s.png" alt="SSL四协议"></p>
+<ul>
+<li>更改密码规格协议：负责更改当前连接的密码组，标志着当前加密策略的改变。ContentType = 20</li>
+<li>警告协议：加密出错或握手失败时，为对方发送警告或直接中止当前连接。ContentType = 21</li>
+<li>握手协议：确定 SSL 握手过程（商定加密算法，建立密钥，提供服务器证书认证）。ContentType = 22</li>
+<li>记录协议：描述 SSL 记录格式，封装数据</li>
+</ul>
+<p><img src="https://i.loli.net/2020/02/10/slABwdEjWJz3MhL.png" alt="SSL记录"></p>
+<h2 id="SSL-握手过程"><a href="#SSL-握手过程" class="headerlink" title="SSL 握手过程"></a>SSL 握手过程</h2><ol>
+<li>客户端发送其支持的算法列表及客户端一次性随机数（nonce）</li>
+<li>服务器选择算法并发回给客户：选择 + 证书 + 服务器一次性随机数</li>
+<li>客户端验证证书提取服务器公钥，生成<strong>预主密钥</strong>，并利用服务器公钥加密预主密钥，发送给服务器</li>
+<li>客户端与服务器基于预主密钥和一次性随机数分别独立计算加密密钥和 MAC 密钥（两方使用相同的算法，得到相同的密钥）</li>
+<li>客户端发送一个针对所有握手过程的 MAC</li>
+<li>服务器发送一个针对所有握手过程的 MAC</li>
+</ol>
+<p>SSL 完全建立之前所有信息都是明文传输的，这就很容易被有心人篡改其中内容，最后两步可以作为握手信息完整性认证。</p>
+<h1 id="IPsec"><a href="#IPsec" class="headerlink" title="IPsec"></a>IPsec</h1><p>IPsec 负责网络层安全，提供机密性，完整性，源认证，防重放攻击服务。IPsec 在网络层中的传输有两种模式：</p>
+<ul>
+<li>传输模式：IPsec 数据报的发送与接收都在端系统完成<br><img src="https://i.loli.net/2020/02/10/KcMzgYaHW9FmZnf.png" alt="IPsec传输模式"></li>
+<li>隧道模式：边缘路由器是 IPsec 感知的，IPsec 数据报进入局域网前还原为普通 IP 数据报<br><img src="https://i.loli.net/2020/02/10/tKvBjaneT8SxqPi.png" alt="IPsec隧道模式"></li>
+</ul>
+<p>有两个协议提供 IPsec 服务：</p>
+<ul>
+<li>数据认证头协议（AH, Authentication Header）：提供源认证，完整性<ul>
+<li>传输模式：<br><img src="https://i.loli.net/2020/02/11/YHNn6CbAxr58pGM.png" alt="传输模式AH记录"><br>下一个头：指向源 IP 数据报载荷中的头部信息，如 TCP 头、UDP 头</li>
+<li>隧道模式：<br><img src="https://i.loli.net/2020/02/11/vjBYzwEKF8de9N2.png" alt="隧道模式AH记录"></li>
+</ul>
+</li>
+<li>封装安全协议（ESP, Encapsulation Security Protocol）：提供源认证，完整性，机密性。实际应用中最为广泛，我们常用的 VPN 就是基于这种协议<ul>
+<li>传输模式：<br><img src="https://i.loli.net/2020/02/11/AleEbu4oYGrnH6v.png" alt="传输模式ESP记录"></li>
+<li>隧道模式：最重要最常见的 IPsec 实现<br><img src="https://i.loli.net/2020/02/11/HKMmj89w2WpdXG1.png" alt="隧道模式ESP记录"></li>
+</ul>
+</li>
+</ul>
+<h2 id="安全关联"><a href="#安全关联" class="headerlink" title="安全关联"></a>安全关联</h2><p>发送数据前，发送端到接收端之间需要建立安全关联 <strong>SA</strong>(Security Association)以定义对数据报的加密算法与密钥。两方均要维护 SA 的连接状态信息。换言之，IPsec 并不是简单的对 IP 的封装，IP 是无连接的，<strong>IPsec 是面向连接的</strong>：</p>
+<p><img src="https://i.loli.net/2020/02/10/3IexuNEcTjdCKpv.png" alt="SA连接"></p>
+<h2 id="安全策略"><a href="#安全策略" class="headerlink" title="安全策略"></a>安全策略</h2><p>安全策略 <strong>SP(Security Policy)</strong> 定义了对什么样的数据流应用 IPsec。多条安全策略记录组成了安全策略数据库 SPD。服务器提取数据报关键信息填充到一个称为“选择符”（目标IP，源IP，传输层协议，源端口，目标端口）的结构中，利用选择符去搜索 SPD，检索匹配的 SP。</p>
+<h1 id="虚拟专用网（VPN）"><a href="#虚拟专用网（VPN）" class="headerlink" title="虚拟专用网（VPN）"></a>虚拟专用网（VPN）</h1><p>专用网络：基于专属的网络设备、链路或协议建设的专门用途的网络。最大的好处就是安全，但是成本很高。</p>
+<p><img src="https://i.loli.net/2020/02/10/SRnjU6oa45tBFWC.png" alt="专用网络"></p>
+<p>虚拟专用网络：通过建立在公共网络上的<strong>安全隧道</strong>，实现总部与分部的安全连接，在逻辑上建立一个专用网络，大大降低了费用。由隧道模式 ESP 实现的 IPsec 是 VPN 最常见的实现方法。</p>
+<p><img src="https://i.loli.net/2020/02/10/Ay3ohPu6sZIarG2.png" alt="虚拟专用网络"></p>
+<p>隧道：通过 Internet 提供安全的端到端的数据传输，本质上是一种加密与封装。数据进入隧道时经 VPN 封装在 Internet 中传输。</p>
+<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><p><img src="https://i.loli.net/2020/02/11/cPOTpuCNy6EUd4F.png" alt="VPN实例"></p>
+<ol>
+<li>R1 将 IP 数据报转换为 IPsec 数据报<ul>
+<li>检索 SPD，确定 SP</li>
+<li>检索 SAD，确定 SA</li>
+<li>在源 IP 数据报后面附加 ESP 尾部</li>
+<li>利用 SA 的加密算法与密钥加密数据报</li>
+<li>在加密结果前面附加 ESP 头</li>
+<li>利用 SA 的加密算法与密钥创建报文认证码 MAC</li>
+<li>构造新 IP 头，发到 R2 去</li>
+</ul>
+</li>
+<li>R2 解封 IPsec 数据报<ul>
+<li>提取 SPI 去检索 SAD，确定 SA</li>
+<li>利用共享密钥解出原始 IP 数据报</li>
+</ul>
+</li>
+</ol>
+<h1 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h1><p>防火墙是隔离内网与公共互联网，阻止某些分组进入 or 离开内网的软硬件设施。可分为三类：</p>
+<ul>
+<li>无状态分组过滤：位于网络边缘路由器，根据 IP 地址、端口号、协议类型等信息逐个过滤分组决定是否转发。</li>
+<li>有状态组过滤：跟踪每个 TCP 连接，根据 SYN、FIN 等状态决定是否放行分组。</li>
+<li>应用网关：基于应用层数据过滤分组<br><img src="https://i.loli.net/2020/02/11/i87WYut32LzXHVG.png" alt="应用网关"></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/网络安全/" rel="tag"># 网络安全</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/30/网络那些事之链路层/" rel="next" title="网络那些事之链路层">
+                <i class="fa fa-chevron-left"></i> 网络那些事之链路层
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/13/URI与URL/" rel="prev" title="网络那些事之URI">
+                网络那些事之URI <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/惊讶猫.jpg" alt="路边的土豆">
+            
+              <p class="site-author-name" itemprop="name">路边的土豆</p>
+              <p class="site-description motion-element" itemprop="description">高山仰止，景行行止。虽不能至，心向往之。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/yue-qiu" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:qiuyue9971@126.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/qiu-yue-37-3" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#网络安全的基本属性"><span class="nav-number">1.</span> <span class="nav-text">网络安全的基本属性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常见攻击手段"><span class="nav-number">2.</span> <span class="nav-text">常见攻击手段</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#密码学基础"><span class="nav-number">3.</span> <span class="nav-text">密码学基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#术语"><span class="nav-number">3.1.</span> <span class="nav-text">术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传统加密方法"><span class="nav-number">3.2.</span> <span class="nav-text">传统加密方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#现代加密方法"><span class="nav-number">3.3.</span> <span class="nav-text">现代加密方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对称加密"><span class="nav-number">3.3.1.</span> <span class="nav-text">对称加密</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#分组密码例子：DES"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">分组密码例子：DES</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分组密码例子：AES"><span class="nav-number">3.3.1.2.</span> <span class="nav-text">分组密码例子：AES</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非对称加密"><span class="nav-number">3.3.2.</span> <span class="nav-text">非对称加密</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#非对称加密例子：RSA"><span class="nav-number">3.3.2.1.</span> <span class="nav-text">非对称加密例子：RSA</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#报文完整性"><span class="nav-number">4.</span> <span class="nav-text">报文完整性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数字签名"><span class="nav-number">4.1.</span> <span class="nav-text">数字签名</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#密钥分发中心（KDC）"><span class="nav-number">5.</span> <span class="nav-text">密钥分发中心（KDC）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#认证中心（CA）"><span class="nav-number">6.</span> <span class="nav-text">认证中心（CA）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SSL"><span class="nav-number">7.</span> <span class="nav-text">SSL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL-通信概览"><span class="nav-number">7.1.</span> <span class="nav-text">SSL 通信概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#现实中的-SSL-协议栈"><span class="nav-number">7.2.</span> <span class="nav-text">现实中的 SSL 协议栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL-握手过程"><span class="nav-number">7.3.</span> <span class="nav-text">SSL 握手过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IPsec"><span class="nav-number">8.</span> <span class="nav-text">IPsec</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安全关联"><span class="nav-number">8.1.</span> <span class="nav-text">安全关联</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安全策略"><span class="nav-number">8.2.</span> <span class="nav-text">安全策略</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#虚拟专用网（VPN）"><span class="nav-number">9.</span> <span class="nav-text">虚拟专用网（VPN）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现过程"><span class="nav-number">9.1.</span> <span class="nav-text">实现过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#防火墙"><span class="nav-number">10.</span> <span class="nav-text">防火墙</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">路边的土豆</span>
+
+  
+</div>
+
+
+<div class="powered-by">
+  Hosted by  
+  <a class="theme-link" href="https://pages.coding.me">
+    Coding Pages
+  </a>   
+</div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  
+    <span class="site-uv">
+      本站访客人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站访客总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'aMaKMjBVPa5XOf0bdfaeqpy5-gzGzoHsz',
+        appKey: 'NUE5wMDsMaQAeYjT5C9KmT3s',
+        placeholder: '不需要填网址也能评论哦(*^▽^*)',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("aMaKMjBVPa5XOf0bdfaeqpy5-gzGzoHsz", "NUE5wMDsMaQAeYjT5C9KmT3s");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
