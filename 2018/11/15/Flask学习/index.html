@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="新一代虚拟环境工具：pipenv以前虚拟环境主要靠 virtualenv， 配合 requirements.txt 做到一键安装依赖的效果。但是 requirements.txt 需要手动管理包记录，每次安装新的包之后都要更新这个文件，很麻烦。现在有了新的工具 pipenv。pipenv 将虚拟环境配置与依赖包管理整合在一起，并自动记录依赖包的安装、更新与卸载。真正做到了”一键使用“。pipenv">
+<meta name="keywords" content="Flask">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flask——启动吧，Flask！">
+<meta property="og:url" content="http://yoursite.com/2018/11/15/Flask学习/index.html">
+<meta property="og:site_name" content="精神的壳">
+<meta property="og:description" content="新一代虚拟环境工具：pipenv以前虚拟环境主要靠 virtualenv， 配合 requirements.txt 做到一键安装依赖的效果。但是 requirements.txt 需要手动管理包记录，每次安装新的包之后都要更新这个文件，很麻烦。现在有了新的工具 pipenv。pipenv 将虚拟环境配置与依赖包管理整合在一起，并自动记录依赖包的安装、更新与卸载。真正做到了”一键使用“。pipenv">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-11-22T14:18:54.354Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Flask——启动吧，Flask！">
+<meta name="twitter:description" content="新一代虚拟环境工具：pipenv以前虚拟环境主要靠 virtualenv， 配合 requirements.txt 做到一键安装依赖的效果。但是 requirements.txt 需要手动管理包记录，每次安装新的包之后都要更新这个文件，很麻烦。现在有了新的工具 pipenv。pipenv 将虚拟环境配置与依赖包管理整合在一起，并自动记录依赖包的安装、更新与卸载。真正做到了”一键使用“。pipenv">
+
+<link rel="canonical" href="http://yoursite.com/2018/11/15/Flask学习/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Flask——启动吧，Flask！ | 精神的壳</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">精神的壳</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/15/Flask学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="路边的土豆">
+      <meta itemprop="description" content="高山仰止，景行行止。虽不能至，心向往之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="精神的壳">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Flask——启动吧，Flask！
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-11-15 19:00:19" itemprop="dateCreated datePublished" datetime="2018-11-15T19:00:19+08:00">2018-11-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-11-22 22:18:54" itemprop="dateModified" datetime="2018-11-22T22:18:54+08:00">2018-11-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web开发/" itemprop="url" rel="index"><span itemprop="name">Web开发</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="新一代虚拟环境工具：pipenv"><a href="#新一代虚拟环境工具：pipenv" class="headerlink" title="新一代虚拟环境工具：pipenv"></a>新一代虚拟环境工具：pipenv</h1><p>以前虚拟环境主要靠 virtualenv， 配合 requirements.txt 做到一键安装依赖的效果。但是 requirements.txt 需要手动管理包记录，每次安装新的包之后都要更新这个文件，很麻烦。现在有了新的工具 pipenv。pipenv 将虚拟环境配置与依赖包管理整合在一起，并自动记录依赖包的安装、更新与卸载。真正做到了”一键使用“。pipenv 的用法参考<a href="https://zhuanlan.zhihu.com/p/37581807" target="_blank" rel="noopener">这篇文章</a>。</p>
+<h1 id="启动Flask"><a href="#启动Flask" class="headerlink" title="启动Flask"></a>启动Flask</h1><p>在 Flask 更新到版本 1.0 以后，不再推荐使用下面的方式启动 Flask</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.run()</span><br></pre></td></tr></table></figure>
+<p>取而代之的是命令</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flask run</span><br></pre></td></tr></table></figure>
+<p>Flask 根据以下规则会自动探测程序实例：</p>
+<ol>
+<li>从当前目录寻找 app.py 或 wsgi.py 模块，并从中寻找名为 app 或 application 的实例</li>
+<li>从环境变量 FLASK_APP 对应的值寻找名为 app 或 application 的实例</li>
+</ol>
+<p>例如，如果 Flask 实例 app 位于 hello.py，将 FLASK_APP 设为 hello，Flask 就会在当前目录的 hello.py 模块寻找实例</p>
+<p>Flask 默认为生产模式(production mode), 通过环境变量 FLASK_ENV 可以修改为开发模式(debug mode)：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FLASK_ENV = development</span><br></pre></td></tr></table></figure>
+<p>利用 –host 与 –port 参数可以修改 Flask 运行主机与端口</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">flask run --host=0.0.0.0</span><br><span class="line">flask run --port=9000</span><br></pre></td></tr></table></figure>
+<p>也可以通过环境变量 FLASK_RUN_HOST 与 FLASK_RUN_PORT 设置。</p>
+<p>可以通过 <code>flask --help</code> 查看所有可用命令</p>
+<h1 id="管理环境变量"><a href="#管理环境变量" class="headerlink" title="管理环境变量"></a>管理环境变量</h1><p>如果安装了 python-dotenv 包， Flask 会从 .env 文件 和 .flaskenv 文件中加载环境变量。此时 Flask 加载环境变量的优先级是：系统环境变量 &gt; .env 中的环境变量 &gt; .flaskenv 中的环境变量</p>
+<p>.env 用于存放公开环境变量, 如 FLAKS_APP, .flaskenv 用于存放敏感环境变量如 Email 账号密码：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">!# MyFlask/.env</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 这是注释</span><br><span class="line">FLASK_APP = hello</span><br></pre></td></tr></table></figure>
+<h1 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h1><p>用如下命令可以启动带有上下文的 Python Shell 环境：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flask shell</span><br></pre></td></tr></table></figure>
+<p>和其他 flask 命令相同，在执行这个命令前要确保 Flask 实例可以被找到</p>
+<h1 id="flask-命令"><a href="#flask-命令" class="headerlink" title="flask 命令"></a>flask 命令</h1><p>通过为一个函数添加 @app.cli.command() 装饰器，可以注册一个 flask 命令。函数的名称即为命令名，也可以通过给装饰器传参的方式命名：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.cli.command('greet')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">()</span>:</span></span><br><span class="line">    click.echo(<span class="string">'hello!'</span>)</span><br></pre></td></tr></table></figure>
+<p>flask 命令是通过 Click 包实现的，更多关于自定义命令的设置和功能请看<a href="http://click.pocoo.org/6/" target="_blank" rel="noopener">Click文档</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Flask/" rel="tag"># Flask</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/06/28/java程序设计-集合/" rel="prev" title="java基础-使用集合类">
+      <i class="fa fa-chevron-left"></i> java基础-使用集合类
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/01/27/Java基础——泛型数组/" rel="next" title="Java 禁止创建泛型数组">
+      Java 禁止创建泛型数组 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#新一代虚拟环境工具：pipenv"><span class="nav-number">1.</span> <span class="nav-text">新一代虚拟环境工具：pipenv</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启动Flask"><span class="nav-number">2.</span> <span class="nav-text">启动Flask</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#管理环境变量"><span class="nav-number">3.</span> <span class="nav-text">管理环境变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Shell"><span class="nav-number">4.</span> <span class="nav-text">Shell</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#flask-命令"><span class="nav-number">5.</span> <span class="nav-text">flask 命令</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">路边的土豆</p>
+  <div class="site-description" itemprop="description">高山仰止，景行行止。虽不能至，心向往之。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">路边的土豆</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

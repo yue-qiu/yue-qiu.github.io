@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="术语 结点（node）：主机和路由器 链路（link）：相邻结点的连接通道 帧（frame）：链路层数据分组  服务链路层负责通过一条链路在相邻结点之间传送数据报：  组帧：封装数据报构成数据帧，加首部和尾部，帧同步（将物理层比特流转换为帧） 链路接入：如果链路是共享的，需要解决链路接入问题。帧首部 MAC 地址用于标识帧的源和目的地 相邻结点间的可靠交付（不一定实现） 流量控制：协调相邻的发送和">
+<meta name="keywords" content="链路层">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络那些事之链路层">
+<meta property="og:url" content="http://yoursite.com/2020/01/30/网络那些事之链路层/index.html">
+<meta property="og:site_name" content="精神的壳">
+<meta property="og:description" content="术语 结点（node）：主机和路由器 链路（link）：相邻结点的连接通道 帧（frame）：链路层数据分组  服务链路层负责通过一条链路在相邻结点之间传送数据报：  组帧：封装数据报构成数据帧，加首部和尾部，帧同步（将物理层比特流转换为帧） 链路接入：如果链路是共享的，需要解决链路接入问题。帧首部 MAC 地址用于标识帧的源和目的地 相邻结点间的可靠交付（不一定实现） 流量控制：协调相邻的发送和">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2020/01/31/OQePn1hbz65NMXG.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/02/Z2LgfdqeOl64Nku.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/02/wfSurjoh4TsUFCg.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/02/Sb13soanWqRtAyV.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/02/gz5fEopJ2X7Zjw4.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/03/M2hT9UxicJ5mapt.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/03/HqX1ytmhi8RJxnD.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/03/hZRAYIUpXG9q6c3.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/03/OiRWNLvsruQg4a5.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/03/1q5hVjXolUWLFsA.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/03/6ISrl85JXjqokQC.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/03/TIbQX3Sf5Uc9nvB.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/03/gPpzCavur2m91bk.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/05/cZXOdiAoawHnWI7.png">
+<meta property="og:image" content="https://i.loli.net/2020/02/05/OJNQRrKyuDflYqm.png">
+<meta property="og:updated_time" content="2020-02-06T07:07:54.721Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网络那些事之链路层">
+<meta name="twitter:description" content="术语 结点（node）：主机和路由器 链路（link）：相邻结点的连接通道 帧（frame）：链路层数据分组  服务链路层负责通过一条链路在相邻结点之间传送数据报：  组帧：封装数据报构成数据帧，加首部和尾部，帧同步（将物理层比特流转换为帧） 链路接入：如果链路是共享的，需要解决链路接入问题。帧首部 MAC 地址用于标识帧的源和目的地 相邻结点间的可靠交付（不一定实现） 流量控制：协调相邻的发送和">
+<meta name="twitter:image" content="https://i.loli.net/2020/01/31/OQePn1hbz65NMXG.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/01/30/网络那些事之链路层/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>网络那些事之链路层 | 精神的壳</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">精神的壳</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/30/网络那些事之链路层/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="路边的土豆">
+      <meta itemprop="description" content="高山仰止，景行行止。虽不能至，心向往之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="精神的壳">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          网络那些事之链路层
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-01-30 16:51:35" itemprop="dateCreated datePublished" datetime="2020-01-30T16:51:35+08:00">2020-01-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-06 15:07:54" itemprop="dateModified" datetime="2020-02-06T15:07:54+08:00">2020-02-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机网络/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h1><ul>
+<li>结点（node）：主机和路由器</li>
+<li>链路（link）：相邻结点的连接通道</li>
+<li>帧（frame）：链路层数据分组</li>
+</ul>
+<h1 id="服务"><a href="#服务" class="headerlink" title="服务"></a>服务</h1><p>链路层负责通过一条链路在相邻结点之间传送数据报：</p>
+<ul>
+<li>组帧：封装数据报构成数据帧，加首部和尾部，帧同步（将物理层比特流转换为帧）</li>
+<li>链路接入：如果链路是共享的，需要解决<code>链路接入</code>问题。帧首部 MAC 地址用于标识帧的源和目的地</li>
+<li>相邻结点间的可靠交付（不一定实现）</li>
+<li>流量控制：协调相邻的发送和接收结点</li>
+<li>差错检测与纠正：应对信号衰减和噪声</li>
+</ul>
+<h1 id="差错编码"><a href="#差错编码" class="headerlink" title="差错编码"></a>差错编码</h1><p>D -&gt; DR，R 为差错检测与纠正比特（冗余比特）：</p>
+<p><img src="https://i.loli.net/2020/01/31/OQePn1hbz65NMXG.png" alt="线性分组码"></p>
+<p><strong>差错编码不保证 100% 可靠</strong>，分为<strong>检错码</strong>与<strong>纠错码</strong>。</p>
+<h2 id="检错"><a href="#检错" class="headerlink" title="检错"></a>检错</h2><p>设 C<sub>i</sub>、C<sub>j</sub> 为编码集中任意两个码字，C’ 为错出错码字：</p>
+<p>对于检错码，如果编码集的汉明距离 d = r + 1，则该差错编码可以检测 r 位差错</p>
+<p><img src="https://i.loli.net/2020/02/02/Z2LgfdqeOl64Nku.png" alt="检错码"></p>
+<p>对于纠错码，若编码集的汉明距离 D = 2r + 1，则该差错编码可以纠错 r 位差错</p>
+<p><img src="https://i.loli.net/2020/02/02/wfSurjoh4TsUFCg.png" alt="纠错码"></p>
+<h3 id="奇偶校验"><a href="#奇偶校验" class="headerlink" title="奇偶校验"></a>奇偶校验</h3><p>给一串比特增加一个校验位，使得该串中所有 “1” 的个数之和为奇数称奇校验，为偶数称偶校验。</p>
+<p><img src="https://i.loli.net/2020/02/02/Sb13soanWqRtAyV.png" alt="奇校验"></p>
+<p><img src="https://i.loli.net/2020/02/02/gz5fEopJ2X7Zjw4.png" alt="偶校验"></p>
+<p>数据和校验位发送给接受方后，接收方再次对数据中1的个数进行计算，如果为奇数则校验通过，表示此次传输过程未发生错误。如果不是奇数，则表示有错误发生，此时接收方可以向发送方发送请求，要求重新发送一遍数据。</p>
+<p>优点：</p>
+<ul>
+<li>容易实现</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>奇偶校验的检错率只有50%，因为只有奇数个数据位发生变化能检测到，如果偶数个数据位发生变化则无能为力了</li>
+<li>每传输一个字节都需要加一位校验位，对传输效率影响很大</li>
+<li>奇偶校验只能发现错误，但不能纠正错误，也就是说它只能告诉你出错了，但不能告诉你怎么出错了，一旦发现错误，只好重发</li>
+</ul>
+<h3 id="校验和"><a href="#校验和" class="headerlink" title="校验和"></a>校验和</h3><p>发送端：</p>
+<ol>
+<li>将数据按 16 bits 一组划分为的二进制数序列（此时数据中校验和字段为 0）</li>
+<li>求和（Sum）：对这些二进制数求和（最高进位的 “1” 返回最低位继续相加）</li>
+<li>校验和（CheckSum）：Sum 的反码</li>
+</ol>
+<p>接收端：</p>
+<ol>
+<li>重新计算数据的 CheckSum’（此时数据中校验和字段不为 0）</li>
+<li>16 位 CheckSum’ 全为 0，无错</li>
+</ol>
+<h1 id="MAC-协议"><a href="#MAC-协议" class="headerlink" title="MAC 协议"></a>MAC 协议</h1><p>功能：多结点共享传输信道过程中，避免信号互相干扰。</p>
+<p>有三类 MAC 协议：</p>
+<ul>
+<li>信道划分 MAC 协议：利用多路复用（时分、频分）支持多结点，每个结点只使用自己那部分</li>
+<li>随机访问 MAC 协议：信道不划分，允许冲突。采用“冲突恢复”机制</li>
+<li>轮转 MAX 协议：结点轮流使用信道，使用时占用全部带宽</li>
+</ul>
+<h2 id="随机访问-MAC-协议"><a href="#随机访问-MAC-协议" class="headerlink" title="随机访问 MAC 协议"></a>随机访问 MAC 协议</h2><p>结点发送分组时：</p>
+<ul>
+<li>利用信道全部带宽 R 发送分组</li>
+<li>没有事先的结点间协调</li>
+</ul>
+<p>当两个或多个结点同时传输，会发生“<strong>冲突</strong>”。</p>
+<h3 id="典型：时隙-ALOHA-协议"><a href="#典型：时隙-ALOHA-协议" class="headerlink" title="典型：时隙 ALOHA 协议"></a>典型：时隙 ALOHA 协议</h3><p>假定：</p>
+<ul>
+<li>所有帧大小相同</li>
+<li>时间被划分为等长时隙（每个时隙刚好可以传输 1 个帧）</li>
+<li>结点只在时隙开始时发送帧</li>
+<li>结点能检测到冲突</li>
+<li>所有结点的时钟同步</li>
+</ul>
+<p>运行：</p>
+<ul>
+<li>当结点有新帧，在下一时隙发送：<ul>
+<li>无冲突：该结点可以在下一时隙继续发新帧</li>
+<li>冲突：该结点在下一时隙以概率 <strong>P</strong> 重传帧</li>
+</ul>
+</li>
+</ul>
+<p>设 C 冲突时隙，E 空闲时隙，S 成功时隙：</p>
+<p><img src="https://i.loli.net/2020/02/03/M2hT9UxicJ5mapt.png" alt="时隙ALOHA"></p>
+<h3 id="典型：纯-ALOHA-协议"><a href="#典型：纯-ALOHA-协议" class="headerlink" title="典型：纯 ALOHA 协议"></a>典型：纯 ALOHA 协议</h3><p>不划分时隙的 ALOHA 协议，<strong>无需同步</strong>。</p>
+<p>当有新的帧生成：</p>
+<ul>
+<li>立即发送</li>
+<li>冲突可能性增大</li>
+</ul>
+<p>在 t<sub>0</sub> 时刻发送的帧，会与在 (t<sub>0</sub>-1, t<sub>0</sub>+1) 时间发送的帧冲突：<br><img src="https://i.loli.net/2020/02/03/HqX1ytmhi8RJxnD.png" alt="纯ALOHA"></p>
+<h3 id="典型：CSMA-协议"><a href="#典型：CSMA-协议" class="headerlink" title="典型：CSMA 协议"></a>典型：CSMA 协议</h3><p>ALOHA 协议经常做些损人不利己的事，不考虑其它结点的感受去占用信道。<strong>载波监听多路访问协议 CSMA</strong>(carrier sense multiple access) 与之相比最大的改进在于<strong>发送帧之前，先监听信道（载波）</strong>：</p>
+<ul>
+<li>信道空闲：发送完整帧</li>
+<li>信道忙：推迟发送<ul>
+<li>1-坚持 CSMA：以概率 P=1 <strong>一直监听</strong>信道，一旦信道空闲立刻发送这个帧</li>
+<li>非坚持 CSMA：<strong>随机监听</strong>信道</li>
+<li>P-坚持 CSMA以 概率 P 坚持监听信道，以 概率 1-p 随机监听信道</li>
+</ul>
+</li>
+</ul>
+<p>由于信号在信道上的传输延迟，冲突仍然可能发生：</p>
+<p><img src="https://i.loli.net/2020/02/03/hZRAYIUpXG9q6c3.png" alt="CSDM冲突"></p>
+<h3 id="典型：CSMA-CD-协议"><a href="#典型：CSMA-CD-协议" class="headerlink" title="典型：CSMA/CD 协议"></a>典型：CSMA/CD 协议</h3><p>CSMA/CD 协议是带有冲突检测的 CSMA 协议：</p>
+<ul>
+<li>短时间内可以检测到冲突</li>
+<li>冲突后传输中止，减少信道浪费</li>
+</ul>
+<p><img src="https://i.loli.net/2020/02/03/OiRWNLvsruQg4a5.png" alt="CSDM/CD冲突检测"></p>
+<p>最大特点：<strong>边发边听，不发不听！</strong></p>
+<p>设网络带宽 R(bps)，数据帧最小长度 L<sub>min(bits)，信号传播速度 V(m/s)：</sub></p>
+<p><img src="https://i.loli.net/2020/02/03/1q5hVjXolUWLFsA.png" alt="最小发送时间"></p>
+<p>A 如果要检测到 B 的冲突，必须保证 L<sub>min</sub>/R &gt;= 2d<sub>max</sub>/V，如果算上路由器等耗时则是 <strong>L<sub>min</sub>/R &gt;= RTT</strong>。</p>
+<h2 id="信道划分与随机访问对比"><a href="#信道划分与随机访问对比" class="headerlink" title="信道划分与随机访问对比"></a>信道划分与随机访问对比</h2><p>信道划分 MAC 协议：</p>
+<ul>
+<li>网络负载重时，共享信道<strong>效率高</strong>且<strong>公平</strong></li>
+<li>网络负载轻时，共享信道<strong>效率低</strong></li>
+</ul>
+<p>随机访问 MAC 协议：</p>
+<ul>
+<li>网络负载轻时，共享信道<strong>效率高</strong>，单个结点可以利用全部带宽</li>
+<li>网络负载重时，产生冲突开销</li>
+</ul>
+<h1 id="ARP-与-MAC"><a href="#ARP-与-MAC" class="headerlink" title="ARP 与 MAC"></a>ARP 与 MAC</h1><h2 id="MAC-地址"><a href="#MAC-地址" class="headerlink" title="MAC 地址"></a>MAC 地址</h2><p>共 48bits，用 16 进制形式表示。用于标识局域网内一个帧从哪个接口发出，到达哪个物理相连的其他接口。每块网卡都有自己独有的 MAC 地址，如：1A-2F-BB-76-09-AD</p>
+<h2 id="ARP-协议"><a href="#ARP-协议" class="headerlink" title="ARP 协议"></a>ARP 协议</h2><p>地址解析协议（ARP）负责网络层 IP 地址与链路层 MAC 地址的转换。</p>
+<p><strong>ARP 表</strong>：LAN 中每个 IP 结点维护一个表，存储某些 LAN 结点的 IP/Mac 地址映射关系：(IP 地址，MAC 地址，TTL)</p>
+<p>例1：A 想要给<strong>同一局域网内</strong>的 B 发送数据报（B 的MAC 地址不在 A 的 ARP 表中）：</p>
+<ol>
+<li>A <strong>广播</strong> ARP 查询分组，其中包含 B 的 IP 地址</li>
+<li>B 接收 ARP 查询分组，IP 地址匹配成功，向 A 应答 B 的 MAC 地址</li>
+<li>A 在自己的 ARP 表中缓存 B 的 IP-MAC 映射直至超时（超时后再次刷新）</li>
+</ol>
+<p>例2：A 想要给<strong>不同局域网内</strong>的 B 发送数据报（B 的MAC 地址不在 A 的 ARP 表中，A 知道第一跳路由器接口的 MAC 地址）：</p>
+<p><img src="https://i.loli.net/2020/02/03/6ISrl85JXjqokQC.png" alt="LAN间ARP"></p>
+<ol>
+<li>A 构造 IP 数据报，源 IP 地址为 A 的，目的 IP 地址为 B 的</li>
+<li>A 构造链路层帧，源 MAC 地址为 A 的，目的 MAC 地址为第一跳路由器的</li>
+<li>R 接收帧，提取 IP 数据报传递给上层 IP 协议，利用转发表转发 IP 数据报</li>
+<li>R 创建链路层帧，源 MAC 地址为 R 出口的，目的 MAC 地址为 B 的</li>
+</ol>
+<h1 id="交换机"><a href="#交换机" class="headerlink" title="交换机"></a>交换机</h1><p>交换机是典型的<strong>链路层设备</strong>，交换可以在多个主机间<strong>同时</strong>进行。特点有：</p>
+<ul>
+<li>存储、转发以太网帧</li>
+<li>检验到达帧的 MAC 地址，选择性向一个或多个输出链路转发</li>
+<li>利用 CSMA/CD 协议访问链路</li>
+</ul>
+<p><img src="https://i.loli.net/2020/02/03/TIbQX3Sf5Uc9nvB.png" alt="交换机"></p>
+<p>每个交换机维护一张<strong>交换表</strong>，每个表项存放（主机 MAC 地址，到达主机的接口，时间戳）。</p>
+<p>交换机通过<strong>自学习</strong>，获知到达主机的接口信息。当一个帧到达交换机时：</p>
+<ol>
+<li>收帧，交换机提取到帧的源 MAC 地址，将源主机的 MAC 地址与接口信息记录到交换表中</li>
+<li>利用目的 MAC 地址检索交换表<ul>
+<li>检索成功：如果目的主机与源主机处于同一网段（有相同的交换机接口）则丢弃帧；否则将帧转发到相应接口</li>
+<li>检索失败：洪泛（向除了接收接口之外所有接口转发）</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://i.loli.net/2020/02/03/gPpzCavur2m91bk.png" alt="组织机构网络"></p>
+<h2 id="交换机-vs-路由器"><a href="#交换机-vs-路由器" class="headerlink" title="交换机 vs 路由器"></a>交换机 vs 路由器</h2><p>两者均为存储、转发设备：</p>
+<ul>
+<li>路由器：网络层设备（检测网络层分组首部）</li>
+<li>交换机：链路层设备（检测链路层帧首部）</li>
+</ul>
+<p>两者均使用转发表：</p>
+<ul>
+<li>路由器：利用路由算法</li>
+<li>交换机：利用自学习</li>
+</ul>
+<h2 id="虚拟局域网（VLAN）"><a href="#虚拟局域网（VLAN）" class="headerlink" title="虚拟局域网（VLAN）"></a>虚拟局域网（VLAN）</h2><p>通过对交换机接口或 MAC 地址进行分组，在一个物理局域网上配置多个虚拟局域网。这样就避免了广播报文（DHCP、ARP 等）在不必要的机器组中传播（<strong>流量隔离</strong>）：</p>
+<p><img src="https://i.loli.net/2020/02/05/cZXOdiAoawHnWI7.png" alt="接口分组"></p>
+<p><img src="https://i.loli.net/2020/02/05/OJNQRrKyuDflYqm.png" alt="MAC分组"></p>
+<p><strong>通过路由器在 VLAN 间转发</strong>（像独立的交换机之间）。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/链路层/" rel="tag"># 链路层</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/01/25/网络那些事之网络层/" rel="prev" title="网络那些事之网络层">
+      <i class="fa fa-chevron-left"></i> 网络那些事之网络层
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/06/网络那些事之网络安全/" rel="next" title="网络那些事之网络安全">
+      网络那些事之网络安全 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#术语"><span class="nav-number">1.</span> <span class="nav-text">术语</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#服务"><span class="nav-number">2.</span> <span class="nav-text">服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#差错编码"><span class="nav-number">3.</span> <span class="nav-text">差错编码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#检错"><span class="nav-number">3.1.</span> <span class="nav-text">检错</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#奇偶校验"><span class="nav-number">3.1.1.</span> <span class="nav-text">奇偶校验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#校验和"><span class="nav-number">3.1.2.</span> <span class="nav-text">校验和</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MAC-协议"><span class="nav-number">4.</span> <span class="nav-text">MAC 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#随机访问-MAC-协议"><span class="nav-number">4.1.</span> <span class="nav-text">随机访问 MAC 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#典型：时隙-ALOHA-协议"><span class="nav-number">4.1.1.</span> <span class="nav-text">典型：时隙 ALOHA 协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#典型：纯-ALOHA-协议"><span class="nav-number">4.1.2.</span> <span class="nav-text">典型：纯 ALOHA 协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#典型：CSMA-协议"><span class="nav-number">4.1.3.</span> <span class="nav-text">典型：CSMA 协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#典型：CSMA-CD-协议"><span class="nav-number">4.1.4.</span> <span class="nav-text">典型：CSMA/CD 协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信道划分与随机访问对比"><span class="nav-number">4.2.</span> <span class="nav-text">信道划分与随机访问对比</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ARP-与-MAC"><span class="nav-number">5.</span> <span class="nav-text">ARP 与 MAC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MAC-地址"><span class="nav-number">5.1.</span> <span class="nav-text">MAC 地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ARP-协议"><span class="nav-number">5.2.</span> <span class="nav-text">ARP 协议</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#交换机"><span class="nav-number">6.</span> <span class="nav-text">交换机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#交换机-vs-路由器"><span class="nav-number">6.1.</span> <span class="nav-text">交换机 vs 路由器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟局域网（VLAN）"><span class="nav-number">6.2.</span> <span class="nav-text">虚拟局域网（VLAN）</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">路边的土豆</p>
+  <div class="site-description" itemprop="description">高山仰止，景行行止。虽不能至，心向往之。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">路边的土豆</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
