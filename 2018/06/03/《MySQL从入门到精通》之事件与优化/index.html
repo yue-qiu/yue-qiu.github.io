@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="精神的壳">
 <meta property="og:description" content="在 MySQL 中，事务由一条或多条 SQL 语句组成，在这个事务中，每条 MySQL 语句是相互依赖的。而整个事务作为一个不可分割的整体，一旦某条 MySQL 语句执行失败或产生错误，整个事务将会回滚。 只有 InnoDB 类型的表支持事务。MySQL默认表类型为 InnoDB。 事务的基本要素(ACID) 原子性（Atomicity）：事务开始后所有操作，要么全部做完，要么全部不做，不可能停滞">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-04-20T16:24:32.540Z">
+<meta property="og:updated_time" content="2020-05-11T00:22:35.684Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL之事务与优化">
 <meta name="twitter:description" content="在 MySQL 中，事务由一条或多条 SQL 语句组成，在这个事务中，每条 MySQL 语句是相互依赖的。而整个事务作为一个不可分割的整体，一旦某条 MySQL 语句执行失败或产生错误，整个事务将会回滚。 只有 InnoDB 类型的表支持事务。MySQL默认表类型为 InnoDB。 事务的基本要素(ACID) 原子性（Atomicity）：事务开始后所有操作，要么全部做完，要么全部不做，不可能停滞">
@@ -437,8 +437,8 @@
 <h2 id="事务的隔离性等级"><a href="#事务的隔离性等级" class="headerlink" title="事务的隔离性等级"></a>事务的隔离性等级</h2><p>事务具有隔离的空间。在 MySQL 服务器中，用户通过不同的会话执行不同的事务，在多用户环境中，许多 RDBMS（关系型数据库管理系统）会话在任意时刻都是活动的。为了使这些事务互不影响，保证数据库性能不受影响，采用事务的孤立等级是很重要的。</p>
 <p>如果没有孤立性，不同的查询操作会在同一事务的环境中检索到不同的结果，这将导致数据的不一致性。</p>
 <ol>
-<li>序列化(serializable)：以序列的形式对事务进行处理。该孤立级的特定是只有当事务提交后，用户才能从数据库上查看数据的变化。。</li>
-<li>可重读(repeatale read)：对应于程序的安全性做出部分妥协，以提高性能。事务在孤立级上不会被看成一个序列，不过在当前执行的事务过程中，用户依然看不到事务的过程。直到事务提交为止，用户才能看到事务的变化结果。（客户端 A、B 同时开启事务，B 向表中插入数据行且提交后，A 在自己提交前是看不到改变的）</li>
+<li>序列化(serializable)：以序列的形式对事务进行处理。该孤立级的特定是只有当事务提交后，用户才能从数据库上查看数据的变化。</li>
+<li>可重读(repeatale read)：事务在孤立级上不会被看成一个序列，不过在当前执行的事务过程中，用户依然看不到事务的过程。直到事务提交为止，用户才能看到事务的变化结果。（客户端 A、B 同时开启事务，B 向表中插入数据行且提交后，A 在自己提交前是看不到改变的）。<strong>是 MySQL 的默认隔离级别</strong>。  </li>
 <li>读已提交(read committed)：该孤立级的安全性比可重读低。在这一级事务用户可以看到其他事务添加到新纪录。在事务处理时如果存在其他用户同时对事务的相应表进行修改那么在同一事务的不同时间内，查询操作可能返回不同的结果(客户端 A、B 同时开启事务，B 向表中插入数据行且提交后，A 在自己提交前可以看到改变)</li>
 <li>读未提交(read uncommitted)：该孤立级提供事务之间最小程度间隔，该孤立级容易产生幻读。其他用户可以在该孤立级上看到未提交的事务。(客户端 A、B 同时开启事务，B 向表中插入数据行且未提交，A 也可以看到改变)</li>
 </ol>
@@ -478,8 +478,11 @@
 </tr>
 </tbody>
 </table>
+<p>不可重复读的重点是修改:同样的条件, 你读取过的数据, 再次读取出来发现值不一样了</p>
+<p>幻读的重点在于新增或者删除：同样的条件, 第1次和第2次读出来的记录数不一样</p>
+<p>从存储引擎的角度看，解决不可重复读只需锁住对应行，而解决幻读需要保存数据库在事务开始前的快照。</p>
 <p>设置事务的隔离等级：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">transaction</span> <span class="keyword">isolation</span> <span class="keyword">level</span> ...;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">transaction</span> <span class="keyword">isolation</span> <span class="keyword">level</span> &#123;<span class="keyword">serializable</span> | repeatable <span class="keyword">read</span> | <span class="keyword">read</span> committed | <span class="keyword">read</span> uncommitted&#125;;</span><br></pre></td></tr></table></figure>
 <h2 id="事务的性能"><a href="#事务的性能" class="headerlink" title="事务的性能"></a>事务的性能</h2><h3 id="应用小事务"><a href="#应用小事务" class="headerlink" title="应用小事务"></a>应用小事务</h3><p>应用小事务的意义在于保证每个事务不会在执行前等待很长时间，从而避免各个事务因为互相等待而导致系统性能大幅度下降。应尽量缩短 <code>insert</code>、<code>update</code> 等操作与 <code>commit</code> 之间的间隔时间。</p>
 <h3 id="合适的孤立级"><a href="#合适的孤立级" class="headerlink" title="合适的孤立级"></a>合适的孤立级</h3><p>事务的性能与其对服务器产生的负载成反比，即事务孤立级越高，其性能越低。例如序列化虽然很稳定，但是会大大影响 MySQL 的性能，生产中比较少用，而用乐观锁悲观锁解决幻读等问题</p>
 <h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><p>当两个或多个处于不同序列的用户打算同时更新某相同数据库时，因互相等待对方释放权限而导致双方一直处于等待状态。两个不同序列的客户端同时对数据执行操作极有可能产生死锁。更通俗地讲，当两个事物相互等待操作对方释放所持有的资源而导致两个事务都无法操作对方持有的资源，这样无限期的等待称为死锁。</p>
