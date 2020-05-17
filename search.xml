@@ -746,7 +746,7 @@
 <li>R 创建链路层帧，源 MAC 地址为 R 出口的，目的 MAC 地址为 B 的</li>
 </ol>
 <p><strong>数据帧传递过程中源/目的 MAC 地址不断改变！</strong></p>
-<h1 id="交换机"><a href="#交换机" class="headerlink" title="交换机"></a>交换机</h1><p>交换机是典型的<strong>链路层设备</strong>，交换可以在多个主机间<strong>同时</strong>进行。特点有：</p>
+<h2 id="交换机"><a href="#交换机" class="headerlink" title="交换机"></a>交换机</h2><p>交换机是典型的<strong>链路层设备</strong>，交换可以在多个主机间<strong>同时</strong>进行。特点有：</p>
 <ul>
 <li>存储、转发以太网帧</li>
 <li>检验到达帧的 MAC 地址，选择性向一个或多个输出链路转发</li>
@@ -764,7 +764,7 @@
 </li>
 </ol>
 <p><img src="https://i.loli.net/2020/02/03/gPpzCavur2m91bk.png" alt="组织机构网络"></p>
-<h2 id="交换机-vs-路由器"><a href="#交换机-vs-路由器" class="headerlink" title="交换机 vs 路由器"></a>交换机 vs 路由器</h2><p>两者均为存储、转发设备：</p>
+<h3 id="交换机-vs-路由器"><a href="#交换机-vs-路由器" class="headerlink" title="交换机 vs 路由器"></a>交换机 vs 路由器</h3><p>两者均为存储、转发设备：</p>
 <ul>
 <li>路由器：网络层设备（检测网络层分组首部）</li>
 <li>交换机：链路层设备（检测链路层帧首部）</li>

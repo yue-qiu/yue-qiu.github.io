@@ -103,7 +103,7 @@
 <meta property="og:image" content="https://i.loli.net/2020/02/03/gPpzCavur2m91bk.png">
 <meta property="og:image" content="https://i.loli.net/2020/02/05/cZXOdiAoawHnWI7.png">
 <meta property="og:image" content="https://i.loli.net/2020/02/05/OJNQRrKyuDflYqm.png">
-<meta property="og:updated_time" content="2020-05-17T15:26:37.574Z">
+<meta property="og:updated_time" content="2020-05-17T15:27:06.183Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络那些事之链路层">
 <meta name="twitter:description" content="先明确几个术语：  结点（node）：主机和路由器 链路（link）：相邻结点的连接通道 帧（frame）：链路层数据分组  链路层负责通过一条链路在相邻结点之间传送数据报，提供的服务有：  组帧：封装数据报构成数据帧，加首部和尾部，帧同步（将物理层比特流转换为帧） 链路接入：如果链路是共享的，需要解决链路接入问题。帧首部 MAC 地址用于标识帧的源和目的地 相邻结点间的可靠交付（不一定实现） 流">
@@ -566,7 +566,7 @@
 <li>R 创建链路层帧，源 MAC 地址为 R 出口的，目的 MAC 地址为 B 的</li>
 </ol>
 <p><strong>数据帧传递过程中源/目的 MAC 地址不断改变！</strong></p>
-<h1 id="交换机"><a href="#交换机" class="headerlink" title="交换机"></a>交换机</h1><p>交换机是典型的<strong>链路层设备</strong>，交换可以在多个主机间<strong>同时</strong>进行。特点有：</p>
+<h2 id="交换机"><a href="#交换机" class="headerlink" title="交换机"></a>交换机</h2><p>交换机是典型的<strong>链路层设备</strong>，交换可以在多个主机间<strong>同时</strong>进行。特点有：</p>
 <ul>
 <li>存储、转发以太网帧</li>
 <li>检验到达帧的 MAC 地址，选择性向一个或多个输出链路转发</li>
@@ -584,7 +584,7 @@
 </li>
 </ol>
 <p><img src="https://i.loli.net/2020/02/03/gPpzCavur2m91bk.png" alt="组织机构网络"></p>
-<h2 id="交换机-vs-路由器"><a href="#交换机-vs-路由器" class="headerlink" title="交换机 vs 路由器"></a>交换机 vs 路由器</h2><p>两者均为存储、转发设备：</p>
+<h3 id="交换机-vs-路由器"><a href="#交换机-vs-路由器" class="headerlink" title="交换机 vs 路由器"></a>交换机 vs 路由器</h3><p>两者均为存储、转发设备：</p>
 <ul>
 <li>路由器：网络层设备（检测网络层分组首部）</li>
 <li>交换机：链路层设备（检测链路层帧首部）</li>
@@ -814,7 +814,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#差错编码"><span class="nav-number">1.</span> <span class="nav-text">差错编码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#检错"><span class="nav-number">1.1.</span> <span class="nav-text">检错</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#奇偶校验"><span class="nav-number">1.1.1.</span> <span class="nav-text">奇偶校验</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#校验和"><span class="nav-number">1.1.2.</span> <span class="nav-text">校验和</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MAC-协议"><span class="nav-number">2.</span> <span class="nav-text">MAC 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#随机访问-MAC-协议"><span class="nav-number">2.1.</span> <span class="nav-text">随机访问 MAC 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#典型：时隙-ALOHA-协议"><span class="nav-number">2.1.1.</span> <span class="nav-text">典型：时隙 ALOHA 协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#典型：纯-ALOHA-协议"><span class="nav-number">2.1.2.</span> <span class="nav-text">典型：纯 ALOHA 协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#典型：CSMA-协议"><span class="nav-number">2.1.3.</span> <span class="nav-text">典型：CSMA 协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#典型：CSMA-CD-协议"><span class="nav-number">2.1.4.</span> <span class="nav-text">典型：CSMA/CD 协议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信道划分与随机访问对比"><span class="nav-number">2.2.</span> <span class="nav-text">信道划分与随机访问对比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ARP-与-MAC"><span class="nav-number">3.</span> <span class="nav-text">ARP 与 MAC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ARP-协议"><span class="nav-number">4.</span> <span class="nav-text">ARP 协议</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#交换机"><span class="nav-number"></span> <span class="nav-text">交换机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#交换机-vs-路由器"><span class="nav-number">1.</span> <span class="nav-text">交换机 vs 路由器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟局域网（VLAN）"><span class="nav-number">2.</span> <span class="nav-text">虚拟局域网（VLAN）</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#差错编码"><span class="nav-number">1.</span> <span class="nav-text">差错编码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#检错"><span class="nav-number">1.1.</span> <span class="nav-text">检错</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#奇偶校验"><span class="nav-number">1.1.1.</span> <span class="nav-text">奇偶校验</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#校验和"><span class="nav-number">1.1.2.</span> <span class="nav-text">校验和</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MAC-协议"><span class="nav-number">2.</span> <span class="nav-text">MAC 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#随机访问-MAC-协议"><span class="nav-number">2.1.</span> <span class="nav-text">随机访问 MAC 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#典型：时隙-ALOHA-协议"><span class="nav-number">2.1.1.</span> <span class="nav-text">典型：时隙 ALOHA 协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#典型：纯-ALOHA-协议"><span class="nav-number">2.1.2.</span> <span class="nav-text">典型：纯 ALOHA 协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#典型：CSMA-协议"><span class="nav-number">2.1.3.</span> <span class="nav-text">典型：CSMA 协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#典型：CSMA-CD-协议"><span class="nav-number">2.1.4.</span> <span class="nav-text">典型：CSMA/CD 协议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信道划分与随机访问对比"><span class="nav-number">2.2.</span> <span class="nav-text">信道划分与随机访问对比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ARP-与-MAC"><span class="nav-number">3.</span> <span class="nav-text">ARP 与 MAC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ARP-协议"><span class="nav-number">4.</span> <span class="nav-text">ARP 协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交换机"><span class="nav-number">5.</span> <span class="nav-text">交换机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#交换机-vs-路由器"><span class="nav-number">5.1.</span> <span class="nav-text">交换机 vs 路由器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟局域网（VLAN）"><span class="nav-number">6.</span> <span class="nav-text">虚拟局域网（VLAN）</span></a></li></ol></div>
             
 
           </div>
