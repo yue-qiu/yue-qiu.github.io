@@ -103,7 +103,7 @@
 <meta property="og:image" content="https://i.loli.net/2020/02/03/gPpzCavur2m91bk.png">
 <meta property="og:image" content="https://i.loli.net/2020/02/05/cZXOdiAoawHnWI7.png">
 <meta property="og:image" content="https://i.loli.net/2020/02/05/OJNQRrKyuDflYqm.png">
-<meta property="og:updated_time" content="2020-05-17T15:19:02.057Z">
+<meta property="og:updated_time" content="2020-05-17T15:26:37.574Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络那些事之链路层">
 <meta name="twitter:description" content="先明确几个术语：  结点（node）：主机和路由器 链路（link）：相邻结点的连接通道 帧（frame）：链路层数据分组  链路层负责通过一条链路在相邻结点之间传送数据报，提供的服务有：  组帧：封装数据报构成数据帧，加首部和尾部，帧同步（将物理层比特流转换为帧） 链路接入：如果链路是共享的，需要解决链路接入问题。帧首部 MAC 地址用于标识帧的源和目的地 相邻结点间的可靠交付（不一定实现） 流">
@@ -565,6 +565,7 @@
 <li>R 接收帧，提取 IP 数据报传递给上层 IP 协议，利用转发表转发 IP 数据报</li>
 <li>R 创建链路层帧，源 MAC 地址为 R 出口的，目的 MAC 地址为 B 的</li>
 </ol>
+<p><strong>数据帧传递过程中源/目的 MAC 地址不断改变！</strong></p>
 <h1 id="交换机"><a href="#交换机" class="headerlink" title="交换机"></a>交换机</h1><p>交换机是典型的<strong>链路层设备</strong>，交换可以在多个主机间<strong>同时</strong>进行。特点有：</p>
 <ul>
 <li>存储、转发以太网帧</li>

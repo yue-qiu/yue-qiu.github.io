@@ -745,6 +745,7 @@
 <li>R 接收帧，提取 IP 数据报传递给上层 IP 协议，利用转发表转发 IP 数据报</li>
 <li>R 创建链路层帧，源 MAC 地址为 R 出口的，目的 MAC 地址为 B 的</li>
 </ol>
+<p><strong>数据帧传递过程中源/目的 MAC 地址不断改变！</strong></p>
 <h1 id="交换机"><a href="#交换机" class="headerlink" title="交换机"></a>交换机</h1><p>交换机是典型的<strong>链路层设备</strong>，交换可以在多个主机间<strong>同时</strong>进行。特点有：</p>
 <ul>
 <li>存储、转发以太网帧</li>
