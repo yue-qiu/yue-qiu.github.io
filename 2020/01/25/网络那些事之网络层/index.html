@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="核心功能 路由：确定分组从源到目的经过的路径。由路由算法确定转发表 转发：数据报由路由器的输入端口转移到合适的输出端口。每个路由器维护一个转发表  服务模型在发送方主机与接收方主机之间传输数据报。属于尽力而为服务。  无连接服务：不事先为系列分组的传输确定路径，每个分组独立确定路径。由路由器根据当前网络状态选择路径（数据报网络） 连接服务：首先为系列分组的传输确定路径，建立网络层逻辑连接（虚电路网">
+<meta name="description" content="网络层的核心功能有两个：  路由：确定分组从源到目的经过的路径。由路由算法确定转发表 转发：数据报由路由器的输入端口转移到合适的输出端口。每个路由器维护一个转发表  服务模型在发送方主机与接收方主机之间传输数据报。属于尽力而为服务。  无连接服务：不事先为系列分组的传输确定路径，每个分组独立确定路径。由路由器根据当前网络状态选择路径（数据报网络） 连接服务：首先为系列分组的传输确定路径，建立网络层">
 <meta name="keywords" content="网络层">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网络那些事之网络层">
 <meta property="og:url" content="http://yoursite.com/2020/01/25/网络那些事之网络层/index.html">
 <meta property="og:site_name" content="精神的壳">
-<meta property="og:description" content="核心功能 路由：确定分组从源到目的经过的路径。由路由算法确定转发表 转发：数据报由路由器的输入端口转移到合适的输出端口。每个路由器维护一个转发表  服务模型在发送方主机与接收方主机之间传输数据报。属于尽力而为服务。  无连接服务：不事先为系列分组的传输确定路径，每个分组独立确定路径。由路由器根据当前网络状态选择路径（数据报网络） 连接服务：首先为系列分组的传输确定路径，建立网络层逻辑连接（虚电路网">
+<meta property="og:description" content="网络层的核心功能有两个：  路由：确定分组从源到目的经过的路径。由路由算法确定转发表 转发：数据报由路由器的输入端口转移到合适的输出端口。每个路由器维护一个转发表  服务模型在发送方主机与接收方主机之间传输数据报。属于尽力而为服务。  无连接服务：不事先为系列分组的传输确定路径，每个分组独立确定路径。由路由器根据当前网络状态选择路径（数据报网络） 连接服务：首先为系列分组的传输确定路径，建立网络层">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.loli.net/2020/01/28/UXhmizIdVLYHj94.png">
 <meta property="og:image" content="https://i.loli.net/2020/01/25/79sQjzEGxgWF3oy.png">
 <meta property="og:image" content="https://i.loli.net/2020/01/25/kMumZIhvYcxjQod.png">
+<meta property="og:image" content="https://i.loli.net/2020/05/17/EYpG8NLcA1yjivJ.png">
 <meta property="og:image" content="https://i.loli.net/2020/01/28/YEol4CqfpZMPDck.png">
 <meta property="og:image" content="https://i.loli.net/2020/01/28/JDLmZTzw6kbp3tq.png">
 <meta property="og:image" content="https://i.loli.net/2020/01/29/wbMGcL2HjV3qKTO.png">
@@ -102,10 +103,10 @@
 <meta property="og:image" content="https://i.loli.net/2020/01/30/7BtAgQ8hsUYOklC.png">
 <meta property="og:image" content="https://i.loli.net/2020/01/30/32BVGCpILAkHbdU.png">
 <meta property="og:image" content="https://i.loli.net/2020/01/30/rIVjqRGvF5Hc1N8.png">
-<meta property="og:updated_time" content="2020-02-03T06:17:28.853Z">
+<meta property="og:updated_time" content="2020-05-17T15:18:04.313Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络那些事之网络层">
-<meta name="twitter:description" content="核心功能 路由：确定分组从源到目的经过的路径。由路由算法确定转发表 转发：数据报由路由器的输入端口转移到合适的输出端口。每个路由器维护一个转发表  服务模型在发送方主机与接收方主机之间传输数据报。属于尽力而为服务。  无连接服务：不事先为系列分组的传输确定路径，每个分组独立确定路径。由路由器根据当前网络状态选择路径（数据报网络） 连接服务：首先为系列分组的传输确定路径，建立网络层逻辑连接（虚电路网">
+<meta name="twitter:description" content="网络层的核心功能有两个：  路由：确定分组从源到目的经过的路径。由路由算法确定转发表 转发：数据报由路由器的输入端口转移到合适的输出端口。每个路由器维护一个转发表  服务模型在发送方主机与接收方主机之间传输数据报。属于尽力而为服务。  无连接服务：不事先为系列分组的传输确定路径，每个分组独立确定路径。由路由器根据当前网络状态选择路径（数据报网络） 连接服务：首先为系列分组的传输确定路径，建立网络层">
 <meta name="twitter:image" content="https://i.loli.net/2020/01/28/UXhmizIdVLYHj94.png">
 
 
@@ -428,24 +429,25 @@
       
 
       
-        <h1 id="核心功能"><a href="#核心功能" class="headerlink" title="核心功能"></a>核心功能</h1><ul>
+        <p>网络层的核心功能有两个：</p>
+<ul>
 <li>路由：确定分组从源到目的经过的路径。由<strong>路由算法</strong>确定转发表</li>
 <li>转发：数据报由路由器的输入端口转移到合适的输出端口。每个路由器维护一个<strong>转发表</strong></li>
 </ul>
-<h1 id="服务模型"><a href="#服务模型" class="headerlink" title="服务模型"></a>服务模型</h1><p>在发送方主机与接收方主机之间传输数据报。属于<code>尽力而为</code>服务。</p>
+<h2 id="服务模型"><a href="#服务模型" class="headerlink" title="服务模型"></a>服务模型</h2><p>在发送方主机与接收方主机之间传输数据报。属于<code>尽力而为</code>服务。</p>
 <ul>
 <li>无连接服务：不事先为系列分组的传输确定路径，每个分组独立确定路径。由路由器根据当前网络状态选择路径（数据报网络）</li>
 <li>连接服务：首先为系列分组的传输确定路径，建立网络层逻辑连接（虚电路网络）</li>
 </ul>
 <p><img src="https://i.loli.net/2020/01/28/UXhmizIdVLYHj94.png" alt="网络层服务"></p>
-<h2 id="虚电路网络"><a href="#虚电路网络" class="headerlink" title="虚电路网络"></a>虚电路网络</h2><p>虚电路：一条从源主机到目的主机，类似于实体电路的虚拟连接路径。与实际电路最大的区别在于<strong>分组交换</strong>。</p>
+<h3 id="虚电路网络"><a href="#虚电路网络" class="headerlink" title="虚电路网络"></a>虚电路网络</h3><p>虚电路：一条从源主机到目的主机，类似于实体电路的虚拟连接路径。与实际电路最大的区别在于<strong>分组交换</strong>。</p>
 <p>路径上每一个网络设备都要维护虚电路连接状态。</p>
-<h3 id="通信过程"><a href="#通信过程" class="headerlink" title="通信过程"></a>通信过程</h3><ol>
+<h4 id="通信过程"><a href="#通信过程" class="headerlink" title="通信过程"></a>通信过程</h4><ol>
 <li>呼叫建立</li>
 <li>数据传输</li>
 <li>拆除呼叫</li>
 </ol>
-<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><p>每条虚电路包括：</p>
+<h4 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h4><p>每条虚电路包括：</p>
 <ul>
 <li>源主机到目的主机的<strong>一条路径</strong></li>
 <li><strong>虚电路号（VCID）</strong>，沿路每段链路一个编号</li>
@@ -453,7 +455,7 @@
 </ul>
 <p>沿某条虚电路传输的分组，携带对应虚电路的 VCID 而不是目的地址。</p>
 <p><img src="https://i.loli.net/2020/01/25/79sQjzEGxgWF3oy.png" alt="虚电路号"></p>
-<h2 id="数据报网络"><a href="#数据报网络" class="headerlink" title="数据报网络"></a>数据报网络</h2><p>特点：</p>
+<h3 id="数据报网络"><a href="#数据报网络" class="headerlink" title="数据报网络"></a>数据报网络</h3><p>特点：</p>
 <ul>
 <li>网络层无连接</li>
 <li>每个分组携带目的地址</li>
@@ -461,8 +463,73 @@
 </ul>
 <p><img src="https://i.loli.net/2020/01/25/kMumZIhvYcxjQod.png" alt="数据报网络"></p>
 <p>路由器按照<strong>最长匹配前缀原则</strong>选择转发接口。</p>
-<p>Internet 就属于数据报网络。<br>（Ipv4报文第一个字节45）</p>
-<h1 id="IP-协议"><a href="#IP-协议" class="headerlink" title="IP 协议"></a>IP 协议</h1><p><img src="https://i.loli.net/2020/01/28/YEol4CqfpZMPDck.png" alt="IP数据报"></p>
+<p>Internet 就属于数据报网络。</p>
+<p>下面是一个现实中的路由表示例（本地网卡 IP 地址 192.168.100.107，子网掩码 255.255.255.0，默认网关 192.168.100.11）：</p>
+<p><img src="https://i.loli.net/2020/05/17/EYpG8NLcA1yjivJ.png" alt="路由表"></p>
+<p>接口列表指明了该机有哪些接口。网络目标 &amp; 网络掩码 == 子网，根据子网将数据报从不同接口发送出去。</p>
+<ul>
+<li>网络目标：用来标识数据包的目的网络</li>
+<li>网络掩码：与网络目标一起标识目的主机或者路由器的子网地址</li>
+<li>接口：数据包从哪个接口发出去</li>
+<li>网关：数据包下一跳的 IP 地址</li>
+<li>跃点：优先级，跃点越少优先级越高。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>网络目标</th>
+<th>网络掩码</th>
+<th>网关</th>
+<th>接口</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.0.0.0</td>
+<td>0.0.0.0</td>
+<td>192.168.100.11</td>
+<td>192.168.100.107</td>
+<td>收到一个目的地址不在路由表中的数据包，将该数据包通过 192.168.100.107 发送到默认网关 192.168.100.11</td>
+</tr>
+<tr>
+<td>127.0.0.0</td>
+<td>255.0.0.0</td>
+<td>在链路上</td>
+<td>127.0.0.1</td>
+<td>收到一个发往目标网段 127.0.0.0/8 的数据包时，发送给该网段的所有数据包</td>
+</tr>
+<tr>
+<td>127.0.0.1</td>
+<td>255.255.255.255</td>
+<td>在链路上</td>
+<td>127.0.0.1</td>
+<td>收到一个目的 IP 为默认本机 IP 的数据包时，系统会将该数据包收下</td>
+</tr>
+<tr>
+<td>192.168.100.0</td>
+<td>255.255.255.0</td>
+<td>在链路上</td>
+<td>192.168.100.107</td>
+<td>收到一个发往目的网段 192.168.100.0/24 的数据包时，将该数据包通过 192.168.100.107 这个接口发送出去</td>
+</tr>
+<tr>
+<td>192.168.100.107</td>
+<td>255.255.255.255</td>
+<td>在链路上</td>
+<td>192.168.100.107</td>
+<td>收到一个目的 IP 为本地网卡 IP 的数据包时，系统会将该数据包收下</td>
+</tr>
+<tr>
+<td>192.168.100.255</td>
+<td>255.255.255.255</td>
+<td>在链路上</td>
+<td>192.168.100.107</td>
+<td>收到一个发给直连网段的本地广播数据包时，系统会将该数据包从 192.168.100.107 这个接口以广播的形式发送出去</td>
+</tr>
+</tbody>
+</table>
+<h2 id="IP-协议"><a href="#IP-协议" class="headerlink" title="IP 协议"></a>IP 协议</h2><p><img src="https://i.loli.net/2020/01/28/YEol4CqfpZMPDck.png" alt="IP数据报"></p>
 <ul>
 <li>版本号：4bits。</li>
 <li>首部长度：4bits。首部字节数 = 4 * 首部长度</li>
@@ -476,7 +543,7 @@
 <li>填充：0-3 bytes。补齐长度，保证首部长度是 4bytes 的倍数。</li>
 </ul>
 <p>IPv4 数据报首部长度通常为 20 bytes（5 行，每行 4bytes），第一个字节典型值为 45（版本号 4，首部长度 5）。</p>
-<h2 id="IP-分片"><a href="#IP-分片" class="headerlink" title="IP 分片"></a>IP 分片</h2><p>最大传输单元（MTU）：<strong>链路层</strong>数据帧可封装的字节数的上限。不同链路的 MTU 可能不同。</p>
+<h3 id="IP-分片"><a href="#IP-分片" class="headerlink" title="IP 分片"></a>IP 分片</h3><p>最大传输单元（MTU）：<strong>链路层</strong>数据帧可封装的字节数的上限。不同链路的 MTU 可能不同。</p>
 <p>为了解决不同链路之间 MTU 不同问题，IP 分组需要进行<strong>分片</strong>。IP 分片到达<strong>目的主机</strong>后进行<strong>重组</strong>。如果传输过程中个别分组丢失导致重组失败，目的主机直接<strong>丢弃</strong>已接收分组。</p>
 <p>IP 首部相关字段参与标识分片与确定分片顺序：总长度、标识、标志位、片偏移。</p>
 <ul>
@@ -485,25 +552,25 @@
 <li>片偏移：13bits。一个分片封装源 IP 分组数据的相对偏移量。偏移字节数 = 8 * 片偏移</li>
 </ul>
 <p>假设 IP 分组总长度 L，链路 MTU 为 M。若 L &gt; M 且 DF = 0，则需要分片。分片时每个分片的标识复制原 IP 分组的标识。除最后一个分片，其余分片均为 MTU 允许的最大分片且数据大小为 8 的倍数。</p>
-<h2 id="IP-编址"><a href="#IP-编址" class="headerlink" title="IP 编址"></a>IP 编址</h2><h3 id="IPv4"><a href="#IPv4" class="headerlink" title="IPv4"></a>IPv4</h3><p>一共 32 bits，标识主机、路由器的<strong>接口</strong>。</p>
-<h4 id="子网"><a href="#子网" class="headerlink" title="子网"></a>子网</h4><p>IP 地址 = 网络号（高比特位） + 主机号（低比特位）。相同网络号组成的网络称为<strong>IP 子网</strong>。转发表只记录<strong>子网地址</strong>。</p>
+<h3 id="IP-编址"><a href="#IP-编址" class="headerlink" title="IP 编址"></a>IP 编址</h3><h4 id="IPv4"><a href="#IPv4" class="headerlink" title="IPv4"></a>IPv4</h4><p>一共 32 bits，标识主机、路由器的<strong>接口</strong>。</p>
+<h5 id="子网"><a href="#子网" class="headerlink" title="子网"></a>子网</h5><p>IP 地址 = 网络号（高比特位） + 主机号（低比特位）。相同网络号组成的网络称为<strong>IP 子网</strong>。转发表只记录<strong>子网地址</strong>。</p>
 <p>IP 子网中的设备可以不跨越路由器彼此物理联通。</p>
 <p><img src="https://i.loli.net/2020/01/29/wbMGcL2HjV3qKTO.png" alt="IP 子网"></p>
-<h4 id="有类-IP-地址"><a href="#有类-IP-地址" class="headerlink" title="有类 IP 地址"></a>有类 IP 地址</h4><p><img src="https://i.loli.net/2020/01/29/hGEr5QJgxKwjLTb.png" alt="有类编址"></p>
+<h5 id="有类-IP-地址"><a href="#有类-IP-地址" class="headerlink" title="有类 IP 地址"></a>有类 IP 地址</h5><p><img src="https://i.loli.net/2020/01/29/hGEr5QJgxKwjLTb.png" alt="有类编址"></p>
 <p>A 类网络数少，每个网络内主机数多；C 类网络数多，每个网络内主机数少。</p>
 <p>D 类、E 类不划分网络号和主机号，D 类用于多播，E 类暂不使用。</p>
-<h4 id="私有地址"><a href="#私有地址" class="headerlink" title="私有地址"></a>私有地址</h4><p>私有地址只用于子网内部，在公共 Internet 上无效。</p>
+<h5 id="私有地址"><a href="#私有地址" class="headerlink" title="私有地址"></a>私有地址</h5><p>私有地址只用于子网内部，在公共 Internet 上无效。</p>
 <p><img src="https://i.loli.net/2020/01/29/o5EFlHrysNKYw4X.png" alt="私有地址"></p>
-<h4 id="特殊-IP-地址"><a href="#特殊-IP-地址" class="headerlink" title="特殊 IP 地址"></a>特殊 IP 地址</h4><p><img src="https://i.loli.net/2020/01/29/PktSwAIXfhDiHGd.png" alt="特殊 IP"></p>
-<h4 id="子网划分"><a href="#子网划分" class="headerlink" title="子网划分"></a>子网划分</h4><p>IP 地址 = 网络号（高比特位） + 子网号（部分原主机号高比特位） + 主机号（低比特位）</p>
-<h4 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a>子网掩码</h4><p>用途：表明一个 IP 地址所处子网的子网号。</p>
+<h5 id="特殊-IP-地址"><a href="#特殊-IP-地址" class="headerlink" title="特殊 IP 地址"></a>特殊 IP 地址</h5><p><img src="https://i.loli.net/2020/01/29/PktSwAIXfhDiHGd.png" alt="特殊 IP"></p>
+<h5 id="子网划分"><a href="#子网划分" class="headerlink" title="子网划分"></a>子网划分</h5><p>IP 地址 = 网络号（高比特位） + 子网号（部分原主机号高比特位） + 主机号（低比特位）</p>
+<h5 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a>子网掩码</h5><p>用途：表明一个 IP 地址所处子网的子网号。</p>
 <p>取值： 32 bits。IP 地址的网络号、子网号全取 1，主机号全取 0。</p>
 <p>例：A 网默认子网掩码 255.0.0.0；B 类默认子网掩码 255.255.0.0；C 类默认子网掩码 255.255.255.0；3 位子网号的 B 类子网掩码 255.255.224.0。</p>
 <p><strong>“子网地址 + 子网掩码”确定子网大小！</strong></p>
 <p>将 IP 分组目的 IP 地址与子网掩码<strong>按位与</strong>运算，得到<strong>子网地址</strong>。</p>
 <h4 id="CIDR-Classless-InterDomain-Routing"><a href="#CIDR-Classless-InterDomain-Routing" class="headerlink" title="CIDR(Classless InterDomain Routing)"></a>CIDR(Classless InterDomain Routing)</h4><p>消除传统 A、B、C 类地址界限。网络号与主机号组成网络前缀，前缀可以任意长度。</p>
 <p>融合子网地址与子网掩码，方便子网划分。无类地址格式：a.b.c.d/x，x 为前缀长度。</p>
-<h3 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h3><p>IPv6 数据报格式：</p>
+<h4 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h4><p>IPv6 数据报格式：</p>
 <ul>
 <li>固定长度为 40bytes 的<strong>基本首部</strong></li>
 <li>不允许分片</li>
@@ -515,9 +582,9 @@
 <li>下一首部：8bits。指向第一个扩展首部，如果扩展首部不存在则指向传输层报文首部</li>
 <li>跳步限制：8bits。报文生存时间</li>
 </ul>
-<h4 id="IPv6-地址形式"><a href="#IPv6-地址形式" class="headerlink" title="IPv6 地址形式"></a>IPv6 地址形式</h4><p>一共 128 bits。划分为 8 组，每组 12 bits，以 16 进制表示。如：<code>1080:0:0:0:8:800:200C:417A</code>，当中间出现多个连续的 0，可以使用压缩形式：<code>1080::8:800:200C:417A</code>。</p>
+<h5 id="IPv6-地址形式"><a href="#IPv6-地址形式" class="headerlink" title="IPv6 地址形式"></a>IPv6 地址形式</h5><p>一共 128 bits。划分为 8 组，每组 12 bits，以 16 进制表示。如：<code>1080:0:0:0:8:800:200C:417A</code>，当中间出现多个连续的 0，可以使用压缩形式：<code>1080::8:800:200C:417A</code>。</p>
 <p><strong>IPv6 不再使用掩码！</strong>，统一以 CIDR 形式表示网络大小。</p>
-<h4 id="相比-IPv4-的改变"><a href="#相比-IPv4-的改变" class="headerlink" title="相比 IPv4 的改变"></a>相比 IPv4 的改变</h4><ul>
+<h5 id="相比-IPv4-的改变"><a href="#相比-IPv4-的改变" class="headerlink" title="相比 IPv4 的改变"></a>相比 IPv4 的改变</h5><ul>
 <li><strong>检验和</strong>：彻底移除，每跳处理时间大大减少。</li>
 <li><strong>选项</strong>：从基本首部移出变为可选，路由器转发时间减少。</li>
 </ul>
@@ -529,7 +596,7 @@
 <li>IP 广播</li>
 <li>链路层广播</li>
 </ul>
-<h2 id="网络地址转换（NAT）"><a href="#网络地址转换（NAT）" class="headerlink" title="网络地址转换（NAT）"></a>网络地址转换（NAT）</h2><p>多个私有 IP 地址组成的内网通过 NAT 转换成统一的公有 IP 地址与外网通信。</p>
+<h4 id="网络地址转换（NAT）"><a href="#网络地址转换（NAT）" class="headerlink" title="网络地址转换（NAT）"></a>网络地址转换（NAT）</h4><p>多个私有 IP 地址组成的内网通过 NAT 转换成统一的公有 IP 地址与外网通信。</p>
 <p>优势：</p>
 <ul>
 <li>只向 ISP 申请一个 IP 地址</li>
@@ -544,7 +611,9 @@
 <li>替换：根据 NAT 转换表，利用（源 IP 地址，源端口号）替换每个<strong>进入内网 IP 数据报</strong>的（目的 IP 地址，目的端口号），即（NAT IP 地址，新端口号）</li>
 </ul>
 <p><img src="https://i.loli.net/2020/01/29/ZU9wXMSGixCm1Kf.png" alt="NAT过程"></p>
-<h3 id="NAT-穿透"><a href="#NAT-穿透" class="headerlink" title="NAT 穿透"></a>NAT 穿透</h3><ul>
+<p><strong>客户端发送给服务器的 IP 报文，源 IP 不变，目的 IP 随跳跃改变，服务器发送给客户端的 IP 报文，源 IP 随跳跃改变，目的 IP 不变</strong>。</p>
+<p>NAT 穿透：</p>
+<ul>
 <li>端口转发：配置路由器，将外部客户对特定端口的请求转发给特定内部服务器</li>
 <li>中继：内、外部客户分别与中继服务器建立连接。中继服务器桥接两个连接的分组（skype、frp 等应用都基于此）<br><img src="https://i.loli.net/2020/01/30/7BtAgQ8hsUYOklC.png" alt="中继"></li>
 </ul>
@@ -788,7 +857,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#核心功能"><span class="nav-number">1.</span> <span class="nav-text">核心功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#服务模型"><span class="nav-number">2.</span> <span class="nav-text">服务模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#虚电路网络"><span class="nav-number">2.1.</span> <span class="nav-text">虚电路网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通信过程"><span class="nav-number">2.1.1.</span> <span class="nav-text">通信过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体实现"><span class="nav-number">2.1.2.</span> <span class="nav-text">具体实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据报网络"><span class="nav-number">2.2.</span> <span class="nav-text">数据报网络</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IP-协议"><span class="nav-number">3.</span> <span class="nav-text">IP 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IP-分片"><span class="nav-number">3.1.</span> <span class="nav-text">IP 分片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP-编址"><span class="nav-number">3.2.</span> <span class="nav-text">IP 编址</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IPv4"><span class="nav-number">3.2.1.</span> <span class="nav-text">IPv4</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#子网"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">子网</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有类-IP-地址"><span class="nav-number">3.2.1.2.</span> <span class="nav-text">有类 IP 地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#私有地址"><span class="nav-number">3.2.1.3.</span> <span class="nav-text">私有地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特殊-IP-地址"><span class="nav-number">3.2.1.4.</span> <span class="nav-text">特殊 IP 地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#子网划分"><span class="nav-number">3.2.1.5.</span> <span class="nav-text">子网划分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#子网掩码"><span class="nav-number">3.2.1.6.</span> <span class="nav-text">子网掩码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CIDR-Classless-InterDomain-Routing"><span class="nav-number">3.2.1.7.</span> <span class="nav-text">CIDR(Classless InterDomain Routing)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPv6"><span class="nav-number">3.2.2.</span> <span class="nav-text">IPv6</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IPv6-地址形式"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">IPv6 地址形式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#相比-IPv4-的改变"><span class="nav-number">3.2.2.2.</span> <span class="nav-text">相比 IPv4 的改变</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DHCP-协议"><span class="nav-number">3.3.</span> <span class="nav-text">DHCP 协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络地址转换（NAT）"><span class="nav-number">3.4.</span> <span class="nav-text">网络地址转换（NAT）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NAT-穿透"><span class="nav-number">3.4.1.</span> <span class="nav-text">NAT 穿透</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ICMP-协议"><span class="nav-number">3.5.</span> <span class="nav-text">ICMP 协议</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#服务模型"><span class="nav-number">1.</span> <span class="nav-text">服务模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#虚电路网络"><span class="nav-number">1.1.</span> <span class="nav-text">虚电路网络</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#通信过程"><span class="nav-number">1.1.1.</span> <span class="nav-text">通信过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#具体实现"><span class="nav-number">1.1.2.</span> <span class="nav-text">具体实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据报网络"><span class="nav-number">1.2.</span> <span class="nav-text">数据报网络</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP-协议"><span class="nav-number">2.</span> <span class="nav-text">IP 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IP-分片"><span class="nav-number">2.1.</span> <span class="nav-text">IP 分片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP-编址"><span class="nav-number">2.2.</span> <span class="nav-text">IP 编址</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IPv4"><span class="nav-number">2.2.1.</span> <span class="nav-text">IPv4</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#子网"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">子网</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#有类-IP-地址"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">有类 IP 地址</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#私有地址"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">私有地址</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#特殊-IP-地址"><span class="nav-number">2.2.1.4.</span> <span class="nav-text">特殊 IP 地址</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#子网划分"><span class="nav-number">2.2.1.5.</span> <span class="nav-text">子网划分</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#子网掩码"><span class="nav-number">2.2.1.6.</span> <span class="nav-text">子网掩码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CIDR-Classless-InterDomain-Routing"><span class="nav-number">2.2.2.</span> <span class="nav-text">CIDR(Classless InterDomain Routing)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IPv6"><span class="nav-number">2.2.3.</span> <span class="nav-text">IPv6</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#IPv6-地址形式"><span class="nav-number">2.2.3.1.</span> <span class="nav-text">IPv6 地址形式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#相比-IPv4-的改变"><span class="nav-number">2.2.3.2.</span> <span class="nav-text">相比 IPv4 的改变</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DHCP-协议"><span class="nav-number">3.</span> <span class="nav-text">DHCP 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#网络地址转换（NAT）"><span class="nav-number">3.0.1.</span> <span class="nav-text">网络地址转换（NAT）</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#ICMP-协议"><span class="nav-number">4.</span> <span class="nav-text">ICMP 协议</span></a></li></div>
             
 
           </div>
