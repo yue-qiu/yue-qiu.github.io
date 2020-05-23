@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Vim 从入门到放弃</title>
+    <url>/2020/05/22/Vim-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83/</url>
+    <content><![CDATA[<p>如果问世界上最强大的语言是什么？答案或许有很多，但是如果问世界上最强大的编辑器是什么，恐怕很多人都回答都是 Vim。笔者从入门编程的第一天开始就听说了 Vim 的大名，然而苦于一大堆眼花缭乱的命令，屡屡尝试最后都是无疾而终。最近决心一定要把玩意儿入门了，于是开始跟着官方 tutorial 学习。打开中文版官方 tutorial 命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vimtutor zh</span><br></pre></td></tr></table></figure>
+<p>大部分 Vim 命令都可以看作三部分：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">operator [number] motion</span><br></pre></td></tr></table></figure>
+<p>operator 是要执行的操作（删除、修改等），number 代表该操作重复的次数，motion 是以什么格式作为操作单位（w 代表单词，$ 代表行末等）</p>
+<h2 id="移动"><a href="#移动" class="headerlink" title="移动"></a>移动</h2><p>Vim 使用 h、j、k、l 四个键是光标在左、下、上、右间移动（当然，直接使用光标键也可以）：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">     ^</span><br><span class="line">     k</span><br><span class="line">&lt;h       l&gt;</span><br><span class="line">     j</span><br><span class="line">     v</span><br></pre></td></tr></table></figure>
+<p>光标在行内移动：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#w：从当前位置起移动到下 # 个单词的头部</span><br><span class="line">#b：#w 的逆操作</span><br><span class="line">#e：从当前位置其移动到第 # 个单词的尾部</span><br><span class="line">$：移动到当前行尾部</span><br><span class="line">0：移动到当前行头部</span><br><span class="line">fPattern：正向跳转到 Pattern 字符</span><br><span class="line">tPattern：反向跳转到 Pattern 字符</span><br><span class="line">%：如果当前位置是 (、)、[、]、&#123;、&#125;，将光标移动到配对的括号上</span><br><span class="line">G：移动到文件末尾</span><br><span class="line">gg：移动到文件头</span><br><span class="line">#G：移动到文件的第 # 行</span><br><span class="line">ctrl+G：显示光标在文件中的位置信息</span><br><span class="line">ctrl+o：移动到早前光标所在位置（o 表示 older）</span><br><span class="line">ctrl+i：ctrl+o 的逆操作（i 在 o 的前面）</span><br></pre></td></tr></table></figure>
+<p>除了主动移动外，有时需要在文件中根据模式进行搜索：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/Pattern：Pattern 表示模式，/ 表示向下搜索</span><br><span class="line">?Pattern：? 表示向上搜索</span><br><span class="line">执行搜索操作后，n 表示继续搜索，N 表示反方向搜索</span><br></pre></td></tr></table></figure>
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p>当然可以进入 insert 模式后按下 Backspace 进行删除，这里讨论的是如何在 normal 模式下删除：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">x： 删除当前光标所在字符</span><br><span class="line">d#w or d#e or d#$ or d#0：d 表示删除操作，w、e、$、0 表示不同操作单位，# 表示重复次数</span><br><span class="line">dd：删除当前行</span><br><span class="line">#dd：删除 # 行</span><br><span class="line">dfPatern：从当前位置删除到 Pattern 字符</span><br><span class="line">di&quot;：删除双引号 &quot;&quot; 里面的内容</span><br><span class="line">da&quot;：删除双引号 &quot;&quot; 及其里面的内容</span><br><span class="line">shift+d：相当于 d$</span><br><span class="line">shift+s：相当于 dd</span><br><span class="line">J：相当于 dd</span><br></pre></td></tr></table></figure>
+<p><code>d</code> 是一个 operator，表示删除（delete）</p>
+<p>有删除就有撤销：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">u：撤销上次一命令</span><br><span class="line">U：恢复本行的原始状态（撤销左右作用在本行的命令）</span><br><span class="line">ctrl+R：u 的逆操作</span><br></pre></td></tr></table></figure>
+<h2 id="复制-amp-粘贴"><a href="#复制-amp-粘贴" class="headerlink" title="复制&amp;粘贴"></a>复制&amp;粘贴</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#yy：复制 # 行</span><br><span class="line">y#w or y#e or y#$ or y#0：y 表示复制操作，w、e、$、0 表示不同操作单位，# 表示重复次数</span><br></pre></td></tr></table></figure>
+<p><code>y</code> 是一个 operator，表示复制（copy）</p>
+<p>选中区域进行操作：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">v 进入 visual 模式，然后用移动键（h、j、k、l）进行选择</span><br><span class="line">被选中的区域可以进行批量 d、y 操作。</span><br></pre></td></tr></table></figure>
+<p>删除操作删掉的数据会保存在 vim 的缓存中，用如下命令把上一次删除的数据复制到相应位置：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#p：复制 # 次，如果被删除数据是一整行那么在光标的下一行插入</span><br></pre></td></tr></table></figure>
+<h2 id="插入-amp-替换"><a href="#插入-amp-替换" class="headerlink" title="插入&amp;替换"></a>插入&amp;替换</h2><p>在行的指定区域进入 insert 模式：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">A：光标移到行末并进入 insert 模式</span><br><span class="line">a：在当前单词尾部进入 insert 模式</span><br></pre></td></tr></table></figure>
+<p>在 normal 模式下对光标指向的字符进行替换：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rnew：当前字符替换为 new</span><br><span class="line">Rnew：连续替换多个字符，类似于原地直接修改</span><br></pre></td></tr></table></figure>
+<p>如果单个字符修改不够用，可以一次修改更多。<code>c</code> 是一个 operator，表示修改（change）：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">c#w or c#e or c#$ or c#0：改变从当前位置到指定位置的所有文本，会自动进入 insert 模式</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">对文本中符合模式的字符串进行替换：</span><br></pre></td></tr></table></figure>
+<p>:s/old/new&lt;回车&gt; 替换当前行第一个匹配项<br>:s/old/new/g 替换当前行所有匹配项<br>:#,#s/old/new/g 替换 # 到 # 行所有的匹配项<br>:%s/old/new/g 替换文本中每个匹配项<br>:%s/old/new/gc 文本中每个匹配项都提示是否进行替换<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">插入空行并进入 insert 模式：</span><br></pre></td></tr></table></figure></p>
+<p>o：在下一行插入空行<br>O：在上一行插入空行<br><code>`</code></p>
+]]></content>
+      <categories>
+        <category>开发工具</category>
+      </categories>
+      <tags>
+        <tag>Vim</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>调度器—Go语言的大管家</title>
     <url>/2020/04/27/%E8%B0%83%E5%BA%A6%E5%99%A8%E2%80%94Go%E8%AF%AD%E8%A8%80%E7%9A%84%E5%A4%A7%E7%AE%A1%E5%AE%B6/</url>
     <content><![CDATA[<p>虽然线程比较轻量，但是在调度时也有比较大的额外开销。每个线程会都占用 1M 以上的内存空间，在对线程进行切换时不止会消耗较多的内存，恢复寄存器中的内容还需要向操作系统申请或者销毁对应的资源，每一次线程上下文的切换都需要消耗 1us 左右的时间。而 Go 调度器对 Goroutine 的上下文切换约为 0.2us，减少了 80% 的额外开销</p>
@@ -1247,7 +1289,7 @@
 <p>可以通过 <code>flask --help</code> 查看所有可用命令</p>
 <h1 id="管理环境变量"><a href="#管理环境变量" class="headerlink" title="管理环境变量"></a>管理环境变量</h1><p>如果安装了 python-dotenv 包， Flask 会从 .env 文件 和 .flaskenv 文件中加载环境变量。此时 Flask 加载环境变量的优先级是：系统环境变量 &gt; .env 中的环境变量 &gt; .flaskenv 中的环境变量</p>
 <p>.env 用于存放公开环境变量, 如 FLAKS_APP, .flaskenv 用于存放敏感环境变量如 Email 账号密码：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">!# MyFlask/.env</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 这是注释</span><br><span class="line">FLASK_APP = hello</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">!# MyFlask/.env</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这是注释</span></span><br><span class="line">FLASK_APP = hello</span><br></pre></td></tr></table></figure>
 <h1 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h1><p>用如下命令可以启动带有上下文的 Python Shell 环境：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">flask shell</span><br></pre></td></tr></table></figure>
 <p>和其他 flask 命令相同，在执行这个命令前要确保 Flask 实例可以被找到</p>
