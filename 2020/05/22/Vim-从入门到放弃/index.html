@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="精神的壳">
 <meta property="og:description" content="如果问世界上最强大的语言是什么？答案或许有很多，但是如果问世界上最强大的编辑器是什么，恐怕很多人都回答都是 Vim。笔者从入门编程的第一天开始就听说了 Vim 的大名，然而苦于一大堆眼花缭乱的命令，屡屡尝试最后都是无疾而终。最近决心一定要把玩意儿入门了，于是开始跟着官方 tutorial 学习。打开中文版官方 tutorial 命令如下： 1vimtutor zh 大部分 Vim 命令都可以看作三">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-05-23T03:32:30.348Z">
+<meta property="og:updated_time" content="2020-05-23T07:20:31.408Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vim 从入门到放弃">
 <meta name="twitter:description" content="如果问世界上最强大的语言是什么？答案或许有很多，但是如果问世界上最强大的编辑器是什么，恐怕很多人都回答都是 Vim。笔者从入门编程的第一天开始就听说了 Vim 的大名，然而苦于一大堆眼花缭乱的命令，屡屡尝试最后都是无疾而终。最近决心一定要把玩意儿入门了，于是开始跟着官方 tutorial 学习。打开中文版官方 tutorial 命令如下： 1vimtutor zh 大部分 Vim 命令都可以看作三">
@@ -435,14 +435,15 @@
 <p>删除操作删掉的数据会保存在 vim 的缓存中，用如下命令把上一次删除的数据复制到相应位置：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#p：复制 # 次，如果被删除数据是一整行那么在光标的下一行插入</span><br></pre></td></tr></table></figure>
 <h2 id="插入-amp-替换"><a href="#插入-amp-替换" class="headerlink" title="插入&amp;替换"></a>插入&amp;替换</h2><p>在行的指定区域进入 insert 模式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A：光标移到行末并进入 insert 模式</span><br><span class="line">a：在当前单词尾部进入 insert 模式</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A：光标移到行末并进入 insert 模式</span><br><span class="line">a：在光标后边进入 insert 模式</span><br></pre></td></tr></table></figure>
 <p>在 normal 模式下对光标指向的字符进行替换：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rnew：当前字符替换为 new</span><br><span class="line">Rnew：连续替换多个字符，类似于原地直接修改</span><br></pre></td></tr></table></figure>
 <p>如果单个字符修改不够用，可以一次修改更多。<code>c</code> 是一个 operator，表示修改（change）：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c#w or c#e or c#$ or c#0：改变从当前位置到指定位置的所有文本，会自动进入 insert 模式</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">对文本中符合模式的字符串进行替换：</span><br></pre></td></tr></table></figure>
 <p>:s/old/new&lt;回车&gt; 替换当前行第一个匹配项<br>:s/old/new/g 替换当前行所有匹配项<br>:#,#s/old/new/g 替换 # 到 # 行所有的匹配项<br>:%s/old/new/g 替换文本中每个匹配项<br>:%s/old/new/gc 文本中每个匹配项都提示是否进行替换<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">插入空行并进入 insert 模式：</span><br></pre></td></tr></table></figure></p>
-<p>o：在下一行插入空行<br>O：在上一行插入空行<br><code>`</code></p>
+<p>o：在下一行插入空行<br>O：在上一行插入空行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 保存操作</span><br></pre></td></tr></table></figure></p>
+<p>:!command：执行 command，即使有命令行参数也可以这么操作<br>:w FILENAME 把文件另存为 FILEMNAME<br>v 进入 visual 模式，选择相应文本后用 :w FILENAME 把选择的文本另存为 FILENAME<br>:r FILENAME 把文件 FILENAME 内容插入到光标之后<br>:r !command 把 command 的输出插入到光标之后<br><code>`</code></p>
 
       
     </div>
