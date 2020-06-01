@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="git,">
+  <meta name="keywords" content="Go,">
 
 
 
@@ -79,25 +79,20 @@
 
 
 
-<meta name="description" content="使用git也有一段时间了，一直没有做总结，在这里记录一下方便以后查看。 配置gitwindows下直接从官网下载就可以了，安装过程是傻瓜式的，一路点确定就OK。安装完成后发现多了个叫git bash的程序，打开程序会弹出一个命令行窗口就可以了。 linux下安装git很简单，直接在终端输入 git，系统会告诉你是否已经安装。如果没有安装还会告诉你安装方法。Debian 和 Ubantu 下通过 s">
-<meta name="keywords" content="git">
+<meta name="description" content="得益于 goroutine 的设计，Go 在执行并发任务是可谓是得心应手。既然存在并发，就必然牵扯到多任务同步的问题。当然，我们可以直接用共享内存来通信（如共享变量），但是 Go 的设计哲学中有一句话叫做不要用共享内存来通信，而是用通信共享内存。利用内置的 channel 结构体在多个 goroutine 间通信是更安全也是更被推崇的。 channel 在 runtime 中用 hchan  结构">
+<meta name="keywords" content="Go">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git常见用法">
-<meta property="og:url" content="http://yoursite.com/2018/05/23/git常见用法/index.html">
+<meta property="og:title" content="channel-Go的传声筒">
+<meta property="og:url" content="http://yoursite.com/2020/06/01/channel-Go的传声筒/index.html">
 <meta property="og:site_name" content="精神的壳">
-<meta property="og:description" content="使用git也有一段时间了，一直没有做总结，在这里记录一下方便以后查看。 配置gitwindows下直接从官网下载就可以了，安装过程是傻瓜式的，一路点确定就OK。安装完成后发现多了个叫git bash的程序，打开程序会弹出一个命令行窗口就可以了。 linux下安装git很简单，直接在终端输入 git，系统会告诉你是否已经安装。如果没有安装还会告诉你安装方法。Debian 和 Ubantu 下通过 s">
+<meta property="og:description" content="得益于 goroutine 的设计，Go 在执行并发任务是可谓是得心应手。既然存在并发，就必然牵扯到多任务同步的问题。当然，我们可以直接用共享内存来通信（如共享变量），但是 Go 的设计哲学中有一句话叫做不要用共享内存来通信，而是用通信共享内存。利用内置的 channel 结构体在多个 goroutine 间通信是更安全也是更被推崇的。 channel 在 runtime 中用 hchan  结构">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://i.loli.net/2020/02/16/U5lM6bayKAHwX1r.png">
-<meta property="og:image" content="https://i.loli.net/2020/02/16/mO2ACVn9jQaMZJg.png">
-<meta property="og:image" content="https://i.loli.net/2020/02/16/BFnk1zxTIN7Khly.png">
-<meta property="og:image" content="https://i.loli.net/2020/02/16/U5lM6bayKAHwX1r.png">
-<meta property="og:image" content="https://i.loli.net/2020/02/16/mO2ACVn9jQaMZJg.png">
-<meta property="og:image" content="https://i.loli.net/2020/02/16/BFnk1zxTIN7Khly.png">
-<meta property="og:updated_time" content="2020-02-16T12:12:38.976Z">
+<meta property="og:image" content="https://i.loli.net/2020/05/25/13WoPzZrpjmYEnh.png">
+<meta property="og:updated_time" content="2020-06-01T07:12:52.210Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git常见用法">
-<meta name="twitter:description" content="使用git也有一段时间了，一直没有做总结，在这里记录一下方便以后查看。 配置gitwindows下直接从官网下载就可以了，安装过程是傻瓜式的，一路点确定就OK。安装完成后发现多了个叫git bash的程序，打开程序会弹出一个命令行窗口就可以了。 linux下安装git很简单，直接在终端输入 git，系统会告诉你是否已经安装。如果没有安装还会告诉你安装方法。Debian 和 Ubantu 下通过 s">
-<meta name="twitter:image" content="https://i.loli.net/2020/02/16/U5lM6bayKAHwX1r.png">
+<meta name="twitter:title" content="channel-Go的传声筒">
+<meta name="twitter:description" content="得益于 goroutine 的设计，Go 在执行并发任务是可谓是得心应手。既然存在并发，就必然牵扯到多任务同步的问题。当然，我们可以直接用共享内存来通信（如共享变量），但是 Go 的设计哲学中有一句话叫做不要用共享内存来通信，而是用通信共享内存。利用内置的 channel 结构体在多个 goroutine 间通信是更安全也是更被推崇的。 channel 在 runtime 中用 hchan  结构">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/25/13WoPzZrpjmYEnh.png">
 
 
 
@@ -127,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/23/git常见用法/">
+  <link rel="canonical" href="http://yoursite.com/2020/06/01/channel-Go的传声筒/">
 
 
 
 
 
-  <title>git常见用法 | 精神的壳</title>
+  <title>channel-Go的传声筒 | 精神的壳</title>
   
 
 
@@ -304,7 +299,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/23/git常见用法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/channel-Go的传声筒/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="路边的土豆">
@@ -321,7 +316,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">git常见用法</h1>
+          <h1 class="post-title" itemprop="name headline">channel-Go的传声筒</h1>
         
 
         <div class="post-meta">
@@ -333,8 +328,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-23T06:45:34+08:00">
-                2018-05-23
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-06-01T14:54:30+08:00">
+                2020-06-01
               </time>
             
 
@@ -344,6 +339,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -352,8 +369,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/05/23/git常见用法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/05/23/git常见用法/" itemprop="commentCount"></span>
+                <a href="/2020/06/01/channel-Go的传声筒/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/06/01/channel-Go的传声筒/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -361,7 +378,7 @@
 
           
           
-             <span id="/2018/05/23/git常见用法/" class="leancloud_visitors" data-flag-title="git常见用法">
+             <span id="/2020/06/01/channel-Go的传声筒/" class="leancloud_visitors" data-flag-title="channel-Go的传声筒">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -397,97 +414,67 @@
       
 
       
-        <p>使用git也有一段时间了，一直没有做总结，在这里记录一下方便以后查看。</p>
-<h1 id="配置git"><a href="#配置git" class="headerlink" title="配置git"></a>配置git</h1><p>windows下直接从<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">官网</a>下载就可以了，安装过程是傻瓜式的，一路点确定就OK。安装完成后发现多了个叫<code>git bash</code>的程序，打开程序会弹出一个命令行窗口就可以了。</p>
-<p>linux下安装git很简单，直接在终端输入 <code>git</code>，系统会告诉你是否已经安装。如果没有安装还会告诉你安装方法。Debian 和 Ubantu 下通过 <code>sudo apt-get install git</code> 就可以进行安装。</p>
-<p>由于git是分布式版本控制系统，所以必须指出每台机器的身份。这就要配置git相关变量：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.username <span class="string">"name"</span></span><br><span class="line">git config --global user.email <span class="string">"email"</span></span><br></pre></td></tr></table></figure>
-<p>有时候我们发现自己的账户和邮箱配置错了，重设我们的账户和邮箱：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global --replace-all user.username <span class="string">"new name"</span></span><br><span class="line">git config --global --replace-all user.email <span class="string">"new email"</span></span><br></pre></td></tr></table></figure>
-<h1 id="常见用法"><a href="#常见用法" class="headerlink" title="常见用法"></a>常见用法</h1><h2 id="版本控制"><a href="#版本控制" class="headerlink" title="版本控制"></a>版本控制</h2><h3 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h3><p>目标文件夹下，打开终端输入：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
-<p>这就为这个文件夹创建了一个版本库，有了版本库就可以开始使用 git 的各项功能了。</p>
-<h3 id="状态"><a href="#状态" class="headerlink" title="状态"></a>状态</h3><p>git 有分区的概念，平时我们新建、删除、修改文件都是在<code>工作区</code>，通过 <code>git add</code> 命令把工作区的变动提交到<code>暂存区</code>（stage），再用 <code>git commit</code> 把stage的内容提交到<code>分支</code>（branch）。</p>
-<p>每次我们对文件进行修改，都会改变 git 的状态。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git status <span class="comment">#查看当前仓库的状态（是否有文件被修改，有文件没有commit等）</span></span><br><span class="line">git diff file <span class="comment">#比较工作区与缓存区的不同</span></span><br><span class="line">git diff head  <span class="comment"># 比较工作区与分支的不同</span></span><br></pre></td></tr></table></figure>
-<h3 id="显示过往提交记录"><a href="#显示过往提交记录" class="headerlink" title="显示过往提交记录"></a>显示过往提交记录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> <span class="comment"># 显示提交日志，每次提交会有一个专属的版本号，通过版本号可回溯至本次提交</span></span><br><span class="line">git <span class="built_in">log</span> --oneline <span class="comment"># 在 log 显示信息过乱时可以加 --oneline 只显示提交记录及其版本号</span></span><br><span class="line">git <span class="built_in">log</span> --graph --oneline <span class="comment"># 把分支记录以时间线的形式显示</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://i.loli.net/2020/02/16/U5lM6bayKAHwX1r.png" alt="log"><br><img src="https://i.loli.net/2020/02/16/mO2ACVn9jQaMZJg.png" alt="log--oneline"></p>
-<p>HEAD 表示当前版本，可以用 HEAD^ 表示上一版本，HEAD^^ 表示上上版本… HEAD~100 表示第前 100 个版本。</p>
-<h3 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h3><p>使用 git 的一个主要好处就是 git 提供方便的版本控制，可以在需要的时候回退到任意版本。</p>
-<p>版本回退命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard 版本号</span><br></pre></td></tr></table></figure>
-<p>但是这里有个问题：当我们回到历史版本后，<code>git log</code> 命令就无法显示最新版本的版本号。相当于我们穿越到过去，却没办法回来了。幸好 <code>git relog</code> 命令可以解决这个问题，<code>git reflog</code> 记录了我们每次在版本间的移动：</p>
-<p><img src="https://i.loli.net/2020/02/16/BFnk1zxTIN7Khly.png" alt="reflog"></p>
-<p>可以看到，我通过 checkout 从 174e8dc 来到 e346f09，这样就不怕穿越不回现代啦~</p>
-<h3 id="管理修改"><a href="#管理修改" class="headerlink" title="管理修改"></a>管理修改</h3><p>有时我们修改了工作区或暂存区的文件，过了一会儿又后悔了，可以用下面的命令撤销这些修改，<strong>相当于 git add 的反向命令，即把暂存区最新版本转移到工作区</strong>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- file</span><br></pre></td></tr></table></figure>
-<p>如果文件已经 add 到了暂存区，想要把它从暂存区里撤下来也是可以的，<strong>相当于 git commit 的反向命令，即把分支最新版本转移到暂存区</strong>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD file</span><br></pre></td></tr></table></figure>
-<p>那如果文件已经 commit 了怎么版本？还记得前面的版本回退命令吗？直接回退就好啦！</p>
-<h3 id="显示提交记录"><a href="#显示提交记录" class="headerlink" title="显示提交记录"></a>显示提交记录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> <span class="comment"># 显示提交日志，每次提交会有一个专属的版本号，通过版本号可回溯至本次提交</span></span><br><span class="line">git <span class="built_in">log</span> --oneline <span class="comment"># 在 log 显示信息过乱时可以加 --oneline 只显示提交记录及其版本号</span></span><br><span class="line">git <span class="built_in">log</span> --graph --oneline <span class="comment"># 把分支记录以时间线的形式显示</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://i.loli.net/2020/02/16/U5lM6bayKAHwX1r.png" alt="log"><br><img src="https://i.loli.net/2020/02/16/mO2ACVn9jQaMZJg.png" alt="log--oneline"></p>
-<p>HEAD 表示当前版本，可以用 HEAD^ 表示上一版本，HEAD^^ 表示上上版本… HEAD~100 表示第前 100 个版本。</p>
-<h3 id="版本回退-1"><a href="#版本回退-1" class="headerlink" title="版本回退"></a>版本回退</h3><p>使用 git 的一个主要好处就是 git 提供方便的版本控制，可以在需要的时候回退到任意版本。</p>
-<p>版本回退命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard 版本号</span><br></pre></td></tr></table></figure>
-<p>但是这里有个问题：当我们回到历史版本后，<code>git log</code> 命令就无法显示最新版本的版本号。相当于我们穿越到过去，却没办法回来了。幸好 <code>git relog</code> 命令可以解决这个问题，<code>git reflog</code> 记录了我们每次在版本间的移动：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reflog</span><br></pre></td></tr></table></figure>
-<p><img src="https://i.loli.net/2020/02/16/BFnk1zxTIN7Khly.png" alt="reflog"></p>
-<p>可以看到，我通过 checkout 从 174e8dc 来到 e346f09，这样就不怕穿越不回现代啦~</p>
-<h3 id="管理修改-1"><a href="#管理修改-1" class="headerlink" title="管理修改"></a>管理修改</h3><p>有时我们修改了工作区或暂存区的文件，过了一会儿又后悔了，可以用下面的命令撤销这些修改：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- file</span><br></pre></td></tr></table></figure>
-<p>如果文件已经 add 到了暂存区，想要把它从暂存区里撤下来也是可以的：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD file</span><br></pre></td></tr></table></figure>
-<p>那如果文件已经 commit 了怎么版本？还记得前面的版本回退命令吗？直接回退就好啦！</p>
-<h2 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h2><p>要先在 Github 中添加这台机器的 ssh 密钥以允许你把本地文件传到 Github 上。执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"email"</span></span><br></pre></td></tr></table></figure>
-<p>这条命令会在当前文件夹下生成 <code>.ssh</code> 文件夹，里面有两个文件：<code>id_rsa</code> 和 <code>id_rsa.pub</code>。带 pub 的是公钥，把 <code>id_rsa.pub</code> 里的内容添加到 Github 上。</p>
-<p>想把 Github 中的仓库和本地仓库关联起来，通过这条命令可以实现，xxxxx 是远程仓库的地址：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin xxxxx</span><br></pre></td></tr></table></figure>
-<p>origin 是这个 git 本地仓库对远程仓库的称呼，也可以用别的名字如 dev、test 等，但是通常都用origin。</p>
-<p>删除本地仓库与远程仓库的关联也很简单：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote remove origin</span><br></pre></td></tr></table></figure>
-<h3 id="克隆远程仓库"><a href="#克隆远程仓库" class="headerlink" title="克隆远程仓库"></a>克隆远程仓库</h3><p>有时候我们在 Github 上可能看到一些很有意思的库，可以用这个命令把它下载到本地，其中 xxxxx 是这个仓库的网址：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> xxxxx</span><br></pre></td></tr></table></figure>
-<h3 id="把本地库内容推送到远程"><a href="#把本地库内容推送到远程" class="headerlink" title="把本地库内容推送到远程"></a>把本地库内容推送到远程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
-<p>如果是第一次推送，可以为push加上 <code>-u</code> 参数，这样以后推送的时候就不用再输入 Github 的账号和密码了。master 代表远程仓库的主分支，如果要推送到其他分支就换成其他分支名。</p>
-<h3 id="抓取远程库内容"><a href="#抓取远程库内容" class="headerlink" title="抓取远程库内容"></a>抓取远程库内容</h3><p>抓取远程仓库内容并 merge 到本地</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull <span class="comment"># 默认抓取 origin 中和当前分支关联的远程分支</span></span><br></pre></td></tr></table></figure>
-<h3 id="删除远程仓库中的文件"><a href="#删除远程仓库中的文件" class="headerlink" title="删除远程仓库中的文件"></a>删除远程仓库中的文件</h3><p>很多时候随着项目的进行，远程仓库中一些文件不再被使用，或者干脆就是不小心提交了没啥用的文件。当然，可以在 Github 点击删除按钮进行删除，但是目前 Github 只提供了单个文件的删除，如果想要删除一个文件夹及其下的所有文件那工作量简直令人崩溃 orz。</p>
-<p>其实，我们可以通过从版本库中删除这个文件再推送到 Github 的方式删除远程仓库中的内容：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git rm -r --cached file</span><br><span class="line">git commit -m <span class="string">"delete file"</span></span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
-<p><code>-r</code> 表示递归删除，这在 file 表示文件夹时尤其有用。<code>--cached</code> 表示对版本库中的缓存进行操作，这样就不会把本地文件给删除了~</p>
-<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><p>创建新分支：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch 分支名</span><br></pre></td></tr></table></figure>
-<p>移动到一个分支：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout 分支名</span><br></pre></td></tr></table></figure>
-<p>创建并移动到一个新分支：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b 分支名</span><br></pre></td></tr></table></figure>
-<p>创建并移动到一个和远程分支对应的分支：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b 分支名 origin/远程分支</span><br></pre></td></tr></table></figure>
-<p>建立本地分支对远程分支的关联：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch --<span class="built_in">set</span>-upstream 本地分支 origin/远程分支</span><br></pre></td></tr></table></figure>
-<p>将当前分支与另一分支合并：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge 分支名</span><br></pre></td></tr></table></figure>
-<h3 id="处理分支冲突"><a href="#处理分支冲突" class="headerlink" title="处理分支冲突"></a>处理分支冲突</h3><p>合并分支时，可能会遇到因两个分支的内容有冲突而导致合并失败的现象（这在执行 pull 操作时尤其常见，特别是当你在 Github 上在线修改了一个文件，而本地没有修改时）。git 会在冲突文件中用 &lt;&lt;&lt;&lt;&lt;&lt;&lt;，=======，&gt;&gt;&gt;&gt;&gt;&gt;&gt; 标记出不同内容的分支。我们需要将文件进行修改后再执行 commit：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 可以看到，本地 HEAD 和远程分支冲突了</span></span><br><span class="line">&lt;&lt;&lt;&lt;&lt;&lt;HEAD</span><br><span class="line">git is good</span><br><span class="line">=======</span><br><span class="line">git is very good</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;branch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将文件修改一下</span></span><br><span class="line">git is very good</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交</span></span><br><span class="line">git add test.txt</span><br><span class="line">git commit -m "解决冲突"</span><br></pre></td></tr></table></figure>
-<h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><p>当项目开发到一定阶段，我们会给它打上一个<code>标签</code>（tag）表示达到了某种程度。就像很多软件经常会说：我们升级到 v7.0.1 版本啦，快来升级哟~ 这里的 v7.0.1 就是一个标签。</p>
-<p>查看当前版本库中所有标签：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag</span><br></pre></td></tr></table></figure>
-<p>给某次 commit 打上标签很简单：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag 标签名 版本号</span><br></pre></td></tr></table></figure>
-<p>像 commit 那样给标签添加说明，<code>-a</code> 表示创建一个带附注的标签，<code>-m</code> 表示附注：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag 标签名 版本号 -a -m <span class="string">"add an annotation"</span></span><br></pre></td></tr></table></figure>
-<p>查看一个标签的详细信息：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git show 标签名</span><br></pre></td></tr></table></figure>
-<p>签出一个标签：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout 标签名</span><br></pre></td></tr></table></figure>
-<p>删除本地标签：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -d 标签名</span><br></pre></td></tr></table></figure>
-<p>推送本地标签到远程仓库：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --tags</span><br></pre></td></tr></table></figure>
-<p>删除远程仓库中的标签：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin :refs/tags/标签名</span><br></pre></td></tr></table></figure>
+        <p>得益于 goroutine 的设计，Go 在执行并发任务是可谓是得心应手。既然存在并发，就必然牵扯到多任务同步的问题。当然，我们可以直接用共享内存来通信（如共享变量），但是 Go 的设计哲学中有一句话叫做<code>不要用共享内存来通信，而是用通信共享内存</code>。利用内置的 channel 结构体在多个 goroutine 间通信是更安全也是更被推崇的。</p>
+<p>channel 在 runtime 中用 <code>hchan</code>  结构体表示，每次创建 channel 都是创建了一个这样的结构体:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> hchan <span class="keyword">struct</span> &#123;</span><br><span class="line">    qcount   <span class="keyword">uint</span> <span class="comment">// channel 中元素个数</span></span><br><span class="line">    dataqsiz <span class="keyword">uint</span> <span class="comment">// channel 中循环队列长度</span></span><br><span class="line">    buf      unsafe.Pointer <span class="comment">// channel 的缓冲区数据指针</span></span><br><span class="line">    elemsize <span class="keyword">uint16</span> <span class="comment">// channel 能收发的元素大小</span></span><br><span class="line">    closed   <span class="keyword">uint32</span></span><br><span class="line">    elemtype *_type <span class="comment">// channel 能够收发的元素类型</span></span><br><span class="line">    sendx    <span class="keyword">uint</span> <span class="comment">// 缓冲过区中 channel 的发送操作处理到的位置</span></span><br><span class="line">    recvx    <span class="keyword">uint</span> <span class="comment">// 缓冲区中 channel 的接收操作处理到的位置</span></span><br><span class="line">    recvq    waitq <span class="comment">// 阻塞在这个 hchan 上的接收 goroutine 队列</span></span><br><span class="line">    sendq    waitq <span class="comment">// 阻塞在这个 hchan 上的发送 goroutine 队列</span></span><br><span class="line"></span><br><span class="line">    lock mutex <span class="comment">// 解决可能的线程竞争问题，也就是说 channel 是线程安全的</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> waitq <span class="keyword">struct</span> &#123;</span><br><span class="line">    first *sudog</span><br><span class="line">    last  *sudog</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> sudog <span class="keyword">struct</span> &#123;</span><br><span class="line">    g *g</span><br><span class="line">    next     *sudog <span class="comment">// 下一个 sudog</span></span><br><span class="line">    prev     *sudog <span class="comment">// 上一个 sudong</span></span><br><span class="line">    elem     unsafe.Pointer <span class="comment">// 指向数据</span></span><br><span class="line">    c        *hchan <span class="comment">// 属于哪个 channel</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="向-Channel-发送"><a href="#向-Channel-发送" class="headerlink" title="向 Channel 发送"></a>向 Channel 发送</h2><p>函数 <code>runtime.chansend</code> 负责向 channel 发送数据的全部逻辑：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">chansend</span><span class="params">(c *hchan, ep unsafe.Pointer, block <span class="keyword">bool</span>, callerpc <span class="keyword">uintptr</span>)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">    lock(&amp;c.lock)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> c.closed != <span class="number">0</span> &#123;</span><br><span class="line">        unlock(&amp;c.lock)</span><br><span class="line">        <span class="built_in">panic</span>(plainError(<span class="string">"send on closed channel"</span>))</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<p>在发送数据的逻辑执行之前会先为当前 Channel 加锁，防止发生竞争条件。如果 Channel 已经关闭，那么向该 Channel 发送数据时就会报”send on closed channel” 错误并中止程序。整个函数的执行过程可分为三部分：</p>
+<ol>
+<li>存在等待的接收者时，把数据直接发送给阻塞的接收者</li>
+<li>存在可用缓冲区时，把数据写入缓冲区</li>
+<li>不存在缓冲区或缓冲区已满时，等待其它 goroutine 从该 channel 接收数据</li>
+</ol>
+<h3 id="直接发送"><a href="#直接发送" class="headerlink" title="直接发送"></a>直接发送</h3><p>如果目标 Channel 没有被关闭并且已经有处于读等待的 Goroutine，那么 runtime.chansend 函数会从接收队列 recvq 中取出最先陷入等待的 Goroutine 并直接向它发送数据:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">chansend</span><span class="params">(c *hchan, ep unsafe.Pointer, block <span class="keyword">bool</span>, callerpc <span class="keyword">uintptr</span>)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">if</span> sg := c.recvq.dequeue(); sg != <span class="literal">nil</span> &#123;</span><br><span class="line">        send(c, sg, ep, <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123; unlock(&amp;c.lock) &#125;, <span class="number">3</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>发送数据时调用 <code>runtime.send</code> 函数，该函数的执行可以分成两个部分：</p>
+<ol>
+<li>将发送的数据直接拷贝到 x = &lt;-c 表达式中变量 x 所在的内存地址上</li>
+<li>将等待接收数据的 Goroutine 标记成可运行状态 Grunnable 并把该 Goroutine 放到发送方所在的处理器的 runnext 上等待执行</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">send</span><span class="params">(c *hchan, sg *sudog, ep unsafe.Pointer, unlockf <span class="keyword">func</span>()</span>, <span class="title">skip</span> <span class="title">int</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> sg.elem != <span class="literal">nil</span> &#123;</span><br><span class="line">        sendDirect(c.elemtype, sg, ep) <span class="comment">// 直接把数据拷贝到接收 goroutine 对应变量的内存地址</span></span><br><span class="line">        sg.elem = <span class="literal">nil</span></span><br><span class="line">    &#125;</span><br><span class="line">    gp := sg.g</span><br><span class="line">    unlock()</span><br><span class="line">    gp.param = unsafe.Pointer(sg)</span><br><span class="line">    goready(gp, skip+<span class="number">1</span>) <span class="comment">// 改变接收 goroutine 的状态，放入处理器 runnext 属性</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="发送到缓冲区"><a href="#发送到缓冲区" class="headerlink" title="发送到缓冲区"></a>发送到缓冲区</h3><p>如果创建的 Channel 包含缓冲区并且 channel 中的数据没有装满，chansend 就会执行下面这段代码：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">chansend</span><span class="params">(c *hchan, ep unsafe.Pointer, block <span class="keyword">bool</span>, callerpc <span class="keyword">uintptr</span>)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">if</span> c.qcount &lt; c.dataqsiz &#123;</span><br><span class="line">        qp := chanbuf(c, c.sendx) <span class="comment">// 计算出缓冲区下一个可用位置</span></span><br><span class="line">        typedmemmove(c.elemtype, qp, ep) <span class="comment">// 发送数据到缓冲区</span></span><br><span class="line">        c.sendx++ <span class="comment">// 更新缓冲区指针</span></span><br><span class="line">        <span class="keyword">if</span> c.sendx == c.dataqsiz &#123;</span><br><span class="line">            c.sendx = <span class="number">0</span> <span class="comment">// 缓冲区是一个循环队列，如果满了就指向队头</span></span><br><span class="line">        &#125;</span><br><span class="line">        c.qcount++ <span class="comment">// 更新缓冲区计数</span></span><br><span class="line">        unlock(&amp;c.lock)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="阻塞发送"><a href="#阻塞发送" class="headerlink" title="阻塞发送"></a>阻塞发送</h3><p>如果 channel 上没有等待接收的 goroutine 或缓冲区不可用，当前发送数据的 goroutine 会被阻塞并加入 channel 的发送队列。chansend 会执行下面的代码:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">chansend</span><span class="params">(c *hchan, ep unsafe.Pointer, block <span class="keyword">bool</span>, callerpc <span class="keyword">uintptr</span>)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">if</span> !block &#123;</span><br><span class="line">        unlock(&amp;c.lock)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    gp := getg() <span class="comment">// 获得当前尝试向 channel 发送数据的 Goroutine</span></span><br><span class="line">    mysg := acquireSudog() <span class="comment">// 获取一个 sudog 结构体并设置相关的属性</span></span><br><span class="line">    mysg.elem = ep</span><br><span class="line">    mysg.g = gp</span><br><span class="line">    mysg.c = c</span><br><span class="line">    gp.waiting = mysg <span class="comment">// 表示当前 Goroutine 等待在 sudog 上</span></span><br><span class="line">    c.sendq.enqueue(mysg) <span class="comment">// 将准备好的 sudog 加入 channel 的发送队列</span></span><br><span class="line">    goparkunlock(&amp;c.lock, waitReasonChanSend, traceEvGoBlockSend, <span class="number">3</span>) <span class="comment">// 将当前 Goroutine 陷入沉睡并等待唤醒</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 做一些清空属性的收尾工作</span></span><br><span class="line">    gp.waiting = <span class="literal">nil</span></span><br><span class="line">    gp.param = <span class="literal">nil</span></span><br><span class="line">    mysg.c = <span class="literal">nil</span></span><br><span class="line">    releaseSudog(mysg)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>使用 <code>ch &lt;- i</code> 向一个 channel 发送数据时：</p>
+<ol>
+<li>如果当前 Channel 的 recvq 上存在已经被阻塞的 Goroutine，那么会直接将数据发送给当前的 Goroutine 并将其设置成下一个运行的 Goroutine；</li>
+<li>如果 Channel 存在缓冲区并且其中还有空闲的容量，我们就会直接将数据直接存储到当前缓冲区 sendx 所在的位置上；</li>
+<li>如果不满足上面的两种情况，就会创建一个 runtime.sudog 结构并将其加入 Channel 的 sendq 队列中，当前 Goroutine 也会陷入阻塞等待其他的协程从 Channel 接收数据</li>
+</ol>
+<p>发送过程中，2 个时机会触发 Goroutine 调度：</p>
+<ol>
+<li>发送数据时发现 channel 上存在等待接收数据的 Goroutine，立刻设置处理器的 runnext 属性，但是并不会立刻触发调度</li>
+<li>发送数据时并没有找到接收方并且缓冲区已经满了，这时就会将自己加入 Channel 的 sendq 队列并调用 runtime.goparkunlock 触发 Goroutine 的调度让出处理器的使用权</li>
+</ol>
+<h2 id="从-Channel-接收"><a href="#从-Channel-接收" class="headerlink" title="从 Channel 接收"></a>从 Channel 接收</h2><p>使用 <code>i &lt;- ch</code> 或 <code>i, ok &lt;- ch</code> 都可以从 channel 接收数据，不同方法在 runtime 最后都是调用 <code>runtime.chanrecv</code> 方法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">chanrecv</span><span class="params">(c *hchan, ep unsafe.Pointer, block <span class="keyword">bool</span>)</span> <span class="params">(selected, received <span class="keyword">bool</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> c == <span class="literal">nil</span> &#123; <span class="comment">// channel 为空（未创建对象）</span></span><br><span class="line">        <span class="keyword">if</span> !block &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 挂起当前 goroutien</span></span><br><span class="line">        gopark(<span class="literal">nil</span>, <span class="literal">nil</span>, waitReasonChanReceiveNilChan, traceEvGoStop, <span class="number">2</span>)</span><br><span class="line">        throw(<span class="string">"unreachable"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    lock(&amp;c.lock)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> c.closed != <span class="number">0</span> &amp;&amp; c.qcount == <span class="number">0</span> &#123; <span class="comment">// 如果 channel 已经关闭并且缓冲区没有数据，直接返回</span></span><br><span class="line">        unlock(&amp;c.lock)</span><br><span class="line">        <span class="keyword">if</span> ep != <span class="literal">nil</span> &#123;</span><br><span class="line">            typedmemclr(c.elemtype, ep)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>, <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="非阻塞接收"><a href="#非阻塞接收" class="headerlink" title="非阻塞接收"></a>非阻塞接收</h3><p>当 Channel 的 sendq 队列中包含处于等待状态的 Goroutine 时，该函数会取出队列头等待的 Goroutine，处理的逻辑和发送时相差无几。</p>
+<ul>
+<li>如果 channel 不存在缓冲区：将 channel 发送队列 sendq 中 Goroutine 存储的 elem 数据拷贝到目标内存地址中；</li>
+<li>如果 channel 存在缓冲区：<ol>
+<li>将 recvx 指向的缓冲区的数据拷贝到接收方的内存地址</li>
+<li>将发送队列 sendq 头的 sudog 中数据拷贝到缓冲区，释放一个阻塞的发送方<br><img src="https://i.loli.net/2020/05/25/13WoPzZrpjmYEnh.png" alt="存在缓冲区"></li>
+</ol>
+</li>
+</ul>
+<p>无论发生哪种情况，运行时都会调用 runtime.goready 函数将当前处理器的 runnext 设置成发送数据的 Goroutine，在调度器下一次调度时将阻塞的发送方唤醒。</p>
+<h3 id="阻塞接收"><a href="#阻塞接收" class="headerlink" title="阻塞接收"></a>阻塞接收</h3><p>当 channel 的发送队列中不存在等待的 Goroutine 并且缓冲区中也不存在任何数据时，从管道中接收数据的操作会变成阻塞操作。当前请求接收的 Goroutine 会被包装成一个 sudog 放入该 channel 的接收等待队列 recvq，然后触发调度。</p>
+<h3 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h3><p>从 channel 中接收数据，可能有以下 5 中情况：</p>
+<ol>
+<li>如果 Channel 为空，那么就会直接调用 runtime.gopark 挂起当前 Goroutine；</li>
+<li>如果 Channel 已经关闭并且缓冲区没有任何数据，runtime.chanrecv 函数会直接返回；</li>
+<li>如果 Channel 的 sendq 队列中存在挂起的 Goroutine，就会将 recvx 索引所在的数据拷贝到接收变量所在的内存空间上并将 sendq 队列中 Goroutine 的数据拷贝到缓冲区；</li>
+<li>如果 Channel 的缓冲区中包含数据就会直接读取 recvx 索引对应的数据；</li>
+<li>在默认情况下会挂起当前的 Goroutine，将 runtime.sudog 结构加入 recvq 队列并陷入休眠等待调度器的唤醒；</li>
+</ol>
+<p>接收过程中，2 个过程会触发 goroutine 调度：</p>
+<ol>
+<li>channel 为空</li>
+<li>缓冲区中不存在数据并且也不存在数据的发送者</li>
+</ol>
+<h2 id="关闭-channel"><a href="#关闭-channel" class="headerlink" title="关闭 channel"></a>关闭 channel</h2><p>close 一个已被关闭的 channel 会导致 panic。正常情况下，<br>runtime 会清空所有 sudog 上的数据 elem，并把阻塞在这个 channel 上的 goroutine （revq 和 sendq 上的）加入调度队列触发调度。</p>
 
       
     </div>
@@ -505,7 +492,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/git/" rel="tag"># git</a>
+            <a href="/tags/Go/" rel="tag"># Go</a>
           
         </div>
       
@@ -533,8 +520,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/31/《MySQL从入门到精通》之基本语句/" rel="next" title="MySQL之基础语法">
-                <i class="fa fa-chevron-left"></i> MySQL之基础语法
+              <a href="/2020/05/22/Vim-从入门到放弃/" rel="next" title="Vim 从入门到放弃">
+                <i class="fa fa-chevron-left"></i> Vim 从入门到放弃
               </a>
             
           </div>
@@ -542,10 +529,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/23/unittest单元测试/" rel="prev" title="unittest简介">
-                unittest简介 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -704,7 +687,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#配置git"><span class="nav-number">1.</span> <span class="nav-text">配置git</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常见用法"><span class="nav-number">2.</span> <span class="nav-text">常见用法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#版本控制"><span class="nav-number">2.1.</span> <span class="nav-text">版本控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建版本库"><span class="nav-number">2.1.1.</span> <span class="nav-text">创建版本库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态"><span class="nav-number">2.1.2.</span> <span class="nav-text">状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显示过往提交记录"><span class="nav-number">2.1.3.</span> <span class="nav-text">显示过往提交记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#版本回退"><span class="nav-number">2.1.4.</span> <span class="nav-text">版本回退</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管理修改"><span class="nav-number">2.1.5.</span> <span class="nav-text">管理修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显示提交记录"><span class="nav-number">2.1.6.</span> <span class="nav-text">显示提交记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#版本回退-1"><span class="nav-number">2.1.7.</span> <span class="nav-text">版本回退</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管理修改-1"><span class="nav-number">2.1.8.</span> <span class="nav-text">管理修改</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程仓库"><span class="nav-number">2.2.</span> <span class="nav-text">远程仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#克隆远程仓库"><span class="nav-number">2.2.1.</span> <span class="nav-text">克隆远程仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#把本地库内容推送到远程"><span class="nav-number">2.2.2.</span> <span class="nav-text">把本地库内容推送到远程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抓取远程库内容"><span class="nav-number">2.2.3.</span> <span class="nav-text">抓取远程库内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除远程仓库中的文件"><span class="nav-number">2.2.4.</span> <span class="nav-text">删除远程仓库中的文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支"><span class="nav-number">2.3.</span> <span class="nav-text">分支</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#处理分支冲突"><span class="nav-number">2.3.1.</span> <span class="nav-text">处理分支冲突</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标签"><span class="nav-number">2.4.</span> <span class="nav-text">标签</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#向-Channel-发送"><span class="nav-number">1.</span> <span class="nav-text">向 Channel 发送</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#直接发送"><span class="nav-number">1.1.</span> <span class="nav-text">直接发送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发送到缓冲区"><span class="nav-number">1.2.</span> <span class="nav-text">发送到缓冲区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阻塞发送"><span class="nav-number">1.3.</span> <span class="nav-text">阻塞发送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">1.4.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从-Channel-接收"><span class="nav-number">2.</span> <span class="nav-text">从 Channel 接收</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#非阻塞接收"><span class="nav-number">2.1.</span> <span class="nav-text">非阻塞接收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阻塞接收"><span class="nav-number">2.2.</span> <span class="nav-text">阻塞接收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结-1"><span class="nav-number">2.3.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关闭-channel"><span class="nav-number">3.</span> <span class="nav-text">关闭 channel</span></a></li></ol></div>
             
 
           </div>
