@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>初探http包——go网络服务的第一步</title>
+    <url>/2020/06/03/http%E5%8C%85%E2%80%94%E2%80%94go%E7%BD%91%E7%BB%9C%E6%9C%8D%E5%8A%A1%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5/</url>
+    <content><![CDATA[<p>仅需几行 go 代码就可以构建一个高效的 HTTP 服务器:</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"net/http"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    http.HandleFunc(<span class="string">"/"</span>, <span class="function"><span class="keyword">func</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">       w.Write([]<span class="keyword">byte</span>(<span class="string">"hello world!"</span>))</span><br><span class="line">    &#125;)</span><br><span class="line">    http.ListenAndServe(<span class="string">":8080"</span>, <span class="literal">nil</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后访问 <code>127.0.0.1:8080</code> 就可以看到，一个服务器已经成功启动了（而且和 Python 等语言自带的服务器相比性能很强哦）：</p>
+<p><img src="https://i.loli.net/2020/06/03/k3QcvMgNR1mr59A.png" alt="http服务器"></p>
+<p>对一次 HTTP 通信，我们只需要关注客户端（client）和服务端（Server）即可。而一个 HTTP 服务器最重要的功能莫过于 <code>路由</code>，即实现一个多路选择器（multiplexer）。本文就来探索这背后的秘密。</p>
+<p>先认识一下 Server 类：</p>
+<p><img src="https://i.loli.net/2020/06/03/asTBZgulqdQXwco.png" alt="http.Server"></p>
+<h2 id="从-Handler-说起"><a href="#从-Handler-说起" class="headerlink" title="从 Handler 说起"></a>从 Handler 说起</h2><p>Handler 是一个抽象接口，其唯一的方法是 <code>ServeHTTP(ResponseWriter, *Request)</code>。<br>实现了 Handler 接口的对象可以注册到 Server，为特定的路径及其子树提供服务。</p>
+<p>下面是 http 包中实现了 Handler 的类：</p>
+<p><img src="https://i.loli.net/2020/06/03/v63t1eTHROSb9dM.png" alt="Handler接口"></p>
+<p>因为本包多处使用到名为 handler 的 Handler 实例，而这些实例可能拥有不同的实现，所以有必要做一个分类：</p>
+<ul>
+<li>handler 处理器函数：签名为 <code>func(ResponseWriter, *Request)</code> 的函数</li>
+<li>handler 处理器：经过 <code>HandleFunc</code> 包装，实现了 <code>Handler</code> 接口的函数</li>
+<li>handler 对象：任何实现了 <code>Handler</code> 接口的结构体</li>
+</ul>
+<p><img src="https://i.loli.net/2020/06/04/Y9glIrx8Ud5yfou.png" alt="Handler对象之间的关系"></p>
+<h2 id="注册处理器"><a href="#注册处理器" class="headerlink" title="注册处理器"></a>注册处理器</h2><p>Server 根据请求选择合适的处理器构建响应，那么当然事先要在 Server 中把 请求-处理器 之间的关系注册好，<code>ServerMux</code> 就是负责关系请求模式串和处理器之间的关系的。</p>
+<p>注册一个处理器的常用方法就是调用 <code>http.HandleFunc(pattern string, handler func(ResponseWriter, *Request))</code>，其背后的逻辑如下：</p>
+<p><img src="https://i.loli.net/2020/06/03/rvLk8VzcFeJyXNw.png" alt="构建处理函数"></p>
+<p><code>http.HandleFunc(pattern string, handler func(ResponseWriter, *Request))</code> 会使用 DefaultServeMux 的 <code>HandleFunc</code> 方法，该方法把 handler 处理器函数包装为 handler 处理器，然后通过 DefaultServeMux 的 <code>Handle</code> 方法把这个处理器注册到相应模式串去。这样就完成了一次 <code>模式串-处理器</code> 的注册。</p>
+<p>当然，我们也可以创建一个 ServeMux 实例并调用其 <code>HandleFunc</code> 方法把处理器注册到自定义的 ServeMux 上去：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> hiHandler <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h *hiHandler)</span> <span class="title">ServeHTTP</span><span class="params">(w http.ResponseWriter,  r *http.Request)</span></span> &#123;</span><br><span class="line">    fmt.Fprint(w, <span class="string">"hi, world!"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    mux := http.NewServeMux()</span><br><span class="line">    mux.HandleFunc(<span class="string">"/hello"</span>, <span class="function"><span class="keyword">func</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">        fmt.Fprint(w, <span class="string">"hello world!"</span>)</span><br><span class="line">    &#125;) <span class="comment">// ServeMux.HandleFunc 需要一个 handler 处理器函数</span></span><br><span class="line">    mux.Handle(<span class="string">"/bye"</span>, http.HandleFunc(<span class="function"><span class="keyword">func</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">        fmt.Fprint(w, <span class="string">"bye world!"</span>)</span><br><span class="line">    &#125;)) <span class="comment">// 把一个 handler 处理器函数包装成一个 handler 处理器</span></span><br><span class="line">    mux.Handle(<span class="string">"/hi"</span>, &amp;hiHandler&#123;&#125;) <span class="comment">// 直接给一个 handler 对象</span></span><br><span class="line">    http.ListenAndServe(<span class="string">":8080"</span>, mux) <span class="comment">// 指定 DefaultServer 使用自定义的 ServeMux</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="处理请求"><a href="#处理请求" class="headerlink" title="处理请求"></a>处理请求</h2><p>我们需要一个 Server 对各种请求进行总处理，调用 <code>http.ListenAndServe(string, Handler)</code> 会初始化一个 Server 实例，其背后逻辑如下：</p>
+<p><img src="https://i.loli.net/2020/06/04/TiXUv2jkazD1HYN.png" alt="处理请求"></p>
+<p>Server 会监听其 <code>Addr</code> 属性上的 TCP 连接，为每个到来的 TCP 连接创建一个 <code>http.conn</code> 作为其在服务器端的抽象。从 <code>http.conn</code> 中读取并解析 HTTP 请求，创建 <code>http.ResponseWriter</code> 作为该请求的响应的抽象，然后在 Server 的 <code>Handler</code> 字段中寻找是否指定了 ServerMux（字段为空则使用 DefaultServeMux）。最后在 ServeMux 中查找并调用相应的处理器构建 HTTP 响应。</p>
+<p>Serer 当然也是可以自定义的：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    mux := NewServeMux()</span><br><span class="line">    mux.HandleFunc(<span class="string">"/hello"</span>, <span class="function"><span class="keyword">func</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">        fmt.Fprint(w, <span class="string">"hello world!"</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    server := &amp;http.Server&#123; <span class="comment">// 自定义 Server 的各种属性</span></span><br><span class="line">        Handler: mux,</span><br><span class="line">        Addr: <span class="string">":8086"</span>,</span><br><span class="line">        ReadTimeout: <span class="number">1</span> * time.Second,</span><br><span class="line">        WriteTimeout: <span class="number">2</span> * time.Second,</span><br><span class="line">    &#125;</span><br><span class="line">    server.ListenAndServe()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="搞搞中间件"><a href="#搞搞中间件" class="headerlink" title="搞搞中间件"></a>搞搞中间件</h2><p>既然 handler 处理器负责对请求构建响应，而函数在 go 中又是所谓“一等公民”（可以被赋值与返回），那么我们可以对它做点文章。比如在一个处理器之外再包一层逻辑形成一个有额外行为的新处理器。</p>
+<p>例如，只要我们实现了签名为 <code>func(Handler) Handler</code> 的函数，就可以额外实现一层逻辑，比如打印响应到来的时间：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    hello := <span class="function"><span class="keyword">func</span><span class="params">(w http.ResponseWriter, req *http.Request)</span></span> &#123;</span><br><span class="line">        fmt.Fprint(w, <span class="string">"hello world!"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    timeLog := <span class="function"><span class="keyword">func</span><span class="params">(next http.Handler)</span> <span class="title">http</span>.<span class="title">Handler</span></span> &#123;</span><br><span class="line">        <span class="comment">// 构建一个新的处理器，里面包含原处理器</span></span><br><span class="line">        <span class="keyword">return</span> http.HandlerFunc(<span class="function"><span class="keyword">func</span><span class="params">(writer http.ResponseWriter, request *http.Request)</span></span> &#123;</span><br><span class="line">            log.Printf( <span class="string">"handling the request at: %v"</span>,  time.Now())</span><br><span class="line">            next.ServeHTTP(writer, request)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    http.Handle(<span class="string">"/hello"</span>, timeLog(http.HandlerFunc(hello)))</span><br><span class="line">    http.ListenAndServe(<span class="string">":8080"</span>, <span class="literal">nil</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>语言</category>
+      </categories>
+      <tags>
+        <tag>Go</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>channel-Go的传声筒</title>
     <url>/2020/06/01/channel-Go%E7%9A%84%E4%BC%A0%E5%A3%B0%E7%AD%92/</url>
     <content><![CDATA[<p>得益于 goroutine 的设计，Go 在执行并发任务是可谓是得心应手。既然存在并发，就必然牵扯到多任务同步的问题。当然，我们可以直接用共享内存来通信（如共享变量），但是 Go 的设计哲学中有一句话叫做<code>不要用共享内存来通信，而是用通信共享内存</code>。利用内置的 channel 结构体在多个 goroutine 间通信是更安全也是更被推崇的。</p>
