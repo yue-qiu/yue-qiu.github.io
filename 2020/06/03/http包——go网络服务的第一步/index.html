@@ -93,7 +93,7 @@
 <meta property="og:image" content="https://i.loli.net/2020/06/04/Y9glIrx8Ud5yfou.png">
 <meta property="og:image" content="https://i.loli.net/2020/06/03/rvLk8VzcFeJyXNw.png">
 <meta property="og:image" content="https://i.loli.net/2020/06/04/TiXUv2jkazD1HYN.png">
-<meta property="og:updated_time" content="2020-06-03T17:00:12.150Z">
+<meta property="og:updated_time" content="2020-06-04T03:25:55.745Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初探http包——go网络服务的第一步">
 <meta name="twitter:description" content="仅需几行 go 代码就可以构建一个高效的 HTTP 服务器: 1234567891011package mainimport (    &quot;net/http&quot;)func main() &amp;#123;    http.HandleFunc(&quot;/&quot;, func(w http.ResponseWriter, r *http.Request) &amp;#123;       w.Write([]byte(&quot;hell">
@@ -450,7 +450,6 @@
 <h2 id="搞搞中间件"><a href="#搞搞中间件" class="headerlink" title="搞搞中间件"></a>搞搞中间件</h2><p>既然 handler 处理器负责对请求构建响应，而函数在 go 中又是所谓“一等公民”（可以被赋值与返回），那么我们可以对它做点文章。比如在一个处理器之外再包一层逻辑形成一个有额外行为的新处理器。</p>
 <p>例如，只要我们实现了签名为 <code>func(Handler) Handler</code> 的函数，就可以额外实现一层逻辑，比如打印响应到来的时间：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    hello := <span class="function"><span class="keyword">func</span><span class="params">(w http.ResponseWriter, req *http.Request)</span></span> &#123;</span><br><span class="line">        fmt.Fprint(w, <span class="string">"hello world!"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    timeLog := <span class="function"><span class="keyword">func</span><span class="params">(next http.Handler)</span> <span class="title">http</span>.<span class="title">Handler</span></span> &#123;</span><br><span class="line">        <span class="comment">// 构建一个新的处理器，里面包含原处理器</span></span><br><span class="line">        <span class="keyword">return</span> http.HandlerFunc(<span class="function"><span class="keyword">func</span><span class="params">(writer http.ResponseWriter, request *http.Request)</span></span> &#123;</span><br><span class="line">            log.Printf( <span class="string">"handling the request at: %v"</span>,  time.Now())</span><br><span class="line">            next.ServeHTTP(writer, request)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    http.Handle(<span class="string">"/hello"</span>, timeLog(http.HandlerFunc(hello)))</span><br><span class="line">    http.ListenAndServe(<span class="string">":8080"</span>, <span class="literal">nil</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
       
     </div>
     
