@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Go,">
 
 
 
@@ -79,16 +79,24 @@
 
 
 
-<meta name="description" content="高山仰止，景行行止。虽不能至，心向往之。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="精神的壳">
-<meta property="og:url" content="http://yoursite.com/tags/Python/index.html">
+<meta name="description" content="Go 语言中函数是所谓“头等对象”，即可以通过参数传递，可以做函数返回值，也可以做为右值赋值给一个变量。Go 语言把这样的参数、返回值、变量称为 function value，本质上是一个指针，指向一个 runtime.funcval 结构体，这个结构体保存了函数的入口地址。  举个例子：func A 的指令位于代码段的 addr1。由于 func A 对应的 funcval 没有捕获列表，编译期">
+<meta name="keywords" content="Go">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go底层大冒险之闭包">
+<meta property="og:url" content="http://yoursite.com/2020/06/21/go底层大冒险之闭包/index.html">
 <meta property="og:site_name" content="精神的壳">
-<meta property="og:description" content="高山仰止，景行行止。虽不能至，心向往之。">
+<meta property="og:description" content="Go 语言中函数是所谓“头等对象”，即可以通过参数传递，可以做函数返回值，也可以做为右值赋值给一个变量。Go 语言把这样的参数、返回值、变量称为 function value，本质上是一个指针，指向一个 runtime.funcval 结构体，这个结构体保存了函数的入口地址。  举个例子：func A 的指令位于代码段的 addr1。由于 func A 对应的 funcval 没有捕获列表，编译期">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="https://i.loli.net/2020/06/21/FJnO7hbSEKM86jR.png">
+<meta property="og:image" content="https://i.loli.net/2020/06/21/4Dmf2zuxHWtgwCJ.png">
+<meta property="og:image" content="https://i.loli.net/2020/06/21/NsIxdGY69SLgzub.png">
+<meta property="og:image" content="https://i.loli.net/2020/06/21/jU3g9E4tn5dSWh8.png">
+<meta property="og:image" content="https://i.loli.net/2020/06/21/NuOHmoygfK3scbL.png">
+<meta property="og:updated_time" content="2020-06-21T14:00:36.315Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="精神的壳">
-<meta name="twitter:description" content="高山仰止，景行行止。虽不能至，心向往之。">
+<meta name="twitter:title" content="Go底层大冒险之闭包">
+<meta name="twitter:description" content="Go 语言中函数是所谓“头等对象”，即可以通过参数传递，可以做函数返回值，也可以做为右值赋值给一个变量。Go 语言把这样的参数、返回值、变量称为 function value，本质上是一个指针，指向一个 runtime.funcval 结构体，这个结构体保存了函数的入口地址。  举个例子：func A 的指令位于代码段的 addr1。由于 func A 对应的 funcval 没有捕获列表，编译期">
+<meta name="twitter:image" content="https://i.loli.net/2020/06/21/FJnO7hbSEKM86jR.png">
 
 
 
@@ -118,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/Python/">
+  <link rel="canonical" href="http://yoursite.com/2020/06/21/go底层大冒险之闭包/">
 
 
 
 
 
-  <title>Tag: Python | 精神的壳</title>
+  <title>Go底层大冒险之闭包 | 精神的壳</title>
   
 
 
@@ -155,7 +163,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -281,52 +289,225 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Python<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/21/go底层大冒险之闭包/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="路边的土豆">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/惊讶猫.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="精神的壳">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/05/23/unittest单元测试/" itemprop="url">
-              
-                <span itemprop="name">unittest简介</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Go底层大冒险之闭包</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-05-23T17:08:42+08:00" content="2018-05-23">
-          05-23
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-06-21T10:14:29+08:00">
+                2020-06-21
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/06/21/go底层大冒险之闭包/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/06/21/go底层大冒险之闭包/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/06/21/go底层大冒险之闭包/" class="leancloud_visitors" data-flag-title="Go底层大冒险之闭包">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Go 语言中函数是所谓“头等对象”，即可以通过参数传递，可以做函数返回值，也可以做为右值赋值给一个变量。Go 语言把这样的参数、返回值、变量称为 <code>function value</code>，本质上是一个指针，指向一个 <code>runtime.funcval</code> 结构体，这个结构体保存了函数的入口地址。</p>
+<p><img src="https://i.loli.net/2020/06/21/FJnO7hbSEKM86jR.png" alt="FunctionValue"></p>
+<p>举个例子：<code>func A</code> 的指令位于代码段的 addr1。由于 <code>func A</code> 对应的 <code>funcval</code> 没有捕获列表，编译期间编译器会在只读数据段分配一个 <code>funcval</code> 结构体，这个结构体本身的地址是 addr2 ，它保存了 <code>func A</code> 的地址 addr1，多次 <code>func A</code> 调用共享一个 <code>funcval</code>。执行阶段，addr2 会被赋予 f1 与 f2。执行 f1 就是通过 f1 找出对应的 <code>funcval</code>，进而拿到 <code>func A</code> 入口地址。</p>
+<p><img src="https://i.loli.net/2020/06/21/4Dmf2zuxHWtgwCJ.png" alt="FunctionValue举例"></p>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>既然有了函数入口地址就能间接调用函数，为什么要在中间插入一层 <code>funcval</code> 呢？这就是出于<strong>闭包</strong>的考虑了：</p>
+<p><img src="https://i.loli.net/2020/06/21/NsIxdGY69SLgzub.png" alt="闭包"></p>
+<p>在一些语言中(如C++)，返回局部变量的地址或引用被认为是不明智的，因为局部变量都分配在栈里，当函数执行结束其占用的栈空间也随之释放，此时我们返回的局部变量也被释放掉了。如果我们使用这些被释放掉的变量就会产生所谓“变量逃逸”问题。</p>
+<p>所幸 JavaScript、Go 等语言都是支持闭包的。那么 Go 底层是如何实现闭包的呢？</p>
+<p>举个例子：运行时在堆分配两个 <code>funcval</code> 结构体地址分别为 addr2、addr3。每个 <code>funcval</code> 同时又保存了各自的捕获列表。通过捕获列表就能使用保存下来的对象了。</p>
+<p><img src="https://i.loli.net/2020/06/21/jU3g9E4tn5dSWh8.png" alt="Go闭包"></p>
+<p>通常来讲，局部变量都是分配在栈的，上图也是这样。但是，如果捕获变量的值会发生改变，Go 编译器会在堆上分配局部变量，栈上只保存一个地址。这就是所谓的“局部变量堆分配”。<code>funcval</code> 的捕获列表保存局部变量的地址，这样闭包函数和外层函数就指向同一个变量了。</p>
+<p><img src="https://i.loli.net/2020/06/21/NuOHmoygfK3scbL.png" alt="Go引用捕获变量"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>Go 内部会把所有 <code>function value</code> 转化为 <code>funcval</code> 结构体，这个结构体保存了函数的实际地址。</li>
+<li>得益于 <code>funcval</code> 做为中间载体，Go 实现了闭包。<code>funcval</code> 会有一个捕获列表，里面或是保存了捕获变量的拷贝，或是保存了捕获变量的地址。</li>
+</ol>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Go/" rel="tag"># Go</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/06/03/http包——go网络服务的第一步/" rel="next" title="初探http包——go网络服务的第一步">
+                <i class="fa fa-chevron-left"></i> 初探http包——go网络服务的第一步
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -334,6 +515,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -354,8 +542,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -439,6 +636,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#闭包"><span class="nav-number">1.</span> <span class="nav-text">闭包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -624,6 +837,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
@@ -1164,26 +1381,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

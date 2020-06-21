@@ -82,15 +82,15 @@
 <meta name="description" content="得益于 goroutine 的设计，Go 在执行并发任务是可谓是得心应手。既然存在并发，就必然牵扯到多任务同步的问题。当然，我们可以直接用共享内存来通信（如共享变量），但是 Go 的设计哲学中有一句话叫做不要用共享内存来通信，而是用通信共享内存。利用内置的 channel 结构体在多个 goroutine 间通信是更安全也是更被推崇的。 channel 在 runtime 中用 hchan  结构">
 <meta name="keywords" content="Go">
 <meta property="og:type" content="article">
-<meta property="og:title" content="channel-Go的传声筒">
+<meta property="og:title" content="Go底层大冒险之channel">
 <meta property="og:url" content="http://yoursite.com/2020/06/01/channel-Go的传声筒/index.html">
 <meta property="og:site_name" content="精神的壳">
 <meta property="og:description" content="得益于 goroutine 的设计，Go 在执行并发任务是可谓是得心应手。既然存在并发，就必然牵扯到多任务同步的问题。当然，我们可以直接用共享内存来通信（如共享变量），但是 Go 的设计哲学中有一句话叫做不要用共享内存来通信，而是用通信共享内存。利用内置的 channel 结构体在多个 goroutine 间通信是更安全也是更被推崇的。 channel 在 runtime 中用 hchan  结构">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.loli.net/2020/05/25/13WoPzZrpjmYEnh.png">
-<meta property="og:updated_time" content="2020-06-01T07:12:52.210Z">
+<meta property="og:updated_time" content="2020-06-21T02:15:52.987Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="channel-Go的传声筒">
+<meta name="twitter:title" content="Go底层大冒险之channel">
 <meta name="twitter:description" content="得益于 goroutine 的设计，Go 在执行并发任务是可谓是得心应手。既然存在并发，就必然牵扯到多任务同步的问题。当然，我们可以直接用共享内存来通信（如共享变量），但是 Go 的设计哲学中有一句话叫做不要用共享内存来通信，而是用通信共享内存。利用内置的 channel 结构体在多个 goroutine 间通信是更安全也是更被推崇的。 channel 在 runtime 中用 hchan  结构">
 <meta name="twitter:image" content="https://i.loli.net/2020/05/25/13WoPzZrpjmYEnh.png">
 
@@ -128,7 +128,7 @@
 
 
 
-  <title>channel-Go的传声筒 | 精神的壳</title>
+  <title>Go底层大冒险之channel | 精神的壳</title>
   
 
 
@@ -316,7 +316,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">channel-Go的传声筒</h1>
+          <h1 class="post-title" itemprop="name headline">Go底层大冒险之channel</h1>
         
 
         <div class="post-meta">
@@ -378,7 +378,7 @@
 
           
           
-             <span id="/2020/06/01/channel-Go的传声筒/" class="leancloud_visitors" data-flag-title="channel-Go的传声筒">
+             <span id="/2020/06/01/channel-Go的传声筒/" class="leancloud_visitors" data-flag-title="Go底层大冒险之channel">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -614,7 +614,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
