@@ -19,6 +19,7 @@
 <li>Go 内部会把所有 <code>function value</code> 转化为 <code>funcval</code> 结构体，这个结构体保存了函数的实际地址。</li>
 <li>得益于 <code>funcval</code> 做为中间载体，Go 实现了闭包。<code>funcval</code> 会有一个捕获列表，里面或是保存了捕获变量的拷贝，或是保存了捕获变量的地址。</li>
 </ol>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>B 站这个 up 讲得蛮好，通俗易懂，直接明了: <a href="https://www.bilibili.com/video/BV1ma4y1e7R5" target="_blank" rel="noopener">eggo-tech</a></p>
 ]]></content>
       <categories>
         <category>语言</category>

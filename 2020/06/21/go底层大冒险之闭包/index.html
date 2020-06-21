@@ -92,7 +92,7 @@
 <meta property="og:image" content="https://i.loli.net/2020/06/21/NsIxdGY69SLgzub.png">
 <meta property="og:image" content="https://i.loli.net/2020/06/21/jU3g9E4tn5dSWh8.png">
 <meta property="og:image" content="https://i.loli.net/2020/06/21/NuOHmoygfK3scbL.png">
-<meta property="og:updated_time" content="2020-06-21T14:23:29.893Z">
+<meta property="og:updated_time" content="2020-06-21T14:27:40.049Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Go底层大冒险之闭包">
 <meta name="twitter:description" content="Go 语言中函数是所谓“头等对象”，即可以通过参数传递，可以做函数返回值，也可以做为右值赋值给一个变量。Go 语言把这样的参数、返回值、变量称为 function value，本质上是一个指针，指向一个 runtime.funcval 结构体，这个结构体保存了函数的入口地址。  举个例子：func A 的指令位于代码段的 addr1。由于 func A 对应的 funcval 没有捕获列表，编译期">
@@ -434,6 +434,7 @@
 <li>Go 内部会把所有 <code>function value</code> 转化为 <code>funcval</code> 结构体，这个结构体保存了函数的实际地址。</li>
 <li>得益于 <code>funcval</code> 做为中间载体，Go 实现了闭包。<code>funcval</code> 会有一个捕获列表，里面或是保存了捕获变量的拷贝，或是保存了捕获变量的地址。</li>
 </ol>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>B 站这个 up 讲得蛮好，通俗易懂，直接明了: <a href="https://www.bilibili.com/video/BV1ma4y1e7R5" target="_blank" rel="noopener">eggo-tech</a></p>
 
       
     </div>
@@ -646,7 +647,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#闭包"><span class="nav-number">1.</span> <span class="nav-text">闭包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#闭包"><span class="nav-number">1.</span> <span class="nav-text">闭包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
