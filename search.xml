@@ -40,7 +40,23 @@
 <p>defer 函数的参数值在注册时被拷贝到 <code>runtime._defer</code> 结构体之后，执行时又从堆拷贝到栈上。</p>
 <h4 id="执行延迟调用"><a href="#执行延迟调用" class="headerlink" title="执行延迟调用"></a>执行延迟调用</h4><p><code>runtime.deferreturn</code> 会从 Goroutine 的 _defer 链表中取出最前面的 runtime._defer 结构体并调用 <a href="https://github.com/golang/go/blob/a38a917aee626a9b9d5ce2b93964f586bf759ea0/src/runtime/asm_386.s#L614-L624" target="_blank" rel="noopener">runtime.jmpdefer</a> 函数传入需要执行的函数和参数:</p>
 <figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">deferreturn</span><span class="params">(arg0 <span class="keyword">uintptr</span>)</span></span> &#123;</span><br><span class="line">    gp := getg()</span><br><span class="line">    d := gp._defer</span><br><span class="line">    <span class="keyword">if</span> d == <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    sp := getcallersp()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span> d.siz &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">    <span class="keyword">case</span> sys.PtrSize:</span><br><span class="line">        *(*<span class="keyword">uintptr</span>)(unsafe.Pointer(&amp;arg0)) = *(*<span class="keyword">uintptr</span>)(deferArgs(d))</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        memmove(unsafe.Pointer(&amp;arg0), deferArgs(d), <span class="keyword">uintptr</span>(d.siz))</span><br><span class="line">    &#125;</span><br><span class="line">    fn := d.fn</span><br><span class="line">    gp._defer = d.link</span><br><span class="line">    freedefer(d)</span><br><span class="line">    jmpdefer(fn, <span class="keyword">uintptr</span>(unsafe.Pointer(&amp;arg0)))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>runtime.deferreturn</code> 函数会多次判断当前 Goroutine 的 _defer 链表中是否有未执行的剩余结构，在所有的延迟函数调用都执行完成之后，该函数才会返回。</p>
+<p><code>runtime.deferreturn</code> 函数会多次判断当前 Goroutine 的 _defer 链表中是否有未执行的剩余结构，在当前函数的所有的延迟函数调用都执行完成之后，该函数才会返回。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><code>defer</code> 关键字的实现主要依靠编译器和运行时的协作:</p>
+<ul>
+<li><p>编译期；</p>
+<ul>
+<li><p>将 <code>defer</code> 关键字被转换 <code>runtime.deferproc</code>；</p>
+</li>
+<li><p>在调用 <code>defer</code> 关键字的函数返回之前插入 <code>runtime.deferreturn</code>；</p>
+</li>
+</ul>
+</li>
+<li>运行时：<ul>
+<li><code>runtime.deferproc</code> 把一个新的 <code>runtime._defer</code> 结构体追加到当前 Goroutine 的链表头；</li>
+<li><code>runtime.deferreturn</code> 反复从 Goroutine 的链表头取出 <code>runtime._defer</code> 结构并依次执行，直至所有当前函数上的延迟函数调用都执行完</li>
+</ul>
+</li>
+</ul>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://draveness.me/golang/docs/part2-foundation/ch05-keyword/golang-defer/#53-defer" target="_blank" rel="noopener">Go语言设计与实现</a></p>
 <p><a href="https://blog.golang.org/defer-panic-and-recover" target="_blank" rel="noopener">Defer, Panic and Recover</a></p>
 <p><a href="https://leokongwq.github.io/2016/10/15/golang-defer.html" target="_blank" rel="noopener">golang之defer简介</a></p>
