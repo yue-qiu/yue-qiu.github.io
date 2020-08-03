@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Golang 关键字 new 和 make 有啥不同?</title>
+    <url>/2020/08/03/Golang-%E5%85%B3%E9%94%AE%E5%AD%97-new-%E5%92%8C-make-%E6%9C%89%E5%95%A5%E4%B8%8D%E5%90%8C/</url>
+    <content><![CDATA[<p>当我们想要得到一个切片、哈希表或者 channel 的实例，我们常使用 <code>make</code>；而如果我们需要一个指针，我们可以用 <code>new</code>：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span> &#123;</span><br><span class="line">    Age <span class="keyword">int8</span></span><br><span class="line">    Name <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">string</span>)</span><br><span class="line">    s := <span class="built_in">make</span>([]<span class="keyword">string</span>, <span class="number">0</span>)</span><br><span class="line">    m := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">string</span>)</span><br><span class="line"></span><br><span class="line">    i := <span class="built_in">new</span>(<span class="keyword">int</span>) <span class="comment">// i 为 *int 类型</span></span><br><span class="line">    pp := <span class="built_in">new</span>(Person) <span class="comment">// pp 为 *Person 类型</span></span><br><span class="line">    p := Person&#123;&#125; <span class="comment">// p 为 Person 类型实例</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>new</code> 只是申请了一片该类型的内存空间并将其置 0，然后返回指向这个空间的指针，换言之，new 得到的指针指向的是该类型的零值；而 <code>make</code> 在申请内存的同时初始化这个内置的数据结构：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    mMap := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">string</span>)</span><br><span class="line">    nMap := <span class="built_in">new</span>(<span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">string</span>)</span><br><span class="line"></span><br><span class="line">    fmt.Println(mMap == <span class="literal">nil</span>)     <span class="comment">// false</span></span><br><span class="line">    fmt.Println(*nMap == <span class="literal">nil</span>)    <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">    mMap[<span class="number">0</span>] = <span class="string">"hello world"</span></span><br><span class="line">    nMap[<span class="number">0</span>] = <span class="string">"hello world"</span>     <span class="comment">// panic: assignment to entry in nil map</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结：</p>
+<ol>
+<li><code>make</code> 只能用于内置的 map、slice、channel 类型，<code>new</code> 可以用于任何类型 </li>
+<li><code>make</code> 得到类型实例，<code>new</code> 得到类型指针</li>
+<li><code>make</code> 在申请内存同时初始化对象，<code>new</code> 只是申请了一片内存并且将其置为类型零值</li>
+</ol>
+]]></content>
+      <categories>
+        <category>语言</category>
+      </categories>
+      <tags>
+        <tag>Go</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>浅谈WiFi6</title>
     <url>/2020/07/30/%E6%B5%85%E8%B0%88WiFi6/</url>
     <content><![CDATA[<h2 id="什么是-WiFi6"><a href="#什么是-WiFi6" class="headerlink" title="什么是 WiFi6"></a>什么是 WiFi6</h2><p>WiFi 标准是 IEEE（电气电子工程师学会）制定的标准之一，IEEE 将最近几代的 WiFi 标准依次命名为 802.11n, 802.11ac, 802.11ax。WiFi 联盟则是一个商业组织，主要目的是在全球范围内推行 WiFi 产品的兼容认证，发展 IEEE802.11 标准的无线局域网技术。</p>
