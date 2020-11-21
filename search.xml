@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>函数调用背后的秘密——寄存器与栈</title>
+    <url>/2020/11/21/%E4%BB%8EBP%E4%B8%8ESP%E8%AF%B4%E5%BC%80%E5%8E%BB/</url>
+    <content><![CDATA[<p>函数调用是解耦思想的一个基本体现。为了实现调用，我们往往需要给子程序提供一些参数并得到子程序的执行结果。今天就来探究一下这个过程在计算机内部是如何实现的。</p>
+<h2 id="利用寄存器传参"><a href="#利用寄存器传参" class="headerlink" title="利用寄存器传参"></a>利用寄存器传参</h2><p>来看例一：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">square</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num * num;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> k = <span class="number">2</span>;</span><br><span class="line">    square(k);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在 x86-64 平台上汇编得到的结果是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">square:</span><br><span class="line">        push    rbp</span><br><span class="line">        mov     rbp, rsp</span><br><span class="line">        mov     DWORD PTR [rbp-4], edi</span><br><span class="line">        mov     eax, DWORD PTR [rbp-4]</span><br><span class="line">        imul    eax, eax</span><br><span class="line">        pop     rbp</span><br><span class="line">        ret</span><br><span class="line">main:</span><br><span class="line">        push    rbp</span><br><span class="line">        mov     rbp, rsp</span><br><span class="line">        sub     rsp, 16</span><br><span class="line">        mov     DWORD PTR [rbp-4], 2</span><br><span class="line">        mov     eax, DWORD PTR [rbp-4]</span><br><span class="line">        mov     edi, eax</span><br><span class="line">        call    square</span><br><span class="line">        mov     DWORD PTR [rbp-4], eax</span><br><span class="line">        mov     eax, 0</span><br><span class="line">        leave</span><br><span class="line">        ret</span><br></pre></td></tr></table></figure>
+<p>变量 k 保存在内存 <code>[rbp-4]</code> 处，其值为 2。随后 <code>[rbp-4]</code> 中的值被存到了 <code>eax</code>，最后保存在 <code>edi</code>，这就完成了一次寄存器传参。square  函数更新 <code>rbp</code> 的值再从 <code>edi</code> 取值保存到 <code>[rbp-4]</code>，完成形参到实参的复制。square 把结果保存在 <code>eax</code> 里，main 读取 <code>eax</code> 得到调用返回值。</p>
+<h2 id="用栈传参"><a href="#用栈传参" class="headerlink" title="用栈传参"></a>用栈传参</h2><p>当参数的数量过多无法全部保存到寄存器里或长度超过了机器字长，就要用到栈来传参。再来看例二：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">20</span>];</span><br><span class="line">    <span class="keyword">int</span>  age;</span><br><span class="line">&#125;Person;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">greet</span><span class="params">(Person people)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"hello %s, you are %d years old.\n"</span>, people.name, people.age);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Person me = &#123;name: <span class="string">"Rowan"</span>, age: <span class="number">21</span>&#125;;</span><br><span class="line">    greet(me);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>翻译成汇编语言是这样：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.LC0:</span><br><span class="line">        .string &quot;hello %s, you are %d years old.\n&quot;</span><br><span class="line">greet:</span><br><span class="line">        push    rbp</span><br><span class="line">        mov     rbp, rsp</span><br><span class="line">        mov     eax, DWORD PTR [rbp+36]</span><br><span class="line">        mov     edx, eax</span><br><span class="line">        lea     rsi, [rbp+16]</span><br><span class="line">        mov     edi, OFFSET FLAT:.LC0</span><br><span class="line">        mov     eax, 0</span><br><span class="line">        call    printf</span><br><span class="line">        nop</span><br><span class="line">        pop     rbp</span><br><span class="line">        ret</span><br><span class="line">main:</span><br><span class="line">        push    rbp</span><br><span class="line">        mov     rbp, rsp</span><br><span class="line">        sub     rsp, 32</span><br><span class="line">        movabs  rax, 474081619794</span><br><span class="line">        mov     edx, 0</span><br><span class="line">        mov     QWORD PTR [rbp-32], rax</span><br><span class="line">        mov     QWORD PTR [rbp-24], rdx</span><br><span class="line">        mov     DWORD PTR [rbp-16], 0</span><br><span class="line">        mov     DWORD PTR [rbp-12], 21</span><br><span class="line">        sub     rsp, 8</span><br><span class="line">        push    QWORD PTR [rbp-16]</span><br><span class="line">        push    QWORD PTR [rbp-24]</span><br><span class="line">        push    QWORD PTR [rbp-32]</span><br><span class="line">        call    greet</span><br><span class="line">        add     rsp, 32</span><br><span class="line">        mov     eax, 0</span><br><span class="line">        leave</span><br><span class="line">        ret</span><br></pre></td></tr></table></figure>
+<p>一个 Person 实例占 24 字节，超过了 x86-64 平台下一个通用寄存器的最大长度（8 字节），编译器用栈来保存参数。</p>
+<p>26 到 27 行的三个 <code>push</code> 操作把 me 入栈，随后用 <code>call</code> 指令跳到 square 函数。square 函数在栈的 <code>[rbp+36]</code> 取到 age 成员的值，取 <code>[rbp+16]</code> （name 成员）的内存地址放入 <code>rsi</code>，完成一次传参。</p>
+<h2 id="细探-sp-与-bp"><a href="#细探-sp-与-bp" class="headerlink" title="细探 sp 与 bp"></a>细探 sp 与 bp</h2><p><strong>sp(stack pointer)</strong>，中文名“栈顶寄存器”。顾名思义，这个指针时刻指向栈的顶部，其值随 push 和 pop 操作隐式改变。假设操作对象为 x：</p>
+<ul>
+<li>push x：首先，sp -= len(x)（x 的字长，以字节为单位）；然后，在 [sp-len(x), sp) 中存入 x 值。</li>
+<li>pop x：首先，从 [sp-len(x), sp) 中读取数据存放到 x；然后，sp += len(x)。</li>
+</ul>
+<p>如果编译器能推断一个函数要占用多少空间，在进入这个函数时往往会为它预先分配好一段栈空间（如例二汇编代码第 18 行 <code>sub rsp, 32</code>，为 main 函数分配了 32 字节栈空间）。在这个函数退出时，调整 sp 的值销毁这段空间（例二汇编代码第 30 行 <code>add rsp, 32</code>）。</p>
+<p><strong>bp(base pointer)</strong>，中文名“基指寄存器”。因为随着指令执行 sp 是不断变化的，所以在进入函数时常用 bp 保存 sp 的初始值以对要用到的数据进行寻址定位（例二汇编代码第 6 行 <code>mov eax, DWORD PTR [rbp+36]</code>，第 21 行 <code>mov QWORD PTR [rbp-32], rax</code> 等）。</p>
+<p>指令 <code>call x</code> 会设置 ip 寄存器的值为 x 的段偏移地址，达到“调用函数”的目的。这个过程分为两步：</p>
+<ol>
+<li>把 ip 寄存器的原址入栈（此时 ip 指向 call 的下一条指令），相当于 <code>push ip</code></li>
+<li>更新 ip 寄存器的值，相当于 <code>mov ip, x</code></li>
+</ol>
+<p>指令 <code>ret</code> 从栈顶取值保存到 ip 寄存器，相当于 <code>call</code> 的逆操作。执行完 ret 指令后 ip 恢复到函数调用前的值，程序从而继续向下执行。</p>
+<p>指令 <code>leave</code> 在函数执行结束后恢复 sp 和 bp 的值。上文说到进入函数时会把 sp 保存到 bp 再调整 sp 的值以为函数分配栈空间。那么在退出函数时自然要恢复原来的 sp 和 bp。这条指令相当于 <code>mov rsp, rbp</code> 和 <code>pop rbp</code> 的结合。</p>
+]]></content>
+      <categories>
+        <category>汇编</category>
+      </categories>
+      <tags>
+        <tag>寄存器</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Golang 关键字 new 和 make 有啥不同?</title>
     <url>/2020/08/03/Golang-%E5%85%B3%E9%94%AE%E5%AD%97-new-%E5%92%8C-make-%E6%9C%89%E5%95%A5%E4%B8%8D%E5%90%8C/</url>
     <content><![CDATA[<p>当我们想要得到一个切片、哈希表或者 channel 的实例，我们常使用 <code>make</code>；而如果我们需要一个指针，我们可以用 <code>new</code>：</p>
