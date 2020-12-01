@@ -87,10 +87,12 @@
 <meta property="og:site_name" content="精神的壳">
 <meta property="og:description" content="函数调用是解耦思想的一个基本体现。为了实现调用，我们往往需要给子程序提供一些参数并得到子程序的执行结果。今天就来探究一下这个过程在计算机内部是如何实现的。 利用寄存器传参来看例一： 12345678int square(int num) &amp;#123;    return num * num;&amp;#125;int main() &amp;#123;    int k = 2;    square(k);&amp;#1">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-11-21T14:20:52.818Z">
+<meta property="og:image" content="https://i.loli.net/2020/12/01/tpiUYdgbZxEBVvm.png">
+<meta property="og:updated_time" content="2020-12-01T10:01:53.067Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="函数调用背后的秘密——寄存器与栈">
 <meta name="twitter:description" content="函数调用是解耦思想的一个基本体现。为了实现调用，我们往往需要给子程序提供一些参数并得到子程序的执行结果。今天就来探究一下这个过程在计算机内部是如何实现的。 利用寄存器传参来看例一： 12345678int square(int num) &amp;#123;    return num * num;&amp;#125;int main() &amp;#123;    int k = 2;    square(k);&amp;#1">
+<meta name="twitter:image" content="https://i.loli.net/2020/12/01/tpiUYdgbZxEBVvm.png">
 
 
 
@@ -424,7 +426,16 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">.LC0:</span><br><span class="line">        .string &quot;hello %s, you are %d years old.\n&quot;</span><br><span class="line">greet:</span><br><span class="line">        push    rbp</span><br><span class="line">        mov     rbp, rsp</span><br><span class="line">        mov     eax, DWORD PTR [rbp+36]</span><br><span class="line">        mov     edx, eax</span><br><span class="line">        lea     rsi, [rbp+16]</span><br><span class="line">        mov     edi, OFFSET FLAT:.LC0</span><br><span class="line">        mov     eax, 0</span><br><span class="line">        call    printf</span><br><span class="line">        nop</span><br><span class="line">        pop     rbp</span><br><span class="line">        ret</span><br><span class="line">main:</span><br><span class="line">        push    rbp</span><br><span class="line">        mov     rbp, rsp</span><br><span class="line">        sub     rsp, 32</span><br><span class="line">        movabs  rax, 474081619794</span><br><span class="line">        mov     edx, 0</span><br><span class="line">        mov     QWORD PTR [rbp-32], rax</span><br><span class="line">        mov     QWORD PTR [rbp-24], rdx</span><br><span class="line">        mov     DWORD PTR [rbp-16], 0</span><br><span class="line">        mov     DWORD PTR [rbp-12], 21</span><br><span class="line">        sub     rsp, 8</span><br><span class="line">        push    QWORD PTR [rbp-16]</span><br><span class="line">        push    QWORD PTR [rbp-24]</span><br><span class="line">        push    QWORD PTR [rbp-32]</span><br><span class="line">        call    greet</span><br><span class="line">        add     rsp, 32</span><br><span class="line">        mov     eax, 0</span><br><span class="line">        leave</span><br><span class="line">        ret</span><br></pre></td></tr></table></figure>
 <p>一个 Person 实例占 24 字节，超过了 x86-64 平台下一个通用寄存器的最大长度（8 字节），编译器用栈来保存参数。</p>
 <p>26 到 28 行的三个 <code>push</code> 操作把 me 入栈，随后用 <code>call</code> 指令跳到 square 函数。square 函数在栈的 <code>[rbp+36]</code> 取到 age 成员的值，取 <code>[rbp+16]</code> （name 成员）的内存地址放入 <code>rsi</code>，完成一次传参。</p>
-<h2 id="细探-sp-与-bp"><a href="#细探-sp-与-bp" class="headerlink" title="细探 sp 与 bp"></a>细探 sp 与 bp</h2><p><strong>sp(stack pointer)</strong>，中文名“栈顶寄存器”。顾名思义，这个指针时刻指向栈的顶部，其值随 push 和 pop 操作隐式改变。假设操作对象为 x：</p>
+<h2 id="程序内存模型"><a href="#程序内存模型" class="headerlink" title="程序内存模型"></a>程序内存模型</h2><p>下图展示了 x86-64 平台 Linux 系统的程序内存分布模型。出于现实世界的数据量考虑，系统只使用了低 47 位作为内存地址，所以可以看到内存地址最大值为 <code>0x00007FFFFFFFFFF</code>：</p>
+<ol>
+<li>前 <code>FFFFFFF</code> 个字节存放共享库、中断向量表等内容，这些东西在程序运行中是共享的</li>
+<li>随后为大小最多 8M 的运行时栈。局部变量、程序状态信息等值往往保存其中。sp 减小，栈增大；sp 增大，栈减小并释放栈帧中的内容</li>
+<li>堆空间的申请与释放由程序员手动管理</li>
+<li>Data 区保存全局数据，通常是常量</li>
+<li>Text 区存放程序指令，sp 指针就在这块区域中来回移动</li>
+</ol>
+<p><img src="https://i.loli.net/2020/12/01/tpiUYdgbZxEBVvm.png" alt="image.png"></p>
+<p><strong>sp(stack pointer)</strong>，中文名“栈顶寄存器”。顾名思义，这个指针时刻指向栈的顶部，其值随 push 和 pop 操作隐式改变。假设操作对象为 x：</p>
 <ul>
 <li>push x：首先，sp -= len(x)（x 的字长，以字节为单位）；然后，在 [sp-len(x), sp) 中存入 x 值。</li>
 <li>pop x：首先，从 [sp-len(x), sp) 中读取数据存放到 x；然后，sp += len(x)。</li>
@@ -650,7 +661,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#利用寄存器传参"><span class="nav-number">1.</span> <span class="nav-text">利用寄存器传参</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用栈传参"><span class="nav-number">2.</span> <span class="nav-text">用栈传参</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#细探-sp-与-bp"><span class="nav-number">3.</span> <span class="nav-text">细探 sp 与 bp</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#利用寄存器传参"><span class="nav-number">1.</span> <span class="nav-text">利用寄存器传参</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用栈传参"><span class="nav-number">2.</span> <span class="nav-text">用栈传参</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序内存模型"><span class="nav-number">3.</span> <span class="nav-text">程序内存模型</span></a></li></ol></div>
             
 
           </div>
