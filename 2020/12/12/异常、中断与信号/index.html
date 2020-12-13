@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="异常处理,">
 
 
 
@@ -79,16 +79,24 @@
 
 
 
-<meta name="description" content="高山仰止，景行行止。虽不能至，心向往之。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="精神的壳">
-<meta property="og:url" content="http://yoursite.com/tags/寄存器/index.html">
+<meta name="description" content="任何一个通用 CPU 都可以在执行完一条指令后检测从 CPU 外部发送过来或从内部产生的一种特殊信息，并且可以立即转而对该信息进行处理。这种“特殊信息”衍生出了异常、中断和信号这三个概念，其中牵涉到的知识点非常广泛且复杂，环环相扣。本文旨在对其进行梳理，形成一个脉络，具体底层细节还需要读者自行探究。 定义 中断（又称异步中断、硬中断）: 本质是一种电信号。当设备有某种事件发生时，它就会产生中断，通">
+<meta name="keywords" content="异常处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="异常、中断与信号">
+<meta property="og:url" content="http://yoursite.com/2020/12/12/异常、中断与信号/index.html">
 <meta property="og:site_name" content="精神的壳">
-<meta property="og:description" content="高山仰止，景行行止。虽不能至，心向往之。">
+<meta property="og:description" content="任何一个通用 CPU 都可以在执行完一条指令后检测从 CPU 外部发送过来或从内部产生的一种特殊信息，并且可以立即转而对该信息进行处理。这种“特殊信息”衍生出了异常、中断和信号这三个概念，其中牵涉到的知识点非常广泛且复杂，环环相扣。本文旨在对其进行梳理，形成一个脉络，具体底层细节还需要读者自行探究。 定义 中断（又称异步中断、硬中断）: 本质是一种电信号。当设备有某种事件发生时，它就会产生中断，通">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="https://i.loli.net/2020/12/13/g6Z8DEmK7XjsPJB.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/13/Ra5TtVXK2YmjzPG.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/13/aCFM9hEjfIQX3Tw.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/13/vAwGdTbNH8lOSg5.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/13/NRnovw1bMuG3xzs.png">
+<meta property="og:updated_time" content="2020-12-13T08:53:20.607Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="精神的壳">
-<meta name="twitter:description" content="高山仰止，景行行止。虽不能至，心向往之。">
+<meta name="twitter:title" content="异常、中断与信号">
+<meta name="twitter:description" content="任何一个通用 CPU 都可以在执行完一条指令后检测从 CPU 外部发送过来或从内部产生的一种特殊信息，并且可以立即转而对该信息进行处理。这种“特殊信息”衍生出了异常、中断和信号这三个概念，其中牵涉到的知识点非常广泛且复杂，环环相扣。本文旨在对其进行梳理，形成一个脉络，具体底层细节还需要读者自行探究。 定义 中断（又称异步中断、硬中断）: 本质是一种电信号。当设备有某种事件发生时，它就会产生中断，通">
+<meta name="twitter:image" content="https://i.loli.net/2020/12/13/g6Z8DEmK7XjsPJB.png">
 
 
 
@@ -118,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/寄存器/">
+  <link rel="canonical" href="http://yoursite.com/2020/12/12/异常、中断与信号/">
 
 
 
 
 
-  <title>Tag: 寄存器 | 精神的壳</title>
+  <title>异常、中断与信号 | 精神的壳</title>
   
 
 
@@ -155,7 +163,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -281,52 +289,282 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>寄存器<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/12/异常、中断与信号/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="路边的土豆">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/惊讶猫.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="精神的壳">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2020/11/21/从BP与SP说开去/" itemprop="url">
-              
-                <span itemprop="name">函数调用背后的秘密——寄存器与栈</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">异常、中断与信号</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-11-21T11:03:15+08:00" content="2020-11-21">
-          11-21
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-12-12T15:59:01+08:00">
+                2020-12-12
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机系统/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机系统</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/12/12/异常、中断与信号/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/12/12/异常、中断与信号/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/12/12/异常、中断与信号/" class="leancloud_visitors" data-flag-title="异常、中断与信号">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>任何一个通用 CPU 都可以在执行完一条指令后检测从 CPU 外部发送过来或从内部产生的一种特殊信息，并且可以立即转而对该信息进行处理。这种“特殊信息”衍生出了异常、中断和信号这三个概念，其中牵涉到的知识点非常广泛且复杂，环环相扣。本文旨在对其进行梳理，形成一个脉络，具体底层细节还需要读者自行探究。</p>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><blockquote>
+<p>中断（又称异步中断、硬中断）: 本质是一种电信号。当设备有某种事件发生时，它就会产生中断，通过总线把电信号发送给中断控制器（如 8259A）。如果中断的线是激活的，中断控制器就把电信号发送给处理器的某个特定引脚。处理器于是立即停止自己正在做的事，跳到中断处理程序的入口点，进行中断处理。</p>
+</blockquote>
+<blockquote>
+<p>异常（又称同步中断，软中断）：由指令产生，如 div 指令中除数为 0 就会引发一个除零异常。异常是可以预期的，通过观察程序的指令就可以知道什么时候会产生什么异常。</p>
+</blockquote>
+<p>中断和异常都是用称为 <code>中断类型码</code> 来表示中断信息的来源。中断类型码是一个字节型数据，可以表示 256 种来源。</p>
+<blockquote>
+<p>信号：信号是软件层面上对中断的模拟，用来通知进程发生了异步事件。进程之间可以通过系统调用发送软中断信号。内核也可以因为内部事件给进程发送信号，通知进程发生了某个事件。注意，信号只是用来通知某进程发生了什么事件，并不给该进程传递任何数据</p>
+</blockquote>
+<h2 id="异常与中断"><a href="#异常与中断" class="headerlink" title="异常与中断"></a>异常与中断</h2><p>我们先来看看异常。刚才说到，异常由指令触发，也就是代表了来自程序内部的某些行为，这些行为总体可以分为四类：</p>
+<ol>
+<li>除法错误，如除零。类型码：0</li>
+<li>单步执行。类型码：1</li>
+<li>执行 into 指令。类型码：4</li>
+<li>执行 int n 指令。类型码：n</li>
+</ol>
+<p>异常处理流程：</p>
+<ol>
+<li>异常发生，控制单元产生一个对应的类型码</li>
+<li>CPU 根据这个类型码从中断向量表(idt, interrupt description table) 找到异常处理处理程序入口</li>
+<li>保存当前程序现场，切换到对应异常处理程序</li>
+<li>异常处理程序最后向进程发送一个信号 SIGXXX，记录在进程的 PCB 里</li>
+<li>如果进程自定义了该信号的处理程序，跳去执行它；否则执行内核预定义的行为</li>
+</ol>
+<p><img src="https://i.loli.net/2020/12/13/g6Z8DEmK7XjsPJB.png" alt="异常处理流程.png"></p>
+<p><strong>异常都是不可屏蔽的，CPU 必须对此做出响应。</strong></p>
+<p>再来看中断。当 CPU 外部有需要处理的事情发生（如外设输入输出等），中断控制器会向 CPU 发出对应的中断类型码，引发中断过程。中断又可以分为两类：</p>
+<ol>
+<li>可屏蔽中断：CPU 可以不响应这个中断。而具体响不响应要看标志寄存器的 IF 位。IF = 1 时 CPU 执行完当前指令后响应中断，IF = 0 则不响应。多数由 IO 引发的中断都是可屏蔽的。</li>
+<li>不可屏蔽中断：CPU 必须响应的中断。CPU 执行完当前指令后立刻引发中断过程。它的类型码固定为 2。存储器校验出错，I/O 通道校验出错等都属于不可屏蔽中断。</li>
+</ol>
+<p>中断处理流程：</p>
+<ol>
+<li>设备产生中断，PIC(可编程中断控制器)产生一个对应的类型码</li>
+<li>CPU 根据这个类型码从中断向量表(idt, interrupt description table) 找到异常处理处理程序入口</li>
+<li>保存当前程序现场，切换到对应异常处理程序</li>
+<li>中断处理程序进行保存现场，做相关处理，恢复现场</li>
+<li>内核调度，返回用户进程</li>
+</ol>
+<p><img src="https://i.loli.net/2020/12/13/Ra5TtVXK2YmjzPG.png" alt="中断处理流程.png"></p>
+<p>现代操作系统把中断处理程序从概念上被分为<code>上底（top half）</code>和<code>下底（bottom half）</code>。在中断发生时上半部分的处理过程立即执行，但是下半部分（如果有的话）却推迟执行。内核把上半部分和下半部分作为独立的函数来处理，上半部分决定其相关的下半部分是否需要执行。必须立即执行的部分必须位于上半部分，而可以推迟的部分可能属于下半部分。两者通过软中断衔接。比如，网卡接收数据的过程中，首先网卡发送中断信号告诉 CPU 来取数据，然后操作系统从网卡读数据存入系统缓冲区，再下来解析数据然后送入应用层。这些如果都让中断处理程序来处理显然过程太长，造成新来的中断阻塞。因此 Linux 将这种任务分为两个部分，一个叫上底，即中断处理程序，短平快地处理与硬件相关的操作（如从网卡读数据到系统缓存）；而把对时间要求相对宽松的任务（如解析数据的工作）放在另一个部分执行。</p>
+<p>为什么要这样划分为两部分呢？</p>
+<ol>
+<li>把中断的总延迟时间最小化。Linux 内核定义了两种类型的中断，快速的和慢速的，这两者之间的一个区别是慢速中断自身还可以被中断，而快速中断则不能。因此，当处理快速中断时，如果有其它中断到达；不管是快速中断还是慢速中断，它们都必须等待。为了尽可能快地处理这些其它的中断，内核就需要尽可能地将处理延迟到下半部分执行。</li>
+<li>当内核执行上半部分时，正在服务的这个特殊IRQ将会被可编程中断控制器禁止，于是，连接在同一个IRQ上的其它设备就只有等到该该中断处理被处理完毕后果才能发出IRQ请求。而采用Bottom_half机制后，不需要立即处理的部分就可以放在下半部分处理，从而，加快了处理机对外部设备的中断请求的响应速度。</li>
+<li>处理程序的下半部分还可以包含一些并非每次中断都必须处理的操作；对这些操作，内核可以在一系列设备中断之后集中处理一次就可以了。即在这种情况下，每次都执行并非必要的操作完全是一种浪费，而采用Bottom_half机制后，可以稍稍延迟并在后来只执行一次就行了。</li>
+</ol>
+<h3 id="二者的关系"><a href="#二者的关系" class="headerlink" title="二者的关系"></a>二者的关系</h3><p>异常和中断最主要的区别在于前者由指令触发，根据指令给出类型码，后者由 PIC 与 CPU 引脚之间的连线触发，从数据线上取得类型码。其次，异常都是不可屏蔽的，而中断分为可屏蔽与不可屏蔽两种。</p>
+<h2 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h2><p>我们在运行一个 shell 程序的时候，往往按下 Ctrl+C 就可以强制退出。按下组合键的过程就是操作系统给进程发送了一个信号：</p>
+<ol>
+<li>松开按键后键盘会产生一个中断，如果 CPU 正在执行这个进程的代码则该进程的用户代码先暂停执行，用户从用户态切换到内核态去处理中断</li>
+<li>键盘驱动程序检测到按下的是 ctrl+c，将这一对组合键翻译成一个 SIGINT 信号记在该进程的 PCB 中（也就是发送了一个 SIGINT 信号给该进程）</li>
+<li>在从内核态回到用户态继续执行进程的用户代码之前，首先要处理 PCB 中的信号，这是发现有一个 SIGINT 要处理，而这个信号的在内核默认处理的方式是终止进程，所以直接终止进程，不再返回用户空间执行代码</li>
+</ol>
+<p>在 bash 执行 <code>kill -l</code> 可以看到所有信号及其编号：<br><img src="https://i.loli.net/2020/12/13/aCFM9hEjfIQX3Tw.png" alt="image.png"></p>
+<p>产生信号的方式：</p>
+<ol>
+<li>按下某些组合键。如 Ctrl+C 产生 SIGINT，Ctrl+/ 产生 SIGQUIT ，Ctrl+Z 产生 SIGTSTP。</li>
+<li>异常产生信号。由硬件检测到并通知内核，然后内核向当前进程发送适当的信号。例如当前进程执行指令 div 0，CPU 的运算单元会产生异常，内核将这个异常解释为 SIGFPE 信号发送给进程；再比如当前进程访问了非法内存地址，MMU 会产生异常，内核将这个异常解释为 SIGSEGV 信号发送给进程。</li>
+<li>进程通过系统调用 kill 函数给另一个进程发送信号。</li>
+<li>通过 kill 命令给某个进程发送信号（内部也是通过系统调用 kill 函数实现的）</li>
+<li>某种特定的软件行为产生信号。如向读端已关闭的管道写数据时产生 SIGPIPE 信号，时钟函数 alarm 超时产生 SIGALRM 信号</li>
+</ol>
+<p>举个例子，用 alarm 函数设定一个闹钟，告诉内核在 2 秒后给当前进程发送一个 SIGALRM 信号，该信号的默认处理动作是终止当前进程：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;signal.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">1</span>;</span><br><span class="line">    alarm(<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">for</span> (; ; count++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"count = %d\n"</span>, count);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到，时钟超时前一直在对 count 进行计数，2s 后进程收到 SIGALRM 信号终止。<br><img src="https://i.loli.net/2020/12/13/vAwGdTbNH8lOSg5.png" alt="image.png"></p>
+<p>下图总结了信号的捕获过程。与中断不同，应用层面的开发者是可以控制程序收到信号后的行为的：</p>
+<p><img src="https://i.loli.net/2020/12/13/NRnovw1bMuG3xzs.png" alt></p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://blog.csdn.net/flowing_wind/article/details/79967588" target="_blank" rel="noopener">Linux进程信号详解</a></p>
+<p><a href="https://www.cnblogs.com/charlesblc/p/6277810.html" target="_blank" rel="noopener">信号和中断的比较+中断和异常的比较</a></p>
+<p>《深入理解计算机系统》第 8 章：异常控制流</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/异常处理/" rel="tag"># 异常处理</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/11/21/从BP与SP说开去/" rel="next" title="函数调用背后的秘密——寄存器与栈">
+                <i class="fa fa-chevron-left"></i> 函数调用背后的秘密——寄存器与栈
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -334,6 +572,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -354,8 +599,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -372,7 +626,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -383,7 +637,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -394,7 +648,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -439,6 +693,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常与中断"><span class="nav-number">2.</span> <span class="nav-text">异常与中断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二者的关系"><span class="nav-number">2.1.</span> <span class="nav-text">二者的关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信号"><span class="nav-number">3.</span> <span class="nav-text">信号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文章"><span class="nav-number">4.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -624,6 +894,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
@@ -1164,26 +1438,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
