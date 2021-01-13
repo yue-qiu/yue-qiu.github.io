@@ -1,6 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>常用的gcc编译选项</title>
+    <url>/2021/01/13/%E5%B8%B8%E7%94%A8%E7%9A%84gcc%E7%BC%96%E8%AF%91%E9%80%89%E9%A1%B9/</url>
+    <content><![CDATA[<p>本文旨在对 gcc 常用编译选项进行归类整理，全部选项可以通过执行如下命令得到：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><a href="#警告选项：-w、-W、-Wall、-Werror">警告选项</a></li>
+<li><a href="#处理选项：-E、-S、-C、-save-temps">中间文件选项</a></li>
+<li><a href="#链接选项：-static、-shared、-fpic、-L、-l(小写的L">链接选项</a>)</li>
+<li><a href="#优化选项：-Og、-O1、-O2、-O3、-g、-pg">优化选项</a></li>
+</ul>
+<h2 id="警告选项：-w、-W、-Wall、-Werror"><a href="#警告选项：-w、-W、-Wall、-Werror" class="headerlink" title="警告选项：-w、-W、-Wall、-Werror"></a>警告选项：-w、-W、-Wall、-Werror</h2><p>-w: 关闭所有 warning</p>
+<p>-W: 只显示编译器认为可能出现错误的警告</p>
+<p>-Wall: 显示所有警告</p>
+<p>-Werror: 把 warning 当做 error 抛出</p>
+<p>举个例子，test.c 中代码如下：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Hello World!\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用 -w 编译，直接就通过了：</p>
+<p><img src="https://i.loli.net/2021/01/13/m8nbhCcvxtBw219.png" alt="-w编译"></p>
+<p>用 -Wall 编译，显示所有的 warning。包括声明的 main 函数返回类型为 void 而不是 int；返回值类型与声明类型不符；声明了变量 a 却未使用：</p>
+<p><img src="https://i.loli.net/2021/01/13/KDefM3qQ5BYJUmp.png" alt="-Wall编译"></p>
+<p>用 -W 编译，只显示返回值类型与声明类型不符这一个 warning：</p>
+<p><img src="https://i.loli.net/2021/01/13/Bzd3i7rCyo1busY.png" alt="-W编译"></p>
+<p>用 -Werror 编译，提示存在 error，编译失败：</p>
+<p><img src="https://i.loli.net/2021/01/13/S6ym2cbxIUEphi5.png" alt="image.png"></p>
+<p>比较好的用法是 -W 与 -Wall 连用</p>
+<h2 id="中间文件选项：-E、-S、-C、-save-temps、-I-大写i"><a href="#中间文件选项：-E、-S、-C、-save-temps、-I-大写i" class="headerlink" title="中间文件选项：-E、-S、-C、-save-temps、-I(大写i)"></a>中间文件选项：-E、-S、-C、-save-temps、-I(大写i)</h2><p>-I\<dir>：使用 <code>#include</code> 包含头文件的时候，如果用 -I 指定了目录，gcc 会先在指定目录查找, 然后再按“当前目录、/usr/include、/usr/local/include”的顺序查找。</dir></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc vector.c -I./src</span><br></pre></td></tr></table></figure>
+<p>-E: 仅进行预处理，得到 .i 文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc -E test.c</span><br></pre></td></tr></table></figure>
+<p>-S：仅进行预处理和编译，得到 .s 文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc -S test.c</span><br></pre></td></tr></table></figure>
+<p>-C: 进行预处理，编译和汇编得到可重定位目标文件 .o，不链接</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc -C test.c</span><br></pre></td></tr></table></figure>
+<p>-save-temps: 保留整个过程中产生的所有中间文件到当前目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc -save-temps -C test.c</span><br></pre></td></tr></table></figure>
+<h2 id="链接选项：-static、-shared、-fpic、-L、-l-小写L"><a href="#链接选项：-static、-shared、-fpic、-L、-l-小写L" class="headerlink" title="链接选项：-static、-shared、-fpic、-L、-l(小写L)"></a>链接选项：-static、-shared、-fpic、-L、-l(小写L)</h2><p>-static：使用静态编译，把静态库的代码和数据直接编译进可执行文件。这样得到的二进制文件体积自然比较大</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc -static test.c ./libvector.a</span><br></pre></td></tr></table></figure>
+<p>-shared：生成共享库(.so 文件)</p>
+<p>-fpic：生成位置无关代码（Position Independent Code），生成共享库时必须要用到</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc -shared -fpic -o libvector.so vector.c</span><br></pre></td></tr></table></figure>
+<p>-l\<file>：链接到指定的库文件。gcc 会自动添加 lib 前缀和 .so/.a 后缀。gcc 会自动链接 libc.a 或 libc.so，所以我们才能使用诸如 <code>printf</code>、<code>scanf</code> 等常用的标准函数。下面这行命令会为 test.c 链接上 libm.a</file></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc test.c -lm</span><br></pre></td></tr></table></figure>
+<p>默认情况下，gcc 依次从从当前目录、/lib、/usr/lib 和 /usr/local/lib 中寻找库文件。</p>
+<p>-L\<dir>：指定库文件所在的目录。如果库文件在上述路径之外就需要指定共享库的目录。假设需要链接的共享库 libvector.so 位于 /home/project 目录下</dir></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc test.c -L/home/project -lvector</span><br></pre></td></tr></table></figure>
+<h2 id="优化选项：-Og、-O1、-O2、-O3、-g、-pg"><a href="#优化选项：-Og、-O1、-O2、-O3、-g、-pg" class="headerlink" title="优化选项：-Og、-O1、-O2、-O3、-g、-pg"></a>优化选项：-Og、-O1、-O2、-O3、-g、-pg</h2><p>-Og：编译时不优化代码</p>
+<p>-O1、-O2、-O3：编译器进行代码优化，数字越大优化程度越高</p>
+<p>-g：在二进制文件中生成调试信息，像 gdb 这类的工具需要有这种信息才能工作。这样可执行文件的体积会比较大。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc test.c -g</span><br></pre></td></tr></table></figure>
+<p>-pg：在二进制文件中生成性能分析所需的信息，像 gprof 这类的工具需要有这种信息才工作</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc test.c -pg</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>开发工具</category>
+      </categories>
+      <tags>
+        <tag>gcc</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Go语言底层大冒险之interface</title>
     <url>/2020/12/26/Go%E8%AF%AD%E8%A8%80%E5%BA%95%E5%B1%82%E5%A4%A7%E5%86%92%E9%99%A9%E4%B9%8Binterface/</url>
     <content><![CDATA[<p>很多现代语言都有“接口”这个概念。接口是为了解耦，即通过引入一个约定的中间层解除上下层之间的高度依赖关系。这东西听着玄乎，用饭馆来举个例子，我们作为顾客通常并不关心菜是怎么做的，只是和厨师有诸如“麻婆豆腐必须是辣的”，“冰淇淋必须是冷的”这样的约定，厨师用自己的方法把这个约定实现就行了。程序设计也是如此。函数 A 可能需要回调形参的某个方法，这个方法是如何实现的并不重要，关键是它实现了 A 的约定，这个约定就是所谓的“接口”。</p>
@@ -2774,7 +2834,8 @@
     <title>git常见用法</title>
     <url>/2018/05/23/git%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95/</url>
     <content><![CDATA[<p>使用git也有一段时间了，一直没有做总结，在这里记录一下方便以后查看。</p>
-<h1 id="配置git"><a href="#配置git" class="headerlink" title="配置git"></a>配置git</h1><p>windows下直接从<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">官网</a>下载就可以了，安装过程是傻瓜式的，一路点确定就OK。安装完成后发现多了个叫<code>git bash</code>的程序，打开程序会弹出一个命令行窗口就可以了。</p>
+<p><strong>配置git：</strong></p>
+<p>windows下直接从<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">官网</a>下载就可以了，安装过程是傻瓜式的，一路点确定就OK。安装完成后发现多了个叫<code>git bash</code>的程序，打开程序会弹出一个命令行窗口就可以了。</p>
 <p>linux下安装git很简单，直接在终端输入 <code>git</code>，系统会告诉你是否已经安装。如果没有安装还会告诉你安装方法。Debian 和 Ubantu 下通过 <code>sudo apt-get install git</code> 就可以进行安装。</p>
 <p>由于git是分布式版本控制系统，所以必须指出每台机器的身份。这就要配置git相关变量：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.username <span class="string">"name"</span></span><br><span class="line">git config --global user.email <span class="string">"email"</span></span><br></pre></td></tr></table></figure>
