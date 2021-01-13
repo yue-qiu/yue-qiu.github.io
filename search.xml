@@ -7,8 +7,8 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><a href="#警告选项：-w、-W、-Wall、-Werror">警告选项</a></li>
-<li><a href="#处理选项：-E、-S、-C、-save-temps">中间文件选项</a></li>
-<li><a href="#链接选项：-static、-shared、-fpic、-L、-l(小写的L">链接选项</a>)</li>
+<li><a href="#中间文件选项：-E、-S、-C、-save-temps、-I(大写i">中间文件选项</a>)</li>
+<li><a href="#链接选项：-static、-shared、-fpic、-L、-l(小写L">链接选项</a>)</li>
 <li><a href="#优化选项：-Og、-O1、-O2、-O3、-g、-pg">优化选项</a></li>
 </ul>
 <h2 id="警告选项：-w、-W、-Wall、-Werror"><a href="#警告选项：-w、-W、-Wall、-Werror" class="headerlink" title="警告选项：-w、-W、-Wall、-Werror"></a>警告选项：-w、-W、-Wall、-Werror</h2><p>-w: 关闭所有 warning</p>
