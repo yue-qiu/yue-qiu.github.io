@@ -79,22 +79,22 @@
 
 
 
-<meta name="description" content="本文旨在对 gcc 常用编译选项进行归类整理，全部选项可以通过执行如下命令得到： 1gcc --help  警告选项 中间文件选项) 链接选项) 优化选项  警告选项：-w、-W、-Wall、-Werror-w: 关闭所有 warning -W: 只显示编译器认为可能出现错误的警告 -Wall: 显示所有警告 -Werror: 把 warning 当做 error 抛出 举个例子，test.c 中">
+<meta name="description" content="本文旨在对 gcc 常用编译选项进行归类整理，全部选项可以通过执行如下命令得到： 1gcc --help 警告选项：-w、-W、-Wall、-Werror-w: 关闭所有 warning -W: 只显示编译器认为可能出现错误的警告 -Wall: 显示所有警告 -Werror: 把 warning 当做 error 抛出 举个例子，test.c 中代码如下： 1234567#include&amp;lt;s">
 <meta name="keywords" content="gcc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="常用的gcc编译选项">
 <meta property="og:url" content="http://yoursite.com/2021/01/13/常用的gcc编译选项/index.html">
 <meta property="og:site_name" content="精神的壳">
-<meta property="og:description" content="本文旨在对 gcc 常用编译选项进行归类整理，全部选项可以通过执行如下命令得到： 1gcc --help  警告选项 中间文件选项) 链接选项) 优化选项  警告选项：-w、-W、-Wall、-Werror-w: 关闭所有 warning -W: 只显示编译器认为可能出现错误的警告 -Wall: 显示所有警告 -Werror: 把 warning 当做 error 抛出 举个例子，test.c 中">
+<meta property="og:description" content="本文旨在对 gcc 常用编译选项进行归类整理，全部选项可以通过执行如下命令得到： 1gcc --help 警告选项：-w、-W、-Wall、-Werror-w: 关闭所有 warning -W: 只显示编译器认为可能出现错误的警告 -Wall: 显示所有警告 -Werror: 把 warning 当做 error 抛出 举个例子，test.c 中代码如下： 1234567#include&amp;lt;s">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.loli.net/2021/01/13/m8nbhCcvxtBw219.png">
 <meta property="og:image" content="https://i.loli.net/2021/01/13/KDefM3qQ5BYJUmp.png">
 <meta property="og:image" content="https://i.loli.net/2021/01/13/Bzd3i7rCyo1busY.png">
 <meta property="og:image" content="https://i.loli.net/2021/01/13/S6ym2cbxIUEphi5.png">
-<meta property="og:updated_time" content="2021-01-13T13:35:54.205Z">
+<meta property="og:updated_time" content="2021-01-13T13:41:02.554Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常用的gcc编译选项">
-<meta name="twitter:description" content="本文旨在对 gcc 常用编译选项进行归类整理，全部选项可以通过执行如下命令得到： 1gcc --help  警告选项 中间文件选项) 链接选项) 优化选项  警告选项：-w、-W、-Wall、-Werror-w: 关闭所有 warning -W: 只显示编译器认为可能出现错误的警告 -Wall: 显示所有警告 -Werror: 把 warning 当做 error 抛出 举个例子，test.c 中">
+<meta name="twitter:description" content="本文旨在对 gcc 常用编译选项进行归类整理，全部选项可以通过执行如下命令得到： 1gcc --help 警告选项：-w、-W、-Wall、-Werror-w: 关闭所有 warning -W: 只显示编译器认为可能出现错误的警告 -Wall: 显示所有警告 -Werror: 把 warning 当做 error 抛出 举个例子，test.c 中代码如下： 1234567#include&amp;lt;s">
 <meta name="twitter:image" content="https://i.loli.net/2021/01/13/m8nbhCcvxtBw219.png">
 
 
@@ -419,12 +419,6 @@
       
         <p>本文旨在对 gcc 常用编译选项进行归类整理，全部选项可以通过执行如下命令得到：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><a href="#警告选项：-w、-W、-Wall、-Werror">警告选项</a></li>
-<li><a href="#中间文件选项：-E、-S、-C、-save-temps、-I(大写i">中间文件选项</a>)</li>
-<li><a href="#链接选项：-static、-shared、-fpic、-L、-l(小写L">链接选项</a>)</li>
-<li><a href="#优化选项：-Og、-O1、-O2、-O3、-g、-pg">优化选项</a></li>
-</ul>
 <h2 id="警告选项：-w、-W、-Wall、-Werror"><a href="#警告选项：-w、-W、-Wall、-Werror" class="headerlink" title="警告选项：-w、-W、-Wall、-Werror"></a>警告选项：-w、-W、-Wall、-Werror</h2><p>-w: 关闭所有 warning</p>
 <p>-W: 只显示编译器认为可能出现错误的警告</p>
 <p>-Wall: 显示所有警告</p>
