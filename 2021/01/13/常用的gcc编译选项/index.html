@@ -88,10 +88,10 @@
 <meta property="og:description" content="本文旨在对 gcc 常用编译选项进行归类整理，全部选项可以通过执行如下命令得到： 1gcc --help 警告选项：-w、-W、-Wall、-Werror-w: 关闭所有 warning -W: 只显示编译器认为可能出现错误的警告 -Wall: 显示所有警告 -Werror: 把 warning 当做 error 抛出 举个例子，test.c 中代码如下： 1234567#include&amp;lt;s">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.loli.net/2021/01/13/m8nbhCcvxtBw219.png">
-<meta property="og:image" content="https://i.loli.net/2021/01/13/KDefM3qQ5BYJUmp.png">
-<meta property="og:image" content="https://i.loli.net/2021/01/13/Bzd3i7rCyo1busY.png">
-<meta property="og:image" content="https://i.loli.net/2021/01/13/S6ym2cbxIUEphi5.png">
-<meta property="og:updated_time" content="2021-01-13T13:41:02.554Z">
+<meta property="og:image" content="https://i.loli.net/2021/01/14/DgwdL9SluHKWMC3.png">
+<meta property="og:image" content="https://i.loli.net/2021/01/14/MP6DC2fOINbW594.png">
+<meta property="og:image" content="https://i.loli.net/2021/01/14/UZmjOfugJyVGCAt.png">
+<meta property="og:updated_time" content="2021-01-14T03:14:35.908Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常用的gcc编译选项">
 <meta name="twitter:description" content="本文旨在对 gcc 常用编译选项进行归类整理，全部选项可以通过执行如下命令得到： 1gcc --help 警告选项：-w、-W、-Wall、-Werror-w: 关闭所有 warning -W: 只显示编译器认为可能出现错误的警告 -Wall: 显示所有警告 -Werror: 把 warning 当做 error 抛出 举个例子，test.c 中代码如下： 1234567#include&amp;lt;s">
@@ -428,13 +428,13 @@
 <p>用 -w 编译，直接就通过了：</p>
 <p><img src="https://i.loli.net/2021/01/13/m8nbhCcvxtBw219.png" alt="-w编译"></p>
 <p>用 -Wall 编译，显示所有的 warning。包括声明的 main 函数返回类型为 void 而不是 int；返回值类型与声明类型不符；声明了变量 a 却未使用：</p>
-<p><img src="https://i.loli.net/2021/01/13/KDefM3qQ5BYJUmp.png" alt="-Wall编译"></p>
+<p><img src="https://i.loli.net/2021/01/14/DgwdL9SluHKWMC3.png" alt="-Wall编译"></p>
 <p>用 -W 编译，只显示返回值类型与声明类型不符这一个 warning：</p>
-<p><img src="https://i.loli.net/2021/01/13/Bzd3i7rCyo1busY.png" alt="-W编译"></p>
+<p><img src="https://i.loli.net/2021/01/14/MP6DC2fOINbW594.png" alt="-W编译"></p>
 <p>用 -Werror 编译，提示存在 error，编译失败：</p>
-<p><img src="https://i.loli.net/2021/01/13/S6ym2cbxIUEphi5.png" alt="image.png"></p>
-<p>比较好的用法是 -W 与 -Wall 连用</p>
-<h2 id="中间文件选项：-E、-S、-C、-save-temps、-I-大写i"><a href="#中间文件选项：-E、-S、-C、-save-temps、-I-大写i" class="headerlink" title="中间文件选项：-E、-S、-C、-save-temps、-I(大写i)"></a>中间文件选项：-E、-S、-C、-save-temps、-I(大写i)</h2><p>-I\<dir>：使用 <code>#include</code> 包含头文件的时候，如果用 -I 指定了目录，gcc 会先在指定目录查找, 然后再按“当前目录、/usr/include、/usr/local/include”的顺序查找。</dir></p>
+<p><img src="https://i.loli.net/2021/01/14/UZmjOfugJyVGCAt.png" alt="-Werror编译"></p>
+<p>比较好的做法是 -W 与 -Wall 连用</p>
+<h2 id="中间文件选项：-E、-S、-C、-save-temps、-I-大写i"><a href="#中间文件选项：-E、-S、-C、-save-temps、-I-大写i" class="headerlink" title="中间文件选项：-E、-S、-C、-save-temps、-I(大写i)"></a>中间文件选项：-E、-S、-C、-save-temps、-I(大写i)</h2><p>-Idir：使用 <code>#include</code> 包含头文件的时候，如果用 -I 指定了目录，gcc 会先在指定目录查找, 然后再按“当前目录、/usr/include、/usr/local/include”的顺序查找。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc vector.c -I./src</span><br></pre></td></tr></table></figure>
 <p>-E: 仅进行预处理，得到 .i 文件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -E test.c</span><br></pre></td></tr></table></figure>
@@ -449,10 +449,10 @@
 <p>-shared：生成共享库(.so 文件)</p>
 <p>-fpic：生成位置无关代码（Position Independent Code），生成共享库时必须要用到</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -shared -fpic -o libvector.so vector.c</span><br></pre></td></tr></table></figure>
-<p>-l\<file>：链接到指定的库文件。gcc 会自动添加 lib 前缀和 .so/.a 后缀。gcc 会自动链接 libc.a 或 libc.so，所以我们才能使用诸如 <code>printf</code>、<code>scanf</code> 等常用的标准函数。下面这行命令会为 test.c 链接上 libm.a</file></p>
+<p>-lfile：链接到指定的库文件。gcc 会自动为 file 添加 lib 前缀和 .so/.a 后缀。gcc 默认为所有编译链接 libc.a 或 libc.so，所以我们才能使用诸如 <code>printf</code>、<code>scanf</code> 等常用的标准函数。下面这行命令会为 test.c 链接上 libm.a</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc test.c -lm</span><br></pre></td></tr></table></figure>
 <p>默认情况下，gcc 依次从从当前目录、/lib、/usr/lib 和 /usr/local/lib 中寻找库文件。</p>
-<p>-L\<dir>：指定库文件所在的目录。如果库文件在上述路径之外就需要指定共享库的目录。假设需要链接的共享库 libvector.so 位于 /home/project 目录下</dir></p>
+<p>-Ldir：指定库文件所在的目录。如果库文件在上述路径之外就需要指定共享库的目录。假设需要链接的共享库 libvector.so 位于 /home/project 目录下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc test.c -L/home/project -lvector</span><br></pre></td></tr></table></figure>
 <h2 id="优化选项：-Og、-O1、-O2、-O3、-g、-pg"><a href="#优化选项：-Og、-O1、-O2、-O3、-g、-pg" class="headerlink" title="优化选项：-Og、-O1、-O2、-O3、-g、-pg"></a>优化选项：-Og、-O1、-O2、-O3、-g、-pg</h2><p>-Og：编译时不优化代码</p>
 <p>-O1、-O2、-O3：编译器进行代码优化，数字越大优化程度越高</p>
