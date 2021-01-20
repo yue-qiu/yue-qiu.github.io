@@ -60,7 +60,7 @@
         <category>计算机系统</category>
       </categories>
       <tags>
-        <tag>并发</tag>
+        <tag>并发编程</tag>
       </tags>
   </entry>
   <entry>
@@ -944,19 +944,19 @@
   <entry>
     <title>也说进程、线程与协程</title>
     <url>/2020/03/02/%E4%B9%9F%E8%B0%88%E8%BF%9B%E7%A8%8B%E3%80%81%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%8D%8F%E7%A8%8B/</url>
-    <content><![CDATA[<h1 id="从-CPU-谈起"><a href="#从-CPU-谈起" class="headerlink" title="从 CPU 谈起"></a>从 CPU 谈起</h1><p>CPU 被誉为“计算机的大脑”，这个比喻可以说是很恰当了。计算机无论是进行 IO 还是计算都要在 CPU 的控制下完成。如此一来，一个强大的“大脑”对于整个系统而言就是非常重要的了，这也是为什么我们总能看到厂家不断地宣传自己 CPU 的主频有多高，核心有多大。</p>
-<h2 id="多核-CPU"><a href="#多核-CPU" class="headerlink" title="多核 CPU"></a>多核 CPU</h2><p>要提高 CPU 的性能，最直接的方法当然是不断增强单个处理器的性能，让处理器频率更高。就像要举起一块石头，让自己变得足够强壮就可以了。</p>
+    <content><![CDATA[<p>CPU 被誉为“计算机的大脑”，这个比喻可以说是很恰当了。计算机无论是进行 IO 还是计算都要在 CPU 的控制下完成。如此一来，一个强大的“大脑”对于整个系统而言就是非常重要的了，这也是为什么我们总能看到厂家不断地宣传自己 CPU 的主频有多高，核心有多大。</p>
+<p>要提高 CPU 的性能，最直接的方法当然是不断增强单个处理器的性能，让处理器频率更高。就像要举起一块石头，让自己变得足够强壮就可以了。</p>
 <p>但是这种方法很快就受制于物理定律：当前技术条件下无限提高频率是不可能的，而且过高的频率也会导致发热量过大。因此，工程师们只好退而求其次，转而增加一个 CPU 内的处理器数量。还是要举起石头，一个人无论如何也举不起来，那多喊几个小弟帮忙总可以吧？</p>
 <p>有了多核 CPU，程序就可以被划分为相对独立的几个部分，每一部分运行在不同的处理器上。当然，这样做也会带来额外的开销。如果操作系统和程序不能很好地协调多处理器，那么执行速度未必就有明显提高（乃至降低也说不定~）。</p>
-<h1 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h1><p>下面给出进程的定义：</p>
+<h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><p>下面给出进程的定义：</p>
 <blockquote>
 <p>进程是具有一定独立功能的程序在一个数据集合上的一次动态执行过程</p>
 </blockquote>
 <p>进程是操作系统<strong>分配资源</strong>的最小单位，拥有代码文本、被分配的系统资源、独立的虚拟内存地址、堆栈空间：</p>
 <p><img src="https://i.loli.net/2020/03/02/qz7MdhlxtQmK8pI.png" alt="进程内存空间"></p>
-<p>操作系统为每个进程维护了一个程序控制块（PCB, Process Contral Block），用来保存该进程的状态信息（进程标识、寄存器、系统资源、调度信息等）。PCB 是进程存在的唯一标识。</p>
+<p>操作系统为每个进程维护了一个程序控制块（PCB, Process Contral Block），用来保存该进程的状态信息（进程标识、寄存器、打开文件资源、调度信息等）。PCB 是进程存在的唯一标识。</p>
+<p><img src="https://i.loli.net/2021/01/20/Q2zIDlrHYA5sqv9.png" alt="image.png"></p>
 <p>进程在整个生命周期期间处于以下五个状态之一：</p>
-<p><img src="https://i.loli.net/2020/03/02/dY1JoNBIRLCFE4G.png" alt="进程状态"></p>
 <ul>
 <li>NULL -&gt; 创建：一个新进程被产生出来执行一个程序</li>
 <li>创建 -&gt; 就绪：当进程被创建完成并初始化后，一切就绪准备运行时，变为就绪状态</li>
@@ -966,28 +966,55 @@
 <li>运行 -&gt; 等待：当进程请求某资源且必须等待时</li>
 <li>等待 -&gt; 就绪：当进程要等待某事件到来时，它从阻塞状态变到就绪状态</li>
 </ul>
-<h1 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h1><p>线程是进程的一部分，描述一段指令流的执行状态，是系统<strong>调度</strong>的基本单位。每个线程拥有自己的线程控制块（TCB, Thread Contral Block），保存了线程标识、从属进程、寄存器状态等信息。</p>
+<p><img src="https://i.loli.net/2020/03/02/dY1JoNBIRLCFE4G.png" alt="进程状态"></p>
+<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><p>在很早的时候计算机并没有线程这个概念，但是随着时代的发展，只用进程来处理程序出现很多的不足。如当一个进程堵塞时，整个程序会停止在堵塞处，并且如果频繁的切换进程，会浪费系统资源。所以线程出现了。一个进程可以拥有多个线程，同属一个进程的多个线程会共享该进程的内存地址空间、打开文件、代码段、全局数据段。</p>
+<p>线程是进程的一部分，描述一段指令流的执行状态，是系统<strong>调度</strong>的基本单位。每个线程拥有自己的线程控制块（TCB, Thread Contral Block），保存了线程标识、从属进程、寄存器状态等信息。每个线程都有一个程序计数器（记录要执行的下一条指令），一组寄存器（保存当前线程的工作变量），堆栈（记录执行历史）。</p>
 <p><img src="https://i.loli.net/2020/03/02/P6MXJ5WHtQNp4x1.png" alt="线程内存空间"></p>
 <p>如前面所言，程序被划分为几部分跑在不同处理器上，这些被划分出来的“部分”就可以看做一个个的线程。</p>
-<h1 id="进程与线程的异同"><a href="#进程与线程的异同" class="headerlink" title="进程与线程的异同"></a>进程与线程的异同</h1><p>进程和线程的切换是 OS 通过调度算法，保存当前的上下文，然后从上次暂停的地方再次开始计算。每次 CPU 计算的指令数量和代码跑过的 CPU 时间是相关的，跑满 OS 分配的时间片后就会被强制挂起，开发者无法精确的控制它们。</p>
+<h2 id="进程与线程的异同"><a href="#进程与线程的异同" class="headerlink" title="进程与线程的异同"></a>进程与线程的异同</h2><p>进程和线程的切换是 OS 通过调度算法，保存当前的上下文，然后从上次暂停的地方再次开始计算。每次 CPU 计算的指令数量和代码跑过的 CPU 时间是相关的，跑满 OS 分配的时间片后就会被强制挂起，开发者无法精确的控制它们。</p>
 <ul>
-<li>地址空间：同一进程的线程共享本进程的地址空间，而进程之间则是独立的地址空间</li>
-<li>资源分配：同一进程内的线程共享本进程的资源如内存、I/O、cpu等，但是进程之间的资源是独立的</li>
+<li>地址空间：<strong>同一进程的线程共享本进程的地址空间</strong>，而进程之间则是独立的地址空间</li>
+<li>资源分配：<strong>同一进程内的线程共享本进程的资源如全局数据、打开文件、CPU</strong>等，但是进程之间的资源是独立的</li>
 <li>程序入口：每个独立的进程有一个程序运行的入口、顺序执行序列和程序的出口。而线程不能够独立执行，必须依存在进程中，由进程对多个线程执行控制。</li>
 <li>健壮性：一个进程崩溃后，在保护模式下不会对其他进程产生影响，但是一个线程崩溃整个进程都死掉。所以多进程要比多线程健壮</li>
 </ul>
-<h1 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h1><p><strong>协程是编译器级的，进程是和线程是操作系统级的</strong></p>
+<h2 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h2><p><strong>协程是编译器级的，进程是和线程是操作系统级的</strong>。</p>
 <p>协程（Coroutine）是比线程更轻量级的存在，可以说是一种<strong>用户态线程</strong>。它更像是一个函数，只是这个函数可以像线程那样中途让出执行权，满足某种条件后又从等待的地方继续运行。</p>
-<p>它比线程拥有更少的资源（必要的寄存器信息，堆栈指针等），<strong>切换策略仅由用户态控制</strong>，对于操作系统是透明的，所以协程间的切换非常快。但这也导致协程无法充分利用多核 CPU，因为协程再多，在操作系统眼里也只有一个线程在运行罢了。</p>
+<p>协程的<strong>切换策略仅由用户态控制</strong>，对于操作系统是透明的，所以协程间的切换非常快。但这也导致协程无法充分利用多核 CPU，因为协程再多，在操作系统眼里也只有一个线程在运行罢了。</p>
 <p><img src="https://i.loli.net/2020/03/02/X3jbaStuZRByIdw.png" alt="协程"></p>
 <p>Go 的调度器使用 m:n 调度，其中 m 是 goroutine 数，n 是活跃线程数（由 GOMAXPROCS 决定，默认等于处理器核心数）。当一个 goroutine 陷入休眠或阻塞在一次管道通信上，调度器会把它的状态设为 <code>_Gwaiting</code> 并解除它与线程的绑定（相当于让出线程，随后就可以执行一次 goroutine 调度），等待状态的 goroutine 不占用线程；而如果 goroutine 阻塞在一次 IO 或其它系统调用上调度器会更新 goroutine 状态为 <code>_Gsyscall</code> 并解除线程和处理器的绑定（相当于让出处理器，这样处理器就可以绑定到其它线程上。这个过程触发一次线程切换的系统调用）。</p>
 <p>以 go 为例，在一个线程里面开启多个协程：</p>
 <figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"sync"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> wg = sync.WaitGroup&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">        wg.Add(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(n <span class="keyword">int</span>)</span></span> &#123;    <span class="comment">// 开启一个新的协程</span></span><br><span class="line">            <span class="keyword">defer</span> wg.Done()</span><br><span class="line">            fmt.Printf(<span class="string">"%v: Hello World!\n"</span>, n)</span><br><span class="line">        &#125;(i)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    wg.Wait()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="协程的优点"><a href="#协程的优点" class="headerlink" title="协程的优点"></a>协程的优点</h2><ol>
+<p>协程的优点：</p>
+<ol>
 <li>创建成本低。在 go 里每个协程大约只占用 1k 的内存。</li>
-<li>调度成本低。协程属于用户态，不需要经过操作系统管理</li>
-<li>减少上锁频率。因为协程都是跑在一个线程里的，所以不用担心指令执行到一半被夺去运行权限的问题。但是如果协程间存在竞争，并不能保证临界区，所以并不是完全不需要锁。</li>
+<li>调度成本低。协程属于用户态，不需要经过操作系统管理，调度时<strong>不需要陷入内核</strong>。</li>
+<li>减少上锁频率。因为协程都是跑在一个线程里的，且都是非抢占式调度，所以不用担心指令执行到一半被夺去运行权限的问题。但是如果协程间存在竞争，并不能保证临界区，所以也不是完全不需要锁。</li>
 </ol>
+<p>协程的缺点：</p>
+<ol>
+<li>无法充分利用多核资源，因为所有协程都是属于一个线程的，协程需要和进程配合才能运行在多核 CPU 上</li>
+<li>执行线程级的阻塞操作会阻塞掉整个程序</li>
+</ol>
+<h2 id="进程、线程和协程的调度成本对比"><a href="#进程、线程和协程的调度成本对比" class="headerlink" title="进程、线程和协程的调度成本对比"></a>进程、线程和协程的调度成本对比</h2><p>进程的切换带来以下<strong>直接开销</strong>：</p>
+<ul>
+<li>陷入内核</li>
+<li>切换页表，刷新 TLB</li>
+<li>保存寄存器值等硬件上下文</li>
+<li>更新 PCB 中的信息（改掉进程的“运行态”），把 PCB 放入相关的状态队列</li>
+</ul>
+<p>此外还有由于 Cache 大规模失效带来的<strong>间接开销</strong>，即原进程缓存下来的指令和数据统统失效，CPU 需要直接访问内存的频率增加。</p>
+<p>与进程相比，线程切换的开销就小了很多，主要体现在省略了切换虚拟地址空间这一步：</p>
+<ul>
+<li>陷入内核</li>
+<li>保存寄存器值等硬件上下文</li>
+<li>更新 TCB 中的信息（改掉线程的“运行态”），把 TCB 放入相关的状态队列</li>
+</ul>
+<p>而协程的切换就更轻量级了，它干脆连内核态也不陷入了：</p>
+<ul>
+<li>保存寄存器值等硬件上下文</li>
+<li>更新协程状态（改掉协程的“运行态”），把协程放入相关的状态队列</li>
+</ul>
 ]]></content>
       <categories>
         <category>计算机系统</category>
@@ -1957,7 +1984,7 @@
         <category>计算机系统</category>
       </categories>
       <tags>
-        <tag>操作系统</tag>
+        <tag>并发编程</tag>
       </tags>
   </entry>
   <entry>
@@ -3202,41 +3229,11 @@
       </tags>
   </entry>
   <entry>
-    <title>进程与线程</title>
+    <title>进程间通信——以Python为例</title>
     <url>/2018/01/09/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</url>
-    <content><![CDATA[<p>众所周知，CPU 是计算机的核心，它承担了所有的计算任务。而操作系统是计算机的管理者，是一个大管家，它负责任务的调度，资源的分配和管理，统领整个计算机硬件。应用应用程序是具有某种功能的程序，程序运行与操作系统之上。</p>
-<h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><p>进程是一个具有一定功能的程序在一个数据集上的一次动态执行过程。进程由程序，数据集合和进程控制块三部分组成。程序用于描述进程要完成的功能，是控制进程执行的指令集；数据集合是程序在执行时需要的数据和工作区；程序控制块（PCB）包含程序的描述信息和控制信息，是进程存在的唯一标志，<strong>换言之，在操作系统看来进程不过是一个个的 PCB 罢了</strong>。<strong>不同的进程之间拥有的独立的控制流和虚拟内存空间</strong>。</p>
-<p>简单来说进程就是动起来的程序。</p>
-<h3 id="写时复制-Copy-On-Write"><a href="#写时复制-Copy-On-Write" class="headerlink" title="写时复制(Copy On Write)"></a>写时复制(Copy On Write)</h3><p>写时复制（COW）是 Linux 中一种用于延迟复制数据的技术。就像小时候做作业，我们对父母声明今晚会好好学习，但实际上只有在他们来你房间检查时你才打开书写几题。在操作系统中也是同理，由于创建一个子进程需要分配新的内存空间，还要把父进程的数据复制到子进程，这个过程是很繁琐的。但是我们真的需要这么多父进程的数据吗？其实很多时候我们创建一个子进程，只是为了执行一些独立的任务，这些任务和父进程没多大关系，比如使用 exec() 装载一个程序到子进程的内存空间，然后子进程就跑去执行这个程序去了。那一开始又何必费那么大力气去复制父进程的数据呢？这就引出了 COW。</p>
-<p>fork() 出一个子进程后，子进程其实与父进程使用<strong>相同的物理内存空间</strong>。子进程的代码段、数据段、堆栈都指向父进程的物理内存。如此一来，创建一个子进程需要的操作就大大减少了！</p>
-<p>那么什么时候子进程获得自己独立的内存呢？答案就是当父子进程间共享的物理内存发生写操作的时候。当某个调用者试图修改资源的内容时，系统才会真正复制一份专用副本给该调用者，而其他调用者所见到的最初的资源仍然保持不变。<strong>这个过程对其他的调用者是透明的</strong>。</p>
-<p>Copy On Write 实现原理：</p>
-<blockquote>
-<p>fork() 之后，kernel 把父进程中所有的内存页的权限都设为 read-only，然后子进程的地址空间指向父进程。当父子进程都只读内存时，相安无事。当其中某个进程写内存时，CPU 硬件检测到内存页是 read-only 的，于是触发页异常中断（page-fault），陷入 kernel 的一个中断例程。中断例程中，kernel就会把触发的异常的页复制一份，于是父子进程各自持有独立的一份。</p>
-</blockquote>
-<p>说了那么多，COW 好处都有啥？</p>
-<ul>
-<li>减少不必要的复制操作，快速创建子进程。</li>
-</ul>
-<p>当然，它的弊端也显而易见：</p>
-<ul>
-<li>如果 fork() 之后子进程和父进程需要对共享的内存执行大量的写操作，那么会频繁地引发缺页异常，反而增加了系统的负担。</li>
-</ul>
-<p>举个例子：Redis 执行 BGSAVE 或 BGREWRITEAOF 命令时会创建子进程执行数据库备份操作。由于操作系统采用 COW 技术，为了避免此时父进程 rehash 导致大量写操作，在子进程备份操作期间服务器会提高负载因子的阈值避免不必要的内存写入操作，最大限度地节约内存。</p>
-<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><p>在很早的时候计算机并没有线程这个概念，但是随着时代的发展，只用进程来处理程序出现很多的不足。如当一个进程堵塞时，整个程序会停止在堵塞处，并且如果频繁的切换进程，会浪费系统资源。所以线程出现了。  </p>
-<p>线程是能拥有资源和独立运行的最小单位，也是程序执行的最小单位。一个进程可以拥有多个线程，而且属于同一个进程的多个线程间会共享该进行的资源。</p>
-<h2 id="进程与线程的区别"><a href="#进程与线程的区别" class="headerlink" title="进程与线程的区别"></a>进程与线程的区别</h2><ol>
-<li>一个进程由一个或者多个线程组成，线程是一个进程中代码的不同执行路线。</li>
-<li>切换进程需要的资源比切换线程的要多的多。</li>
-<li>进程之间相互独立，而同一个进程下的线程共享程序的内存空间（如代码段，数据集，堆栈等）。某进程内的线程在其他进程不可见。换言之，线程共享同一片内存空间，而进程各有独立的内存空间。</li>
-</ol>
-<p>以下是我在知乎上看到的关于进程与线程的讨论，其中一个作者感觉很有道理，摘抄如下：</p>
-<blockquote>
-<p>首先来一句概括的总论：进程和线程都是一个时间段的描述，是CPU工作时间段的描述。下面细说背景：CPU + RAM + 各种资源（比如显卡，光驱，键盘，GPS, 等等外设）构成我们的电脑，但是电脑的运行，实际就是CPU和相关寄存器以及 RAM 之间的事情。一个最最基础的事实：CPU 太快，太快，太快了，寄存器仅仅能够追的上他的脚步，RAM 和别的挂在各总线上的设备完全是望其项背。那当多个任务要执行的时候怎么办呢？轮流着来?或者谁优先级高谁来？不管怎么样的策略，一句话就是在 CPU 看来就是轮流着来。一个必须知道的事实：执行一段程序代码，实现一个功能的过程介绍 ，当得到CPU的时候，相关的资源必须也已经就位，就是显卡啊，GPS 啊什么的必须就位，然后CPU开始执行。这里除了 CPU 以外所有的就构成了这个程序的执行环境，也就是我们所定义的程序上下文。当这个程序执行完了，或者分配给他的 CPU 执行时间用完了，那它就要被切换出去，等待下一次CPU的临幸。在被切换出去的最后一步工作就是保存程序上下文，因为这个是下次他被CPU临幸的运行环境，必须保存。串联起来的事实：前面讲过在 CPU 看来所有的任务都是一个一个的轮流执行的，具体的轮流方法就是：先加载程序 A 的上下文，然后开始执行 A，保存程序A的上下文，调入下一个要执行的程序 B 的程序上下文，然后开始执行 B,保存程序B的上下文。。。。<br>========= 重要的东西出现了========<br>进程和线程就是这样的背景出来的，两个名词不过是对应的 CPU 时间段的描述，名词就是这样的功能。进程就是包括上下文切换的程序执行时间总和 = CPU加载上下文+ CPU 执行+ CPU 保存上下文。线程是什么呢？进程的颗粒度太大，每次都要有上下的调入，保存，调出。如果我们把进程比喻为一个运行在电脑上的软件，那么一个软件的执行不可能是一条逻辑执行的，必定有多个分支和多个程序段，就好比要实现程序A，实际分成 a，b，c等多个块组合而成。那么这里具体的执行就可能变成：程序 A 得到 CPU -&gt; CPU 加载上下文，开始执行程序 A 的 a 小段，然后执行 A 的 b 小段，然后再执行 A 的 c 小段，最后 CPU 保存 A 的上下文。这里 a，b，c 的执行是共享了 A 的上下文，CPU 在执行的时候没有进行上下文切换的。这里的 a，b，c 就是线程，也就是说线程是共享了进程的上下文环境，的更为细小的 CPU 时间段。到此全文结束，再一个总结：进程和线程都是一个时间段的描述，是 CPU 工作时间段的描述，不过是颗粒大小不同。  </p>
-</blockquote>
-<h2 id="Pool-进程池"><a href="#Pool-进程池" class="headerlink" title="Pool 进程池"></a>Pool 进程池</h2><p>需要创建多个进程时，可以使用multiprocessing中的Pool类开进程池。Pool()默认开启数量等于当前cpu核心数的子进程（当然可以手动改变）</p>
+    <content><![CDATA[<p>需要创建多个进程时，可以使用 multiprocessing 中的 Pool 类开进程池。Pool() 默认开启数量等于当前 cpu 核心数的子进程（当然可以手动改变）</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">(i)</span>:</span></span><br><span class="line">    print(<span class="string">"hello ,this is the %d process"</span> % i)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    p = Pool()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">5</span>):</span><br><span class="line">        p.apply_async(target=hell0,args=(i,))</span><br><span class="line">    p.close()</span><br><span class="line">    p.join()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
-<p>apply_async 表示在开进程时不阻塞主进程，是异步 IO 的一种方式之一。targe参数传入要在子线程中执行的<strong>函数对象</strong>，args以元组的方式传入函数的参数。<br>join() 会等待线程池中的每一个线程执行完毕，在 join() 之前必须要先 close()，close() 表示不能再向线程池中添加新的 process 了。</p>
+<p>apply_async 表示在开进程时不阻塞主进程，是异步 IO 的一种方式之一。targe 参数传入要在子线程中执行的<strong>函数对象</strong>，args以元组的方式传入函数的参数。<br>join() 会等待线程池中的每一个线程执行完毕，在 join() 之前必须要先 close()，close() 表示不能再向线程池中添加新的 process 了。</p>
 <h2 id="进程间的通信"><a href="#进程间的通信" class="headerlink" title="进程间的通信"></a>进程间的通信</h2><p>每个进程各自有不同的用户地址空间,任何一个进程的全局变量在另一个进程中都看不到，所以进程之间要交换数据必须通过内核,在内核中开辟一块缓冲区,进程A把数据从用户空间拷到内核缓冲区,进程B再从内核缓冲区把数据读走,内核提供的这种机制称为进程间通信。假如创建了多个进程，那么进程间的通信是必不可少的。Python 提供了多种进程通信的方式，其中以 Queue 和 Pipe 用得最多。下面分别介绍这两种模式。</p>
 <h3 id="共享内存通信"><a href="#共享内存通信" class="headerlink" title="共享内存通信"></a>共享内存通信</h3><p>让操作系统维持一块共享内存，所有要互相通信的进程通过这块内存交换信息。这样做的缺点是要格外注意数据同步问题。</p>
 <p>下面以 Python 中 Queue 为例子做一个示范。Queue 是一种多进程安全的队列，其实现多进程间的通信有两种方法：</p>
@@ -3276,7 +3273,7 @@
         <category>计算机系统</category>
       </categories>
       <tags>
-        <tag>操作系统</tag>
+        <tag>并发编程</tag>
       </tags>
   </entry>
   <entry>
