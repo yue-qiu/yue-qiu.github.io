@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Go,">
+  <meta name="keywords" content="并发,">
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="所谓并发(concurrency) 是指几段程序在同一时间段内交错执行，当我们无法肯定一个事件一定会会先于另一个事件发生，那么就可以说这几个时间是“并发”的。如果一个函数在并发调用时仍能正确执行，这个函数就是并发安全的；如果一个类型的所有可访问方法和操作都是并发安全的，则它就是一个并发安全的类型。 本文主要介绍了几种并发编程中常见的问题及对策，所有的例子都会用 Go 语言来描述，还会涉及到一些 G">
-<meta name="keywords" content="Go">
+<meta name="keywords" content="并发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="并发编程-以 Go 为例">
 <meta property="og:url" content="http://yoursite.com/2020/03/24/并发编程-以Go为例/index.html">
 <meta property="og:site_name" content="精神的壳">
 <meta property="og:description" content="所谓并发(concurrency) 是指几段程序在同一时间段内交错执行，当我们无法肯定一个事件一定会会先于另一个事件发生，那么就可以说这几个时间是“并发”的。如果一个函数在并发调用时仍能正确执行，这个函数就是并发安全的；如果一个类型的所有可访问方法和操作都是并发安全的，则它就是一个并发安全的类型。 本文主要介绍了几种并发编程中常见的问题及对策，所有的例子都会用 Go 语言来描述，还会涉及到一些 G">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-04-13T16:10:20.976Z">
+<meta property="og:updated_time" content="2021-01-20T08:50:22.815Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="并发编程-以 Go 为例">
 <meta name="twitter:description" content="所谓并发(concurrency) 是指几段程序在同一时间段内交错执行，当我们无法肯定一个事件一定会会先于另一个事件发生，那么就可以说这几个时间是“并发”的。如果一个函数在并发调用时仍能正确执行，这个函数就是并发安全的；如果一个类型的所有可访问方法和操作都是并发安全的，则它就是一个并发安全的类型。 本文主要介绍了几种并发编程中常见的问题及对策，所有的例子都会用 Go 语言来描述，还会涉及到一些 G">
@@ -349,8 +349,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
+                  <a href="/categories/计算机系统/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机系统</span>
                   </a>
                 </span>
 
@@ -414,7 +414,7 @@
       
         <p>所谓<code>并发</code>(concurrency) 是指几段程序在同一时间段内交错执行，当我们无法肯定一个事件一定会会先于另一个事件发生，那么就可以说这几个时间是“并发”的。如果一个函数在并发调用时仍能正确执行，这个函数就是<code>并发安全</code>的；如果一个类型的所有可访问方法和操作都是并发安全的，则它就是一个并发安全的类型。</p>
 <p>本文主要介绍了几种并发编程中常见的问题及对策，所有的例子都会用 Go 语言来描述，还会涉及到一些 Go 对并发编程的支持。</p>
-<h1 id="竞态"><a href="#竞态" class="headerlink" title="竞态"></a>竞态</h1><p>竞态是指多个 goroutine 并发执行时，程序无法给出正确结果。比如多个 goroutine 同时修改了一个包级别变量的值，那么很可能导致某一个 goroutine 的修改对另一个 goroutine 不可见：</p>
+<h2 id="竞态"><a href="#竞态" class="headerlink" title="竞态"></a>竞态</h2><p>竞态是指多个 goroutine 并发执行时，程序无法给出正确结果。比如多个 goroutine 同时修改了一个包级别变量的值，那么很可能导致某一个 goroutine 的修改对另一个 goroutine 不可见：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> amount = <span class="number">0</span></span><br><span class="line"><span class="keyword">var</span> done = <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        amount += <span class="number">100</span></span><br><span class="line">        done &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        amount += <span class="number">200</span></span><br><span class="line">        done &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    &lt;- done</span><br><span class="line">    &lt;- done</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>上面这段代码执行以后，balance 有几种可能取值：300，200，100。程序中的这种状态称为<code>数据竞态</code>，是竞态的一种。数据竞态发生在多个 goroutine 并发读写同一个变量并且至少一个为写操作的时候。</p>
 <p>有三种方法可以避免数据竞态：</p>
@@ -441,24 +441,14 @@
 <p>如果写锁和读锁是平级的，假设当前已经上了读锁，此时一个 goroutine 的 Lock() 操作会被阻塞。而如果不断有 goroutine 获得读锁那么 Lock() 操作就会一直阻塞下去。因此，<code>写锁的优先级高于读锁</code>，即当获得写锁的请求产生以后，直到 Lock() 执行成功前所有 RLock() 操作都会阻塞。</p>
 <p>对读操作上读锁，避免读到脏数据的同时又提高了资源访问速度！</p>
 <p>要注意的是，go 的读写锁是通过互斥锁加上引用计数器实现的，所以除非读操作确实远远比写操作多，否则读写锁未必就比互斥锁效率高。</p>
-<h1 id="内存同步"><a href="#内存同步" class="headerlink" title="内存同步"></a>内存同步</h1><p>即使是一个只包含单个操作的只读操作，上锁也是必要的。一是为了防止这个操作被插入到对该变量的写入操作中，二是将处理器缓存中的内容刷入内存。</p>
-<p>现代计算机一般会有多个处理器，每个处理器都有自己的缓存。对变量的写操作通常不会直接写入内存，而是先记录在处理器缓存中，在操作系统认为必要的时候再刷回内存。而通道通信和互斥锁这样的<code>同步原语</code>都会强制刷回内存，如此一来在这之前的 goroutine 的执行结果就对当前 goroutine 可见了。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> x, y <span class="keyword">int</span></span><br><span class="line"><span class="keyword">var</span> done = <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        x = <span class="number">1</span>   <span class="comment">// A1</span></span><br><span class="line">        fmt.Print(<span class="string">"y="</span>, y, <span class="string">" "</span>) <span class="comment">// A2</span></span><br><span class="line">        done &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        y = <span class="number">2</span>   <span class="comment">// B1</span></span><br><span class="line">        fmt.Print(<span class="string">"x="</span>, x, <span class="string">" "</span>) <span class="comment">// B2</span></span><br><span class="line">        done &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    &lt;- done</span><br><span class="line">    &lt;- done</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="内存同步"><a href="#内存同步" class="headerlink" title="内存同步"></a>内存同步</h2><p>即使是一个只包含单个操作的只读操作，上锁也是必要的。一是为了防止这个操作被插入到该变量的写操作前，二是将处理器缓存中的内容刷入内存。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> x, y <span class="keyword">int</span></span><br><span class="line"><span class="keyword">var</span> done = <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        x = <span class="number">1</span>   <span class="comment">// A1</span></span><br><span class="line">        fmt.Print(<span class="string">"y="</span>, y, <span class="string">" "</span>) <span class="comment">// A2</span></span><br><span class="line">        done &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        y = <span class="number">2</span>   <span class="comment">// B1</span></span><br><span class="line">        fmt.Print(<span class="string">"x="</span>, x, <span class="string">" "</span>) <span class="comment">// B2</span></span><br><span class="line">        done &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    &lt;- done</span><br><span class="line">    &lt;- done</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>由于 A、B 四行语句的交替执行，以上代码的如下输出是可接受的：</p>
-<ol>
-<li>y=0 x=1</li>
-<li>y=2 x=1</li>
-<li>x=0 y=2</li>
-<li>x=1 y=2</li>
-</ol>
-<p>但是由于处理器缓存的存在，写操作（A1 &amp;&amp; B1）可能不会立即对其它 goroutine 可见，那么其它 goroutine 就会使用过期值。此外，由于赋值语句和输出语句对应不同变量，编译器可能认为这两个语句的执行顺序是不重要的，于是私自调换了语句的执行顺序。我们可能看到这样的非预期输出：</p>
-<ol>
-<li>y=0 x=0</li>
-<li>y=2 x=0</li>
-<li>x=0 y=0</li>
-<li>x=1 y=0</li>
-</ol>
-<p>要解决这样的问题，访问共享变量前利用上文提到的同步原语进行同步就可以了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">y=0 x=1 // A1-&gt;A2-&gt;B1-&gt;B2 </span><br><span class="line">y=2 x=1 // B1-&gt;A1-&gt;A2-&gt;B2</span><br><span class="line">x=0 y=2 // B1-&gt;B2-&gt;A1-&gt;A2</span><br><span class="line">x=1 y=2 // A1-&gt;B1-&gt;B2-&gt;A2</span><br></pre></td></tr></table></figure>
+<p>现代计算机一般会有多个处理器，每个处理器都有自己的缓存。对变量的写操作通常不会直接写入内存，而是先记录在处理器缓存中，在操作系统认为必要的时候再刷回内存。由于处理器缓存的存在，写操作（A1 &amp;&amp; B1）可能不会立即对其它 goroutine 可见，那么其它 goroutine 就会使用过期值。此外，由于赋值语句和输出语句对应不同变量，编译器可能认为这两个语句的执行顺序是不重要的，于是私自调换了语句的执行顺序，CPU 执行指令时也可能发生指令重排，在不影响语义的前提下把后面的指令放到前面来执行。我们可能看到这样的非预期输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">y=0 x=0 // A2-&gt;B2-&gt;A1-&gt;B1 or A2-&gt;B2-&gt;B1-&gt;A1</span><br><span class="line">y=2 x=0 // B1-&gt;A2-&gt;B2-&gt;A1</span><br><span class="line">x=0 y=0 // B2-&gt;A2-&gt;A1-&gt;B1 or B2-&gt;A2-&gt;B1-&gt;A1</span><br><span class="line">x=1 y=0 // A1-&gt;B2-&gt;A2-&gt;B1</span><br></pre></td></tr></table></figure>
+<p>此时，指令的执行顺序看起来就和代码的编写顺序不一样了。而通道通信和互斥锁这样的<strong>同步原语</strong>会强制刷回内存，并插入内存屏障（Memory Barrier）。如此一来某个 Goroutine 中指令执行顺序就对别的 Goroutine 可见了：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> x, y <span class="keyword">int</span></span><br><span class="line"><span class="keyword">var</span> done = <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line"><span class="keyword">var</span> ok = <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        x = <span class="number">1</span>   <span class="comment">// A1</span></span><br><span class="line">        ok &lt;- <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line">        fmt.Print(<span class="string">"y="</span>, y, <span class="string">" "</span>) <span class="comment">// A2</span></span><br><span class="line">        done &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        y = <span class="number">2</span>   <span class="comment">// B1</span></span><br><span class="line">        &lt;-ok</span><br><span class="line">        fmt.Print(<span class="string">"x="</span>, x, <span class="string">" "</span>) <span class="comment">// B2</span></span><br><span class="line">        done &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    &lt;- done</span><br><span class="line">    &lt;- done</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -476,7 +466,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Go/" rel="tag"># Go</a>
+            <a href="/tags/并发/" rel="tag"># 并发</a>
           
         </div>
       
@@ -598,7 +588,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -620,7 +610,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -675,7 +665,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#竞态"><span class="nav-number">1.</span> <span class="nav-text">竞态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#内存同步"><span class="nav-number">2.</span> <span class="nav-text">内存同步</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#竞态"><span class="nav-number">1.</span> <span class="nav-text">竞态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存同步"><span class="nav-number">2.</span> <span class="nav-text">内存同步</span></a></li></ol></div>
             
 
           </div>
