@@ -88,11 +88,10 @@
 <meta property="og:description" content="虽然线程比较轻量，但是在调度时也有比较大的额外开销。每个线程会都占用 1M 以上的内存空间，在对线程进行切换时不止会消耗较多的内存，恢复寄存器中的内容还需要向操作系统申请或者销毁对应的资源，每一次线程上下文的切换都需要消耗 1us 左右的时间。而 Go 调度器对 Goroutine 的上下文切换约为 0.2us，减少了 80% 的额外开销 Go 语言的调度器通过使用与 CPU 数量相等的线程减少线">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.loli.net/2020/04/26/F617HYhRtfTrJlM.png">
-<meta property="og:image" content="https://i.loli.net/2020/04/26/HYZyCRmugW4XA8K.png">
 <meta property="og:image" content="https://i.loli.net/2020/04/26/ihSrwOGqjRa3mCo.png">
 <meta property="og:image" content="https://i.loli.net/2020/04/26/TaxLscAnwlDZq7m.png">
 <meta property="og:image" content="https://i.loli.net/2020/04/27/1bVMsIOvXk3Dlx7.png">
-<meta property="og:updated_time" content="2020-06-21T02:16:07.065Z">
+<meta property="og:updated_time" content="2021-01-21T06:56:33.458Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Go底层大冒险之调度器">
 <meta name="twitter:description" content="虽然线程比较轻量，但是在调度时也有比较大的额外开销。每个线程会都占用 1M 以上的内存空间，在对线程进行切换时不止会消耗较多的内存，恢复寄存器中的内容还需要向操作系统申请或者销毁对应的资源，每一次线程上下文的切换都需要消耗 1us 左右的时间。而 Go 调度器对 Goroutine 的上下文切换约为 0.2us，减少了 80% 的额外开销 Go 语言的调度器通过使用与 CPU 数量相等的线程减少线">
@@ -439,7 +438,7 @@
 <li>运行时：Goroutine 已经准备就绪，可以在线程运行，如果当前程序中有非常多的 Goroutine，每个 Goroutine 就可能会等待更多的时间，即 <code>_Grunnable</code></li>
 <li>运行中：Goroutine 正在某个线程上运行，即 <code>_Grunning</code></li>
 </ul>
-<p><img src="https://i.loli.net/2020/04/26/HYZyCRmugW4XA8K.png" alt="Goroutine状态"></p>
+<!-- ![Goroutine状态](https://i.loli.net/2020/04/26/HYZyCRmugW4XA8K.png) -->
 <h3 id="M"><a href="#M" class="headerlink" title="M"></a>M</h3><p>M 是操作系统线程。调度器最多可以创建 10000 个线程，但是其中大多数的线程都不会执行用户代码（可能陷入系统调用），最多只会有 GOMAXPROCS 个活跃线程能够正常运行。在默认情况下，运行时会将 GOMAXPROCS 设置成当前机器的核数，这样不会触发操作系统的线程调度和上下文切换，所有的调度都会发生在用户态，由 Go 语言调度器触发，能够减少非常多的额外开销。我们也可以使用 runtime.GOMAXPROCS 来改变程序中最大的线程数。</p>
 <p><img src="https://i.loli.net/2020/04/26/ihSrwOGqjRa3mCo.png" alt="M与CPU"></p>
 <p>线程表现为私有结构体 m，下面是一些比较重要的字段：</p>
@@ -458,11 +457,15 @@
 <li>更新 Goroutine 调度相关的属性：设置新 g 的 sp、pc并更新其状态到 <code>_Grunnable</code></li>
 <li>将 Goroutine 加入运行队列 runq：Go 语言中有两个运行队列，一个是处理器本地的运行队列，另一个是调度器持有的全局运行队列，只有在本地运行队列没有剩余空间时才会使用全局队列<br><img src="https://i.loli.net/2020/04/27/1bVMsIOvXk3Dlx7.png" alt="运行队列"></li>
 </ol>
-<h2 id="触发调度"><a href="#触发调度" class="headerlink" title="触发调度"></a>触发调度</h2><h3 id="主动挂起"><a href="#主动挂起" class="headerlink" title="主动挂起"></a>主动挂起</h3><p>当 goroutine 陷入休眠（如 <code>time.sleep</code>）或阻塞在一次 chan 操作时，goroutine 触发主动挂起。主动挂起会将当前 goroutine 暂停。调度器把 goroutine 状态设为 <code>_Gwaiting</code> 并<strong>解除 goroutine 与线程的绑定</strong>（相当于让出线程，随后就可以执行一次 goroutine 调度），等待状态的 goroutine 不占用线程。</p>
-<p>当 goroutine 满足特定条件后，运行时将因主动挂起而休眠的 goroutine 唤醒并将其状态设为 <code>_Grunnable</code>，随后这个 goroutine 被放到运行队列等待调度。</p>
-<h3 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h3><p>当 goroutine 阻塞在一次 IO 或其它系统调用上调度器会更新 goroutine 状态为 <code>_Gsyscall</code> 并<strong>解除线程和处理器的绑定</strong>（相当于让出处理器，这样处理器就可以绑定到其它线程上。原线程陷入系统调用等待返回。这个过程触发一次线程切换的系统调用）。</p>
-<p>系统调用结束后，为这个 goroutine 重新分配资源并更新其状态为 <code>_Grunnable</code>，找到一个可用的处理器与这个 goroutine 绑定。</p>
-<h3 id="抢占"><a href="#抢占" class="headerlink" title="抢占"></a>抢占</h3><p>运行时会更新 Goroutine 的状态到 <code>_Grunnable</code>，让出当前的处理器并将这个 Goroutine 放回全局队列。最后，调用 runtime.schedule 触发调度。</p>
+<h2 id="触发调度"><a href="#触发调度" class="headerlink" title="触发调度"></a>触发调度</h2><ul>
+<li><p>主动挂起：当 goroutine 陷入休眠（如 <code>time.sleep</code>）或阻塞在一次 chan 操作时，goroutine 触发主动挂起。主动挂起会将当前 goroutine 暂停。调度器把 goroutine 状态设为 <code>_Gwaiting</code> 并<strong>解除 goroutine 与线程的绑定</strong>（相当于让出线程，随后就可以执行一次 goroutine 调度），等待状态的 goroutine 不占用线程。当主动挂起的 goroutine 满足特定条件后，运行时将其状态设为 <code>_Grunnable</code> 并放到运行队列等待调度。</p>
+</li>
+<li><p>系统调用：当 goroutine 阻塞在一次 IO 或其它系统调用上调度器会更新 goroutine 状态为 <code>_Gsyscall</code> 并<strong>解除线程和处理器的绑定</strong>（相当于让出处理器，这样处理器就可以绑定到其它线程上。原线程陷入系统调用等待返回。这个过程触发一次线程切换的系统调用）。系统调用结束后，为这个 goroutine 重新分配资源并更新其状态为 <code>_Grunnable</code>，找到一个可用的处理器与这个 goroutine 绑定。</p>
+</li>
+</ul>
+<p>下面这段代码示范了运行时在主动挂起和系统调用时进行协程调度：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line">improt (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"runtime"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    runtime.GOMAXPROCS(<span class="number">1</span>)</span><br><span class="line">    sched := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line">    loopCount := <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">for</span> &#123;</span><br><span class="line">            <span class="keyword">select</span> &#123;</span><br><span class="line">                <span class="keyword">case</span> &lt;-sched:</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                    loopCount += <span class="number">1</span></span><br><span class="line">                    fmt.Printf(<span class="string">"loop %d\n"</span>, loopCount) <span class="comment">// Printf 属于 IO，可能会阻塞然后触发调度</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    sched &lt;-<span class="keyword">struct</span>&#123;&#125;&#123;&#125; <span class="comment">// 主动阻塞在一次 channel 操作上，触发调度</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>反复执行这段程序会发现输出结果不唯一，因为 <code>fmt.Printf</code> 操作具体什么时候阻塞是说不准的。但只要有 loop 被打印出来，可以肯定发生了两次调度：一次由 chan 发送操作导致，一次由 IO 操作导致。</p>
 <h2 id="设计原理"><a href="#设计原理" class="headerlink" title="设计原理"></a>设计原理</h2><p>总结起来三个特点：多线程、任务窃取、抢占式：</p>
 <ol>
 <li>多线程：进程中可以同时存在多个活跃线程。多线程调度器引入了 GOMAXPROCS 变量帮助我们灵活控制程序中的最大处理器数，即活跃线程数</li>
@@ -685,7 +688,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构"><span class="nav-number">1.</span> <span class="nav-text">数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#G"><span class="nav-number">1.1.</span> <span class="nav-text">G</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#M"><span class="nav-number">1.2.</span> <span class="nav-text">M</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#P"><span class="nav-number">1.3.</span> <span class="nav-text">P</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建-Goroutine"><span class="nav-number">2.</span> <span class="nav-text">创建 Goroutine</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#触发调度"><span class="nav-number">3.</span> <span class="nav-text">触发调度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主动挂起"><span class="nav-number">3.1.</span> <span class="nav-text">主动挂起</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统调用"><span class="nav-number">3.2.</span> <span class="nav-text">系统调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抢占"><span class="nav-number">3.3.</span> <span class="nav-text">抢占</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设计原理"><span class="nav-number">4.</span> <span class="nav-text">设计原理</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构"><span class="nav-number">1.</span> <span class="nav-text">数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#G"><span class="nav-number">1.1.</span> <span class="nav-text">G</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#M"><span class="nav-number">1.2.</span> <span class="nav-text">M</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#P"><span class="nav-number">1.3.</span> <span class="nav-text">P</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建-Goroutine"><span class="nav-number">2.</span> <span class="nav-text">创建 Goroutine</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#触发调度"><span class="nav-number">3.</span> <span class="nav-text">触发调度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设计原理"><span class="nav-number">4.</span> <span class="nav-text">设计原理</span></a></li></ol></div>
             
 
           </div>
