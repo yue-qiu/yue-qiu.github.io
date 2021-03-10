@@ -98,12 +98,14 @@
 <meta property="og:image" content="https://i.loli.net/2020/02/03/OiRWNLvsruQg4a5.png">
 <meta property="og:image" content="https://i.loli.net/2020/02/03/1q5hVjXolUWLFsA.png">
 <meta property="og:image" content="https://i.loli.net/2020/05/17/d6eJ9OhzwVrcHxk.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/10/a8ercKtqWwEDu7p.png">
 <meta property="og:image" content="https://i.loli.net/2020/02/03/6ISrl85JXjqokQC.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/10/7QwzHUBKx8osWyj.png">
 <meta property="og:image" content="https://i.loli.net/2020/02/03/TIbQX3Sf5Uc9nvB.png">
 <meta property="og:image" content="https://i.loli.net/2020/02/03/gPpzCavur2m91bk.png">
 <meta property="og:image" content="https://i.loli.net/2020/02/05/cZXOdiAoawHnWI7.png">
 <meta property="og:image" content="https://i.loli.net/2020/02/05/OJNQRrKyuDflYqm.png">
-<meta property="og:updated_time" content="2020-05-17T15:27:06.183Z">
+<meta property="og:updated_time" content="2021-03-10T12:10:40.892Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络那些事之链路层">
 <meta name="twitter:description" content="先明确几个术语：  结点（node）：主机和路由器 链路（link）：相邻结点的连接通道 帧（frame）：链路层数据分组  链路层负责通过一条链路在相邻结点之间传送数据报，提供的服务有：  组帧：封装数据报构成数据帧，加首部和尾部，帧同步（将物理层比特流转换为帧） 链路接入：如果链路是共享的，需要解决链路接入问题。帧首部 MAC 地址用于标识帧的源和目的地 相邻结点间的可靠交付（不一定实现） 流">
@@ -547,8 +549,8 @@
 <li>网络负载重时，产生冲突开销</li>
 </ul>
 <h2 id="ARP-与-MAC"><a href="#ARP-与-MAC" class="headerlink" title="ARP 与 MAC"></a>ARP 与 MAC</h2><p>MAC 地址共 48bits，用 16 进制形式表示。用于标识局域网内一个帧从哪个接口发出，到达哪个物理相连的其他接口。每块网卡都有自己独有的 MAC 地址，如：1A-2F-BB-76-09-AD</p>
-<h2 id="ARP-协议"><a href="#ARP-协议" class="headerlink" title="ARP 协议"></a>ARP 协议</h2><p>地址解析协议（ARP）负责网络层 IP 地址与链路层 MAC 地址的转换。</p>
-<p><strong>ARP 表</strong>：LAN 中每个 IP 结点维护一个表，存储某些 LAN 结点的 IP <-> Mac 地址映射关系：(IP 地址，MAC 地址，TTL)</-></p>
+<h2 id="ARP-协议"><a href="#ARP-协议" class="headerlink" title="ARP 协议"></a>ARP 协议</h2><p>地址解析协议（ARP, Address Resolve Protocal）负责网络层地址与链路层地址的转换。</p>
+<p>ARP 表：LAN 中每个 IP 结点维护一个表，存储某些 LAN 结点的 [IP, MAC, TTL] 映射关系</p>
 <p>下面是一个 ARP 表示例（本地网卡 IP 地址 192.168.100.107，子网掩码 255.255.255.0，默认网关 192.168.100.11）：</p>
 <p><img src="https://i.loli.net/2020/05/17/d6eJ9OhzwVrcHxk.png" alt="ARP表"></p>
 <p>例1：A 想要给<strong>同一局域网内</strong>的 B 发送数据报（B 的MAC 地址不在 A 的 ARP 表中）：</p>
@@ -557,6 +559,7 @@
 <li>B 接收 ARP 查询分组，IP 地址匹配成功，向 A 应答 B 的 MAC 地址</li>
 <li>A 在自己的 ARP 表中缓存 B 的 IP-MAC 映射直至超时（超时后再次刷新）</li>
 </ol>
+<p><img src="https://i.loli.net/2021/03/10/a8ercKtqWwEDu7p.png" alt="同一子网ARP.png"></p>
 <p>例2：A 想要给<strong>不同局域网内</strong>的 B 发送数据报（B 的MAC 地址不在 A 的 ARP 表中，A 知道第一跳路由器接口的 MAC 地址）：</p>
 <p><img src="https://i.loli.net/2020/02/03/6ISrl85JXjqokQC.png" alt="LAN间ARP"></p>
 <ol>
@@ -566,6 +569,7 @@
 <li>R 创建链路层帧，源 MAC 地址为 R 出口的，目的 MAC 地址为 B 的</li>
 </ol>
 <p><strong>数据帧传递过程中源/目的 MAC 地址不断改变！</strong></p>
+<p><img src="https://i.loli.net/2021/03/10/7QwzHUBKx8osWyj.png" alt="不同子网ARP.png"></p>
 <h2 id="交换机"><a href="#交换机" class="headerlink" title="交换机"></a>交换机</h2><p>交换机是典型的<strong>链路层设备</strong>，交换可以在多个主机间<strong>同时</strong>进行。特点有：</p>
 <ul>
 <li>存储、转发以太网帧</li>
