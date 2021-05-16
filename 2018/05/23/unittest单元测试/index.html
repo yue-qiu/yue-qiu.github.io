@@ -1,73 +1,117 @@
 <!DOCTYPE html>
-<html lang="en">
 
-<head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="utf-8">
+
+<html lang="zh-CN">
   
-  
-  
-  <meta name="description" content="高山仰止，景行行止。虽不能至，心向往之。">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>
-    unittest简介 |
-    
-    精神的壳</title>
-  
-  <link rel="shortcut icon" href="/favicon.ico">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-  
-  <script src="/js/pace.min.js"></script>
-<link rel="alternate" href="/atom.xml" title="精神的壳" type="application/atom+xml">
-</head></html>
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="“生活，代码，思考”" />
+       
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>unittest简介 |  精神的壳</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+<script>
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?847f7a1169508eb118c64f7719e8a4cf";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+      <!-- mermaid -->
+      
+    <link rel="alternate" href="/atom.xml" title="精神的壳" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
 
 <body>
-  <main class="content">
-    <section class="outer">
-  <article id="post-unittest单元测试" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-unittest单元测试"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
   <div class="article-inner">
     
     <header class="article-header">
-      
-
-<h1 class="article-title" itemprop="name">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
   unittest简介
 </h1>
+ 
 
-
-
+      
     </header>
-    
-
-    
+     
     <div class="article-meta">
-      <a href="/2018/05/23/unittest单元测试/" class="article-date">
+      <a href="/2018/05/23/unittest%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" class="article-date">
   <time datetime="2018-05-23T09:08:42.000Z" itemprop="datePublished">2018-05-23</time>
-</a>
-      
-<div class="article-category">
-  <a class="article-category-link" href="/categories/语言/">语言</a>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%AD%E8%A8%80/">语言</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.3k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">5 分钟</span>
+        </span>
+    </span>
 </div>
-
+ 
     </div>
-    
+      
+    <div class="tocbot"></div>
 
-    
-    
-<div class="tocbot"></div>
 
-    
 
+
+  
     <div class="article-entry" itemprop="articleBody">
-      
-      
-      
-      <p>有个词叫TDD(Tset Driven Development)，测试驱动开发。一个好的开发人员不仅要懂开发，还要懂得一定的测试技巧。python自带了很多的测试库，比如unittest，coverage….介绍一下unittest的使用。</p>
+       
+  <p>有个词叫TDD(Tset Driven Development)，测试驱动开发。一个好的开发人员不仅要懂开发，还要懂得一定的测试技巧。python自带了很多的测试库，比如unittest，coverage….介绍一下unittest的使用。</p>
 <h1 id="unittests四个重要的概念"><a href="#unittests四个重要的概念" class="headerlink" title="unittests四个重要的概念"></a>unittests四个重要的概念</h1><p>unittest有四个重要的面向对象概念：</p>
 <ol>
 <li>test fixture。这个概念主要处理测试环境的搭建和清理。很多时候我们在进行测试的时候需要搭建合适的环境，例如创建目录、创建数据库等，而在测试完毕后这些环境又不再需要了。test fixturn可以帮我们很好的处理这些事情。</li>
@@ -77,135 +121,271 @@
 </ol>
 <h1 id="创建testcase"><a href="#创建testcase" class="headerlink" title="创建testcase"></a>创建testcase</h1><p>unittest提供了TastCase类，要创建一个testcase只需要继承这个父类就好了。</p>
 <p>先在<code>mathfunc.py</code>编写三个函数用于测试：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> x + y</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">minus</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> x - y</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">string</span><span class="params">(s)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> s</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">x, y</span>):</span></span><br><span class="line">    <span class="keyword">return</span> x + y</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">minus</span>(<span class="params">x, y</span>):</span></span><br><span class="line">    <span class="keyword">return</span> x - y</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">string</span>(<span class="params">s</span>):</span></span><br><span class="line">    <span class="keyword">return</span> s</span><br></pre></td></tr></table></figure>
 <p>在<code>test_math.py</code>中创建测试用例：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> mathfunc <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> unittest <span class="keyword">import</span> TestCase</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestMath</span><span class="params">(TestCase)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_add</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="string">"""测试add函数"""</span></span><br><span class="line">        self.assertTrue(<span class="number">1</span>+<span class="number">2</span>, add(<span class="number">1</span>, <span class="number">2</span>))</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_minus</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="string">"""测试minus函数"""</span></span><br><span class="line">        self.assertEqual(<span class="number">2</span><span class="number">-1</span>, minus(<span class="number">2</span>, <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_string</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="string">"""测试string函数"""</span></span><br><span class="line">        self.assertIn(<span class="string">'h'</span> <span class="keyword">in</span> string(<span class="string">'hello'</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> mathfunc <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> unittest <span class="keyword">import</span> TestCase</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestMath</span>(<span class="params">TestCase</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_add</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;测试add函数&quot;&quot;&quot;</span></span><br><span class="line">        self.assertTrue(<span class="number">1</span>+<span class="number">2</span>, add(<span class="number">1</span>, <span class="number">2</span>))</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_minus</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;测试minus函数&quot;&quot;&quot;</span></span><br><span class="line">        self.assertEqual(<span class="number">2</span>-<span class="number">1</span>, minus(<span class="number">2</span>, <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_string</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;测试string函数&quot;&quot;&quot;</span></span><br><span class="line">        self.assertIn(<span class="string">&#x27;h&#x27;</span> <span class="keyword">in</span> string(<span class="string">&#x27;hello&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
 <p>这就创建了一个testcase，包含三个测试。<strong>testcase中所有的测试必须以<code>test</code>开头</strong>。<code>self.assert*()</code>是由TestCase提供的测试函数。每一个测试里的文档会在输出测试报告时显示。不用python内置的assert()是因为uniittest在遇到<code>self.assert*()</code>发生错误时会把这个测试标记为failure，然后继续执行其他测试。</p>
-<h1 id="创建testsuite"><a href="#创建testsuite" class="headerlink" title="创建testsuite"></a>创建testsuite</h1><p>有了testcase，自然想把它加入到suite中。unittest提供了<code>TestSuite</code>类来表示一个suite。默认情况下，unittest按测试函数的函数名进行排序，然后按这个排序执行测试。如果我们想控制测试执行顺序，就要在向suite添加case时做点文章：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> mathfunc <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"></span><br><span class="line">suite = unittest.TestSuite()</span><br><span class="line"><span class="comment"># 传入列表，这样就会按照元素顺序执行测试</span></span><br><span class="line">suite.addTests([TestMath(<span class="string">'test_add'</span>), TestMath(<span class="string">'test_minus'</span>), TestMath(<span class="string">'test_string'</span>)])</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    unittest.main()</span><br></pre></td></tr></table></figure></p>
-<p>还可以通过unittest提供的TestLoader类来添加testcase，<strong>TestLoader会返回一个suite</strong>。不过<strong>TestLoader无法保证按照顺序执行测试</strong>。TestLoader类提供了一下常用方法：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> test_math <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 三种方法都可以</span></span><br><span class="line">suite.addTests(unittest.TestLoader().loadTestsFromName(<span class="string">'test_math.TestMath'</span>))</span><br><span class="line">suite.addTests(unitest.TestLoader().loadTestsFromNanes([<span class="string">'test_math.TestMath'</span>])</span><br><span class="line">suite.addTests(unitest.TestLoader().loadTestsFromTestCase(TestMath))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果test_math在/usr/test/目录下</span></span><br><span class="line">suite.addTests(unittest.TestLoader().discover(<span class="string">r'/usr/test/'</span>))</span><br><span class="line"><span class="comment"># 可用添加单个testcase</span></span><br><span class="line">suite.addTest(TestMath(<span class="string">'test_add'</span>))</span><br></pre></td></tr></table></figure></p>
+<h1 id="创建testsuite"><a href="#创建testsuite" class="headerlink" title="创建testsuite"></a>创建testsuite</h1><p>有了testcase，自然想把它加入到suite中。unittest提供了<code>TestSuite</code>类来表示一个suite。默认情况下，unittest按测试函数的函数名进行排序，然后按这个排序执行测试。如果我们想控制测试执行顺序，就要在向suite添加case时做点文章：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> mathfunc <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"></span><br><span class="line">suite = unittest.TestSuite()</span><br><span class="line"><span class="comment"># 传入列表，这样就会按照元素顺序执行测试</span></span><br><span class="line">suite.addTests([TestMath(<span class="string">&#x27;test_add&#x27;</span>), TestMath(<span class="string">&#x27;test_minus&#x27;</span>), TestMath(<span class="string">&#x27;test_string&#x27;</span>)])</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    unittest.main()</span><br></pre></td></tr></table></figure>
+<p>还可以通过unittest提供的TestLoader类来添加testcase，<strong>TestLoader会返回一个suite</strong>。不过<strong>TestLoader无法保证按照顺序执行测试</strong>。TestLoader类提供了一下常用方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> test_math <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 三种方法都可以</span></span><br><span class="line">suite.addTests(unittest.TestLoader().loadTestsFromName(<span class="string">&#x27;test_math.TestMath&#x27;</span>))</span><br><span class="line">suite.addTests(unitest.TestLoader().loadTestsFromNanes([<span class="string">&#x27;test_math.TestMath&#x27;</span>])</span><br><span class="line">suite.addTests(unitest.TestLoader().loadTestsFromTestCase(TestMath))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果test_math在/usr/test/目录下</span></span><br><span class="line">suite.addTests(unittest.TestLoader().discover(<span class="string">r&#x27;/usr/test/&#x27;</span>))</span><br><span class="line"><span class="comment"># 可用添加单个testcase</span></span><br><span class="line">suite.addTest(TestMath(<span class="string">&#x27;test_add&#x27;</span>))</span><br></pre></td></tr></table></figure>
 <ul>
 <li>loadTestsFromName(模块名.testcase名)</li>
 <li>loadTestsFromTestCase(testcase名)</li>
 <li>discover(start_dir, pattern=’test*.py’, top_level_dir=None)。start_dir是目标文件夹路径，unittest会查找指定目录及子目录下的全部符合pattern的模块并执行里面的TestCase。<strong>电脑中不能有同名的目标文件夹，否则unittest可能无法找到正确的位置</strong>。patter默认是’test*.py’。</li>
 </ul>
 <h1 id="搭建测试环境"><a href="#搭建测试环境" class="headerlink" title="搭建测试环境"></a>搭建测试环境</h1><p>TaseCase父类提供了<code>setUp()</code>，<code>tearDown()</code>，<code>setUpClass()</code>，<code>tearDownClass()</code>。我们在自己的测试用例中重写就可以了。</p>
-<p>setUp()与tearDown()会在每个测试之前执行。setUp()负责搭建测试环境，tearDown()负责清理环境。如果setUp()执行失败那么这次测试不会进行，如果setUp()成功执行那么不管测试是否成功tearDown()都会执行。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"><span class="keyword">from</span> manage <span class="keyword">import</span> create_app, db</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestBasic</span><span class="params">(unittest.TestCase)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setUp</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.app = create_app(<span class="string">'TESTING'</span>)</span><br><span class="line">        self.app_context = self.app.app_context()</span><br><span class="line">        self.app_context.push()</span><br><span class="line">        self.client = self.app.test_client(use_cookies=<span class="literal">True</span>)</span><br><span class="line">        db.create_all()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">tearDown</span><span class="params">(self)</span>:</span></span><br><span class="line">        db.session.remove()</span><br><span class="line">        db.drop_all()</span><br><span class="line">        self.app_context.pop()</span><br><span class="line">    </span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
-<p>如果想要在所以case之前执行一次环境准备，所有case之后清理环境，可用<code>setUpClass()</code>和<code>tearDownClass()</code>。不过要带上<code>@classmethod</code>装饰器。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"><span class="keyword">from</span> manage <span class="keyword">import</span> create_app, db</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestBasic</span><span class="params">(unittest.TestCase)</span>:</span></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setUp</span><span class="params">(cls)</span>:</span></span><br><span class="line">        cls.app = create_app(<span class="string">'TESTING'</span>)</span><br><span class="line">        cls.app_context = cls.app.app_context()</span><br><span class="line">        cls.app_context.push()</span><br><span class="line">        cls.client = cls.app.test_client(use_cookies=<span class="literal">True</span>)</span><br><span class="line">        db.create_all()</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">tearDown</span><span class="params">(cls)</span>:</span></span><br><span class="line">        db.session.remove()</span><br><span class="line">        db.drop_all()</span><br><span class="line">        cls.app_context.pop()</span><br><span class="line">    </span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
-<h1 id="执行测试及控制输出"><a href="#执行测试及控制输出" class="headerlink" title="执行测试及控制输出"></a>执行测试及控制输出</h1><p>通常我们使用<code>unittest.main()</code>就会调用Test Runner开始测试。当然也可以手动执行Runner。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    runner = unittest.TextTest.Runner(verbosity=<span class="number">2</span>)</span><br><span class="line">    runner.run(suite)</span><br></pre></td></tr></table></figure></p>
+<p>setUp()与tearDown()会在每个测试之前执行。setUp()负责搭建测试环境，tearDown()负责清理环境。如果setUp()执行失败那么这次测试不会进行，如果setUp()成功执行那么不管测试是否成功tearDown()都会执行。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"><span class="keyword">from</span> manage <span class="keyword">import</span> create_app, db</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestBasic</span>(<span class="params">unittest.TestCase</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setUp</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.app = create_app(<span class="string">&#x27;TESTING&#x27;</span>)</span><br><span class="line">        self.app_context = self.app.app_context()</span><br><span class="line">        self.app_context.push()</span><br><span class="line">        self.client = self.app.test_client(use_cookies=<span class="literal">True</span>)</span><br><span class="line">        db.create_all()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">tearDown</span>(<span class="params">self</span>):</span></span><br><span class="line">        db.session.remove()</span><br><span class="line">        db.drop_all()</span><br><span class="line">        self.app_context.pop()</span><br><span class="line">    </span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<p>如果想要在所以case之前执行一次环境准备，所有case之后清理环境，可用<code>setUpClass()</code>和<code>tearDownClass()</code>。不过要带上<code>@classmethod</code>装饰器。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"><span class="keyword">from</span> manage <span class="keyword">import</span> create_app, db</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestBasic</span>(<span class="params">unittest.TestCase</span>):</span></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setUp</span>(<span class="params">cls</span>):</span></span><br><span class="line">        cls.app = create_app(<span class="string">&#x27;TESTING&#x27;</span>)</span><br><span class="line">        cls.app_context = cls.app.app_context()</span><br><span class="line">        cls.app_context.push()</span><br><span class="line">        cls.client = cls.app.test_client(use_cookies=<span class="literal">True</span>)</span><br><span class="line">        db.create_all()</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">tearDown</span>(<span class="params">cls</span>):</span></span><br><span class="line">        db.session.remove()</span><br><span class="line">        db.drop_all()</span><br><span class="line">        cls.app_context.pop()</span><br><span class="line">    </span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<h1 id="执行测试及控制输出"><a href="#执行测试及控制输出" class="headerlink" title="执行测试及控制输出"></a>执行测试及控制输出</h1><p>通常我们使用<code>unittest.main()</code>就会调用Test Runner开始测试。当然也可以手动执行Runner。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    runner = unittest.TextTest.Runner(verbosity=<span class="number">2</span>)</span><br><span class="line">    runner.run(suite)</span><br></pre></td></tr></table></figure>
 <p>verbosity设定了测试报告的详细程度，有0，1，2三种。默认值是1，数字越大越详细。</p>
-<p>也可以把输出写到文件里,将文件指针传给Runner()里的<code>stream</code>参数就可以了：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'/usr/test/report'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    runner = unittest.TextTest.Runner(verbosity=<span class="number">2</span>, stream=f)</span><br><span class="line">    runner.run(suite)</span><br></pre></td></tr></table></figure></p>
-<h1 id="跳过测试"><a href="#跳过测试" class="headerlink" title="跳过测试"></a>跳过测试</h1><p>unittest提供3种跳过测试的装饰器：skip([reason])、skipIf(condtion[,reason])，skipUnless(conditon[,reason])。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> mathfunc <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestMath</span><span class="params">(unittest.TestCase)</span>:</span></span><br><span class="line"><span class="meta">    @unittest.skip('跳过add函数')</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_add</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.assertTrue(<span class="number">1</span>+<span class="number">2</span>, add(<span class="number">1</span>, <span class="number">2</span>))</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_minus</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.assertEqual(<span class="number">2</span><span class="number">-1</span>, minus(<span class="number">2</span>, <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_string</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.assertIn(<span class="string">'h'</span> <span class="keyword">in</span> string(<span class="string">'hello'</span>))</span><br></pre></td></tr></table></figure></p>
-
+<p>也可以把输出写到文件里,将文件指针传给Runner()里的<code>stream</code>参数就可以了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;/usr/test/report&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    runner = unittest.TextTest.Runner(verbosity=<span class="number">2</span>, stream=f)</span><br><span class="line">    runner.run(suite)</span><br></pre></td></tr></table></figure>
+<h1 id="跳过测试"><a href="#跳过测试" class="headerlink" title="跳过测试"></a>跳过测试</h1><p>unittest提供3种跳过测试的装饰器：skip([reason])、skipIf(condtion[,reason])，skipUnless(conditon[,reason])。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> mathfunc <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestMath</span>(<span class="params">unittest.TestCase</span>):</span></span><br><span class="line"><span class="meta">    @unittest.skip(<span class="params"><span class="string">&#x27;跳过add函数&#x27;</span></span>)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_add</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.assertTrue(<span class="number">1</span>+<span class="number">2</span>, add(<span class="number">1</span>, <span class="number">2</span>))</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_minus</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.assertEqual(<span class="number">2</span>-<span class="number">1</span>, minus(<span class="number">2</span>, <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_string</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.assertIn(<span class="string">&#x27;h&#x27;</span> <span class="keyword">in</span> string(<span class="string">&#x27;hello&#x27;</span>))</span><br></pre></td></tr></table></figure> 
+      <!-- reward -->
       
     </div>
+    
+
+    <!-- copyright -->
+    
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/23/unittest单元测试/" data-id="ckoqt9nsr000eb0upswuqqq9f" class="article-share-link">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
         分享
-      </a>
-      
-<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2018/05/23/unittest%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
 
     </footer>
-
   </div>
 
-  
-  
-<nav class="article-nav">
-  
-  <a href="/2018/05/23/字符串编码/" class="article-nav-link">
-    <strong class="article-nav-caption">前一篇</strong>
-    <div class="article-nav-title">
-      
-      也谈 Unicode
-      
-    </div>
-  </a>
-  
-  
-  <a href="/2018/05/23/git常见用法/" class="article-nav-link">
-    <strong class="article-nav-caption">后一篇</strong>
-    <div class="article-nav-title">git常见用法</div>
-  </a>
-  
-</nav>
+   
+  <nav class="article-nav">
+    
+      <a href="/2018/05/23/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BC%96%E7%A0%81/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            也谈 Unicode
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2018/05/23/git%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">git常见用法</div>
+      </a>
+    
+  </nav>
 
-  
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "dFVA5Fsm53B4vdyWtGFy0L7s-gzGzoHsz",
+    app_key: "xg2Ab6m7iBD4OGa79ueXjG9y",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "啥啥啥？",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
 
-  
-  
-  
-  
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
 
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
 </article>
+
 </section>
-    <footer class="footer">
+      <footer class="footer">
   <div class="outer">
-    <div class="float-right">
-      <ul class="list-inline">
-  
-  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
-  
-  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
-  
-</ul>
-    </div>
-    <ul class="list-inline">
-      <li>精神的壳 &copy; 2021</li>
+    <ul>
+      <li>
+        Copyrights &copy;
+        2017-2021
+        <i class="ri-heart-fill heart_icon"></i> 路边的土豆
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
       
-        <li>京ICP备17054916号-2</li>
+    </ul>
+    <ul>
       
-      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
-      <li>theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
     </ul>
   </div>
 </footer>
-  </main>
-  <aside class="sidebar">
-    <button class="navbar-toggle"></button>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
 <nav class="navbar">
   
   <div class="logo">
-    <a href="/"><img src="/images/hexo.svg" alt="精神的壳"></a>
+    <a href="/"><img src="/images/ayer-side.svg" alt="精神的壳"></a>
   </div>
   
   <ul class="nav nav-main">
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/">Home</a>
+      <a class="nav-item-link" href="/">主页</a>
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/archives">Archives</a>
+      <a class="nav-item-link" href="/archives">归档</a>
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/tags/">Tags</a>
+      <a class="nav-item-link" href="/categories">分类</a>
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/categories/">categories</a>
+      <a class="nav-item-link" href="/tags">标签</a>
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link nav-item-search" title="搜索">
-        <i class="fe fe-search"></i>
-        搜索
-      </a>
+      <a class="nav-item-link" href="/friends">友链</a>
     </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
   </ul>
 </nav>
 <nav class="navbar navbar-bottom">
   <ul class="nav">
     <li class="nav-item">
-      <div class="totop" id="totop">
-  <i class="fe fe-rocket"></i>
-</div>
-    </li>
-    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
       
       <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-        <i class="fe fe-feed"></i>
+        <i class="ri-rss-line"></i>
       </a>
       
     </li>
@@ -217,36 +397,273 @@
   <div id="local-search-result" class="local-search-result"></div>
 </div>
 </div>
-  </aside>
-  <script src="/js/jquery-2.0.3.min.js"></script>
-<script src="/js/jquery.justifiedGallery.min.js"></script>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+ 
 <script src="/js/lazyload.min.js"></script>
-<script src="/js/busuanzi-2.3.pure.min.js"></script>
 
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-<script src="/js/copybtn.js"></script>
-
-
-
+<!-- Tocbot -->
+ 
 <script src="/js/tocbot.min.js"></script>
+
 <script>
-  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
   tocbot.init({
-    tocSelector: '.tocbot',
-    contentSelector: '.article-entry',
-    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
     hasInnerContainers: true,
     scrollSmooth: true,
-    positionFixedSelector: '.tocbot',
-    positionFixedClass: 'is-position-fixed',
-    fixedSidebarOffset: 'auto',
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
   });
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
 
-<script src="/js/ocean.js"></script>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+  </div>
+</body>
 
 </html>

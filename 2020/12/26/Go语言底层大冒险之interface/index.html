@@ -1,237 +1,422 @@
 <!DOCTYPE html>
-<html lang="en">
 
-<head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="utf-8">
+
+<html lang="zh-CN">
   
-  
-  
-  <meta name="description" content="高山仰止，景行行止。虽不能至，心向往之。">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>
-    Go语言底层大冒险之interface |
-    
-    精神的壳</title>
-  
-  <link rel="shortcut icon" href="/favicon.ico">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-  
-  <script src="/js/pace.min.js"></script>
-<link rel="alternate" href="/atom.xml" title="精神的壳" type="application/atom+xml">
-</head></html>
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="“生活，代码，思考”" />
+       
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>Go语言底层大冒险之interface |  精神的壳</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+<script>
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?847f7a1169508eb118c64f7719e8a4cf";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+      <!-- mermaid -->
+      
+    <link rel="alternate" href="/atom.xml" title="精神的壳" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
 
 <body>
-  <main class="content">
-    <section class="outer">
-  <article id="post-Go语言底层大冒险之interface" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-Go语言底层大冒险之interface"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
   <div class="article-inner">
     
     <header class="article-header">
-      
-
-<h1 class="article-title" itemprop="name">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
   Go语言底层大冒险之interface
 </h1>
+ 
 
-
-
+      
     </header>
-    
-
-    
+     
     <div class="article-meta">
-      <a href="/2020/12/26/Go语言底层大冒险之interface/" class="article-date">
+      <a href="/2020/12/26/Go%E8%AF%AD%E8%A8%80%E5%BA%95%E5%B1%82%E5%A4%A7%E5%86%92%E9%99%A9%E4%B9%8Binterface/" class="article-date">
   <time datetime="2020-12-26T02:52:00.000Z" itemprop="datePublished">2020-12-26</time>
-</a>
-      
-<div class="article-category">
-  <a class="article-category-link" href="/categories/语言/">语言</a>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%AD%E8%A8%80/">语言</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">8 分钟</span>
+        </span>
+    </span>
 </div>
-
+ 
     </div>
-    
+      
+    <div class="tocbot"></div>
 
-    
-    
-<div class="tocbot"></div>
 
-    
 
+
+  
     <div class="article-entry" itemprop="articleBody">
-      
-      
-      
-      <p>很多现代语言都有“接口”这个概念。接口是为了解耦，即通过引入一个约定的中间层解除上下层之间的高度依赖关系。这东西听着玄乎，用饭馆来举个例子，我们作为顾客通常并不关心菜是怎么做的，只是和厨师有诸如“麻婆豆腐必须是辣的”，“冰淇淋必须是冷的”这样的约定，厨师用自己的方法把这个约定实现就行了。程序设计也是如此。函数 A 可能需要回调形参的某个方法，这个方法是如何实现的并不重要，关键是它实现了 A 的约定，这个约定就是所谓的“接口”。</p>
+       
+  <p>很多现代语言都有“接口”这个概念。接口是为了解耦，即通过引入一个约定的中间层解除上下层之间的高度依赖关系。这东西听着玄乎，用饭馆来举个例子，我们作为顾客通常并不关心菜是怎么做的，只是和厨师有诸如“麻婆豆腐必须是辣的”，“冰淇淋必须是冷的”这样的约定，厨师用自己的方法把这个约定实现就行了。程序设计也是如此。函数 A 可能需要回调形参的某个方法，这个方法是如何实现的并不重要，关键是它实现了 A 的约定，这个约定就是所谓的“接口”。</p>
 <p>在 java 中，类需要在定义的时候显示声明实现了某接口。而 Go 不一样，只要结构体实现了某个接口的全部方法，编译器就认为结构体实现了这个接口。这样的设计可能会让人因为害怕在不知不觉中实现了某个接口感到不安，而且也不便于程序员阅读，但是 Go 语言的设计者认为这种情况几乎不会出现，而且从编译器的角度来看显示声明完全是多余的：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Tester <span class="keyword">interface</span> &#123;</span><br><span class="line">    test() <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> I <span class="keyword">int</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// I 实现了 Tester 接口的全部方法</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(i I)</span> <span class="title">test</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"testing"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> t Tester = I(<span class="number">2</span>)</span><br><span class="line">    fmt.Println(t.test()) <span class="comment">// I 实现了 Tester 接口的 test() 方法，main 作为调用方不关心 I 是如何实现 test() 的</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Tester <span class="keyword">interface</span> &#123;</span><br><span class="line">    test() <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> I <span class="keyword">int</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// I 实现了 Tester 接口的全部方法</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(i I)</span> <span class="title">test</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;testing&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> t Tester = I(<span class="number">2</span>)</span><br><span class="line">    fmt.Println(t.test()) <span class="comment">// I 实现了 Tester 接口的 test() 方法，main 作为调用方不关心 I 是如何实现 test() 的</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>Go 只在编译期对结构体是否符合某个接口进行检查。具体而言，就在以下三个时刻：</p>
 <ol>
 <li>变量赋值</li>
 <li>传递参数</li>
 <li>传递返回值</li>
 </ol>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Tester <span class="keyword">interface</span>&#123;</span><br><span class="line">    test() <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> I <span class="keyword">int</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(i I)</span> <span class="title">test</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"testing"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> t Tester = I(<span class="number">1</span>) <span class="comment">// 变量赋值，编译器进行类型检查</span></span><br><span class="line">    echo(t) <span class="comment">// 传递参数，编译器进行类型检查</span></span><br><span class="line">    t = NewI(<span class="number">2</span>) <span class="comment">// 传递返回值，编译器进行类型检查</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewI</span><span class="params">(i <span class="keyword">int</span>)</span> <span class="title">I</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> I(i)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">echo</span><span class="params">(t Tester)</span></span> &#123;</span><br><span class="line">    fmt.Println(t.test() + <span class="string">", pass"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在 Go 语言中，任意类型的对象都可以转换为 <code>interface{}</code> 类型，一个误区是因此把 <code>interface{}</code> 当作 C 语言的空指针 <code>void*</code>。但事实上 <code>interface{}</code> 是一个独立的类型，与指针是完全不同的两个概念：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> p *<span class="keyword">int</span></span><br><span class="line">    fmt.Println(p == <span class="literal">nil</span>)   <span class="comment">// true，指针的零值为 nil</span></span><br><span class="line">    fmt.Println(testNil(p)) <span class="comment">// false</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">testNil</span><span class="params">(v <span class="keyword">interface</span>&#123;&#125;)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> v == <span class="literal">nil</span> <span class="comment">// 总是 false，因为 interface&#123;&#125; 永远不为 nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>Go 编译器将接口按照有无方法分为两种结构体来表示：有方法的接口表示为 <a href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L203" target="_blank" rel="noopener">runtime.iface</a>，无方法的空接口表示为 <a href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L208" target="_blank" rel="noopener">runtime.eface</a>。这些结构由编译器在编译期生成</p>
-<h3 id="无方法接口及-eface"><a href="#无方法接口及-eface" class="headerlink" title="无方法接口及 eface"></a>无方法接口及 eface</h3><p>因为空接口比较简单，所以 <a href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L208" target="_blank" rel="noopener">runtime.eface</a> 的成员也少：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Tester <span class="keyword">interface</span>&#123;</span><br><span class="line">    test() <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> I <span class="keyword">int</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(i I)</span> <span class="title">test</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;testing&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> t Tester = I(<span class="number">1</span>) <span class="comment">// 变量赋值，编译器进行类型检查</span></span><br><span class="line">    echo(t) <span class="comment">// 传递参数，编译器进行类型检查</span></span><br><span class="line">    t = NewI(<span class="number">2</span>) <span class="comment">// 传递返回值，编译器进行类型检查</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewI</span><span class="params">(i <span class="keyword">int</span>)</span> <span class="title">I</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> I(i)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">echo</span><span class="params">(t Tester)</span></span> &#123;</span><br><span class="line">    fmt.Println(t.test() + <span class="string">&quot;, pass&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 Go 语言中，任意类型的对象都可以转换为 <code>interface&#123;&#125;</code> 类型，一个误区是因此把 <code>interface&#123;&#125;</code> 当作 C 语言的空指针 <code>void*</code>。但事实上 <code>interface&#123;&#125;</code> 是一个独立的类型，与指针是完全不同的两个概念：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> p *<span class="keyword">int</span></span><br><span class="line">    fmt.Println(p == <span class="literal">nil</span>)   <span class="comment">// true，指针的零值为 nil</span></span><br><span class="line">    fmt.Println(testNil(p)) <span class="comment">// false</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">testNil</span><span class="params">(v <span class="keyword">interface</span>&#123;&#125;)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> v == <span class="literal">nil</span> <span class="comment">// 总是 false，因为 interface&#123;&#125; 永远不为 nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>Go 编译器将接口按照有无方法分为两种结构体来表示：有方法的接口表示为 <a target="_blank" rel="noopener" href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L203">runtime.iface</a>，无方法的空接口表示为 <a target="_blank" rel="noopener" href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L208">runtime.eface</a>。这些结构由编译器在编译期生成</p>
+<h3 id="无方法接口及-eface"><a href="#无方法接口及-eface" class="headerlink" title="无方法接口及 eface"></a>无方法接口及 eface</h3><p>因为空接口比较简单，所以 <a target="_blank" rel="noopener" href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L208">runtime.eface</a> 的成员也少：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> eface <span class="keyword">struct</span> &#123; <span class="comment">// 16 字节</span></span><br><span class="line">    _type *_type</span><br><span class="line">    data  unsafe.Pointer</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><code>_type</code> 表示原对象的类型元信息</li>
 <li><code>data</code> 是一个指向原对象的指针</li>
 </ul>
-<p><a href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L208" target="_blank" rel="noopener">runtime.eface</a> 是对原对象进行一层简单的封装，通过 <a href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/type.go#L31" target="_blank" rel="noopener">runtime._type</a> 保留了原对象类型的运行时元信息：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L208">runtime.eface</a> 是对原对象进行一层简单的封装，通过 <a target="_blank" rel="noopener" href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/type.go#L31">runtime._type</a> 保留了原对象类型的运行时元信息：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> _type <span class="keyword">struct</span> &#123;</span><br><span class="line">    size       <span class="keyword">uintptr</span></span><br><span class="line">    ptrdata    <span class="keyword">uintptr</span></span><br><span class="line">    hash       <span class="keyword">uint32</span></span><br><span class="line">    tflag      tflag</span><br><span class="line">    align      <span class="keyword">uint8</span></span><br><span class="line">    fieldAlign <span class="keyword">uint8</span></span><br><span class="line">    kind       <span class="keyword">uint8</span></span><br><span class="line">    equal      <span class="function"><span class="keyword">func</span><span class="params">(unsafe.Pointer, unsafe.Pointer)</span> <span class="title">bool</span></span></span><br><span class="line">    gcdata     *<span class="keyword">byte</span></span><br><span class="line">    str        nameOff</span><br><span class="line">    ptrToThis  typeOff</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><code>size</code> 表示类型大小，分配内存的时候要用到</li>
 <li><code>hash</code> 是类型的哈希值，通常用于快速确定两个类型是否相同</li>
 <li><code>equal</code> 用来判断一个类型的两个对象是否相等</li>
 <li><code>align</code> 用来确定这个类型的字节对齐边界</li>
 </ul>
-<p>总而言之，<a href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/type.go#L31" target="_blank" rel="noopener">runtime._type</a> 包含了与“如何描述一个类型”有关的信息。</p>
+<p>总而言之，<a target="_blank" rel="noopener" href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/type.go#L31">runtime._type</a> 包含了与“如何描述一个类型”有关的信息。</p>
 <p>对空接口赋值后的数据结构表示如下：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Binary <span class="keyword">uint64</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    b := Binary(<span class="number">200</span>)</span><br><span class="line">    any := (<span class="keyword">interface</span>&#123;&#125;)(b)</span><br><span class="line">    fmt.Println(any)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Binary <span class="keyword">uint64</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    b := Binary(<span class="number">200</span>)</span><br><span class="line">    any := (<span class="keyword">interface</span>&#123;&#125;)(b)</span><br><span class="line">    fmt.Println(any)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://i.loli.net/2020/12/26/WajYNX2scv8O4i6.png" alt="空接口"></p>
-<h3 id="有方法接口及-iface"><a href="#有方法接口及-iface" class="headerlink" title="有方法接口及 iface"></a>有方法接口及 iface</h3><p><a href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L203" target="_blank" rel="noopener">runtime.iface</a> 不仅有指向原数据的 <code>data</code> 字段，还有 <a href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L857" target="_blank" rel="noopener">runtime.itab</a> 类型的 <code>tab</code> 字段：</p>
+<h3 id="有方法接口及-iface"><a href="#有方法接口及-iface" class="headerlink" title="有方法接口及 iface"></a>有方法接口及 iface</h3><p><a target="_blank" rel="noopener" href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L203">runtime.iface</a> 不仅有指向原数据的 <code>data</code> 字段，还有 <a target="_blank" rel="noopener" href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L857">runtime.itab</a> 类型的 <code>tab</code> 字段：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> iface <span class="keyword">struct</span> &#123; <span class="comment">// 16 字节</span></span><br><span class="line">    tab  *itab</span><br><span class="line">    data unsafe.Pointer</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><a href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L857" target="_blank" rel="noopener">runtime.itab</a> 是 <a href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L203" target="_blank" rel="noopener">runtime.iface</a> 的核心字段，是具体类型和接口类型的结合，可以看作结构体把某种接口类型和某种具体类型联系在一起:</p>
+
+<p><a target="_blank" rel="noopener" href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L857">runtime.itab</a> 是 <a target="_blank" rel="noopener" href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L203">runtime.iface</a> 的核心字段，是具体类型和接口类型的结合，可以看作结构体把某种接口类型和某种具体类型联系在一起:</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> itab <span class="keyword">struct</span> &#123; <span class="comment">// 32 字节</span></span><br><span class="line">    inter *interfacetype <span class="comment">// 接口类型信息</span></span><br><span class="line">    _type *_type         <span class="comment">// 具体类型信息 </span></span><br><span class="line">    hash  <span class="keyword">uint32</span>         <span class="comment">// _type.hash 的副本，用于快速判断接口的具体类型</span></span><br><span class="line">    _     [<span class="number">4</span>]<span class="keyword">byte</span></span><br><span class="line">    fun   [<span class="number">1</span>]<span class="keyword">uintptr</span>    <span class="comment">// 底层数组，存储接口的方法集的具体实现的地址，其包含一组函数指针，实现了接口方法的动态分派，且每次在接口发生变更时都会更新</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><a href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/type.go#L366" target="_blank" rel="noopener">runtime.interface</a> 类似于 <a href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/type.go#L31" target="_blank" rel="noopener">runtime._type</a>，是对某种接口的描述：</p>
+
+<p><a target="_blank" rel="noopener" href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/type.go#L366">runtime.interface</a> 类似于 <a target="_blank" rel="noopener" href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/type.go#L31">runtime._type</a>，是对某种接口的描述：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> nameOff <span class="keyword">int32</span></span><br><span class="line"><span class="keyword">type</span> typeOff <span class="keyword">int32</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> imethod <span class="keyword">struct</span> &#123;</span><br><span class="line"> name nameOff</span><br><span class="line"> ityp typeOff</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> interfacetype <span class="keyword">struct</span> &#123;</span><br><span class="line"> typ     _type      <span class="comment">// 接口的具体类型信息</span></span><br><span class="line"> pkgpath name       <span class="comment">// 接口的包（package）名信息</span></span><br><span class="line"> mhdr    []imethod  <span class="comment">// 接口所定义的函数列表</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>对有方法接口赋值后的数据结构表示如下：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"strconv"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Binary <span class="keyword">uint64</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(i Binary)</span> <span class="title">String</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> strconv.FormatUint(i.Get(), <span class="number">10</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(i Binary)</span> <span class="title">Get</span><span class="params">()</span> <span class="title">uint64</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">uint64</span>(i)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    b := Binary(<span class="number">200</span>)</span><br><span class="line">    s := fmt.Stringer(b) <span class="comment">// fmt.Stringer 是一个仅包含 String() string 的接口</span></span><br><span class="line">    fmt.Println(s)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;strconv&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Binary <span class="keyword">uint64</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(i Binary)</span> <span class="title">String</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> strconv.FormatUint(i.Get(), <span class="number">10</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(i Binary)</span> <span class="title">Get</span><span class="params">()</span> <span class="title">uint64</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">uint64</span>(i)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    b := Binary(<span class="number">200</span>)</span><br><span class="line">    s := fmt.Stringer(b) <span class="comment">// fmt.Stringer 是一个仅包含 String() string 的接口</span></span><br><span class="line">    fmt.Println(s)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://i.loli.net/2020/12/26/dwSRrUA2VOBu8XW.png" alt="有方法接口"></p>
 <h2 id="eface-和-iface-的区别"><a href="#eface-和-iface-的区别" class="headerlink" title="eface 和 iface 的区别"></a>eface 和 iface 的区别</h2><p><img src="https://i.loli.net/2021/01/21/6EYlosW1LPg7IXu.png" alt="eface和iface"></p>
 <p>所有接口的数据结构都有一个指向具体数据的的指针，这也就是为什么接口变量必须初始化。然后根据这个接口有没有方法决定是否产生把具体类型和接口类型组合成一个 itab</p>
 <h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><p>Go 方法的接收者可以是指针也可以是结构体，所以既可以是指针实现了某接口，也可以是结构体实现了某接口，但是只能二选一，如果结构体和其指针实现了同一接口，编译器会报错“method redeclared”：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Tester <span class="keyword">interface</span>&#123;</span><br><span class="line">    test()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">结构体做接收者的接口，用结构体或指针初始化都是可以的</span></span><br><span class="line"><span class="comment">func (p Person) test() &#123;&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">func main() &#123;</span></span><br><span class="line"><span class="comment">    var t1 Tester = P&#123;&#125;</span></span><br><span class="line"><span class="comment">    var t2 Tester = &amp;P&#123;&#125;</span></span><br><span class="line"><span class="comment">    t1.test()</span></span><br><span class="line"><span class="comment">    t2.test()</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">指针做接收者的接口，只能用指针初始化</span></span><br><span class="line"><span class="comment">func (p *Person) test() &#123;&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">func main() &#123;</span></span><br><span class="line"><span class="comment">    var t1 Tester = &amp;P&#123;&#125;</span></span><br><span class="line"><span class="comment">    t1.test()</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
 <p>结构体实现接口，使用结构体对象进行接口变量初始化；指针实现接口，使用指针对象进行接口变量初始化，这都是顺其自然的。反常的是用结构体实现接口可以用指针对象初始化接口变量和用指针实现接口不能用结构体对象初始化接口变量。</p>
 <p>这是因为 Go 传参时统一使用“值传递”。所谓“接收者”本质上也是一个参数，编译器翻译时会复制参数到帧顶。无论上述代码中初始化变量 t1 的是 P{} 还是 &amp;P{}，使用 t1.test() 时都会发生值拷贝</p>
 <p>如果是结构体实现接口而用指针初始化，调用时编译器拷贝指针，方法栈帧中通过 <code>*</code> 操作就可以得到原结构体并执行其方法；而如果是指针实现接口而用结构体初始化，调用时编译器只能拷贝结构体，即使在背后使用 <code>&amp;</code> 也无法得到指向原结构体的指针。</p>
 <h2 id="类型断言"><a href="#类型断言" class="headerlink" title="类型断言"></a>类型断言</h2><p>有时候我们需要确定某个接口变量的具体类型，就需要用到类型断言。类型断言可以把接口类型转为具体类型：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Tester <span class="keyword">interface</span>&#123;</span><br><span class="line">    test()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span> &#123;&#125;</span><br><span class="line"><span class="keyword">type</span> Cat <span class="keyword">struct</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p Person)</span> <span class="title">test</span><span class="params">()</span></span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> t Tester = P&#123;&#125;</span><br><span class="line">    <span class="keyword">switch</span> x := t.(<span class="keyword">type</span>) &#123;</span><br><span class="line">        <span class="keyword">case</span> Person:     <span class="comment">// 这里 x 是 Person 类型</span></span><br><span class="line">        <span class="keyword">case</span> Cat, <span class="keyword">int</span>:  <span class="comment">// 这里 x 是 interface&#123;&#125; 类型</span></span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>前面说过无论是 <a href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L203" target="_blank" rel="noopener">runtime.iface</a> 还是 <a href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L208" target="_blank" rel="noopener">runtime.eface</a> 都有个 <code>hash</code> 字段标识接口的具体类型，类型断言时编译器把这个字段和目标类型的哈希值进行比较就知道两个类型是否相同了。</p>
-<p>参考：</p>
-<p><a href="https://draveness.me/golang/" target="_blank" rel="noopener">Go语言设计与实现</a></p>
-<p><a href="https://i6448038.github.io/2018/10/01/Golang-interface/" target="_blank" rel="noopener">Go语言interface底层实现</a></p>
-<p>《Go程序设计语言》第七章</p>
 
+<p>前面说过无论是 <a target="_blank" rel="noopener" href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L203">runtime.iface</a> 还是 <a target="_blank" rel="noopener" href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L208">runtime.eface</a> 都有个 <code>hash</code> 字段标识接口的具体类型，类型断言时编译器把这个字段和目标类型的哈希值进行比较就知道两个类型是否相同了。</p>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://draveness.me/golang/">Go语言设计与实现</a></p>
+<p><a target="_blank" rel="noopener" href="https://i6448038.github.io/2018/10/01/Golang-interface/">Go语言interface底层实现</a></p>
+<p>《Go程序设计语言》第七章</p>
+ 
+      <!-- reward -->
       
     </div>
+    
+
+    <!-- copyright -->
+    
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/12/26/Go语言底层大冒险之interface/" data-id="ckoqt9nuh000xb0upoxfpfdbi" class="article-share-link">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
         分享
-      </a>
-      
-<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li></ul>
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/12/26/Go%E8%AF%AD%E8%A8%80%E5%BA%95%E5%B1%82%E5%A4%A7%E5%86%92%E9%99%A9%E4%B9%8Binterface/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/" rel="tag">Go</a></li></ul>
 
     </footer>
-
   </div>
 
-  
-  
-<nav class="article-nav">
-  
-  <a href="/2021/01/13/常用的gcc编译选项/" class="article-nav-link">
-    <strong class="article-nav-caption">前一篇</strong>
-    <div class="article-nav-title">
-      
-      常用的gcc编译选项
-      
-    </div>
-  </a>
-  
-  
-  <a href="/2020/12/21/光猫，路由与交换机/" class="article-nav-link">
-    <strong class="article-nav-caption">后一篇</strong>
-    <div class="article-nav-title">大话光猫，路由器与交换机</div>
-  </a>
-  
-</nav>
+   
+  <nav class="article-nav">
+    
+      <a href="/2021/01/13/%E5%B8%B8%E7%94%A8%E7%9A%84gcc%E7%BC%96%E8%AF%91%E9%80%89%E9%A1%B9/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            常用的gcc编译选项
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/12/21/%E5%85%89%E7%8C%AB%EF%BC%8C%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2%E6%9C%BA/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">大话光猫，路由器与交换机</div>
+      </a>
+    
+  </nav>
 
-  
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "dFVA5Fsm53B4vdyWtGFy0L7s-gzGzoHsz",
+    app_key: "xg2Ab6m7iBD4OGa79ueXjG9y",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "啥啥啥？",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
 
-  
-  
-  
-  
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
 
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
 </article>
+
 </section>
-    <footer class="footer">
+      <footer class="footer">
   <div class="outer">
-    <div class="float-right">
-      <ul class="list-inline">
-  
-  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
-  
-  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
-  
-</ul>
-    </div>
-    <ul class="list-inline">
-      <li>精神的壳 &copy; 2021</li>
+    <ul>
+      <li>
+        Copyrights &copy;
+        2017-2021
+        <i class="ri-heart-fill heart_icon"></i> 路边的土豆
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
       
-        <li>京ICP备17054916号-2</li>
+    </ul>
+    <ul>
       
-      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
-      <li>theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
     </ul>
   </div>
 </footer>
-  </main>
-  <aside class="sidebar">
-    <button class="navbar-toggle"></button>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
 <nav class="navbar">
   
   <div class="logo">
-    <a href="/"><img src="/images/hexo.svg" alt="精神的壳"></a>
+    <a href="/"><img src="/images/ayer-side.svg" alt="精神的壳"></a>
   </div>
   
   <ul class="nav nav-main">
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/">Home</a>
+      <a class="nav-item-link" href="/">主页</a>
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/archives">Archives</a>
+      <a class="nav-item-link" href="/archives">归档</a>
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/tags/">Tags</a>
+      <a class="nav-item-link" href="/categories">分类</a>
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/categories/">categories</a>
+      <a class="nav-item-link" href="/tags">标签</a>
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link nav-item-search" title="搜索">
-        <i class="fe fe-search"></i>
-        搜索
-      </a>
+      <a class="nav-item-link" href="/friends">友链</a>
     </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
   </ul>
 </nav>
 <nav class="navbar navbar-bottom">
   <ul class="nav">
     <li class="nav-item">
-      <div class="totop" id="totop">
-  <i class="fe fe-rocket"></i>
-</div>
-    </li>
-    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
       
       <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-        <i class="fe fe-feed"></i>
+        <i class="ri-rss-line"></i>
       </a>
       
     </li>
@@ -243,36 +428,273 @@
   <div id="local-search-result" class="local-search-result"></div>
 </div>
 </div>
-  </aside>
-  <script src="/js/jquery-2.0.3.min.js"></script>
-<script src="/js/jquery.justifiedGallery.min.js"></script>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+ 
 <script src="/js/lazyload.min.js"></script>
-<script src="/js/busuanzi-2.3.pure.min.js"></script>
 
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-<script src="/js/copybtn.js"></script>
-
-
-
+<!-- Tocbot -->
+ 
 <script src="/js/tocbot.min.js"></script>
+
 <script>
-  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
   tocbot.init({
-    tocSelector: '.tocbot',
-    contentSelector: '.article-entry',
-    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
     hasInnerContainers: true,
     scrollSmooth: true,
-    positionFixedSelector: '.tocbot',
-    positionFixedClass: 'is-position-fixed',
-    fixedSidebarOffset: 'auto',
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
   });
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
 
-<script src="/js/ocean.js"></script>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+  </div>
+</body>
 
 </html>

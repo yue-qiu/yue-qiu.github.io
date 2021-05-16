@@ -1,1175 +1,732 @@
 <!DOCTYPE html>
-<html lang="en">
 
-<head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="utf-8">
+
+<html lang="zh-CN">
   
-  
-  
-  <meta name="description" content="高山仰止，景行行止。虽不能至，心向往之。">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>
-    
-    精神的壳</title>
-  
-  <link rel="shortcut icon" href="/favicon.ico">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-  
-  <script src="/js/pace.min.js"></script>
-<link rel="alternate" href="/atom.xml" title="精神的壳" type="application/atom+xml">
-</head></html>
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="“生活，代码，思考”" />
+       
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title> 精神的壳</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+<script>
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?847f7a1169508eb118c64f7719e8a4cf";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+      <!-- mermaid -->
+      
+    <link rel="alternate" href="/atom.xml" title="精神的壳" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
 
 <body>
-  <main class="content">
-    <section class="jumbotron">
-  <div class="video">
+  <div id="app">
     
-    <div class="video-frame">
-      <img src="/images/ocean/overlay-hero.png" alt="Decorative image frame">
-    </div>
+      
+    <main class="content on">
+      
+<section class="cover">
     
-    <div class="video-media">
-      <video playsinline="" autoplay="" loop="" muted="" data-autoplay="" poster="/images/ocean/ocean.png"
-        x5-video-player-type="h5">
-        <source src="/images/ocean/ocean.mp4" type="video/mp4">
-        <source src="/images/ocean/ocean.ogv" type="video/ogg">
-        <source src="/images/ocean/ocean.webm" type="video/webm">
-        <p>Your user agent does not support the HTML5 Video element.</p>
-      </video>
-      <div class="video-overlay"></div>
+  <div class="cover-frame">
+    <div class="bg-box">
+      <img src="/images/cover1.jpg" alt="image frame" />
     </div>
-    <div class="video-inner text-center text-white">
+    <div class="cover-inner text-center text-white">
       <h1><a href="/">精神的壳</a></h1>
-      <p></p>
-      <div><img src="/images/hexo-inverted.svg" class="brand" alt="精神的壳"></div>
+      <div id="subtitle-box">
+        
+        <span id="subtitle"></span>
+        
+      </div>
+      <div>
+        
+      </div>
     </div>
-    <div class="video-learn-more">
-      <a class="anchor" href="#landingpage"><i class="fe fe-mouse"></i></a>
-    </div>
+  </div>
+  <div class="cover-learn-more">
+    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
   </div>
 </section>
-<div id="landingpage">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js"></script>
+
+
+<!-- Subtitle -->
+
+  <script>
+    try {
+      var typed = new Typed("#subtitle", {
+        strings: ['高山仰止，景行行止', '虽不能至，心向往之', ''],
+        startDelay: 0,
+        typeSpeed: 200,
+        loop: false,
+        backSpeed: 100,
+        showCursor: true
+      });
+    } catch (err) {
+      console.log(err)
+    }
+  </script>
+  
+<div id="main">
   <section class="outer">
+  
+  
+  
+
+<div class="notice" style="margin-top:50px">
+    <i class="ri-heart-fill"></i>
+    <div class="notice-content" id="broad"></div>
+</div>
+<script type="text/javascript">
+    fetch('https://v1.hitokoto.cn')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("broad").innerHTML = data.hitokoto;
+        })
+        .catch(console.error)
+</script>
+
+<style>
+    .notice {
+        padding: 20px;
+        border: 1px dashed #e6e6e6;
+        color: #969696;
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        background: #fbfbfb50;
+        border-radius: 10px;
+    }
+
+    .notice i {
+        float: left;
+        color: #999;
+        font-size: 16px;
+        padding-right: 10px;
+        vertical-align: middle;
+        margin-top: -2px;
+    }
+
+    .notice-content {
+        display: initial;
+        vertical-align: middle;
+    }
+</style>
+  
   <article class="articles">
     
-    <h1 class="page-type-title"></h1>
     
     
-    <article id="post-Cache-Coherency-与-Memory-Consistency" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
+    
+    <article
+  id="post-Cache-Coherency-与-Memory-Consistency"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
   <div class="article-inner">
     
     <header class="article-header">
-      
-
+       
 <h2 itemprop="name">
-  <a class="article-title" href="/2021/01/20/Cache-Coherency-与-Memory-Consistency/">Cache Coherency and Memory Consistency</a>
+  <a class="article-title" href="/2021/01/20/Cache-Coherency-%E4%B8%8E-Memory-Consistency/"
+    >Cache Coherency and Memory Consistency</a> 
 </h2>
+ 
 
-
-
+      
     </header>
-    
-
-    
+     
     <div class="article-meta">
-      <a href="/2021/01/20/Cache-Coherency-与-Memory-Consistency/" class="article-date">
+      <a href="/2021/01/20/Cache-Coherency-%E4%B8%8E-Memory-Consistency/" class="article-date">
   <time datetime="2021-01-20T03:26:46.000Z" itemprop="datePublished">2021-01-20</time>
-</a>
-      
-<div class="article-category">
-  <a class="article-category-link" href="/categories/计算机系统/">计算机系统</a>
-</div>
-
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a>
+  </div>
+   
     </div>
+       
+
+    <!-- copyright -->
     
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-      
-      <p><a href="http://qiuyueqy.com/2020/03/24/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E4%BB%A5Go%E4%B8%BA%E4%BE%8B/" target="_blank" rel="noopener">并发编程-以Go为例</a>一文总结了并发编程中常见的两种错误并给出了解决策略。本文旨在从计算机体系的角度分析这两种错误出现的原因。</p>
-<h2 id="缓存一致性-Cache-Coherency"><a href="#缓存一致性-Cache-Coherency" class="headerlink" title="缓存一致性(Cache Coherency)"></a>缓存一致性(Cache Coherency)</h2><p>又称<strong>缓存可见性</strong>，现代计算机存储系统采用了分级架构，每个 CPU 内核有自己的 L1、L2 Cache，相互之间还有一个共享的 L3 Cache，其中 L1 还分为缓存指令的 i-cache(只读)和缓存程序数据的 d-cache，L2、L3 Cache 则不区分指令和程序数据，称为统一缓存(unified cache)。而字节从 Memory 缓存到 Cache 的策略又分为<strong>直接映射</strong>、<strong>全相联</strong>和<strong>组相联</strong>三种，此处不做展开：</p>
-<p><img src="https://i.loli.net/2021/01/20/cAnCZgduros1mTY.png" alt="分级架构"></p>
-<p>在多核时代，假设有下面这一个场景：</p>
-<ol>
-<li>CPU0 和 CPU1 在各自的 Cache 有一份内存地址为 0x6324 的值的副本，比如这个位置存放了全局变量 a 的值为 0，CPU0 和 CPU1 各自缓存了一个 0</li>
-<li>CPU0 要把 a 的值修改为 1，于是直接在自己的 Cache 里对 a 进行写操作（store）</li>
-<li>CPU1 执行读操作（load）读取 a 的值，这时候它读从自家 Cache 里读到的实际上是 a 的过期值（仍为 0）</li>
-</ol>
-<p>这就是一个由于缓存不一致引发的错误。Cache 设计的最大难点其实在于 Cache 一致性: 即所有 CPU 看到的指定地址的值是一致的。CPU 尝试修改某个地址值时，其它 CPU 可能已有该地址的缓存，甚至可能也在执行修改操作。因此该 CPU 需要先征求其它 CPU 的”同意”，才能执行操作。这需要给各个 CPU 的 Cache Line 加一些标记(状态)，辅以 CPU 之间的通信机制(事件)来完成。这可以通过 MESI 协议来完成。MESI 是以下四个状态的简称：</p>
-<ul>
-<li>M(modified): 该行刚被 CPU 改过，并且保证不会出现在其它 CPU 的 Cache Line 中。即 CPU 是该行唯一所有者</li>
-<li>E(exclusive): 和 M 类似，但是未被修改，即和内存是一致的，CPU 可直接对该行执行修改(修改之后为 modified 状态)。</li>
-<li>S(shared): 该行内容至少被一个其它 CPU 共享，因此该 CPU 不能直接修改该行而需要先与其它 CPU 协商，但可以直接读</li>
-<li>I(invalidated): 该行为无效行，即为可以被填充的行，前面提到 Cache 策略会优先填充 Invalid 行。</li>
-</ul>
-<p><img src="https://i.loli.net/2021/01/20/ZKIjdyxQvRimwnC.png" alt="MESI状态机"></p>
-<p>MESI 协议足够简单，并且能够满足我们对缓存一致性的需求，它在单个 CPU 对指定地址的反复读写方面有很好的性能表现，但在某个 CPU 尝试修改在其它 CPU Cache Line 中存在的数据时，性能表现非常糟糕。硬件工程师为了追求极致的性能，在 CPU 和L1 Cache 之间又加入一级缓存，我们称之为 store buffer。store buffer 和 L1 Cache 还有点区别，<strong>store buffer只缓存 CPU 的写操作</strong>。store buffer 访问一般只需要 1 个指令周期，这在一定程度上降低了内存写延迟。不管 Cache 是否命中，CPU 都将数据写入 store buffer。store buffer 负责后续以 FIFO 次序写入 L1 Cache。store buffer 一般只有几十个字节，和 L1 Cache相比是小巫见大巫了。</p>
-<p><img src="https://i.loli.net/2021/01/20/EUBrteHac7OJhsz.png" alt="store buffer"></p>
-<p>当存在 store buffer 的情况下。<strong>针对写操作</strong>，CPU 直接把数据扔给 store buffer。后续 store buffer 负责<strong>以 FIFO 次序写回 L1 Cache</strong>。这会对我们的程序产生什么影响呢？我们来看个例子：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 代码一</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> x = <span class="number">0</span>, y = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> r1, r2;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="keyword">int</span> <span class="title">thread_cpu0</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        x = <span class="number">1</span>;    <span class="comment">/* A */</span></span><br><span class="line">        r1 = y;   <span class="comment">/* B */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="keyword">int</span> <span class="title">thread_cpu1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        y = <span class="number">1</span>;    <span class="comment">/* C */</span></span><br><span class="line">        r2 = x;   <span class="comment">/* D */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">check_after_assign</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"r1 = %d, r2 = %d\n"</span>, r1, r2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>假设 thread_cpu0 在 CPU0 上执行，thread_cpu1 在 CPU1 上执行。在多核系统上，我们知道两个函数 4 条操作执行可以互相交错。理论上来我们有以下 6 种组合，3 种结果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">A-&gt;B-&gt;C-&gt;D</span><br><span class="line">A-&gt;C-&gt;B-&gt;D</span><br><span class="line">A-&gt;C-&gt;D-&gt;B</span><br><span class="line">C-&gt;D-&gt;A-&gt;B</span><br><span class="line">C-&gt;A-&gt;D-&gt;B</span><br><span class="line">C-&gt;A-&gt;B-&gt;D</span><br><span class="line"></span><br><span class="line">r1 = 1, r2 = 1</span><br><span class="line">r1 = 0, r2 = 1</span><br><span class="line">r1 = 1, r2 = 0</span><br></pre></td></tr></table></figure>
-<p>当我们考虑 store buffer 时，会是怎样的结果呢？我们就以 A-&gt;C-&gt;B-&gt;D 的执行次序说明问题。当 CPU0 执行 <code>x = 1</code> 时，x的值会被写入 CPU0 的 store buffer。CPU1 指令 <code>y = 1</code> 操作，同样 y 的值会被写入 CPU1 的 store buffer。接下来，<code>r1 = y</code> 执行时，CPU0 读取 y 的值，由于 y 的新值依然在 CPU1 的 store buffer 里面，所以 CPU0 看到 y 的值依然是 0。所以 r1 的值是 0。为什么 CPU0 看到 r1 的值是 0 呢？因为 MESI 只保证缓存一致性，只要值没有被写入 Cache(依然躺在 store buffer 里面)，MESI 就管不着。同样的道理，r2 的值也会是 0。此时我们看到了一个意外的结果。这里有个注意点，虽然 store buffer 主要是用来缓存 CPU 的写操作，但是 CPU 读取数据时也会检查私有 store buffer 是否命中，如果没有命中才会查找 L1 Cache。这主要是为了 CPU 自己看到自己写进 store buffer 的值。所以 CPU0 可以看到 x 值更新，但是 CPU1 不能及时看到 x。同样，CPU1 可以看到y值更新，但是 CPU0 不能及时看到 y。所以，我们经常说“单核乱序对程序员是透明的，只有其他核才会受到乱序影响”。</p>
-<h2 id="内存一致性-Memory-Consistency"><a href="#内存一致性-Memory-Consistency" class="headerlink" title="内存一致性(Memory Consistency)"></a>内存一致性(Memory Consistency)</h2><p>内存一致性关注的是多个 CPU 看到多个地址数据的读写次序。到目前为止我们只考虑了 CPU 按照程序顺序执行指令，而实际上为了更好地利用 CPU，CPU 和编译器都可能会对指令进行重排(reordering)：</p>
-<ul>
-<li>编译期间重排: 编译器在编译期间，可能对指令进行重排，以使其对 CPU 更友好</li>
-<li>运行期间重排: CPU 在执行指令的过程中，可能乱序执行以更好地利用流水线</li>
-</ul>
-<p>以下代码无法保证 A1 一定在 A2 之前执行，同样也无法保证 B1 一定在 B2 之前执行。因为赋值语句和输出语句对应不同变量，编译器可能认为这两个语句的执行顺序是不重要的，所以私自进行了指令重排，同理 CPU 指令流水期间也可能发生重排：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 代码二</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> x, y <span class="keyword">int</span></span><br><span class="line"><span class="keyword">var</span> done = <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        x = <span class="number">1</span>   <span class="comment">// A1</span></span><br><span class="line">        fmt.Print(<span class="string">"y="</span>, y, <span class="string">" "</span>) <span class="comment">// A2</span></span><br><span class="line">        done &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        y = <span class="number">2</span>   <span class="comment">// B1</span></span><br><span class="line">        fmt.Print(<span class="string">"x="</span>, x, <span class="string">" "</span>) <span class="comment">// B2</span></span><br><span class="line">        done &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    &lt;- done</span><br><span class="line">    &lt;- done</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="顺序一致性"><a href="#顺序一致性" class="headerlink" title="顺序一致性"></a>顺序一致性</h3><p>顺序一致性保证一个线程中所有操作必须按照代码编写的顺序来执行，也就是说如果上面的的代码满足顺序一致性，就不会出现“后面的指令反而放到前面来执行”的情况了。现代 CPU 为了支持指令重排以提高执行效率，往往只满足“无数据竞争程序的顺序一致性”，即对没有 data race 的程序来说，是满足顺序一致性的(编译器能够分析上下文相关性)，但是在并发环境下，需要程序员通过指令手动去限制指令重排以满足顺序一致性。</p>
-<p>值得注意的时，所谓“顺序一致性”是单个线程的要求，不要把它和“竞态”搞混了。</p>
-<h2 id="缓存一致性和内存一致性的区别"><a href="#缓存一致性和内存一致性的区别" class="headerlink" title="缓存一致性和内存一致性的区别"></a>缓存一致性和内存一致性的区别</h2><p>缓存一致性主要考虑对于同一内存位置的写操作对于所有的处理器的可见性。理想情况下，我们希望写内存的结果可以立即被所有处理器看到，也就是说写操作后其它处理器的读操作所读到的值都是新值。但事实上，由于层次存储模型的存在，这样的假设由于太强不可能实现。</p>
-<p>内存一致性关注对多个内存区域的访问（读和写）的顺序。当然，最理想的情况就是所有指令的执行顺序和程序里写的一模一样（即满足顺序一致性），但事实上这也是不可能的。因为考虑到并行优化，几乎所有平台都会改变指令顺序来提高程序运行速度，这不可避免地会违反一致性原则。前面提到内存访问分两种：读和写，则<strong>违反内存一致性原则的情况可能有 4 种：LoadLoad，LoadStore，StoreStore 和 StoreLoad</strong>。过强的一致性约束会使优化程度极大降低，因此很多平台会选择放弃其中的一种或几种。</p>
-<h2 id="什么原因会导致乱序？"><a href="#什么原因会导致乱序？" class="headerlink" title="什么原因会导致乱序？"></a>什么原因会导致乱序？</h2><ol>
-<li>Store Buffer 可见性导致的 <code>伪·乱序</code>。指令顺序没有变，但是写入 Store Buffer 的数据没有及时刷新到内存，在其它 CPU 看来好像这个 CPU 发生了“乱序”。</li>
-<li>编译器、CPU 指令重排导致的 <code>真·乱序</code>。即后面的指令真的跑到前面去执行了。</li>
-</ol>
-<h2 id="内存屏障"><a href="#内存屏障" class="headerlink" title="内存屏障"></a>内存屏障</h2><p>限制编译器和 CPU 进行指令重排的方法就是使用<strong>内存屏障（Memory Barrier）</strong>，又称<strong>内存栅栏（Memory Fence）</strong>，它是程序员解决乱序问题的大杀器。内存屏障起到两个作用：</p>
-<ol>
-<li>强制刷新 store buffer。这样内存屏障之前的所有写操作对屏障之后的指令都是可见的。</li>
-<li>阻止此处的指令重排。它后面的读写操作不会乱序到前面的指令之前执行，就像是个屏障一样，不容逾越。但是屏障前面/后面的 load/store 操作怎么乱序就管不着了。</li>
-</ol>
-<p>对于上文代码二，利用“管道操作”这一同步原语进行同步以后，就能够保证 A1 与 A2，B1 与 B2 的执行顺序了：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 代码三</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> x, y <span class="keyword">int</span></span><br><span class="line"><span class="keyword">var</span> done = <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line"><span class="keyword">var</span> ok = <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        x = <span class="number">1</span>   <span class="comment">// A1</span></span><br><span class="line">        ok &lt;- <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line">        fmt.Print(<span class="string">"y="</span>, y, <span class="string">" "</span>) <span class="comment">// A2</span></span><br><span class="line">        done &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        y = <span class="number">2</span>   <span class="comment">// B1</span></span><br><span class="line">        &lt;-ok</span><br><span class="line">        fmt.Print(<span class="string">"x="</span>, x, <span class="string">" "</span>) <span class="comment">// B2</span></span><br><span class="line">        done &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    &lt;- done</span><br><span class="line">    &lt;- done</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>实际的 CPU 架构中，可能提供多种内存屏障，比如可能分为四种:</p>
-<ul>
-<li>LoadLoad: 任何该屏障前的读操作都会先于该屏障后的读操作完成</li>
-<li>LoadStore: 任何该屏障前的读操作都会先于该屏障后的写操作完成</li>
-<li>StoreStore: 任何该屏障前的写操作都会先于该屏障后的写操作完成</li>
-<li>StoreLoad: 任何该屏障前的写操作都会先于该屏障后的读操作完成</li>
-</ul>
-<p>其中 StoreLoad 屏障是保证性最强的，也是开销最大的，所以有些 CPU 能保证每条指令都满足前三种要求，但是 StoreLoad 需要程序员手动利用屏障保证。</p>
-<h2 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h2><p>根据对内存一致性的的支持不同，处理器被划分为几种不同的内存模型：</p>
-<ul>
-<li>弱内存模型：如 DEC Alpha。它可能经历所有的四种内存乱序(LoadLoad, LoadStore, StoreLoad, StoreStore)，任何 Load 和 Store 操作都能与任何其它的 Load 或 Store 操作乱序，只要其不改变单线程的行为。</li>
-<li>强内存模型：如 X86/64。它使用了 LoadLoad/LoadStore/StoreStore 三种内存屏障，即避免了四种乱序中的三种，仍然保留 StoreLoad 的重排，这种情况需要程序员手动插入屏障来确保程序正确。</li>
-<li>顺序一致性模型：最强的一致性，理想中的模型，在这种内存模型中，没有乱序的存在。如今很难找到一个硬件体系结构支持顺序一致性，因为它会严重限制硬件对 CPU 执行效率的优化(对寄存器/Cache/流水线的使用)。</li>
-</ul>
-<h2 id="什么时候需要考虑一致性？"><a href="#什么时候需要考虑一致性？" class="headerlink" title="什么时候需要考虑一致性？"></a>什么时候需要考虑一致性？</h2><ol>
-<li>是否有共享数据？私有数据不存在竞争，也就不存在一致性的问题</li>
-<li>共享数据是否可能被多个 CPU 并行访问？如果只有一个 CPU 会访问共享数据（包括读写），也不需要考虑一致性问题</li>
-<li>是否有多个共享数据？多个数据之间的读写访问，是否需要保证一定的次序？如果需要保证次序，就需要考虑乱序。如果不 care 访问次序，那就没必要考虑乱序。</li>
-</ol>
-<p>对开发者而言，<strong>编写并发程序需要关注三个东西: 原子性，可见性和顺序性</strong>：</p>
-<ul>
-<li>原子性: 尽管在如今大部分平台下，对一个字的数据进行存取(int,指针)的操作本身就是原子性的，但为了更好地跨平台性，通过 atomic 操作来实现原子性是更好的方法，并且不会造成额外的开销。</li>
-<li>可见性: 数据同步相关，前面讨论的 CPU Cache 设计主要关注的就是可见性，即同一时刻所有 CPU 看到的某个地址上的值是一致的。<strong>缓存一致性主要解决的就是数据可见性的问题</strong></li>
-<li>顺序性: 内存屏障保证屏障前的某些操作必定限于屏障后的操作发生且可见。但屏障前或屏障后的指令，CPU/编译器仍然可以在不改变单线程结果的情况下进行局部重排。每个硬件平台有自己的基础顺序性(强/弱内存模型)</li>
-</ul>
-<p>对开发者来说，应用程序可以通过封装好的 mutex 完成大部分的并发控制，而无需关注底层用了哪些内存屏障，各平台的内存一致性等细节。但是在使用比 mutex 更底层的同步机制(如atomic, volatile, memory-barrier等)时，就要务必小心。从原子性，可见性，顺序性等方面确保代码执行结果如预期。</p>
-<h2 id="阅读资料"><a href="#阅读资料" class="headerlink" title="阅读资料"></a>阅读资料</h2><p><a href="https://www.zhihu.com/column/cpu-cache" target="_blank" rel="noopener">高速缓存与一致性</a></p>
-<p><a href="https://wudaijun.com/2019/04/cpu-cache-and-memory-model/" target="_blank" rel="noopener">Cache一致性和内存模型</a></p>
-<p><a href="https://wudaijun.com/2018/09/distributed-consistency/" target="_blank" rel="noopener">一致性杂谈</a></p>
-<p><a href="https://zh.wikipedia.org/wiki/%E5%86%85%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7%E6%A8%A1%E5%9E%8B" target="_blank" rel="noopener">内存一致性模型</a></p>
-<p><a href="https://monkeysayhi.github.io/2017/12/28/%E4%B8%80%E6%96%87%E8%A7%A3%E5%86%B3%E5%86%85%E5%AD%98%E5%B1%8F%E9%9A%9C/" target="_blank" rel="noopener">一文解决内存屏障</a></p>
-
-      
-    </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/01/20/Cache-Coherency-与-Memory-Consistency/" data-id="ckoqt9nu0000ub0upsa8rwrt1" class="article-share-link">
-        分享
-      </a>
-      
-<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发编程/">并发编程</a></li></ul>
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="tag">并发编程</a></li></ul>
 
     </footer>
-
   </div>
 
-  
-
-  
-
-</article>
     
-    <article id="post-常用的gcc编译选项" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
+ 
+    
+</article>
 
+    
+    <article
+  id="post-常用的gcc编译选项"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
   <div class="article-inner">
     
     <header class="article-header">
-      
-
+       
 <h2 itemprop="name">
-  <a class="article-title" href="/2021/01/13/常用的gcc编译选项/">常用的gcc编译选项</a>
+  <a class="article-title" href="/2021/01/13/%E5%B8%B8%E7%94%A8%E7%9A%84gcc%E7%BC%96%E8%AF%91%E9%80%89%E9%A1%B9/"
+    >常用的gcc编译选项</a> 
 </h2>
+ 
 
-
-
+      
     </header>
-    
-
-    
+     
     <div class="article-meta">
-      <a href="/2021/01/13/常用的gcc编译选项/" class="article-date">
+      <a href="/2021/01/13/%E5%B8%B8%E7%94%A8%E7%9A%84gcc%E7%BC%96%E8%AF%91%E9%80%89%E9%A1%B9/" class="article-date">
   <time datetime="2021-01-13T09:32:17.000Z" itemprop="datePublished">2021-01-13</time>
-</a>
-      
-<div class="article-category">
-  <a class="article-category-link" href="/categories/开发工具/">开发工具</a>
-</div>
-
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a>
+  </div>
+   
     </div>
+       
+
+    <!-- copyright -->
     
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-      
-      <p>本文旨在对 gcc 常用编译选项进行归类整理，全部选项可以通过执行如下命令得到：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
-<h2 id="警告选项：-w、-W、-Wall、-Werror"><a href="#警告选项：-w、-W、-Wall、-Werror" class="headerlink" title="警告选项：-w、-W、-Wall、-Werror"></a>警告选项：-w、-W、-Wall、-Werror</h2><p>-w: 关闭所有 warning</p>
-<p>-W: 只显示编译器认为可能出现错误的警告</p>
-<p>-Wall: 显示所有警告</p>
-<p>-Werror: 把 warning 当做 error 抛出</p>
-<p>举个例子，test.c 中代码如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Hello World!\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>用 -w 编译，直接就通过了：</p>
-<p><img src="https://i.loli.net/2021/01/13/m8nbhCcvxtBw219.png" alt="-w编译"></p>
-<p>用 -Wall 编译，显示所有的 warning。包括声明的 main 函数返回类型为 void 而不是 int；返回值类型与声明类型不符；声明了变量 a 却未使用：</p>
-<p><img src="https://i.loli.net/2021/01/14/DgwdL9SluHKWMC3.png" alt="-Wall编译"></p>
-<p>用 -W 编译，只显示返回值类型与声明类型不符这一个 warning：</p>
-<p><img src="https://i.loli.net/2021/01/14/MP6DC2fOINbW594.png" alt="-W编译"></p>
-<p>用 -Werror 编译，提示存在 error，编译失败：</p>
-<p><img src="https://i.loli.net/2021/01/14/UZmjOfugJyVGCAt.png" alt="-Werror编译"></p>
-<p>比较好的做法是 -W 与 -Wall 连用</p>
-<h2 id="中间文件选项：-E、-S、-C、-save-temps、-I-大写i"><a href="#中间文件选项：-E、-S、-C、-save-temps、-I-大写i" class="headerlink" title="中间文件选项：-E、-S、-C、-save-temps、-I(大写i)"></a>中间文件选项：-E、-S、-C、-save-temps、-I(大写i)</h2><p>-Idir：使用 <code>#include</code> 包含头文件的时候，如果用 -I 指定了目录，gcc 会先在指定目录查找, 然后再按“当前目录、/usr/include、/usr/local/include”的顺序查找。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc vector.c -I./src</span><br></pre></td></tr></table></figure>
-<p>-E: 仅进行预处理，得到 .i 文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -E test.c</span><br></pre></td></tr></table></figure>
-<p>-S：仅进行预处理和编译，得到 .s 文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -S test.c</span><br></pre></td></tr></table></figure>
-<p>-C: 进行预处理，编译和汇编得到可重定位目标文件 .o，不链接</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -C test.c</span><br></pre></td></tr></table></figure>
-<p>-save-temps: 保留整个过程中产生的所有中间文件到当前目录</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -save-temps -C test.c</span><br></pre></td></tr></table></figure>
-<h2 id="链接选项：-static、-shared、-fpic、-L、-l-小写L"><a href="#链接选项：-static、-shared、-fpic、-L、-l-小写L" class="headerlink" title="链接选项：-static、-shared、-fpic、-L、-l(小写L)"></a>链接选项：-static、-shared、-fpic、-L、-l(小写L)</h2><p>-static：使用静态编译，把静态库的代码和数据直接编译进可执行文件。这样得到的二进制文件体积自然比较大</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -static test.c ./libvector.a</span><br></pre></td></tr></table></figure>
-<p>-shared：生成共享库(.so 文件)</p>
-<p>-fpic：生成位置无关代码（Position Independent Code），生成共享库时必须要用到</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -shared -fpic -o libvector.so vector.c</span><br></pre></td></tr></table></figure>
-<p>-lfile：链接到指定的库文件。gcc 会自动为 file 添加 lib 前缀和 .so/.a 后缀。gcc 默认为所有编译链接 libc.a 或 libc.so，所以我们才能使用诸如 <code>printf</code>、<code>scanf</code> 等常用的标准函数。下面这行命令会为 test.c 链接上 libm.a</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc test.c -lm</span><br></pre></td></tr></table></figure>
-<p>默认情况下，gcc 依次从从当前目录、/lib、/usr/lib 和 /usr/local/lib 中寻找库文件。</p>
-<p>-Ldir：指定库文件所在的目录。如果库文件在上述路径之外就需要指定共享库的目录。假设需要链接的共享库 libvector.so 位于 /home/project 目录下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc test.c -L/home/project -lvector</span><br></pre></td></tr></table></figure>
-<h2 id="优化选项：-Og、-O1、-O2、-O3、-g、-pg"><a href="#优化选项：-Og、-O1、-O2、-O3、-g、-pg" class="headerlink" title="优化选项：-Og、-O1、-O2、-O3、-g、-pg"></a>优化选项：-Og、-O1、-O2、-O3、-g、-pg</h2><p>-Og：编译时不优化代码</p>
-<p>-O1、-O2、-O3：编译器进行代码优化，数字越大优化程度越高</p>
-<p>-g：在二进制文件中生成调试信息，像 gdb 这类的工具需要有这种信息才能工作。这样可执行文件的体积会比较大。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc test.c -g</span><br></pre></td></tr></table></figure>
-<p>-pg：在二进制文件中生成性能分析所需的信息，像 gprof 这类的工具需要有这种信息才工作</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc test.c -pg</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/01/13/常用的gcc编译选项/" data-id="ckoqt9nt5000mb0upswyvawjd" class="article-share-link">
-        分享
-      </a>
-      
-<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gcc/">gcc</a></li></ul>
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gcc/" rel="tag">gcc</a></li></ul>
 
     </footer>
-
   </div>
 
-  
-
-  
-
-</article>
     
-    <article id="post-Go语言底层大冒险之interface" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
+ 
+    
+</article>
 
+    
+    <article
+  id="post-Go语言底层大冒险之interface"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
   <div class="article-inner">
     
     <header class="article-header">
-      
-
+       
 <h2 itemprop="name">
-  <a class="article-title" href="/2020/12/26/Go语言底层大冒险之interface/">Go语言底层大冒险之interface</a>
+  <a class="article-title" href="/2020/12/26/Go%E8%AF%AD%E8%A8%80%E5%BA%95%E5%B1%82%E5%A4%A7%E5%86%92%E9%99%A9%E4%B9%8Binterface/"
+    >Go语言底层大冒险之interface</a> 
 </h2>
+ 
 
-
-
+      
     </header>
-    
-
-    
+     
     <div class="article-meta">
-      <a href="/2020/12/26/Go语言底层大冒险之interface/" class="article-date">
+      <a href="/2020/12/26/Go%E8%AF%AD%E8%A8%80%E5%BA%95%E5%B1%82%E5%A4%A7%E5%86%92%E9%99%A9%E4%B9%8Binterface/" class="article-date">
   <time datetime="2020-12-26T02:52:00.000Z" itemprop="datePublished">2020-12-26</time>
-</a>
-      
-<div class="article-category">
-  <a class="article-category-link" href="/categories/语言/">语言</a>
-</div>
-
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%AD%E8%A8%80/">语言</a>
+  </div>
+   
     </div>
+       
+
+    <!-- copyright -->
     
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-      
-      <p>很多现代语言都有“接口”这个概念。接口是为了解耦，即通过引入一个约定的中间层解除上下层之间的高度依赖关系。这东西听着玄乎，用饭馆来举个例子，我们作为顾客通常并不关心菜是怎么做的，只是和厨师有诸如“麻婆豆腐必须是辣的”，“冰淇淋必须是冷的”这样的约定，厨师用自己的方法把这个约定实现就行了。程序设计也是如此。函数 A 可能需要回调形参的某个方法，这个方法是如何实现的并不重要，关键是它实现了 A 的约定，这个约定就是所谓的“接口”。</p>
-<p>在 java 中，类需要在定义的时候显示声明实现了某接口。而 Go 不一样，只要结构体实现了某个接口的全部方法，编译器就认为结构体实现了这个接口。这样的设计可能会让人因为害怕在不知不觉中实现了某个接口感到不安，而且也不便于程序员阅读，但是 Go 语言的设计者认为这种情况几乎不会出现，而且从编译器的角度来看显示声明完全是多余的：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Tester <span class="keyword">interface</span> &#123;</span><br><span class="line">    test() <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> I <span class="keyword">int</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// I 实现了 Tester 接口的全部方法</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(i I)</span> <span class="title">test</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"testing"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> t Tester = I(<span class="number">2</span>)</span><br><span class="line">    fmt.Println(t.test()) <span class="comment">// I 实现了 Tester 接口的 test() 方法，main 作为调用方不关心 I 是如何实现 test() 的</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Go 只在编译期对结构体是否符合某个接口进行检查。具体而言，就在以下三个时刻：</p>
-<ol>
-<li>变量赋值</li>
-<li>传递参数</li>
-<li>传递返回值</li>
-</ol>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Tester <span class="keyword">interface</span>&#123;</span><br><span class="line">    test() <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> I <span class="keyword">int</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(i I)</span> <span class="title">test</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"testing"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> t Tester = I(<span class="number">1</span>) <span class="comment">// 变量赋值，编译器进行类型检查</span></span><br><span class="line">    echo(t) <span class="comment">// 传递参数，编译器进行类型检查</span></span><br><span class="line">    t = NewI(<span class="number">2</span>) <span class="comment">// 传递返回值，编译器进行类型检查</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewI</span><span class="params">(i <span class="keyword">int</span>)</span> <span class="title">I</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> I(i)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">echo</span><span class="params">(t Tester)</span></span> &#123;</span><br><span class="line">    fmt.Println(t.test() + <span class="string">", pass"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在 Go 语言中，任意类型的对象都可以转换为 <code>interface{}</code> 类型，一个误区是因此把 <code>interface{}</code> 当作 C 语言的空指针 <code>void*</code>。但事实上 <code>interface{}</code> 是一个独立的类型，与指针是完全不同的两个概念：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> p *<span class="keyword">int</span></span><br><span class="line">    fmt.Println(p == <span class="literal">nil</span>)   <span class="comment">// true，指针的零值为 nil</span></span><br><span class="line">    fmt.Println(testNil(p)) <span class="comment">// false</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">testNil</span><span class="params">(v <span class="keyword">interface</span>&#123;&#125;)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> v == <span class="literal">nil</span> <span class="comment">// 总是 false，因为 interface&#123;&#125; 永远不为 nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>Go 编译器将接口按照有无方法分为两种结构体来表示：有方法的接口表示为 <a href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L203" target="_blank" rel="noopener">runtime.iface</a>，无方法的空接口表示为 <a href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L208" target="_blank" rel="noopener">runtime.eface</a>。这些结构由编译器在编译期生成</p>
-<h3 id="无方法接口及-eface"><a href="#无方法接口及-eface" class="headerlink" title="无方法接口及 eface"></a>无方法接口及 eface</h3><p>因为空接口比较简单，所以 <a href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L208" target="_blank" rel="noopener">runtime.eface</a> 的成员也少：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> eface <span class="keyword">struct</span> &#123; <span class="comment">// 16 字节</span></span><br><span class="line">    _type *_type</span><br><span class="line">    data  unsafe.Pointer</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>_type</code> 表示原对象的类型元信息</li>
-<li><code>data</code> 是一个指向原对象的指针</li>
-</ul>
-<p><a href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L208" target="_blank" rel="noopener">runtime.eface</a> 是对原对象进行一层简单的封装，通过 <a href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/type.go#L31" target="_blank" rel="noopener">runtime._type</a> 保留了原对象类型的运行时元信息：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> _type <span class="keyword">struct</span> &#123;</span><br><span class="line">    size       <span class="keyword">uintptr</span></span><br><span class="line">    ptrdata    <span class="keyword">uintptr</span></span><br><span class="line">    hash       <span class="keyword">uint32</span></span><br><span class="line">    tflag      tflag</span><br><span class="line">    align      <span class="keyword">uint8</span></span><br><span class="line">    fieldAlign <span class="keyword">uint8</span></span><br><span class="line">    kind       <span class="keyword">uint8</span></span><br><span class="line">    equal      <span class="function"><span class="keyword">func</span><span class="params">(unsafe.Pointer, unsafe.Pointer)</span> <span class="title">bool</span></span></span><br><span class="line">    gcdata     *<span class="keyword">byte</span></span><br><span class="line">    str        nameOff</span><br><span class="line">    ptrToThis  typeOff</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>size</code> 表示类型大小，分配内存的时候要用到</li>
-<li><code>hash</code> 是类型的哈希值，通常用于快速确定两个类型是否相同</li>
-<li><code>equal</code> 用来判断一个类型的两个对象是否相等</li>
-<li><code>align</code> 用来确定这个类型的字节对齐边界</li>
-</ul>
-<p>总而言之，<a href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/type.go#L31" target="_blank" rel="noopener">runtime._type</a> 包含了与“如何描述一个类型”有关的信息。</p>
-<p>对空接口赋值后的数据结构表示如下：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Binary <span class="keyword">uint64</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    b := Binary(<span class="number">200</span>)</span><br><span class="line">    any := (<span class="keyword">interface</span>&#123;&#125;)(b)</span><br><span class="line">    fmt.Println(any)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://i.loli.net/2020/12/26/WajYNX2scv8O4i6.png" alt="空接口"></p>
-<h3 id="有方法接口及-iface"><a href="#有方法接口及-iface" class="headerlink" title="有方法接口及 iface"></a>有方法接口及 iface</h3><p><a href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L203" target="_blank" rel="noopener">runtime.iface</a> 不仅有指向原数据的 <code>data</code> 字段，还有 <a href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L857" target="_blank" rel="noopener">runtime.itab</a> 类型的 <code>tab</code> 字段：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> iface <span class="keyword">struct</span> &#123; <span class="comment">// 16 字节</span></span><br><span class="line">    tab  *itab</span><br><span class="line">    data unsafe.Pointer</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><a href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L857" target="_blank" rel="noopener">runtime.itab</a> 是 <a href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L203" target="_blank" rel="noopener">runtime.iface</a> 的核心字段，是具体类型和接口类型的结合，可以看作结构体把某种接口类型和某种具体类型联系在一起:</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> itab <span class="keyword">struct</span> &#123; <span class="comment">// 32 字节</span></span><br><span class="line">    inter *interfacetype <span class="comment">// 接口类型信息</span></span><br><span class="line">    _type *_type         <span class="comment">// 具体类型信息 </span></span><br><span class="line">    hash  <span class="keyword">uint32</span>         <span class="comment">// _type.hash 的副本，用于快速判断接口的具体类型</span></span><br><span class="line">    _     [<span class="number">4</span>]<span class="keyword">byte</span></span><br><span class="line">    fun   [<span class="number">1</span>]<span class="keyword">uintptr</span>    <span class="comment">// 底层数组，存储接口的方法集的具体实现的地址，其包含一组函数指针，实现了接口方法的动态分派，且每次在接口发生变更时都会更新</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><a href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/type.go#L366" target="_blank" rel="noopener">runtime.interface</a> 类似于 <a href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/type.go#L31" target="_blank" rel="noopener">runtime._type</a>，是对某种接口的描述：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> nameOff <span class="keyword">int32</span></span><br><span class="line"><span class="keyword">type</span> typeOff <span class="keyword">int32</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> imethod <span class="keyword">struct</span> &#123;</span><br><span class="line"> name nameOff</span><br><span class="line"> ityp typeOff</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> interfacetype <span class="keyword">struct</span> &#123;</span><br><span class="line"> typ     _type      <span class="comment">// 接口的具体类型信息</span></span><br><span class="line"> pkgpath name       <span class="comment">// 接口的包（package）名信息</span></span><br><span class="line"> mhdr    []imethod  <span class="comment">// 接口所定义的函数列表</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>对有方法接口赋值后的数据结构表示如下：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"strconv"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Binary <span class="keyword">uint64</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(i Binary)</span> <span class="title">String</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> strconv.FormatUint(i.Get(), <span class="number">10</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(i Binary)</span> <span class="title">Get</span><span class="params">()</span> <span class="title">uint64</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">uint64</span>(i)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    b := Binary(<span class="number">200</span>)</span><br><span class="line">    s := fmt.Stringer(b) <span class="comment">// fmt.Stringer 是一个仅包含 String() string 的接口</span></span><br><span class="line">    fmt.Println(s)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://i.loli.net/2020/12/26/dwSRrUA2VOBu8XW.png" alt="有方法接口"></p>
-<h2 id="eface-和-iface-的区别"><a href="#eface-和-iface-的区别" class="headerlink" title="eface 和 iface 的区别"></a>eface 和 iface 的区别</h2><p><img src="https://i.loli.net/2021/01/21/6EYlosW1LPg7IXu.png" alt="eface和iface"></p>
-<p>所有接口的数据结构都有一个指向具体数据的的指针，这也就是为什么接口变量必须初始化。然后根据这个接口有没有方法决定是否产生把具体类型和接口类型组合成一个 itab</p>
-<h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><p>Go 方法的接收者可以是指针也可以是结构体，所以既可以是指针实现了某接口，也可以是结构体实现了某接口，但是只能二选一，如果结构体和其指针实现了同一接口，编译器会报错“method redeclared”：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Tester <span class="keyword">interface</span>&#123;</span><br><span class="line">    test()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">结构体做接收者的接口，用结构体或指针初始化都是可以的</span></span><br><span class="line"><span class="comment">func (p Person) test() &#123;&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">func main() &#123;</span></span><br><span class="line"><span class="comment">    var t1 Tester = P&#123;&#125;</span></span><br><span class="line"><span class="comment">    var t2 Tester = &amp;P&#123;&#125;</span></span><br><span class="line"><span class="comment">    t1.test()</span></span><br><span class="line"><span class="comment">    t2.test()</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">指针做接收者的接口，只能用指针初始化</span></span><br><span class="line"><span class="comment">func (p *Person) test() &#123;&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">func main() &#123;</span></span><br><span class="line"><span class="comment">    var t1 Tester = &amp;P&#123;&#125;</span></span><br><span class="line"><span class="comment">    t1.test()</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-<p>结构体实现接口，使用结构体对象进行接口变量初始化；指针实现接口，使用指针对象进行接口变量初始化，这都是顺其自然的。反常的是用结构体实现接口可以用指针对象初始化接口变量和用指针实现接口不能用结构体对象初始化接口变量。</p>
-<p>这是因为 Go 传参时统一使用“值传递”。所谓“接收者”本质上也是一个参数，编译器翻译时会复制参数到帧顶。无论上述代码中初始化变量 t1 的是 P{} 还是 &amp;P{}，使用 t1.test() 时都会发生值拷贝</p>
-<p>如果是结构体实现接口而用指针初始化，调用时编译器拷贝指针，方法栈帧中通过 <code>*</code> 操作就可以得到原结构体并执行其方法；而如果是指针实现接口而用结构体初始化，调用时编译器只能拷贝结构体，即使在背后使用 <code>&amp;</code> 也无法得到指向原结构体的指针。</p>
-<h2 id="类型断言"><a href="#类型断言" class="headerlink" title="类型断言"></a>类型断言</h2><p>有时候我们需要确定某个接口变量的具体类型，就需要用到类型断言。类型断言可以把接口类型转为具体类型：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Tester <span class="keyword">interface</span>&#123;</span><br><span class="line">    test()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span> &#123;&#125;</span><br><span class="line"><span class="keyword">type</span> Cat <span class="keyword">struct</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p Person)</span> <span class="title">test</span><span class="params">()</span></span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> t Tester = P&#123;&#125;</span><br><span class="line">    <span class="keyword">switch</span> x := t.(<span class="keyword">type</span>) &#123;</span><br><span class="line">        <span class="keyword">case</span> Person:     <span class="comment">// 这里 x 是 Person 类型</span></span><br><span class="line">        <span class="keyword">case</span> Cat, <span class="keyword">int</span>:  <span class="comment">// 这里 x 是 interface&#123;&#125; 类型</span></span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>前面说过无论是 <a href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L203" target="_blank" rel="noopener">runtime.iface</a> 还是 <a href="https://github.com/golang/go/blob/6c64b6db6802818dd9a4789cdd564f19b70b6b4c/src/runtime/runtime2.go#L208" target="_blank" rel="noopener">runtime.eface</a> 都有个 <code>hash</code> 字段标识接口的具体类型，类型断言时编译器把这个字段和目标类型的哈希值进行比较就知道两个类型是否相同了。</p>
-<p>参考：</p>
-<p><a href="https://draveness.me/golang/" target="_blank" rel="noopener">Go语言设计与实现</a></p>
-<p><a href="https://i6448038.github.io/2018/10/01/Golang-interface/" target="_blank" rel="noopener">Go语言interface底层实现</a></p>
-<p>《Go程序设计语言》第七章</p>
-
-      
-    </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/12/26/Go语言底层大冒险之interface/" data-id="ckoqt9nuh000xb0upoxfpfdbi" class="article-share-link">
-        分享
-      </a>
-      
-<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li></ul>
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/" rel="tag">Go</a></li></ul>
 
     </footer>
-
   </div>
 
-  
-
-  
-
-</article>
     
-    <article id="post-光猫，路由与交换机" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
+ 
+    
+</article>
 
+    
+    <article
+  id="post-光猫，路由与交换机"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
   <div class="article-inner">
     
     <header class="article-header">
-      
-
+       
 <h2 itemprop="name">
-  <a class="article-title" href="/2020/12/21/光猫，路由与交换机/">大话光猫，路由器与交换机</a>
+  <a class="article-title" href="/2020/12/21/%E5%85%89%E7%8C%AB%EF%BC%8C%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2%E6%9C%BA/"
+    >大话光猫，路由器与交换机</a> 
 </h2>
+ 
 
-
-
+      
     </header>
-    
-
-    
+     
     <div class="article-meta">
-      <a href="/2020/12/21/光猫，路由与交换机/" class="article-date">
+      <a href="/2020/12/21/%E5%85%89%E7%8C%AB%EF%BC%8C%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2%E6%9C%BA/" class="article-date">
   <time datetime="2020-12-21T01:00:15.000Z" itemprop="datePublished">2020-12-21</time>
-</a>
-      
-<div class="article-category">
-  <a class="article-category-link" href="/categories/计算机网络/">计算机网络</a>
-</div>
-
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+  </div>
+   
     </div>
+       
+
+    <!-- copyright -->
     
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-      
-      <p>生活中最常见的网络设备就是光猫和路由器了。一些较大型的企业可能还会用到交换机。以家庭上网为例，数据从光纤到达个人设备的流程是这样的：</p>
-<p><img src="https://i.loli.net/2020/12/21/fD5YlTFmNaG49hq.png" alt="边缘网络模型.png"></p>
-<h2 id="光猫"><a href="#光猫" class="headerlink" title="光猫"></a>光猫</h2><p>现在光纤入户已经很普及了，顾名思义光纤是通过光信号来传输信息的，而我们的终端设备只能处理电信号，那么如何处理从光信号到电信号的转换呢？答案就是光猫(modem)，通俗地讲，光猫就是一种负责光电转换的设备。由于光纤宽带有两种技术模式：一种是 EPON 接入，另一种是 GPON 接入，所以光猫也分为 EPON 光猫和 GPON 光猫。</p>
-<p>由于不同地区、不同运营商往往用的都是不同的光纤技术，所以每个地区每个运营商对应的光猫一般也不同，比如一个光猫在湖南联通能正常工作，而在广东移动可能就无法使用了。所幸在光纤入户的时候运营商会赠送一个对应的光猫。如果要自己在市场上购买光猫，一定要注意地区与运营商的限制。</p>
-<p><img src="https://i.loli.net/2020/12/21/z8lVmEKRaeQZr7H.jpg" alt="猫.jpg"></p>
-<p>一般来说，在猫背面的标签上都会标明了设备的名称、型号以及其它参数。由于光猫一般都是网络运营商配送的，所以光猫的标签上除了设备型号和参数外，通常还标有网络运营商的标志或LOGO等</p>
-<p><img src="https://i.loli.net/2020/12/21/3iSzyBoACfYHWnj.jpg" alt="猫底.jpg"></p>
-<p><img src="https://i.loli.net/2020/12/21/WuJfjkxUBtoanQY.jpg" alt="猫背.jpg"></p>
-<h2 id="路由器"><a href="#路由器" class="headerlink" title="路由器"></a>路由器</h2><p>如今各种联网设备越来越多，常见的就有手机、电脑、ipad，还有各种各样的智能家电。仅靠一个光猫是无法满足这么多设备的联网需求的（端口不够），而且通常也无法实现无线上网（当然现在有光猫和路由器一体的机器，这里不做讨论）。这就要用到路由器(router)了。</p>
-<p>专业上来说，路由器是位于网络层的设备，负责在多个网络之间传输数据包。路由器内部维护了一张路由表，根据路由表和一些算法决定把数据包发往何处；可以给局域网分配 ip ，即把一个公有 ip 地址转换为多个私有 ip 地址；另外还会提供防火墙功能。</p>
-<p>通俗地讲，有了路由器我们就可以实现多台设备共用一个运营商账号，并且使用所谓“WiFi”进行无线上网。</p>
-<p><img src="https://i.loli.net/2020/12/21/Ag54uVlcSZy8ztf.png" alt="路由器.png"></p>
-<p><img src="https://i.loli.net/2020/12/21/oEtXeQFVPu6MLz9.png" alt="image.png"></p>
-<h2 id="交换机"><a href="#交换机" class="headerlink" title="交换机"></a>交换机</h2><p>交换机对于家庭用户而言可能比较陌生，因为它是为多设备互联而生的。就像前面所说，如果在一个公司里有上百台设备要联网，这时候路由器也不够用了，就需要使用交换机(switch)。</p>
-<p>交换机就是在多个端口之间交换数据，与路由器不同，它是一个链路层的设备，通过判断 MAC 地址来决定数据发往哪台设备。它不具有分配 ip、防火墙等功能，仅负责在端口之间交换数据包，就像是十字路口的交警，在局域网内对数据流转起到一个指挥作用。</p>
-<p>交换机全部接口都是一样的，没有 WLAN 口和 VLAN 口之分。一般情况下，当路由器的网口不够用的时候，可以再接入一个交换机来扩展网口。从无线路由器的 VLAN 口上接一条网线到交换机任意接口，然后从交换机的其他接口可以接到电脑等设备上。</p>
-<p><img src="https://i.loli.net/2020/12/21/aPJUZMH8Fen5rhg.png" alt="交换机.png"></p>
-
-      
-    </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/12/21/光猫，路由与交换机/" data-id="ckoqt9nt1000jb0upoq1fyr5z" class="article-share-link">
-        分享
-      </a>
-      
-<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/硬件/">硬件</a></li></ul>
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A1%AC%E4%BB%B6/" rel="tag">硬件</a></li></ul>
 
     </footer>
-
   </div>
 
-  
-
-  
-
-</article>
     
-    <article id="post-异常、中断与信号" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
+ 
+    
+</article>
 
+    
+    <article
+  id="post-异常、中断与信号"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
   <div class="article-inner">
     
     <header class="article-header">
-      
-
+       
 <h2 itemprop="name">
-  <a class="article-title" href="/2020/12/12/异常、中断与信号/">异常、中断与信号</a>
+  <a class="article-title" href="/2020/12/12/%E5%BC%82%E5%B8%B8%E3%80%81%E4%B8%AD%E6%96%AD%E4%B8%8E%E4%BF%A1%E5%8F%B7/"
+    >异常、中断与信号</a> 
 </h2>
+ 
 
-
-
+      
     </header>
-    
-
-    
+     
     <div class="article-meta">
-      <a href="/2020/12/12/异常、中断与信号/" class="article-date">
+      <a href="/2020/12/12/%E5%BC%82%E5%B8%B8%E3%80%81%E4%B8%AD%E6%96%AD%E4%B8%8E%E4%BF%A1%E5%8F%B7/" class="article-date">
   <time datetime="2020-12-12T07:59:01.000Z" itemprop="datePublished">2020-12-12</time>
-</a>
-      
-<div class="article-category">
-  <a class="article-category-link" href="/categories/计算机系统/">计算机系统</a>
-</div>
-
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a>
+  </div>
+   
     </div>
+       
+
+    <!-- copyright -->
     
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-      
-      <p>任何一个通用 CPU 都可以在执行完一条指令后检测从 CPU 外部发送过来或从内部产生的一种特殊信息，并且可以立即转而对该信息进行处理。这种“特殊信息”衍生出了异常、中断和信号这三个概念，其中牵涉到的知识点非常广泛且复杂，环环相扣。本文旨在对其进行梳理，形成一个脉络，具体底层细节还需要读者自行探究。</p>
-<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><blockquote>
-<p>中断（又称异步中断、硬中断）: 本质是一种电信号。当设备有某种事件发生时，它就会产生中断，通过总线把电信号发送给中断控制器（如 8259A）。如果中断的线是激活的，中断控制器就把电信号发送给处理器的某个特定引脚。处理器于是立即停止自己正在做的事，跳到中断处理程序的入口点，进行中断处理。</p>
-</blockquote>
-<blockquote>
-<p>异常（又称同步中断，软中断）：由指令产生，如 div 指令中除数为 0 就会引发一个除零异常。异常是可以预期的，通过观察程序的指令就可以知道什么时候会产生什么异常。</p>
-</blockquote>
-<p>中断和异常都是用称为 <code>中断类型码</code> 来表示中断信息的来源。中断类型码是一个字节型数据，可以表示 256 种来源。</p>
-<blockquote>
-<p>信号：信号是软件层面上对中断的模拟，用来通知进程发生了异步事件。进程之间可以通过系统调用发送软中断信号。内核也可以因为内部事件给进程发送信号，通知进程发生了某个事件。注意，信号只是用来通知某进程发生了什么事件，并不给该进程传递任何数据</p>
-</blockquote>
-<h2 id="异常与中断"><a href="#异常与中断" class="headerlink" title="异常与中断"></a>异常与中断</h2><p>我们先来看看异常。刚才说到，异常由指令触发，也就是代表了来自程序内部的某些行为，这些行为总体可以分为四类：</p>
-<ol>
-<li>除法错误，如除零。类型码：0</li>
-<li>单步执行。类型码：1</li>
-<li>执行 into 指令。类型码：4</li>
-<li>执行 int n 指令。类型码：n</li>
-</ol>
-<p>异常处理流程：</p>
-<ol>
-<li>异常发生，控制单元产生一个对应的类型码</li>
-<li>CPU 根据这个类型码从中断向量表(idt, interrupt description table) 找到异常处理处理程序入口</li>
-<li>保存当前程序现场，切换到对应异常处理程序</li>
-<li>异常处理程序最后向进程发送一个信号 SIGXXX，记录在进程的 PCB 里</li>
-<li>如果进程自定义了该信号的处理程序，跳去执行它；否则执行内核预定义的行为</li>
-</ol>
-<p><img src="https://i.loli.net/2020/12/13/g6Z8DEmK7XjsPJB.png" alt="异常处理流程.png"></p>
-<p><strong>异常都是不可屏蔽的，CPU 必须对此做出响应。</strong></p>
-<p>再来看中断。当 CPU 外部有需要处理的事情发生（如外设输入输出等），中断控制器会向 CPU 发出对应的中断类型码，引发中断过程。中断又可以分为两类：</p>
-<ol>
-<li>可屏蔽中断：CPU 可以不响应这个中断。而具体响不响应要看标志寄存器的 IF 位。IF = 1 时 CPU 执行完当前指令后响应中断，IF = 0 则不响应。多数由 IO 引发的中断都是可屏蔽的。</li>
-<li>不可屏蔽中断：CPU 必须响应的中断。CPU 执行完当前指令后立刻引发中断过程。它的类型码固定为 2。存储器校验出错，I/O 通道校验出错等都属于不可屏蔽中断。</li>
-</ol>
-<p>中断处理流程：</p>
-<ol>
-<li>设备产生中断，PIC(可编程中断控制器)产生一个对应的类型码</li>
-<li>CPU 根据这个类型码从中断向量表(idt, interrupt description table) 找到异常处理处理程序入口</li>
-<li>保存当前程序现场，切换到对应异常处理程序</li>
-<li>中断处理程序进行保存现场，做相关处理，恢复现场</li>
-<li>内核调度，返回用户进程</li>
-</ol>
-<p><img src="https://i.loli.net/2020/12/13/Ra5TtVXK2YmjzPG.png" alt="中断处理流程.png"></p>
-<p>现代操作系统把中断处理程序从概念上被分为<code>上底（top half）</code>和<code>下底（bottom half）</code>。在中断发生时上半部分的处理过程立即执行，但是下半部分（如果有的话）却推迟执行。内核把上半部分和下半部分作为独立的函数来处理，上半部分决定其相关的下半部分是否需要执行。必须立即执行的部分必须位于上半部分，而可以推迟的部分可能属于下半部分。两者通过软中断衔接。比如，网卡接收数据的过程中，首先网卡发送中断信号告诉 CPU 来取数据并用 DMA 技术把数据包写入内存，然后 CPU 调用网卡驱动先禁用网卡中断，再把原始数据包解析成协议栈对应的格式，最后送入各层依次解析。这些如果都让中断处理程序来处理显然过程太长，造成新来的中断阻塞。因此 Linux 将这种任务分为两个部分，一个叫上底，即中断处理程序，短平快地处理与硬件相关的操作（如禁用网卡中断）；而把对时间要求相对宽松的任务（如解析数据的工作）放在另一个部分执行。</p>
-<p>为什么要这样划分为两部分呢？</p>
-<ol>
-<li>把中断的总延迟时间最小化。Linux 内核定义了两种类型的中断，快速的和慢速的，这两者之间的一个区别是慢速中断自身还可以被中断，而快速中断则不能。因此，当处理快速中断时，如果有其它中断到达；不管是快速中断还是慢速中断，它们都必须等待。为了尽可能快地处理这些其它的中断，内核就需要尽可能地将处理延迟到下半部分执行。</li>
-<li>当内核执行上半部分时，正在服务的这个特殊IRQ将会被可编程中断控制器禁止，于是，连接在同一个 IRQ 上的其它设备就只有等到该该中断处理被处理完毕后果才能发出 IRQ 请求。而采用 Bottom_half 机制后，不需要立即处理的部分就可以放在下半部分处理，从而，加快了处理机对外部设备的中断请求的响应速度。</li>
-<li>处理程序的下半部分还可以包含一些并非每次中断都必须处理的操作；对这些操作，内核可以在一系列设备中断之后集中处理一次就可以了。即在这种情况下，每次都执行并非必要的操作完全是一种浪费，而采用 Bottom_half 机制后，可以稍稍延迟并在后来只执行一次就行了。</li>
-</ol>
-<h3 id="二者的关系"><a href="#二者的关系" class="headerlink" title="二者的关系"></a>二者的关系</h3><p>异常和中断最主要的区别在于前者由指令触发，根据指令给出类型码，后者由 PIC 与 CPU 引脚之间的连线触发，从数据线上取得类型码。其次，异常都是不可屏蔽的，而中断分为可屏蔽与不可屏蔽两种。</p>
-<p>现在通过数据包从 <em>网卡 -&gt; 内存 -&gt; 网络模块 -&gt; 协议栈</em> 这个过程示范一下中断处理程序是怎么利用硬中断与异常完成工作的：</p>
-<p><img src="https://i.loli.net/2020/12/14/9xbd6e4Ekp72GKC.png" alt="上底处理流程.png"></p>
-<p><img src="https://i.loli.net/2020/12/14/LPI1l5CsuNMmXak.png" alt="下底处理流程.png"></p>
-<h2 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h2><p>我们在运行一个 shell 程序的时候，往往按下 Ctrl+C 就可以强制退出。按下组合键的过程就是操作系统给进程发送了一个信号：</p>
-<ol>
-<li>松开按键后键盘会产生一个中断，如果 CPU 正在执行这个进程的代码则该进程的用户代码先暂停执行，用户从用户态切换到内核态去处理中断</li>
-<li>键盘驱动程序检测到按下的是 ctrl+c，将这一对组合键翻译成一个 SIGINT 信号记在该进程的 PCB 中（也就是发送了一个 SIGINT 信号给该进程）</li>
-<li>在从内核态回到用户态继续执行进程的用户代码之前，首先要处理 PCB 中的信号，这是发现有一个 SIGINT 要处理，而这个信号的在内核默认处理的方式是终止进程，所以直接终止进程，不再返回用户空间执行代码</li>
-</ol>
-<p>在 bash 执行 <code>kill -l</code> 可以看到所有信号及其编号：<br><img src="https://i.loli.net/2020/12/13/aCFM9hEjfIQX3Tw.png" alt="image.png"></p>
-<p>产生信号的方式：</p>
-<ol>
-<li>按下某些组合键。如 Ctrl+C 产生 SIGINT，Ctrl+/ 产生 SIGQUIT ，Ctrl+Z 产生 SIGTSTP。</li>
-<li>异常产生信号。由硬件检测到并通知内核，然后内核向当前进程发送适当的信号。例如当前进程执行指令 div 0，CPU 的运算单元会产生异常，内核将这个异常解释为 SIGFPE 信号发送给进程；再比如当前进程访问了非法内存地址，MMU 会产生异常，内核将这个异常解释为 SIGSEGV 信号发送给进程。</li>
-<li>进程通过系统调用 kill 函数给另一个进程发送信号。</li>
-<li>通过 kill 命令给某个进程发送信号（内部也是通过系统调用 kill 函数实现的）</li>
-<li>某种特定的软件行为产生信号。如向读端已关闭的管道写数据时产生 SIGPIPE 信号，时钟函数 alarm 超时产生 SIGALRM 信号</li>
-</ol>
-<p>举个例子，用 alarm 函数设定一个闹钟，告诉内核在 2 秒后给当前进程发送一个 SIGALRM 信号，该信号的默认处理动作是终止当前进程：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;signal.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">1</span>;</span><br><span class="line">    alarm(<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">for</span> (; ; count++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"count = %d\n"</span>, count);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以看到，时钟超时前一直在对 count 进行计数，2s 后进程收到 SIGALRM 信号终止。<br><img src="https://i.loli.net/2020/12/13/vAwGdTbNH8lOSg5.png" alt="image.png"></p>
-<p>下图总结了信号的捕获过程。与中断不同，应用层面的开发者是可以控制程序收到信号后的行为的：</p>
-<p><img src="https://i.loli.net/2020/12/13/NRnovw1bMuG3xzs.png" alt></p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://blog.csdn.net/flowing_wind/article/details/79967588" target="_blank" rel="noopener">Linux进程信号详解</a></p>
-<p><a href="https://www.cnblogs.com/charlesblc/p/6277810.html" target="_blank" rel="noopener">信号和中断的比较+中断和异常的比较</a></p>
-<p>《深入理解计算机系统》第 8 章：异常控制流</p>
-
-      
-    </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/12/12/异常、中断与信号/" data-id="ckoqt9nuq0016b0upxnoahv5z" class="article-share-link">
-        分享
-      </a>
-      
-<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/异常处理/">异常处理</a></li></ul>
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" rel="tag">异常处理</a></li></ul>
 
     </footer>
-
   </div>
 
-  
-
-  
-
-</article>
     
-    <article id="post-从BP与SP说开去" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
+ 
+    
+</article>
 
+    
+    <article
+  id="post-从BP与SP说开去"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
   <div class="article-inner">
     
     <header class="article-header">
-      
-
+       
 <h2 itemprop="name">
-  <a class="article-title" href="/2020/11/21/从BP与SP说开去/">函数调用背后的秘密——寄存器与栈</a>
+  <a class="article-title" href="/2020/11/21/%E4%BB%8EBP%E4%B8%8ESP%E8%AF%B4%E5%BC%80%E5%8E%BB/"
+    >函数调用背后的秘密——寄存器与栈</a> 
 </h2>
+ 
 
-
-
+      
     </header>
-    
-
-    
+     
     <div class="article-meta">
-      <a href="/2020/11/21/从BP与SP说开去/" class="article-date">
+      <a href="/2020/11/21/%E4%BB%8EBP%E4%B8%8ESP%E8%AF%B4%E5%BC%80%E5%8E%BB/" class="article-date">
   <time datetime="2020-11-21T03:03:15.000Z" itemprop="datePublished">2020-11-21</time>
-</a>
-      
-<div class="article-category">
-  <a class="article-category-link" href="/categories/计算机系统/">计算机系统</a>
-</div>
-
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a>
+  </div>
+   
     </div>
+       
+
+    <!-- copyright -->
     
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-      
-      <p>函数调用是解耦思想的一个基本体现。为了实现调用，我们往往需要给子程序提供一些参数并得到子程序的执行结果。今天就来探究一下这个过程在计算机内部是如何实现的。</p>
-<h2 id="程序内存模型"><a href="#程序内存模型" class="headerlink" title="程序内存模型"></a>程序内存模型</h2><p>下图展示了 x86-64 平台 Linux 系统的程序内存分布模型。出于现实世界的数据量考虑，系统只使用了低 47 位作为内存地址，所以可以看到内存地址最大值为 <code>0x00007FFFFFFFFFF</code>：</p>
-<ol>
-<li>前 FFFFFFF 个字节存放共享库，如 <code>stdio.h</code>、 <code>iostream</code> 等都在这里</li>
-<li>随后为大小最多 8M 的运行时栈。局部变量、程序状态信息等值往往保存其中。sp 减小，栈增大；sp 增大，栈减小并释放栈帧中的内容</li>
-<li>堆空间的申请与释放由程序员手动管理</li>
-<li>Data 区保存全局数据，通常是常量</li>
-<li>Text 区存放程序指令，sp 指针就在这块区域中来回移动</li>
-<li>低 400000 字节则有中断向量表等内容，这块空间通常不会被分配给程序</li>
-</ol>
-<p><img src="https://i.loli.net/2020/12/01/tpiUYdgbZxEBVvm.png" alt="image.png"></p>
-<p><strong>sp(stack pointer)</strong>，中文名“栈顶寄存器”。顾名思义，这个指针时刻指向栈的顶部，其值随 push 和 pop 操作隐式改变。假设操作对象为 x：</p>
-<ul>
-<li>push x：首先，sp -= len(x)（x 的字长，以字节为单位）；然后，在 [sp-len(x), sp) 中存入 x 值。</li>
-<li>pop x：首先，从 [sp-len(x), sp) 中读取数据存放到 x；然后，sp += len(x)。</li>
-</ul>
-<p>如果编译器能推断一个函数要占用多少空间，在进入这个函数时往往会为它预先分配好一段栈空间（如例二汇编代码第 18 行 <code>sub rsp, 32</code>，为 main 函数分配了 32 字节栈空间）。在这个函数退出时，调整 sp 的值销毁这段空间（例二汇编代码第 30 行 <code>add rsp, 32</code>）。</p>
-<p><strong>bp(base pointer)</strong>，中文名“基指寄存器”。因为随着指令执行 sp 是不断变化的，所以在进入函数时常用 bp 保存 sp 的初始值以对要用到的数据进行寻址定位（例二汇编代码第 6 行 <code>mov eax, DWORD PTR [rbp+36]</code>，第 21 行 <code>mov QWORD PTR [rbp-32], rax</code> 等）。</p>
-<p>指令 <code>call x</code> 会设置 ip 寄存器的值为 x 的段偏移地址，达到“调用函数”的目的。这个过程分为两步：</p>
-<ol>
-<li>把 ip 寄存器的原址入栈（此时 ip 指向 call 的下一条指令），相当于 <code>push ip</code></li>
-<li>更新 ip 寄存器的值，相当于 <code>mov ip, x</code></li>
-</ol>
-<p>指令 <code>ret</code> 从栈顶取值保存到 ip 寄存器，相当于 <code>call</code> 的逆操作。执行完 ret 指令后 ip 恢复到函数调用前的值，程序从而继续向下执行。</p>
-<p>指令 <code>leave</code> 在函数执行结束后恢复 sp 和 bp 的值。上文说到进入函数时会把 sp 保存到 bp 再调整 sp 的值以为函数分配栈空间。那么在退出函数时自然要恢复原来的 sp 和 bp。这条指令相当于 <code>mov rsp, rbp</code> 和 <code>pop rbp</code> 的结合。</p>
-<h2 id="利用寄存器传参"><a href="#利用寄存器传参" class="headerlink" title="利用寄存器传参"></a>利用寄存器传参</h2><p>来看例一：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">square</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num * num;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> k = <span class="number">2</span>;</span><br><span class="line">    square(k);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在 x86-64 平台上汇编得到的结果是这样的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">square:</span><br><span class="line">        push    rbp</span><br><span class="line">        mov     rbp, rsp</span><br><span class="line">        mov     DWORD PTR [rbp-4], edi</span><br><span class="line">        mov     eax, DWORD PTR [rbp-4]</span><br><span class="line">        imul    eax, eax</span><br><span class="line">        pop     rbp</span><br><span class="line">        ret</span><br><span class="line">main:</span><br><span class="line">        push    rbp</span><br><span class="line">        mov     rbp, rsp</span><br><span class="line">        sub     rsp, 16</span><br><span class="line">        mov     DWORD PTR [rbp-4], 2</span><br><span class="line">        mov     eax, DWORD PTR [rbp-4]</span><br><span class="line">        mov     edi, eax</span><br><span class="line">        call    square</span><br><span class="line">        mov     DWORD PTR [rbp-4], eax</span><br><span class="line">        mov     eax, 0</span><br><span class="line">        leave</span><br><span class="line">        ret</span><br></pre></td></tr></table></figure>
-<p>变量 k 保存在内存 <code>[rbp-4]</code> 处，其值为 2。随后 <code>[rbp-4]</code> 中的值被存到了 <code>eax</code>，最后保存在 <code>edi</code>，这就完成了一次寄存器传参。square  函数更新 <code>rbp</code> 的值再从 <code>edi</code> 取值保存到 <code>[rbp-4]</code>，完成形参到实参的复制。square 把结果保存在 <code>eax</code> 里，main 读取 <code>eax</code> 得到调用返回值。</p>
-<h2 id="用栈传参"><a href="#用栈传参" class="headerlink" title="用栈传参"></a>用栈传参</h2><p>当参数的数量过多无法全部保存到寄存器里或长度超过了机器字长，就要用到栈来传参。再来看例二：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">20</span>];</span><br><span class="line">    <span class="keyword">int</span>  age;</span><br><span class="line">&#125;Person;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">greet</span><span class="params">(Person people)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"hello %s, you are %d years old.\n"</span>, people.name, people.age);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Person me = &#123;name: <span class="string">"Rowan"</span>, age: <span class="number">21</span>&#125;;</span><br><span class="line">    greet(me);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>翻译成汇编语言是这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">.LC0:</span><br><span class="line">        .string &quot;hello %s, you are %d years old.\n&quot;</span><br><span class="line">greet:</span><br><span class="line">        push    rbp</span><br><span class="line">        mov     rbp, rsp</span><br><span class="line">        mov     eax, DWORD PTR [rbp+36]</span><br><span class="line">        mov     edx, eax</span><br><span class="line">        lea     rsi, [rbp+16]</span><br><span class="line">        mov     edi, OFFSET FLAT:.LC0</span><br><span class="line">        mov     eax, 0</span><br><span class="line">        call    printf</span><br><span class="line">        nop</span><br><span class="line">        pop     rbp</span><br><span class="line">        ret</span><br><span class="line">main:</span><br><span class="line">        push    rbp</span><br><span class="line">        mov     rbp, rsp</span><br><span class="line">        sub     rsp, 32</span><br><span class="line">        movabs  rax, 474081619794</span><br><span class="line">        mov     edx, 0</span><br><span class="line">        mov     QWORD PTR [rbp-32], rax</span><br><span class="line">        mov     QWORD PTR [rbp-24], rdx</span><br><span class="line">        mov     DWORD PTR [rbp-16], 0</span><br><span class="line">        mov     DWORD PTR [rbp-12], 21</span><br><span class="line">        sub     rsp, 8</span><br><span class="line">        push    QWORD PTR [rbp-16]</span><br><span class="line">        push    QWORD PTR [rbp-24]</span><br><span class="line">        push    QWORD PTR [rbp-32]</span><br><span class="line">        call    greet</span><br><span class="line">        add     rsp, 32</span><br><span class="line">        mov     eax, 0</span><br><span class="line">        leave</span><br><span class="line">        ret</span><br></pre></td></tr></table></figure>
-<p>一个 Person 实例占 24 字节，超过了 x86-64 平台下一个通用寄存器的最大长度（8 字节），编译器用栈来保存参数。</p>
-<p>26 到 28 行的三个 <code>push</code> 操作把 me 入栈，随后用 <code>call</code> 指令跳到 square 函数。square 函数在栈的 <code>[rbp+36]</code> 取到 age 成员的值，取 <code>[rbp+16]</code> （name 成员）的内存地址放入 <code>rsi</code>，完成一次传参。</p>
-<h2 id="如何实现多返回值"><a href="#如何实现多返回值" class="headerlink" title="如何实现多返回值"></a>如何实现多返回值</h2><p>前面说到，调用方通过读取 <code>eax</code> 寄存器得到被调用函数的返回值，而 <code>eax</code> 只能存放一个值，那么像 Golang 这种支持多返回值的语言是如何实现的呢？答案就是栈。</p>
-<p>Golang 统一用栈来传参，函数调用前在调用者栈帧上就已经预先为返回值分配好了内存空间，被调用函数只需要把返回值依次填进去就好了。</p>
-<p><img src="https://i.loli.net/2021/01/16/vAlpKw2HEYWcfS7.png" alt="go函数调用内存模型.png"></p>
-<p>统一使用栈传参最直接的好处当然就是支持多返回值，以及便于编译器生成汇编代码了。但是相比 C 等支持寄存器传参的语言来说，主要弊端在于传参速度慢，因为 CPU 访问栈的开销比访问寄存器高几十倍。</p>
-
-      
-    </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/11/21/从BP与SP说开去/" data-id="ckoqt9nt0000ib0upfycx8q9z" class="article-share-link">
-        分享
-      </a>
-      
-<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内存模型/">内存模型</a></li></ul>
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" rel="tag">内存模型</a></li></ul>
 
     </footer>
-
   </div>
 
-  
-
-  
-
-</article>
     
-    <article id="post-Golang-关键字-new-和-make-有啥不同" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
+ 
+    
+</article>
 
+    
+    <article
+  id="post-Golang-关键字-new-和-make-有啥不同"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
   <div class="article-inner">
     
     <header class="article-header">
-      
-
+       
 <h2 itemprop="name">
-  <a class="article-title" href="/2020/08/03/Golang-关键字-new-和-make-有啥不同/">Golang 关键字 new 和 make 有啥不同?</a>
+  <a class="article-title" href="/2020/08/03/Golang-%E5%85%B3%E9%94%AE%E5%AD%97-new-%E5%92%8C-make-%E6%9C%89%E5%95%A5%E4%B8%8D%E5%90%8C/"
+    >Golang 关键字 new 和 make 有啥不同?</a> 
 </h2>
+ 
 
-
-
+      
     </header>
-    
-
-    
+     
     <div class="article-meta">
-      <a href="/2020/08/03/Golang-关键字-new-和-make-有啥不同/" class="article-date">
+      <a href="/2020/08/03/Golang-%E5%85%B3%E9%94%AE%E5%AD%97-new-%E5%92%8C-make-%E6%9C%89%E5%95%A5%E4%B8%8D%E5%90%8C/" class="article-date">
   <time datetime="2020-08-03T01:59:14.000Z" itemprop="datePublished">2020-08-03</time>
-</a>
-      
-<div class="article-category">
-  <a class="article-category-link" href="/categories/语言/">语言</a>
-</div>
-
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%AD%E8%A8%80/">语言</a>
+  </div>
+   
     </div>
+       
+
+    <!-- copyright -->
     
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-      
-      <p>当我们想要得到一个切片、哈希表或者 channel 的实例，我们常使用 <code>make</code>；而如果我们需要一个指针，我们可以用 <code>new</code>：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span> &#123;</span><br><span class="line">    Age <span class="keyword">int8</span></span><br><span class="line">    Name <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">string</span>)</span><br><span class="line">    s := <span class="built_in">make</span>([]<span class="keyword">string</span>, <span class="number">0</span>)</span><br><span class="line">    m := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">string</span>)</span><br><span class="line"></span><br><span class="line">    i := <span class="built_in">new</span>(<span class="keyword">int</span>) <span class="comment">// i 为 *int 类型</span></span><br><span class="line">    pp := <span class="built_in">new</span>(Person) <span class="comment">// pp 为 *Person 类型</span></span><br><span class="line">    p := Person&#123;&#125; <span class="comment">// p 为 Person 类型实例</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>new</code> 只是申请了一片该类型的内存空间并将其置 0，然后返回指向这个空间的指针，换言之，new 得到的指针指向的是该类型的零值；而 <code>make</code> 在申请内存的同时初始化这个内置的数据结构：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    mMap := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">string</span>)</span><br><span class="line">    nMap := <span class="built_in">new</span>(<span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">string</span>)</span><br><span class="line"></span><br><span class="line">    fmt.Println(mMap == <span class="literal">nil</span>)     <span class="comment">// false</span></span><br><span class="line">    fmt.Println(*nMap == <span class="literal">nil</span>)    <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">    mMap[<span class="number">0</span>] = <span class="string">"hello world"</span></span><br><span class="line">    nMap[<span class="number">0</span>] = <span class="string">"hello world"</span>     <span class="comment">// panic: assignment to entry in nil map</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>总结：</p>
-<ol>
-<li><code>make</code> 只能用于内置的 map、slice、channel 类型，<code>new</code> 可以用于任何类型 </li>
-<li><code>make</code> 得到类型实例，<code>new</code> 得到类型指针</li>
-<li><code>make</code> 在申请内存同时初始化对象，<code>new</code> 只是申请了一片内存并且将其置为类型零值</li>
-</ol>
-
-      
-    </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/08/03/Golang-关键字-new-和-make-有啥不同/" data-id="ckoqt9nru0001b0up7kpel5kh" class="article-share-link">
-        分享
-      </a>
-      
-<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li></ul>
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/" rel="tag">Go</a></li></ul>
 
     </footer>
-
   </div>
 
-  
-
-  
-
-</article>
     
-    <article id="post-浅谈WiFi6" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
+ 
+    
+</article>
 
+    
+    <article
+  id="post-浅谈WiFi6"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
   <div class="article-inner">
     
     <header class="article-header">
-      
-
+       
 <h2 itemprop="name">
-  <a class="article-title" href="/2020/07/30/浅谈WiFi6/">浅谈WiFi6</a>
+  <a class="article-title" href="/2020/07/30/%E6%B5%85%E8%B0%88WiFi6/"
+    >浅谈WiFi6</a> 
 </h2>
+ 
 
-
-
+      
     </header>
-    
-
-    
+     
     <div class="article-meta">
-      <a href="/2020/07/30/浅谈WiFi6/" class="article-date">
+      <a href="/2020/07/30/%E6%B5%85%E8%B0%88WiFi6/" class="article-date">
   <time datetime="2020-07-30T01:44:35.000Z" itemprop="datePublished">2020-07-30</time>
-</a>
-      
-<div class="article-category">
-  <a class="article-category-link" href="/categories/计算机网络/">计算机网络</a>
-</div>
-
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+  </div>
+   
     </div>
+       
+
+    <!-- copyright -->
     
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-      
-      <h2 id="什么是-WiFi6"><a href="#什么是-WiFi6" class="headerlink" title="什么是 WiFi6"></a>什么是 WiFi6</h2><p>WiFi 标准是 IEEE（电气电子工程师学会）制定的标准之一，IEEE 将最近几代的 WiFi 标准依次命名为 802.11n, 802.11ac, 802.11ax。WiFi 联盟则是一个商业组织，主要目的是在全球范围内推行 WiFi 产品的兼容认证，发展 IEEE802.11 标准的无线局域网技术。</p>
-<p>2018年底，为了方便宣传与推广，WiFi 联盟为 WiFi 标准推出了更为简单好记的名字：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">802.11n = WiFi4</span><br><span class="line">802.11ac = WiFi5</span><br><span class="line">802.11ax = WiFi6</span><br></pre></td></tr></table></figure>
-<p><img src="https://i.loli.net/2020/07/30/vNi1Pqt4cxpeC8A.png" alt="各版本WiFi对比"></p>
-<h2 id="OFDMA"><a href="#OFDMA" class="headerlink" title="OFDMA"></a>OFDMA</h2><p>使用 OFDM， 每一帧数据只能服务一个设备；而使用 OFDMA，每一帧数据可以被多个设备所使用。</p>
-<p><img src="https://i.loli.net/2020/07/30/fAW9UZlwxkYJOPz.png" alt="OFDM与OFDMA"></p>
-<p>一个通俗的比喻是卡车。使用 OFDM 卡车每次只能给一家运货，即使这次运输卡车没装满。而 OFDMA 一次可以把东西运给多家，这样就不会浪费运力了。</p>
-<p><img src="https://i.loli.net/2020/07/30/P92vCYuAUaTcMRb.png" alt="OFDMA卡车"></p>
-<h2 id="MU-MIMO"><a href="#MU-MIMO" class="headerlink" title="MU-MIMO"></a>MU-MIMO</h2><p>传统的 SU-MIMO 的路由器信号呈一个环状散发，根据距离依次单独与设备进行通讯。当接入设备过多会导致部分设备长期处于等待状态，造成所谓“信号满格网速很慢”的现象。更为严重的是，每次通讯的带宽 = 总带宽 / 接入设备数。这样就造成了大量浪费。<br>而 MU-MIMO 路由器对信号进行频分、码分等复用，这样一台有 n 根天线的 MU-MIMO 路由器可以和最多 n台设备同时通讯且每个设备都能最大限度利用频宽，数据传输速率提高了 n 倍。<br>支持 MU-MIMO 的路由器同时与 SU-MIMO 设备和 MU-MIMO 设备通信时会混着用这两种技术。举例来说设备 1 是 SU-MIMO，设备 2、3 是 MU-MIMO，那 MU-MIMO 路由器和 1 通信时使用 SU-MIMO，和 2、3 通信时使用 MU-MIMO。<br>MU-MIMO 只是利用了空置的天线，并不一定就能提高 wifi 速度。如果当前所有天线都被利用上了再使用 MU-MIMO 也没效果。比如 MU-MIMO 路由器与 3 台 MU-MIMO 设备 + 1 台 SU-MIMO 设备通信，此时路由器 3 根天线都满载了，把那一台 SU-MIMO 升级成 MU-MIMO 并不会对网速有提升。<br>与 wifi 5 相比 wifi6 的提升在于支持上行 MU-MIMO，这在用户上传数据的时候很有用</p>
-<p><img src="https://i.loli.net/2020/07/30/CWQzdSU2youTrVx.png" alt="MU-MIMO"></p>
-<h2 id="调制模式"><a href="#调制模式" class="headerlink" title="调制模式"></a>调制模式</h2><p>QAM 是一种在两个正交载波上进行幅度调制的调制方式，xQAM 代表了一个传输单元含 x 子载波，即路由器每一帧最多能传输多少数据。</p>
-<p><img src="https://i.loli.net/2020/07/30/Sx541NemKHCt8Jn.png" alt="QAM"></p>
-<ul>
-<li>WIFI5：最高为 256-QAM，但是有效子载波数量只有 234 个。使用 160Mhz 频宽就是 468 个。</li>
-<li>WIFI6：最高为1024-QAM，但是有效子载波数量的只有 980 个。使用 160Mhz 频宽时候为 1960 个</li>
-</ul>
-<p>WIFI5 一个QAM传输 8bit 数据，WIFI6 用的是10Bit数据。两者最高速度时候的编码率都是5/6。wifi6 每帧传输更多的数据，用户感受到的“网速”也就变快了。<br>在 120MHz 下 wifi6 理论上单流最高可达 1021Mbps，极限 8 串流达到 9607Mbps(9.3Gbps)。当然，具体速度如何还受用户网络带宽等因素的限制。</p>
-<h2 id="TWT"><a href="#TWT" class="headerlink" title="TWT"></a>TWT</h2><p>TWT(Target Wake Time) 主要面向于智能家居产品，这些设备通过沟通告诉路由器什么时候唤醒设备，其他时间不要找我（维持wifi连接），避免多个设备同时通信造成等待，减少无线网络天线使用及信号搜索时间，进而减少智能家居产品的耗电问题。但该技术并不是对所有设备都有帮助，例如笔记本电脑需要持续的互联网访问，因此不太可能过多地受益于此功能。</p>
-<p><img src="https://i.loli.net/2020/07/30/3AU7J1MhsSHRafY.png" alt="TWT"></p>
-<h2 id="SR"><a href="#SR" class="headerlink" title="SR"></a>SR</h2><p>SR(spacial reuse) 指空间复用技术，作用是实现高密度场景下（空间中同时存在多个路由信号）的信道复用</p>
-<p><img src="https://i.loli.net/2020/07/30/qdfQhs6vFXzpLik.png" alt="SR"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>当前主流路由器已经支持 WiFi5，由于 WiFi5 仅支持 5G 频段，而现实里还存在不少只支持 2.4G 频段的设备，因此路由器会向下兼容 WiFi 4 的标准，也就是它们在 2.4G 频段使用的 WiFi4 确保向下兼容，在 5G 频段则使用的 WiFi5。<br>WiFi6 同时支持 2.4G 和 5G 频段，若 WiFi6 路由器和支持 WiFi6 的终端普及后，结合上文内容，预计带来的增益有：</p>
-<ol>
-<li>速度更快，可将无线速率提高到最高9.6Gbps，满足高速率应用需求，主要通过1024QAM、160Mhz、更多的空间流等实现</li>
-<li>延迟更低，通过MU-MIMO、OFDMA实现</li>
-<li>网络容量提升，对同时连接多设备的场景支持更好，通过MU-MIMO、OFDMA实现</li>
-<li>信号更加稳定，抗干扰能力和覆盖范围增强，通过支持 2.4G 频段、SR等实现</li>
-<li>此外，为了支持新的技术特性，WiFi 6路由器本身在硬件规格（处理器、内存等）上也会有提升，硬件上的提升也会带来各方面更好的效果，所以对于不支持 WiFi6 的设备也有一定增益</li>
-</ol>
-
-      
-    </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/30/浅谈WiFi6/" data-id="ckoqt9nt7000ob0up2n9r2u1g" class="article-share-link">
-        分享
-      </a>
-      
-<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/硬件/">硬件</a></li></ul>
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A1%AC%E4%BB%B6/" rel="tag">硬件</a></li></ul>
 
     </footer>
-
   </div>
 
-  
-
-  
-
-</article>
     
-    <article id="post-Go底层大冒险之defer" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
+ 
+    
+</article>
 
+    
+    <article
+  id="post-Go底层大冒险之defer"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
   <div class="article-inner">
     
     <header class="article-header">
-      
-
+       
 <h2 itemprop="name">
-  <a class="article-title" href="/2020/07/09/Go底层大冒险之defer/">Go底层大冒险之defer</a>
+  <a class="article-title" href="/2020/07/09/Go%E5%BA%95%E5%B1%82%E5%A4%A7%E5%86%92%E9%99%A9%E4%B9%8Bdefer/"
+    >Go底层大冒险之defer</a> 
 </h2>
+ 
 
-
-
+      
     </header>
-    
-
-    
+     
     <div class="article-meta">
-      <a href="/2020/07/09/Go底层大冒险之defer/" class="article-date">
+      <a href="/2020/07/09/Go%E5%BA%95%E5%B1%82%E5%A4%A7%E5%86%92%E9%99%A9%E4%B9%8Bdefer/" class="article-date">
   <time datetime="2020-07-09T00:08:07.000Z" itemprop="datePublished">2020-07-09</time>
-</a>
-      
-<div class="article-category">
-  <a class="article-category-link" href="/categories/语言/">语言</a>
-</div>
-
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%AD%E8%A8%80/">语言</a>
+  </div>
+   
     </div>
+       
+
+    <!-- copyright -->
     
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-      
-      <h2 id="defer"><a href="#defer" class="headerlink" title="defer"></a>defer</h2><h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p>与 Python 中的 <code>with</code> 类似，Golang 使用 <code>defer</code> 关键字替我们管理函数的退出时的清除操作。一个经典的例子如下：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">CopyFile</span><span class="params">(dstName, srcName <span class="keyword">string</span>)</span> <span class="params">(written <span class="keyword">int64</span>, err error)</span></span> &#123;</span><br><span class="line">    src, err := os.Open(srcName)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    dst, err := os.Create(dstName)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    written, err = io.Copy(dst, src)</span><br><span class="line">    dst.Close()</span><br><span class="line">    src.Close()</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面这段代码有个 bug 就是如果 <code>os.create</code> 调用失败，整个函数会直接 return，然而此时 src 的文件描述符并没有关闭。当然在 return 前调用一次 src.Clouse 可以解决问题。然而一旦项目变得复杂，这种隐晦的问题就不容易被注意到。因此，<code>defer</code> 便应运而生了。把关闭文件描述符这个操作交给运行时去管理，我们就不用担心会发生资源泄露了：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">CopyFile</span><span class="params">(dstName, srcName <span class="keyword">string</span>)</span> <span class="params">(written <span class="keyword">int64</span>, err error)</span></span> &#123;</span><br><span class="line">    src, err := os.Open(srcName)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">defer</span> src.Close()</span><br><span class="line"></span><br><span class="line">    dst, err := os.Create(dstName)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">defer</span> dst.Close()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> io.Copy(dst, src)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>古人云：defer 好，defer 妙，defer 棒的呱呱叫。但其实在使用过程中也有几个必须要注意的点：</p>
-<ul>
-<li>defer 函数的参数会被预计算。换言之，<strong>defer 函数的参数值在其注册时就已经确定了</strong>。如下所示，A 中的 defer 函数在注册时就执行了 <code>time.Since(startedAt)</code> 并进行传参；而 B 注册了一个闭包，<code>time.Since(startedAt)</code> 在 defer 函数中才执行。总结起来就是：在 defer 函数声明时，对外部变量的引用有两种方式：作为函数参数 or 作为闭包引用。作为函数参数，则在 defer 声明时就把值传给 defer；作为闭包引用，则会在 defer 函数执行时根据整个上下文确定当前的值。：</li>
-</ul>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//output: 0s</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">A</span><span class="params">()</span></span> &#123;</span><br><span class="line">    startedAt := time.Now()</span><br><span class="line">    <span class="keyword">defer</span> fmt.Println(time.Since(startedAt))</span><br><span class="line"></span><br><span class="line">    time.Sleep(time.Second)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//output: 1s</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">B</span><span class="params">()</span></span> &#123;</span><br><span class="line">    startedAt := time.Now()</span><br><span class="line">    <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        fmt.Println(time.Since(startedAt))</span><br><span class="line">    &#125;()</span><br><span class="line"></span><br><span class="line">    time.Sleep(time.Second)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>defer 函数根据后进先出（Last In First Out）的原则调用：</li>
-</ul>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">b</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">4</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">defer</span> fmt.Print(i)</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="comment">// output: 3210</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>defer 函数可以读取和修改<strong>命名</strong>返回值：</li>
-</ul>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">c</span><span class="params">()</span> <span class="params">(i <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">         i++</span><br><span class="line">     &#125;()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">&#125; <span class="comment">// i 为 2</span></span><br></pre></td></tr></table></figure>
-<p>这个过程被拆解如下：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">c</span><span class="params">()</span> <span class="params">(i <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    i = <span class="number">1</span>         <span class="comment">// 给命名返回值赋值</span></span><br><span class="line">    i++           <span class="comment">// 函数返回前插入 defer 函数，将 i 加一</span></span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这是<em>因为 return 语句先给命名返回值赋值，再执行 defer 中的函数（命名返回值在延迟函数前声明，故延迟函数可以对其进行操作），最后用 ret 指令退出</em>。如果是匿名返回值，其在 defer 语句前没有声明，延迟函数也就无从改变它的值：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">d</span><span class="params">()</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    i := <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        i = <span class="number">2</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> i</span><br><span class="line">&#125; <span class="comment">// i 为 1</span></span><br></pre></td></tr></table></figure>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>先来看一下 defer 关键字在 go 中对应的结构体 <a href="https://github.com/golang/go/blob/e1faebe7b40c23811a6025ed104d3ce9882f0c3b/src/runtime/runtime2.go#L903" target="_blank" rel="noopener">runtime._defer</a>：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> _defer <span class="keyword">struct</span> &#123;</span><br><span class="line">    siz       <span class="keyword">int32</span></span><br><span class="line">    heap      <span class="keyword">bool</span></span><br><span class="line">    openDefer <span class="keyword">bool</span></span><br><span class="line">    sp        <span class="keyword">uintptr</span></span><br><span class="line">    pc        <span class="keyword">uintptr</span></span><br><span class="line">    fn        *funcval</span><br><span class="line">    _panic    *_panic</span><br><span class="line">    link      *_defer</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>siz</code> 延迟函数的参数和返回值大小</li>
-<li><code>heap</code> 这个结构体是否在堆上分配</li>
-<li><code>sp</code> 和 <code>pc</code> 分别是调用者栈指针和程序计数器</li>
-<li><code>fn</code> 延迟函数指针</li>
-<li><code>_panic</code> 触发这个 defer 的 panic</li>
-<li><code>openDefer</code> 表示当前 defer 是否经过开放编码的优化</li>
-<li><code>link</code> 下一个 _defer 结构体</li>
-</ul>
-<p>多个 <a href="https://github.com/golang/go/blob/e1faebe7b40c23811a6025ed104d3ce9882f0c3b/src/runtime/runtime2.go#L903" target="_blank" rel="noopener">runtime._defer</a> 结构体通过 <code>link</code> 字段以链表的形式组织起来。</p>
-<h3 id="编译阶段对-defer-的处理"><a href="#编译阶段对-defer-的处理" class="headerlink" title="编译阶段对 defer 的处理"></a>编译阶段对 defer 的处理</h3><p>编译阶段编译器会使用 <a href="https://github.com/golang/go/blob/4d5bb9c60905b162da8b767a8a133f6b4edcaa65/src/cmd/compile/internal/gc/ssa.go#L1023" target="_blank" rel="noopener">cmd/compile/internal/gc.state.stmt</a> 函数处理代码里的 defer 关键字，该函数会根据条件的不同，使用三种不同的机制处理该关键字：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *state)</span> <span class="title">stmt</span><span class="params">(n *Node)</span></span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">switch</span> n.Op &#123;</span><br><span class="line">    <span class="keyword">case</span> ODEFER:</span><br><span class="line">        ...</span><br><span class="line">        <span class="keyword">if</span> s.hasOpenDefers &#123;</span><br><span class="line">            s.openDeferRecord(n.Left) <span class="comment">// 开放编码</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            d := callDefer <span class="comment">// 堆分配 _defer 结构体</span></span><br><span class="line">            <span class="keyword">if</span> n.Esc == EscNever &#123;</span><br><span class="line">                d = callDeferStack <span class="comment">// 栈分配 _defer 结构体</span></span><br><span class="line">            &#125;</span><br><span class="line">            s.call(n.Left, d)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>堆分配是 Go 最早的实现方式，但是这样性能较差，在高并发场景下可能拖慢系统的速度。从 1.13 开始新增了栈分配，减少了 30% 的额外开销，并在 1.14 中引入了基于开放编码的 defer，使得该关键字的额外开销可以忽略不计。</p>
-<h3 id="堆上分配"><a href="#堆上分配" class="headerlink" title="堆上分配"></a>堆上分配</h3><p><a href="https://github.com/golang/go/blob/4d5bb9c60905b162da8b767a8a133f6b4edcaa65/src/cmd/compile/internal/gc/ssa.go#L1023" target="_blank" rel="noopener">cmd/compile/internal/gc.state.stmt</a> 函数最后调用了 <a href="https://github.com/golang/go/blob/4d5bb9c60905b162da8b767a8a133f6b4edcaa65/src/cmd/compile/internal/gc/ssa.go#L4324" target="_blank" rel="noopener">cmd/compile/internal/gc.state.call</a>。call 函数不只用在 defer 关键字，还被用来为所有函数和方法生成中间代码，但这里我们只关注与 defer 有关的部分：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *state)</span> <span class="title">call</span><span class="params">(n *Node, k callKind)</span> *<span class="title">ssa</span>.<span class="title">Value</span></span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">var</span> call *ssa.Value</span><br><span class="line">    <span class="keyword">if</span> k == callDeferStack &#123;</span><br><span class="line">        <span class="comment">// 在栈上初始化 defer 结构体</span></span><br><span class="line">        ...</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">        <span class="keyword">switch</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> k == callDefer:</span><br><span class="line">            call = s.newValue1A(ssa.OpStaticCall, types.TypeMem, deferproc, s.mem()) <span class="comment">// 调用 runtime.deferproc 函数</span></span><br><span class="line">        ...</span><br><span class="line">        &#125;</span><br><span class="line">        call.AuxInt = stksize <span class="comment">// Call operations carry the argsize of the callee along with them</span></span><br><span class="line">    &#125;</span><br><span class="line">    s.vars[&amp;memVar] = call</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>defer 关键字在运行期间会调用 <a href="https://github.com/golang/go/blob/2517f4946b42b8deedb864c884f1b41311d45850/src/runtime/panic.go#L223" target="_blank" rel="noopener">runtime.deferproc</a> 函数，这个函数接收了参数的大小和闭包所在的地址两个参数，负责创建新的延迟调用任务：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">deferproc</span><span class="params">(siz <span class="keyword">int32</span>, fn *funcval)</span></span> &#123;</span><br><span class="line">    gp := getg()</span><br><span class="line">    <span class="keyword">if</span> gp.m.curg != gp &#123;</span><br><span class="line">        throw(<span class="string">"defer on system stack"</span>) <span class="comment">// go code on the system stack can't defer</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    sp := getcallersp()</span><br><span class="line">    argp := <span class="keyword">uintptr</span>(unsafe.Pointer(&amp;fn)) + unsafe.Sizeof(fn)</span><br><span class="line">    callerpc := getcallerpc()</span><br><span class="line"></span><br><span class="line">    d := newdefer(siz)</span><br><span class="line">    <span class="keyword">if</span> d._panic != <span class="literal">nil</span> &#123;</span><br><span class="line">        throw(<span class="string">"deferproc: d.panic != nil after newdefer"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    d.link = gp._defer</span><br><span class="line">    gp._defer = d <span class="comment">// 新的 _defer 结构体被追加到 Goroutine 持有的 defer 链表头部</span></span><br><span class="line">    d.fn = fn</span><br><span class="line">    d.pc = callerpc</span><br><span class="line">    d.sp = sp</span><br><span class="line">    <span class="keyword">switch</span> siz &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">        <span class="comment">// Do nothing.</span></span><br><span class="line">    <span class="keyword">case</span> sys.PtrSize:</span><br><span class="line">        *(*<span class="keyword">uintptr</span>)(deferArgs(d)) = *(*<span class="keyword">uintptr</span>)(unsafe.Pointer(argp))</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        memmove(deferArgs(d), unsafe.Pointer(argp), <span class="keyword">uintptr</span>(siz))</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// deferproc returns 0 normally.</span></span><br><span class="line">    <span class="comment">// a deferred func that stops a panic</span></span><br><span class="line">    <span class="comment">// makes the deferproc return 1.</span></span><br><span class="line">    <span class="comment">// the code the compiler generates always</span></span><br><span class="line">    <span class="comment">// checks the return value and jumps to the</span></span><br><span class="line">    <span class="comment">// end of the function if deferproc returns != 0.</span></span><br><span class="line">    return0()</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p><a href="https://github.com/golang/go/blob/2517f4946b42b8deedb864c884f1b41311d45850/src/runtime/panic.go#L223" target="_blank" rel="noopener">runtime.deferproc</a> 中的 <a href="https://github.com/golang/go/blob/2517f4946b42b8deedb864c884f1b41311d45850/src/runtime/panic.go#L392" target="_blank" rel="noopener">runtime.newdefer</a> 函数的作用是想尽办法获得一个 <a href="https://github.com/golang/go/blob/e1faebe7b40c23811a6025ed104d3ce9882f0c3b/src/runtime/runtime2.go#L903" target="_blank" rel="noopener">runtime._defer</a> 结构体，办法有三个：</p>
-<ol>
-<li>从调度器的延迟调用缓存池 <code>sched.deferpool</code> 中取出结构体并将该结构体追加到当前 Goroutine 的缓存池中；</li>
-<li>从 Goroutine 的延迟调用缓存池 <code>pp.deferpool</code> 中取出结构体</li>
-<li>通过 <a href="https://github.com/golang/go/blob/921ceadd2997f2c0267455e13f909df044234805/src/runtime/malloc.go#L891" target="_blank" rel="noopener">runtime.mallocgc</a> 在堆上创建一个新的结构体</li>
-</ol>
-<p>无论使用哪种方式，只要获取到 <a href="https://github.com/golang/go/blob/e1faebe7b40c23811a6025ed104d3ce9882f0c3b/src/runtime/runtime2.go#L903" target="_blank" rel="noopener">runtime._defer</a> 结构体，它都会被追加到所在 Goroutine 的 _defer 链表的最前面。</p>
-<h3 id="栈上分配"><a href="#栈上分配" class="headerlink" title="栈上分配"></a>栈上分配</h3><p>在默认情况下，我们可以看到 Go 语言中 <a href="https://github.com/golang/go/blob/e1faebe7b40c23811a6025ed104d3ce9882f0c3b/src/runtime/runtime2.go#L903" target="_blank" rel="noopener">runtime._defer</a> 结构体都会在堆上分配，如果我们能够将部分结构体分配到堆上就可以节约内存分配带来的额外开销。</p>
-<p>Go 语言团队在 1.13 中对 defer 关键字进行了优化，<strong>当该关键字在函数体中最多执行一次时</strong>，编译期间的 <a href="https://github.com/golang/go/blob/4d5bb9c60905b162da8b767a8a133f6b4edcaa65/src/cmd/compile/internal/gc/ssa.go#L4324" target="_blank" rel="noopener">cmd/compile/internal/gc.state.call</a> 会将结构体分配到栈上并调用 <a href="https://github.com/golang/go/blob/2517f4946b42b8deedb864c884f1b41311d45850/src/runtime/panic.go#L276" target="_blank" rel="noopener">runtime.deferprocStack</a>：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *state)</span> <span class="title">call</span><span class="params">(n *Node, k callKind)</span> *<span class="title">ssa</span>.<span class="title">Value</span></span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">var</span> call *ssa.Value</span><br><span class="line">    <span class="keyword">if</span> k == callDeferStack &#123;</span><br><span class="line">        <span class="comment">// Make a defer struct d on the stack.</span></span><br><span class="line">        t := deferstruct(stksize)</span><br><span class="line">        ...</span><br><span class="line">        <span class="comment">// Call runtime.deferprocStack with pointer to _defer record.</span></span><br><span class="line">        arg0 := s.constOffPtrSP(types.Types[TUINTPTR], Ctxt.FixedFrameSize())</span><br><span class="line">        s.store(types.Types[TUINTPTR], arg0, addr)</span><br><span class="line">        call = s.newValue1A(ssa.OpStaticCall, types.TypeMem, deferprocStack, s.mem())</span><br><span class="line">        <span class="keyword">if</span> stksize &lt; <span class="keyword">int64</span>(Widthptr) &#123;</span><br><span class="line">            <span class="comment">// We need room for both the call to deferprocStack and the call to</span></span><br><span class="line">            <span class="comment">// the deferred function.</span></span><br><span class="line">            stksize = <span class="keyword">int64</span>(Widthptr)</span><br><span class="line">        &#125;</span><br><span class="line">        call.AuxInt = stksize</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    s.vars[&amp;memVar] = call</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>因为在编译期间我们已经创建了 <a href="https://github.com/golang/go/blob/e1faebe7b40c23811a6025ed104d3ce9882f0c3b/src/runtime/runtime2.go#L903" target="_blank" rel="noopener">runtime._defer</a> 结构体，所以 <a href="https://github.com/golang/go/blob/2517f4946b42b8deedb864c884f1b41311d45850/src/runtime/panic.go#L276" target="_blank" rel="noopener">runtime.deferprocStack</a> 函数在运行期间我们只需要设置那些未在编译期初始化的字段并将栈上的结构体追加到函数的链表上：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">deferprocStack</span><span class="params">(d *_defer)</span></span> &#123;</span><br><span class="line">    gp := getg()</span><br><span class="line">    <span class="keyword">if</span> gp.m.curg != gp &#123;</span><br><span class="line">        <span class="comment">// go code on the system stack can't defer</span></span><br><span class="line">        throw(<span class="string">"defer on system stack"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// siz and fn are already set.</span></span><br><span class="line">    <span class="comment">// The other fields are junk on entry to deferprocStack and</span></span><br><span class="line">    <span class="comment">// are initialized here.</span></span><br><span class="line">    d.started = <span class="literal">false</span></span><br><span class="line">    d.heap = <span class="literal">false</span></span><br><span class="line">    d.openDefer = <span class="literal">false</span></span><br><span class="line">    d.sp = getcallersp()</span><br><span class="line">    d.pc = getcallerpc()</span><br><span class="line">    d.framepc = <span class="number">0</span></span><br><span class="line">    d.varp = <span class="number">0</span></span><br><span class="line">    *(*<span class="keyword">uintptr</span>)(unsafe.Pointer(&amp;d._panic)) = <span class="number">0</span></span><br><span class="line">    *(*<span class="keyword">uintptr</span>)(unsafe.Pointer(&amp;d.fd)) = <span class="number">0</span></span><br><span class="line">    *(*<span class="keyword">uintptr</span>)(unsafe.Pointer(&amp;d.link)) = <span class="keyword">uintptr</span>(unsafe.Pointer(gp._defer))</span><br><span class="line">    *(*<span class="keyword">uintptr</span>)(unsafe.Pointer(&amp;gp._defer)) = <span class="keyword">uintptr</span>(unsafe.Pointer(d))</span><br><span class="line"></span><br><span class="line">    return0()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>除了分配位置的不同，栈上分配和堆上分配的<a href="https://github.com/golang/go/blob/e1faebe7b40c23811a6025ed104d3ce9882f0c3b/src/runtime/runtime2.go#L903" target="_blank" rel="noopener">runtime._defer</a> 并没有本质的不同，而该方法可以适用于绝大多数的场景，与堆上分配 相比，该方法可以将 defer 关键字的额外开销降低 ~30%。</p>
-<h3 id="开放编码"><a href="#开放编码" class="headerlink" title="开放编码"></a>开放编码</h3><p>Go 语言在 1.14 中通过开发编码（Open Coded）实现 defer 关键字，该设计使用代码内联优化 defer 关键字的额外开销并引入函数数据 <code>funcdata</code> 管理 panic 的调用，该优化可以将 defer 的调用开销从 1.13 版本的 ~35ns 降低至 ~6ns 左右。</p>
-<h4 id="使用条件"><a href="#使用条件" class="headerlink" title="使用条件"></a>使用条件</h4><p>开放编码作为一种优化 defer 关键字的方法，它不是在所有的场景下都会开启的，开发编码只会在满足以下的条件时启用：</p>
-<ul>
-<li>函数的 defer 数量少于或者等于 8 个；</li>
-<li>函数的 defer 关键字不能在循环中执行；</li>
-<li>函数的 return 语句与 defer 语句的乘积小于或者等于 15 个；</li>
-</ul>
-<p>Go 语言会在编译期间根据代码是否满足上述条件确定是否使用开放编码。一旦确定使用开放编码，就会在编译期间初始化延迟比特和延迟记录。</p>
-<h4 id="延迟记录"><a href="#延迟记录" class="headerlink" title="延迟记录"></a>延迟记录</h4><p><strong>延迟比特</strong>和<strong>延迟记录</strong>是使用开放编码实现 defer 的两个最重要结构，一旦决定使用开放编码，编译器会在编译期间在栈上初始化大小为 8 个比特的 <code>deferBits</code> 变量。</p>
-<p>延迟比特中的每一个比特位都表示该位对应的 defer 关键字是否需要被执行，如下图所示，其中 8 个比特的倒数第二个比特在函数返回前被设置成了 1，那么该比特位对应的函数会在函数返回前执行：</p>
-<p><img src="https://i.loli.net/2020/12/16/ehniw6W1Fts9uP8.png" alt="image.png"></p>
-<p>延迟比特的作用就是标记哪些 defer 关键字在函数中被执行，这样在函数返回时可以根据对应 deferBits 的内容确定执行的函数，而正是因为 deferBits 的大小仅为 8 比特，所以该优化的启用条件为函数中的 defer 关键字少于 8 个。</p>
-<p>传入 defer 关键字的函数和参数都会存储在延迟记录 <a href="https://draveness.me/golang/tree/cmd/compile/internal/gc.openDeferInfo" target="_blank" rel="noopener">cmd/compile/internal/gc.openDeferInfo</a> 中：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> openDeferInfo <span class="keyword">struct</span> &#123;</span><br><span class="line">    n           *Node</span><br><span class="line">    closure     *ssa.Value      <span class="comment">// 延迟调用函数</span></span><br><span class="line">    closureNode *Node</span><br><span class="line">    rcvr        *ssa.Value      <span class="comment">// 延迟方法的接收者</span></span><br><span class="line">    rcvrNode    *Node</span><br><span class="line">    argVals     []*ssa.Value    <span class="comment">// 延迟函数的参数</span></span><br><span class="line">    argNodes    []*Node</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>开放编码开启后，使用 defer 关键字就和普通的函数调用相差无几了。例如对于下面 Defer.go 文件中的代码：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">c</span><span class="params">()</span> <span class="params">(i <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">         i++</span><br><span class="line">     &#125;()</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>使用 <code>go tool compile -S main.go</code> 得到汇编代码.可能很多人刚看到 go 汇编代码时会一脸懵，因为它既不是 AT&amp;T 格式，也不是 Intel 格式，而是较为小众的 Plan 9，<a href="https://xargin.com/plan9-assembly/" target="_blank" rel="noopener">这篇文章</a>可以让你快速了解 Plan 9：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">&quot;&quot;.c STEXT size=141 args=0x8 locals=0x28</span><br><span class="line">        0x0000 00000 (Defer.go:3)       TEXT    &quot;&quot;.c(SB), ABIInternal, $40-8</span><br><span class="line">        0x0000 00000 (Defer.go:3)       MOVQ    (TLS), CX</span><br><span class="line">        0x0009 00009 (Defer.go:3)       CMPQ    SP, 16(CX)</span><br><span class="line">        0x000d 00013 (Defer.go:3)       PCDATA  $0, $-2</span><br><span class="line">        0x000d 00013 (Defer.go:3)       JLS     131</span><br><span class="line">        0x000f 00015 (Defer.go:3)       PCDATA  $0, $-1</span><br><span class="line">        0x000f 00015 (Defer.go:3)       SUBQ    $40, SP</span><br><span class="line">        0x0013 00019 (Defer.go:3)       MOVQ    BP, 32(SP)</span><br><span class="line">        0x0018 00024 (Defer.go:3)       LEAQ    32(SP), BP</span><br><span class="line">        0x001d 00029 (Defer.go:3)       XORPS   X0, X0</span><br><span class="line">        0x0020 00032 (Defer.go:3)       MOVUPS  X0, 16(SP)</span><br><span class="line">        0x0025 00037 (Defer.go:3)       FUNCDATA        $0, gclocals·69c1753bd5f81501d95132d08af04464(SB)</span><br><span class="line">        0x0025 00037 (Defer.go:3)       FUNCDATA        $1, gclocals·e226d4ae4a7cad8835311c6a4683c14f(SB)</span><br><span class="line">        0x0025 00037 (Defer.go:3)       FUNCDATA        $5, &quot;&quot;.c.opendefer(SB)</span><br><span class="line">        0x0025 00037 (Defer.go:3)       MOVB    $0, &quot;&quot;..autotmp_2+15(SP)</span><br><span class="line">        0x002a 00042 (Defer.go:3)       MOVQ    $0, &quot;&quot;.i+48(SP)</span><br><span class="line">        0x0033 00051 (Defer.go:4)       LEAQ    &quot;&quot;.c.func1·f(SB), AX</span><br><span class="line">        0x003a 00058 (Defer.go:4)       MOVQ    AX, &quot;&quot;..autotmp_3+24(SP)</span><br><span class="line">        0x003f 00063 (Defer.go:4)       LEAQ    &quot;&quot;.i+48(SP), AX</span><br><span class="line">        0x0044 00068 (Defer.go:4)       MOVQ    AX, &quot;&quot;..autotmp_4+16(SP)</span><br><span class="line">        0x0049 00073 (Defer.go:4)       MOVB    $1, &quot;&quot;..autotmp_2+15(SP)</span><br><span class="line">        0x004e 00078 (Defer.go:7)       MOVQ    $1, &quot;&quot;.i+48(SP)</span><br><span class="line">        0x0057 00087 (Defer.go:7)       MOVB    $0, &quot;&quot;..autotmp_2+15(SP)</span><br><span class="line">        0x005c 00092 (Defer.go:7)       MOVQ    &quot;&quot;..autotmp_4+16(SP), AX</span><br><span class="line">        0x0061 00097 (Defer.go:7)       MOVQ    AX, (SP)</span><br><span class="line">        0x0065 00101 (Defer.go:7)       PCDATA  $1, $1</span><br><span class="line">        0x0065 00101 (Defer.go:7)       CALL    &quot;&quot;.c.func1(SB)</span><br><span class="line">        0x006a 00106 (Defer.go:7)       MOVQ    32(SP), BP</span><br><span class="line">        0x006f 00111 (Defer.go:7)       ADDQ    $40, SP</span><br><span class="line">        0x0073 00115 (Defer.go:7)       RET</span><br><span class="line">        0x0074 00116 (Defer.go:7)       CALL    runtime.deferreturn(SB)</span><br><span class="line">        0x0079 00121 (Defer.go:7)       MOVQ    32(SP), BP</span><br><span class="line">        0x007e 00126 (Defer.go:7)       ADDQ    $40, SP</span><br><span class="line">        0x0082 00130 (Defer.go:7)       RET</span><br><span class="line">        0x0083 00131 (Defer.go:7)       NOP</span><br><span class="line">        0x0083 00131 (Defer.go:3)       PCDATA  $1, $-1</span><br><span class="line">        0x0083 00131 (Defer.go:3)       PCDATA  $0, $-2</span><br><span class="line">        0x0083 00131 (Defer.go:3)       CALL    runtime.morestack_noctxt(SB)</span><br><span class="line">        0x0088 00136 (Defer.go:3)       PCDATA  $0, $-1</span><br><span class="line">        0x0088 00136 (Defer.go:3)       JMP     0</span><br><span class="line"></span><br><span class="line">&quot;&quot;.c.func1 STEXT nosplit size=9 args=0x8 locals=0x0</span><br><span class="line">        0x0000 00000 (Defer.go:4)       TEXT    &quot;&quot;.c.func1(SB), NOSPLIT|ABIInternal, $0-8</span><br><span class="line">        0x0000 00000 (Defer.go:4)       FUNCDATA        $0, gclocals·1a65e721a2ccc325b382662e7ffee780(SB)</span><br><span class="line">        0x0000 00000 (Defer.go:4)       FUNCDATA        $1, gclocals·69c1753bd5f81501d95132d08af04464(SB)</span><br><span class="line">        0x0000 00000 (Defer.go:5)       MOVQ    &quot;&quot;.&amp;i+8(SP), AX</span><br><span class="line">        0x0005 00005 (Defer.go:5)       INCQ    (AX)</span><br><span class="line">        0x0008 00008 (Defer.go:6)       RET</span><br></pre></td></tr></table></figure>
-<p><code>FUNCDATA</code> 和 <code>PCDATA</code> 都是编译器为运行时垃圾回收额外添加的内容。从汇编代码第 28 行可以看到，启用开放编码以后执行延迟函数就跟普通的函数调用一样，都是通过 <code>CALL</code> 指令完成。</p>
-<h3 id="执行延迟调用"><a href="#执行延迟调用" class="headerlink" title="执行延迟调用"></a>执行延迟调用</h3><p>编译器不仅将 defer 关键字都转换成 <a href="https://github.com/golang/go/blob/2517f4946b42b8deedb864c884f1b41311d45850/src/runtime/panic.go#L223" target="_blank" rel="noopener">runtime.deferproc</a> 、<a href="https://github.com/golang/go/blob/2517f4946b42b8deedb864c884f1b41311d45850/src/runtime/panic.go#L276" target="_blank" rel="noopener">runtime.deferprocStack</a> 或者内联函数，还会在所有调用 defer 的函数末尾插入 <a href="https://github.com/golang/go/blob/2517f4946b42b8deedb864c884f1b41311d45850/src/runtime/panic.go#L524" target="_blank" rel="noopener">runtime.deferreturn</a> 的函数调用：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">deferreturn</span><span class="params">(arg0 <span class="keyword">uintptr</span>)</span></span> &#123;</span><br><span class="line">    gp := getg()</span><br><span class="line">    d := gp._defer</span><br><span class="line">    <span class="keyword">if</span> d == <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125; <span class="comment">//  当前 Goroutine 持有的所有延迟函数都得到执行了，函数返回</span></span><br><span class="line">    sp := getcallersp()</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">switch</span> d.siz &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">        <span class="comment">// Do nothing.</span></span><br><span class="line">    <span class="keyword">case</span> sys.PtrSize:</span><br><span class="line">        *(*<span class="keyword">uintptr</span>)(unsafe.Pointer(&amp;arg0)) = *(*<span class="keyword">uintptr</span>)(deferArgs(d))</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        memmove(unsafe.Pointer(&amp;arg0), deferArgs(d), <span class="keyword">uintptr</span>(d.siz))</span><br><span class="line">    &#125;</span><br><span class="line">    fn := d.fn</span><br><span class="line">    d.fn = <span class="literal">nil</span></span><br><span class="line">    gp._defer = d.link</span><br><span class="line">    freedefer(d)</span><br><span class="line">    _  = fn.fn</span><br><span class="line">    jmpdefer(fn, <span class="keyword">uintptr</span>(unsafe.Pointer(&amp;arg0)))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><a href="https://draveness.me/golang/tree/runtime.jmpdefer" target="_blank" rel="noopener">runtime.jmpdefer</a> 是一个用汇编语言实现的运行时函数，它的主要工作是跳转到 defer 所在的代码段并在执行结束之后跳转回 <a href="https://github.com/golang/go/blob/2517f4946b42b8deedb864c884f1b41311d45850/src/runtime/panic.go#L524" target="_blank" rel="noopener">runtime.deferreturn</a>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">TEXT runtime·jmpdefer(SB), NOSPLIT, $0-8</span><br><span class="line">    MOVL    fv+0(FP), DX    // fn</span><br><span class="line">    MOVL    argp+4(FP), BX  // caller sp</span><br><span class="line">    LEAL    -4(BX), SP      // caller sp after CALL</span><br><span class="line">    #ifdef GOBUILDMODE_shared</span><br><span class="line">    SUBL    $16, (SP)       // return to CALL again</span><br><span class="line">    #else</span><br><span class="line">    SUBL    $5, (SP)        // return to CALL again</span><br><span class="line">    #endif</span><br><span class="line">    MOVL    0(DX), BX</span><br><span class="line">    JMP BX                  // but first run the deferred function</span><br></pre></td></tr></table></figure>
-<p><a href="https://github.com/golang/go/blob/2517f4946b42b8deedb864c884f1b41311d45850/src/runtime/panic.go#L524" target="_blank" rel="noopener">runtime.deferreturn</a> 函数会多次判断当前 Goroutine 的 _defer 链表中是否有未执行的结构体，<strong>该函数只有在所有延迟函数都执行后才会返回</strong>。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><code>defer</code> 的实现主要依靠编译器和运行时的协作，经历了好几个版本的更迭，其可用性也越来越强。截止目前（2020年12月16日）经历了三种机制：</p>
-<ol>
-<li><p>堆上分配(1.1 ~ 现在)：</p>
-<ul>
-<li>编译期将 defer 关键字被转换为 <a href="https://github.com/golang/go/blob/2517f4946b42b8deedb864c884f1b41311d45850/src/runtime/panic.go#L223" target="_blank" rel="noopener">runtime.deferproc</a> 并在调用 defer 关键字的函数返回之前插入 <a href="https://github.com/golang/go/blob/2517f4946b42b8deedb864c884f1b41311d45850/src/runtime/panic.go#L524" target="_blank" rel="noopener">runtime.deferreturn</a></li>
-<li>运行时调用 <a href="https://github.com/golang/go/blob/2517f4946b42b8deedb864c884f1b41311d45850/src/runtime/panic.go#L22" target="_blank" rel="noopener">runtime.deferproc</a> 会将一个新的 <a href="https://github.com/golang/go/blob/e1faebe7b40c23811a6025ed104d3ce9882f0c3b/src/runtime/runtime2.go#L903" target="_blank" rel="noopener">runtime._defer</a> 结构体追加到当前 Goroutine 的链表头；</li>
-<li>运行时调用 <a href="https://github.com/golang/go/blob/2517f4946b42b8deedb864c884f1b41311d45850/src/runtime/panic.go#L524" target="_blank" rel="noopener">runtime.deferreturn</a> 会从 Goroutine 的链表中取出 <a href="https://github.com/golang/go/blob/e1faebe7b40c23811a6025ed104d3ce9882f0c3b/src/runtime/runtime2.go#L903" target="_blank" rel="noopener">runtime._defer</a> 结构并依次执行；</li>
-</ul>
-</li>
-<li><p>栈上分配(1.13 ~ 现在):</p>
-<ul>
-<li>当该关键字在函数体中最多执行一次时，编译期间的 <a href="https://github.com/golang/go/blob/4d5bb9c60905b162da8b767a8a133f6b4edcaa65/src/cmd/compile/internal/gc/ssa.go#L4324" target="_blank" rel="noopener">cmd/compile/internal/gc.state.call</a> 会将 <a href="https://github.com/golang/go/blob/e1faebe7b40c23811a6025ed104d3ce9882f0c3b/src/runtime/runtime2.go#L903" target="_blank" rel="noopener">runtime._defer</a> 结构体分配到栈上并调用 <a href="https://github.com/golang/go/blob/2517f4946b42b8deedb864c884f1b41311d45850/src/runtime/panic.go#L276" target="_blank" rel="noopener">runtime.deferprocStack</a></li>
-</ul>
-</li>
-<li><p>开放编码(1.14 ~ 现在):</p>
-<ul>
-<li>编译期间判断 defer 关键字、return 语句的个数确定是否开启开放编码优化</li>
-<li>通过 deferBits 和 <a href="https://draveness.me/golang/tree/cmd/compile/internal/gc.openDeferInfo" target="_blank" rel="noopener">cmd/compile/internal/gc.openDeferInfo</a> 存储 defer 关键字的相关信息；</li>
-<li>如果 defer 关键字的执行可以在编译期间确定，会在函数返回前直接跳转到相应的代码，否则会由运行时的  <a href="https://github.com/golang/go/blob/2517f4946b42b8deedb864c884f1b41311d45850/src/runtime/panic.go#L524" target="_blank" rel="noopener">runtime.deferreturn</a> 处理</li>
-</ul>
-</li>
-</ol>
-<p>于是前面提过的两个现象就可以解释了：</p>
-<ul>
-<li>后调用的 defer 函数会先执行：后调用的 defer 函数会被追加到 Goroutine 的 <a href="https://github.com/golang/go/blob/e1faebe7b40c23811a6025ed104d3ce9882f0c3b/src/runtime/runtime2.go#L903" target="_blank" rel="noopener">runtime._defer</a> 链表的最前面，而运行时是从链表的前到后依次执行</li>
-<li>函数的参数会被预先计算：调用 <a href="https://github.com/golang/go/blob/2517f4946b42b8deedb864c884f1b41311d45850/src/runtime/panic.go#L22" target="_blank" rel="noopener">runtime.deferproc</a> 函数创建新的延迟调用时就会立刻拷贝函数的参数，函数的参数不会等到真正执行时计算；</li>
-</ul>
-<p>所有使用了 defer 关键字的函数最后都会插入  <a href="https://github.com/golang/go/blob/2517f4946b42b8deedb864c884f1b41311d45850/src/runtime/panic.go#L524" target="_blank" rel="noopener">runtime.deferreturn</a> 保证延迟函数得到执行。</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://draveness.me/golang/docs/part2-foundation/ch05-keyword/golang-defer/#53-defer" target="_blank" rel="noopener">Go语言设计与实现</a></p>
-<p><a href="https://blog.golang.org/defer-panic-and-recover" target="_blank" rel="noopener">Defer, Panic and Recover</a></p>
-<p><a href="https://leokongwq.github.io/2016/10/15/golang-defer.html" target="_blank" rel="noopener">golang之defer简介</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/56557423" target="_blank" rel="noopener">Golang之轻松化解defer的温柔陷阱</a></p>
-<p><a href="https://www.bilibili.com/video/BV1E5411x7NC" target="_blank" rel="noopener">eggo: defer1.12</a></p>
-
-      
-    </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/09/Go底层大冒险之defer/" data-id="ckoqt9nw9002pb0up2lpshtum" class="article-share-link">
-        分享
-      </a>
-      
-<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li></ul>
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/" rel="tag">Go</a></li></ul>
 
     </footer>
-
   </div>
 
-  
-
-  
-
-</article>
     
-    <article id="post-go底层大冒险之闭包" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
+ 
+    
+</article>
 
+    
+    <article
+  id="post-go底层大冒险之闭包"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
   <div class="article-inner">
     
     <header class="article-header">
-      
-
+       
 <h2 itemprop="name">
-  <a class="article-title" href="/2020/06/21/go底层大冒险之闭包/">Go底层大冒险之闭包</a>
+  <a class="article-title" href="/2020/06/21/go%E5%BA%95%E5%B1%82%E5%A4%A7%E5%86%92%E9%99%A9%E4%B9%8B%E9%97%AD%E5%8C%85/"
+    >Go底层大冒险之闭包</a> 
 </h2>
+ 
 
-
-
+      
     </header>
-    
-
-    
+     
     <div class="article-meta">
-      <a href="/2020/06/21/go底层大冒险之闭包/" class="article-date">
+      <a href="/2020/06/21/go%E5%BA%95%E5%B1%82%E5%A4%A7%E5%86%92%E9%99%A9%E4%B9%8B%E9%97%AD%E5%8C%85/" class="article-date">
   <time datetime="2020-06-21T02:14:29.000Z" itemprop="datePublished">2020-06-21</time>
-</a>
-      
-<div class="article-category">
-  <a class="article-category-link" href="/categories/语言/">语言</a>
-</div>
-
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%AD%E8%A8%80/">语言</a>
+  </div>
+   
     </div>
+       
+
+    <!-- copyright -->
     
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-      
-      <p>Go 语言中函数是所谓“头等对象”，即可以通过参数传递，可以做函数返回值，也可以做为右值赋值给一个变量。Go 语言把这样的参数、返回值、变量称为 <code>function value</code>，本质上是一个指针，指向一个 <code>runtime.funcval</code> 结构体，这个结构体保存了函数的入口地址。</p>
-<p><img src="https://i.loli.net/2020/06/21/FJnO7hbSEKM86jR.png" alt="FunctionValue"></p>
-<p>举个例子：<code>func A</code> 的指令位于代码段的 addr1。由于 <code>func A</code> 对应的 <code>funcval</code> 没有捕获列表，编译期间编译器会在只读数据段分配一个 <code>funcval</code> 结构体，这个结构体本身的地址是 addr2 ，它保存了 <code>func A</code> 的地址 addr1，多次 <code>func A</code> 调用共享一个 <code>funcval</code>。执行阶段，addr2 会被赋予 f1 与 f2。执行 f1 就是通过 f1 找出对应的 <code>funcval</code>，进而拿到 <code>func A</code> 入口地址。</p>
-<p><img src="https://i.loli.net/2020/06/21/4Dmf2zuxHWtgwCJ.png" alt="FunctionValue举例"></p>
-<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>既然有了函数入口地址就能间接调用函数，为什么要在中间插入一层 <code>funcval</code> 呢？这就是出于<strong>闭包</strong>的考虑了：</p>
-<p><img src="https://i.loli.net/2020/06/21/NsIxdGY69SLgzub.png" alt="闭包"></p>
-<p>在一些语言中(如C++)，返回局部变量的地址或引用被认为是不明智的，因为局部变量都分配在栈里，当函数执行结束其占用的栈空间也随之释放，此时我们返回的局部变量也被释放掉了。如果我们使用这些被释放掉的变量就会产生所谓“变量逃逸”问题。</p>
-<p>所幸 JavaScript、Go 等语言都是支持闭包的。那么 Go 底层是如何实现闭包的呢？</p>
-<p>举个例子：运行时在堆分配两个 <code>funcval</code> 结构体地址分别为 addr2、addr3。每个 <code>funcval</code> 同时又保存了各自的捕获列表。通过捕获列表就能使用保存下来的对象了。</p>
-<p><img src="https://i.loli.net/2020/06/21/jU3g9E4tn5dSWh8.png" alt="Go闭包"></p>
-<p>通常来讲，局部变量都是分配在栈的，上图也是这样。但是，如果捕获变量的值会发生改变，Go 编译器会在堆上分配局部变量，栈上只保存一个地址。这就是所谓的“局部变量堆分配”。<code>funcval</code> 的捕获列表保存局部变量的地址，这样闭包函数和外层函数就指向同一个变量了。</p>
-<p><img src="https://i.loli.net/2020/06/21/NuOHmoygfK3scbL.png" alt="Go引用捕获变量"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
-<li>Go 内部会把所有 <code>function value</code> 转化为 <code>funcval</code> 结构体，这个结构体保存了函数的实际地址。</li>
-<li>得益于 <code>funcval</code> 做为中间载体，Go 实现了闭包。<code>funcval</code> 会有一个捕获列表，里面或是保存了捕获变量的拷贝，或是保存了捕获变量的地址。</li>
-</ol>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>B 站这个 up 讲得蛮好，通俗易懂，直接明了: <a href="https://www.bilibili.com/video/BV1ma4y1e7R5" target="_blank" rel="noopener">eggo-tech</a></p>
-
-      
-    </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/06/21/go底层大冒险之闭包/" data-id="ckoqt9nsn000bb0upx00akb6a" class="article-share-link">
-        分享
-      </a>
-      
-<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li></ul>
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/" rel="tag">Go</a></li></ul>
 
     </footer>
-
   </div>
 
-  
-
-  
-
+    
+ 
+    
 </article>
+
     
   </article>
   
 
   
   <nav class="page-nav">
+    
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
   </nav>
   
 </section>
 </div>
 
-    <footer class="footer">
+      <footer class="footer">
   <div class="outer">
-    <div class="float-right">
-      <ul class="list-inline">
-  
-  <li><i class="fe fe-bar-chart"></i> <span id="busuanzi_value_site_pv"></span></li>
-  
-  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
-  
-</ul>
-    </div>
-    <ul class="list-inline">
-      <li>精神的壳 &copy; 2021</li>
+    <ul>
+      <li>
+        Copyrights &copy;
+        2017-2021
+        <i class="ri-heart-fill heart_icon"></i> 路边的土豆
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
       
-        <li>京ICP备17054916号-2</li>
+    </ul>
+    <ul>
       
-      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
-      <li>theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
     </ul>
   </div>
 </footer>
-  </main>
-  <aside class="sidebar">
-    <button class="navbar-toggle"></button>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
 <nav class="navbar">
   
   <div class="logo">
-    <a href="/"><img src="/images/hexo.svg" alt="精神的壳"></a>
+    <a href="/"><img src="/images/ayer-side.svg" alt="精神的壳"></a>
   </div>
   
   <ul class="nav nav-main">
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/">Home</a>
+      <a class="nav-item-link" href="/">主页</a>
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/archives">Archives</a>
+      <a class="nav-item-link" href="/archives">归档</a>
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/tags/">Tags</a>
+      <a class="nav-item-link" href="/categories">分类</a>
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/categories/">categories</a>
+      <a class="nav-item-link" href="/tags">标签</a>
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link nav-item-search" title="搜索">
-        <i class="fe fe-search"></i>
-        搜索
-      </a>
+      <a class="nav-item-link" href="/friends">友链</a>
     </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
   </ul>
 </nav>
 <nav class="navbar navbar-bottom">
   <ul class="nav">
     <li class="nav-item">
-      <div class="totop" id="totop">
-  <i class="fe fe-rocket"></i>
-</div>
-    </li>
-    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
       
       <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-        <i class="fe fe-feed"></i>
+        <i class="ri-rss-line"></i>
       </a>
       
     </li>
@@ -1181,21 +738,257 @@
   <div id="local-search-result" class="local-search-result"></div>
 </div>
 </div>
-  </aside>
-  <script src="/js/jquery-2.0.3.min.js"></script>
-<script src="/js/jquery.justifiedGallery.min.js"></script>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+ 
 <script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
 <script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
 
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
 
 
-<script src="/js/copybtn.js"></script>
-
-
-
-
-<script src="/js/ocean.js"></script>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+    
+  </div>
+</body>
 
 </html>

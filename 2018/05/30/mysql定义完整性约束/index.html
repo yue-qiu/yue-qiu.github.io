@@ -1,73 +1,117 @@
 <!DOCTYPE html>
-<html lang="en">
 
-<head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="utf-8">
+
+<html lang="zh-CN">
   
-  
-  
-  <meta name="description" content="高山仰止，景行行止。虽不能至，心向往之。">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>
-    MySQL之完整性约束 |
-    
-    精神的壳</title>
-  
-  <link rel="shortcut icon" href="/favicon.ico">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-  
-  <script src="/js/pace.min.js"></script>
-<link rel="alternate" href="/atom.xml" title="精神的壳" type="application/atom+xml">
-</head></html>
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="“生活，代码，思考”" />
+       
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>MySQL之完整性约束 |  精神的壳</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+<script>
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?847f7a1169508eb118c64f7719e8a4cf";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+      <!-- mermaid -->
+      
+    <link rel="alternate" href="/atom.xml" title="精神的壳" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
 
 <body>
-  <main class="content">
-    <section class="outer">
-  <article id="post-mysql定义完整性约束" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-mysql定义完整性约束"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
   <div class="article-inner">
     
     <header class="article-header">
-      
-
-<h1 class="article-title" itemprop="name">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
   MySQL之完整性约束
 </h1>
+ 
 
-
-
+      
     </header>
-    
-
-    
+     
     <div class="article-meta">
-      <a href="/2018/05/30/mysql定义完整性约束/" class="article-date">
+      <a href="/2018/05/30/mysql%E5%AE%9A%E4%B9%89%E5%AE%8C%E6%95%B4%E6%80%A7%E7%BA%A6%E6%9D%9F/" class="article-date">
   <time datetime="2018-05-30T12:19:42.000Z" itemprop="datePublished">2018-05-30</time>
-</a>
-      
-<div class="article-category">
-  <a class="article-category-link" href="/categories/数据库/">数据库</a>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">8 分钟</span>
+        </span>
+    </span>
 </div>
-
+ 
     </div>
-    
+      
+    <div class="tocbot"></div>
 
-    
-    
-<div class="tocbot"></div>
 
-    
 
+
+  
     <div class="article-entry" itemprop="articleBody">
-      
-      
-      
-      <p>MySQL提供了多种完整性约束，作为数据库关系模式定义的一部分，可以通过<code>create table</code>或<code>alter table</code>语句来定义。一旦定义了完整性约束，MySQL服务器会随时检测处于更新状态的数据库内容是否符合相关的完整性约束，从而保证数据的一致性与正确性。</p>
+       
+  <p>MySQL提供了多种完整性约束，作为数据库关系模式定义的一部分，可以通过<code>create table</code>或<code>alter table</code>语句来定义。一旦定义了完整性约束，MySQL服务器会随时检测处于更新状态的数据库内容是否符合相关的完整性约束，从而保证数据的一致性与正确性。</p>
 <p>在关系模型中，提供了实体完整性、参照完整性和用户完整性3项规则。</p>
 <h1 id="实体完整性"><a href="#实体完整性" class="headerlink" title="实体完整性"></a>实体完整性</h1><p><code>实体</code>是一个数据对象，是指客观存在并可以相互区分的事物，如一个教师、一个学生等。一个实体在数据库中表现为一条记录。</p>
 <p>实体完整性是指关系的主属性及主键的组成不能为空。也就是主键不能使空值null。关系对应于现实世界的实体集，而现实世界的实体是可以区分的，即说明每个实例具有唯一性标识。在关系模型中，是使用主键作为唯一性标识的。</p>
@@ -85,11 +129,14 @@
 <li>复合主键不能包含不必要的多余列</li>
 <li>一个列名在复合主键的列表中只能出现一次</li>
 </ol>
-<h3 id="作为列的主键约束"><a href="#作为列的主键约束" class="headerlink" title="作为列的主键约束"></a>作为列的主键约束</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">users</span> (</span><br><span class="line">    <span class="keyword">id</span> <span class="built_in">tinyint</span> auto_increment primary <span class="keyword">key</span>,</span><br><span class="line">    <span class="keyword">name</span> <span class="built_in">char</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="literal">null</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<h3 id="作为表的主键约束"><a href="#作为表的主键约束" class="headerlink" title="作为表的主键约束"></a>作为表的主键约束</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">users</span> (</span><br><span class="line">    <span class="keyword">id</span> <span class="built_in">tinyint</span> auto_increment,</span><br><span class="line">    <span class="keyword">name</span> <span class="built_in">char</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    age <span class="built_in">tinyint</span>,</span><br><span class="line">    primary <span class="keyword">key</span> (<span class="keyword">id</span>,<span class="keyword">name</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="作为列的主键约束"><a href="#作为列的主键约束" class="headerlink" title="作为列的主键约束"></a>作为列的主键约束</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> users (</span><br><span class="line">    id tinyint auto_increment <span class="keyword">primary</span> key,</span><br><span class="line">    name <span class="type">char</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="keyword">null</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="作为表的主键约束"><a href="#作为表的主键约束" class="headerlink" title="作为表的主键约束"></a>作为表的主键约束</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> users (</span><br><span class="line">    id tinyint auto_increment,</span><br><span class="line">    name <span class="type">char</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">    age tinyint,</span><br><span class="line">    <span class="keyword">primary</span> key (id,name)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+
 <p><strong>如果主键仅由表中的某一列构成，以上两种方法均可以定义主键。如果主键由表中多个列组成，那么只能有第二种方法定义主键约束。</strong></p>
 <h2 id="候选键约束"><a href="#候选键约束" class="headerlink" title="候选键约束"></a>候选键约束</h2><p>如果一个属性集能<strong>唯一标识元组</strong>而又<strong>不含有多余的属性</strong>，那么这个属性集称为关系的候选键，用关键字<code>unique</code>来定义。</p>
-<p>候选键可以是表中的某一列，也可以是表中多个列所构成的一个组合。<strong>任何时候，候选键的值必须是唯一的且不能为空</strong>。定义方法类似于主键：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">users</span> (</span><br><span class="line">    <span class="keyword">id</span> <span class="built_in">tinyint</span> auto_increment primary <span class="keyword">key</span>,</span><br><span class="line">    <span class="keyword">name</span> <span class="built_in">char</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="literal">null</span> <span class="keyword">unique</span>,</span><br><span class="line">    age <span class="built_in">tinyint</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">users</span> (</span><br><span class="line">    <span class="keyword">id</span> <span class="built_in">tinyint</span> auto_increment primary <span class="keyword">key</span>,</span><br><span class="line">    <span class="keyword">name</span> <span class="built_in">char</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    age <span class="built_in">tinyint</span>,</span><br><span class="line">    <span class="keyword">unique</span> (<span class="keyword">name</span>,age)</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<p>候选键可以是表中的某一列，也可以是表中多个列所构成的一个组合。<strong>任何时候，候选键的值必须是唯一的且不能为空</strong>。定义方法类似于主键：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> users (</span><br><span class="line">    id tinyint auto_increment <span class="keyword">primary</span> key,</span><br><span class="line">    name <span class="type">char</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">unique</span>,</span><br><span class="line">    age tinyint</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> users (</span><br><span class="line">    id tinyint auto_increment <span class="keyword">primary</span> key,</span><br><span class="line">    name <span class="type">char</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">    age tinyint,</span><br><span class="line">    <span class="keyword">unique</span> (name,age)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 <p>候选键与主键的区别在于：</p>
 <ol>
 <li>一个表只能创建一个主键，但是可以有多个候选键</li>
@@ -100,11 +147,15 @@
 <blockquote>
 <p>若属性（或属性组）F是基本关系R的外键，它与基本关系S的主键K对应，则对于R中的每个元组在F上的值只允许两种可能：要么取空值，要么等于S中某个元组的主键值，其中R与S可以是不同的关系，也可以是同一是关系，而F和K定义在同一个域中。</p>
 </blockquote>
-<p>声明外键的基本语法如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[constraint [symbol]] foreign key (index_col_name,...) reference_defination</span><br></pre></td></tr></table></figure></p>
-<p><code>reference_defination</code>主要用于定义外键所参照的表、列，它的基本语法格式如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">references tbl_name [(index_col_name,...)]</span><br><span class="line">[match full | match pratial | match simple]</span><br><span class="line">[on <span class="keyword">delete</span> reference_options]</span><br><span class="line">[<span class="keyword">on</span> <span class="keyword">update</span> reference_options]</span><br></pre></td></tr></table></figure></p>
+<p>声明外键的基本语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="keyword">constraint</span> [symbol]] <span class="keyword">foreign</span> key (index_col_name,...) reference_defination</span><br></pre></td></tr></table></figure>
+<p><code>reference_defination</code>主要用于定义外键所参照的表、列，它的基本语法格式如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">references</span> tbl_name [(index_col_name,...)]</span><br><span class="line">[<span class="keyword">match</span> <span class="keyword">full</span> <span class="operator">|</span> <span class="keyword">match</span> pratial <span class="operator">|</span> <span class="keyword">match</span> simple]</span><br><span class="line">[<span class="keyword">on</span> <span class="keyword">delete</span> reference_options]</span><br><span class="line">[<span class="keyword">on</span> update reference_options]</span><br></pre></td></tr></table></figure>
 <p><code>tbl_name</code>指定外键所参照的表名，这个表称为<code>被参照表</code>或<code>父表</code>，外键所在的表被称为<code>参照表</code>或<code>子表</code>。 </p>
-<p><code>index_col_name</code>指定被参照表中与外键相关联的列，<strong>必须是父表的主键或候选键</strong>，格式语法如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">col_name [(length)] [ASC|DESC]</span><br></pre></td></tr></table></figure></p>
-<p><code>reference_options</code>指定参照完整性约束的实现策略，默认为<code>restrict</code>。语法格式如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">restrict | cascade | <span class="keyword">set</span> <span class="literal">null</span> | <span class="keyword">no</span> <span class="keyword">action</span></span><br></pre></td></tr></table></figure></p>
+<p><code>index_col_name</code>指定被参照表中与外键相关联的列，<strong>必须是父表的主键或候选键</strong>，格式语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">col_name [(length)] [<span class="keyword">ASC</span><span class="operator">|</span><span class="keyword">DESC</span>]</span><br></pre></td></tr></table></figure>
+<p><code>reference_options</code>指定参照完整性约束的实现策略，默认为<code>restrict</code>。语法格式如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">restrict <span class="operator">|</span> cascade <span class="operator">|</span> <span class="keyword">set</span> <span class="keyword">null</span> <span class="operator">|</span> <span class="keyword">no</span> action</span><br></pre></td></tr></table></figure>
 <p>cascade：瀑布、级联</p>
 <ul>
 <li>restrict 限制策略：当要删除或更新被参照表中被参照列上，并在外键中出现的值时，系统拒绝对被参照表的删除和更新</li>
@@ -112,145 +163,287 @@
 <li>cascade 级联策略：从被参照表中删除或更新纪录行时，自动删除或更新参照表匹配的记录行</li>
 <li>set null 制空策略：从被参照表中删除或更新纪录行时，设置参照表中与之对应的外键列的值为null。这个策略需要被参照表中的外键没有声明限定词not null</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">users</span> (</span><br><span class="line">    <span class="keyword">id</span> <span class="built_in">tinyint</span> auto_increment primary <span class="keyword">key</span>,</span><br><span class="line">    <span class="keyword">name</span> <span class="built_in">char</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    class_id <span class="built_in">tinyint</span> <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    <span class="keyword">constraint</span> <span class="keyword">class</span> <span class="keyword">foreign</span> <span class="keyword">key</span> (class_id) <span class="keyword">references</span> <span class="keyword">class</span>(<span class="keyword">id</span>)</span><br><span class="line">    <span class="keyword">on</span> <span class="keyword">delete</span> <span class="keyword">cascade</span></span><br><span class="line">    <span class="keyword">on</span> <span class="keyword">update</span> <span class="keyword">cascade</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p><strong>当父子表是同一张表时，MySQL不允许指定<code>on update cascade</code>与<code>on update set null</code></strong>，相关联的两个字段类型必须一致。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> users (</span><br><span class="line">    id tinyint auto_increment <span class="keyword">primary</span> key,</span><br><span class="line">    name <span class="type">char</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">    class_id tinyint <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">    <span class="keyword">constraint</span> class <span class="keyword">foreign</span> key (class_id) <span class="keyword">references</span> class(id)</span><br><span class="line">    <span class="keyword">on</span> <span class="keyword">delete</span> cascade</span><br><span class="line">    <span class="keyword">on</span> update cascade</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+
+<p>**当父子表是同一张表时，MySQL不允许指定<code>on update cascade</code>与<code>on update set null</code>**，相关联的两个字段类型必须一致。</p>
 <h1 id="用户定义完整性"><a href="#用户定义完整性" class="headerlink" title="用户定义完整性"></a>用户定义完整性</h1><p>用户定义完整性是针对某一应用环境的完整性约束条件，它反映了某一具体应用所涉及的数据应满足的要求，关系模型提供定义和检查这类完整性规则的机制。</p>
 <p>MySQL提供了<strong>非空约束</strong>，<strong>check约束</strong>和<strong>触发器</strong>3种用户自定义完整性约束。</p>
-<h2 id="非空约束"><a href="#非空约束" class="headerlink" title="非空约束"></a>非空约束</h2><p>通过<code>create table</code>或<code>alter table</code>语句将某个列加上关键字<code>not null</code>可以实现非空约束。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> <span class="keyword">users</span> <span class="keyword">modify</span> age <span class="built_in">tinyint</span> <span class="keyword">not</span> <span class="literal">null</span>;</span><br></pre></td></tr></table></figure></p>
-<h2 id="check约束"><a href="#check约束" class="headerlink" title="check约束"></a>check约束</h2><p>可以对列或表使用<code>check</code>约束，语法如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">check</span> (expr)</span><br></pre></td></tr></table></figure></p>
+<h2 id="非空约束"><a href="#非空约束" class="headerlink" title="非空约束"></a>非空约束</h2><p>通过<code>create table</code>或<code>alter table</code>语句将某个列加上关键字<code>not null</code>可以实现非空约束。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> users modify age tinyint <span class="keyword">not</span> <span class="keyword">null</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="check约束"><a href="#check约束" class="headerlink" title="check约束"></a>check约束</h2><p>可以对列或表使用<code>check</code>约束，语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">check</span> (expr)</span><br></pre></td></tr></table></figure>
 <p><code>expr</code>是一个SQL表达式，用于指定需要检查的限定条件。更新数据时MySQL会检查更新后的数据行是否满足<code>check</code>约束中的限定条件。该条件可以是表达式，也可以是子查询。</p>
-<h3 id="对列使用check约束"><a href="#对列使用check约束" class="headerlink" title="对列使用check约束"></a>对列使用check约束</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">users</span> (</span><br><span class="line">    <span class="keyword">id</span> <span class="built_in">tinyint</span> auto_increment primary <span class="keyword">key</span>,</span><br><span class="line">    <span class="keyword">name</span> <span class="built_in">char</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    age <span class="built_in">tinyint</span> <span class="keyword">check</span>(age&gt;<span class="number">6</span> <span class="keyword">and</span> age&lt;<span class="number">19</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<h3 id="对表使用check约束"><a href="#对表使用check约束" class="headerlink" title="对表使用check约束"></a>对表使用check约束</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">users</span>(</span><br><span class="line">    <span class="keyword">id</span> <span class="built_in">tinyint</span> auto_increment primary <span class="keyword">key</span>,</span><br><span class="line">    <span class="keyword">name</span> <span class="built_in">char</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    age <span class="built_in">tinyint</span>,</span><br><span class="line">    <span class="keyword">check</span>(<span class="keyword">name</span> <span class="keyword">in</span> (<span class="keyword">select</span> <span class="keyword">name</span> <span class="keyword">from</span> students))</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="对列使用check约束"><a href="#对列使用check约束" class="headerlink" title="对列使用check约束"></a>对列使用check约束</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> users (</span><br><span class="line">    id tinyint auto_increment <span class="keyword">primary</span> key,</span><br><span class="line">    name <span class="type">char</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">    age tinyint <span class="keyword">check</span>(age<span class="operator">&gt;</span><span class="number">6</span> <span class="keyword">and</span> age<span class="operator">&lt;</span><span class="number">19</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="对表使用check约束"><a href="#对表使用check约束" class="headerlink" title="对表使用check约束"></a>对表使用check约束</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> users(</span><br><span class="line">    id tinyint auto_increment <span class="keyword">primary</span> key,</span><br><span class="line">    name <span class="type">char</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">    age tinyint,</span><br><span class="line">    <span class="keyword">check</span>(name <span class="keyword">in</span> (<span class="keyword">select</span> name <span class="keyword">from</span> students))</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 <h2 id="触发器约束"><a href="#触发器约束" class="headerlink" title="触发器约束"></a>触发器约束</h2><p>触发器由MySQL的基本命令事件来触发的某种特定操作，这些基本的命令有<code>insert</code>、<code>update</code>、<code>delete</code>等事件来触发某些特定的操作。满足触发器的触发条件时，数据库系统会自动执行触发器中定义的程序语句。</p>
-<h3 id="创建单行触发器"><a href="#创建单行触发器" class="headerlink" title="创建单行触发器"></a>创建单行触发器</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> 触发器名 <span class="keyword">before</span>|<span class="keyword">after</span> 触发事件</span><br><span class="line"><span class="keyword">on</span> 表名 <span class="keyword">for</span> <span class="keyword">each</span> <span class="keyword">row</span> 执行语句;</span><br></pre></td></tr></table></figure>
+<h3 id="创建单行触发器"><a href="#创建单行触发器" class="headerlink" title="创建单行触发器"></a>创建单行触发器</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> 触发器名 before<span class="operator">|</span>after 触发事件</span><br><span class="line"><span class="keyword">on</span> 表名 <span class="keyword">for</span> <span class="keyword">each</span> <span class="type">row</span> 执行语句;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>before|after 指定触发器执行时间是在触发事件之前还是之后</li>
 <li>触发事件 <code>insert</code>、<code>delete</code>、<code>update</code>等都是触发事件</li>
 <li>执行语句 当满足条件时执行的触发器语句</li>
 </ul>
-<p>创建一个触发器，自动在用户向users表插入数据行之前向日志插入当前时间：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> userstime <span class="keyword">before</span> <span class="keyword">insert</span></span><br><span class="line"><span class="keyword">on</span> <span class="keyword">users</span> <span class="keyword">for</span> <span class="keyword">each</span> <span class="keyword">row</span> </span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> userslog <span class="keyword">values</span> (<span class="literal">null</span>, <span class="keyword">now</span>());</span><br></pre></td></tr></table></figure></p>
-<h3 id="创建多行触发器"><a href="#创建多行触发器" class="headerlink" title="创建多行触发器"></a>创建多行触发器</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> 触发器名称 <span class="keyword">before</span>|<span class="keyword">after</span> 触发事件</span><br><span class="line"><span class="keyword">on</span> 表名 <span class="keyword">for</span> <span class="keyword">each</span> <span class="keyword">row</span> </span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">执行语句列表</span><br><span class="line"><span class="keyword">end</span>\g</span><br></pre></td></tr></table></figure>
+<p>创建一个触发器，自动在用户向users表插入数据行之前向日志插入当前时间：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> userstime before <span class="keyword">insert</span></span><br><span class="line"><span class="keyword">on</span> users <span class="keyword">for</span> <span class="keyword">each</span> <span class="type">row</span> </span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> userslog <span class="keyword">values</span> (<span class="keyword">null</span>, now());</span><br></pre></td></tr></table></figure>
+<h3 id="创建多行触发器"><a href="#创建多行触发器" class="headerlink" title="创建多行触发器"></a>创建多行触发器</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> 触发器名称 before<span class="operator">|</span>after 触发事件</span><br><span class="line"><span class="keyword">on</span> 表名 <span class="keyword">for</span> <span class="keyword">each</span> <span class="type">row</span> </span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">执行语句列表</span><br><span class="line"><span class="keyword">end</span>\g</span><br></pre></td></tr></table></figure>
 <p>要执行的多条语句放入<code>begin</code>和<code>end</code>中，用<code>;</code>分隔。</p>
-<h3 id="查看触发器："><a href="#查看触发器：" class="headerlink" title="查看触发器："></a>查看触发器：</h3><p>查看所有触发器：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">triggers</span>;</span><br></pre></td></tr></table></figure></p>
-<p>根据名字查看触发器：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> infomation_schema.triggers <span class="keyword">where</span> trigger_name=触发器名;</span><br></pre></td></tr></table></figure></p>
-<h3 id="删除触发器"><a href="#删除触发器" class="headerlink" title="删除触发器"></a>删除触发器</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">trigger</span> 触发器名称;</span><br></pre></td></tr></table></figure>
-<h1 id="命名完整性约束"><a href="#命名完整性约束" class="headerlink" title="命名完整性约束"></a>命名完整性约束</h1><p>可以对完整性使用添加，删除和修改等操作。为了删除和修改完整性约束，需要在定义约束的同时对其进行命名。命名完整性约束是在各种完整性约束的定义说明之前加上<code>constraint</code>字句实现的：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">constraint &lt;symbol&gt; [primary key | foreign key | check]</span><br></pre></td></tr></table></figure></p>
-<p>对users表添加外键约束并命名为class：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> <span class="keyword">users</span> <span class="keyword">add</span> <span class="keyword">constraint</span> <span class="keyword">class</span> <span class="keyword">foreign</span> <span class="keyword">key</span> (class_id)</span><br><span class="line"><span class="keyword">references</span> <span class="keyword">class</span>(<span class="keyword">id</span>)</span><br><span class="line"><span class="keyword">on</span> <span class="keyword">update</span> <span class="keyword">cascade</span></span><br><span class="line"><span class="keyword">on</span> <span class="keyword">delete</span> <span class="keyword">cascade</span>;</span><br></pre></td></tr></table></figure></p>
-<h1 id="更新完整性约束"><a href="#更新完整性约束" class="headerlink" title="更新完整性约束"></a>更新完整性约束</h1><p>对各种约束命名后就可以用<code>alter table</code>语句来更新或删除。</p>
-<h2 id="删除完整性约束"><a href="#删除完整性约束" class="headerlink" title="删除完整性约束"></a>删除完整性约束</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> [<span class="keyword">foreign</span> <span class="keyword">key</span> | <span class="keyword">index</span> | &lt;symbol&gt;] | primary <span class="keyword">key</span>;</span><br></pre></td></tr></table></figure>
-<p>在删除主键时，必须在创建一个主键否则不会成功。</p>
-<p>删除users表的名为class的外键：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> <span class="keyword">users</span> <span class="keyword">drop</span> <span class="keyword">foreign</span> <span class="keyword">key</span> <span class="keyword">class</span>;</span><br></pre></td></tr></table></figure></p>
+<h3 id="查看触发器："><a href="#查看触发器：" class="headerlink" title="查看触发器："></a>查看触发器：</h3><p>查看所有触发器：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> triggers;</span><br></pre></td></tr></table></figure>
+<p>根据名字查看触发器：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> infomation_schema.triggers <span class="keyword">where</span> trigger_name<span class="operator">=</span>触发器名;</span><br></pre></td></tr></table></figure>
 
+<h3 id="删除触发器"><a href="#删除触发器" class="headerlink" title="删除触发器"></a>删除触发器</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">trigger</span> 触发器名称;</span><br></pre></td></tr></table></figure>
+
+<h1 id="命名完整性约束"><a href="#命名完整性约束" class="headerlink" title="命名完整性约束"></a>命名完整性约束</h1><p>可以对完整性使用添加，删除和修改等操作。为了删除和修改完整性约束，需要在定义约束的同时对其进行命名。命名完整性约束是在各种完整性约束的定义说明之前加上<code>constraint</code>字句实现的：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constraint</span> <span class="operator">&lt;</span>symbol<span class="operator">&gt;</span> [<span class="keyword">primary</span> key <span class="operator">|</span> <span class="keyword">foreign</span> key <span class="operator">|</span> <span class="keyword">check</span>]</span><br></pre></td></tr></table></figure>
+<p>对users表添加外键约束并命名为class：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> users <span class="keyword">add</span> <span class="keyword">constraint</span> class <span class="keyword">foreign</span> key (class_id)</span><br><span class="line"><span class="keyword">references</span> class(id)</span><br><span class="line"><span class="keyword">on</span> update cascade</span><br><span class="line"><span class="keyword">on</span> <span class="keyword">delete</span> cascade;</span><br></pre></td></tr></table></figure>
+<h1 id="更新完整性约束"><a href="#更新完整性约束" class="headerlink" title="更新完整性约束"></a>更新完整性约束</h1><p>对各种约束命名后就可以用<code>alter table</code>语句来更新或删除。</p>
+<h2 id="删除完整性约束"><a href="#删除完整性约束" class="headerlink" title="删除完整性约束"></a>删除完整性约束</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> [<span class="keyword">foreign</span> key <span class="operator">|</span> index <span class="operator">|</span> <span class="operator">&lt;</span>symbol<span class="operator">&gt;</span>] <span class="operator">|</span> <span class="keyword">primary</span> key;</span><br></pre></td></tr></table></figure>
+<p>在删除主键时，必须在创建一个主键否则不会成功。</p>
+<p>删除users表的名为class的外键：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> users <span class="keyword">drop</span> <span class="keyword">foreign</span> key class;</span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
       
     </div>
+    
+
+    <!-- copyright -->
+    
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/30/mysql定义完整性约束/" data-id="ckoqt9num0012b0up71r8l90w" class="article-share-link">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
         分享
-      </a>
-      
-<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2018/05/30/mysql%E5%AE%9A%E4%B9%89%E5%AE%8C%E6%95%B4%E6%80%A7%E7%BA%A6%E6%9D%9F/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li></ul>
 
     </footer>
-
   </div>
 
-  
-  
-<nav class="article-nav">
-  
-  <a href="/2018/06/03/《MySQL从入门到精通》之事件与优化/" class="article-nav-link">
-    <strong class="article-nav-caption">前一篇</strong>
-    <div class="article-nav-title">
-      
-      MySQL之事务与优化
-      
-    </div>
-  </a>
-  
-  
-  <a href="/2018/05/30/《MySQL从入门到精通》之索引与视图/" class="article-nav-link">
-    <strong class="article-nav-caption">后一篇</strong>
-    <div class="article-nav-title">MySQL之索引与范式</div>
-  </a>
-  
-</nav>
+   
+  <nav class="article-nav">
+    
+      <a href="/2018/06/03/%E3%80%8AMySQL%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E3%80%8B%E4%B9%8B%E4%BA%8B%E4%BB%B6%E4%B8%8E%E4%BC%98%E5%8C%96/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            MySQL之事务与优化
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2018/05/30/%E3%80%8AMySQL%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E3%80%8B%E4%B9%8B%E7%B4%A2%E5%BC%95%E4%B8%8E%E8%A7%86%E5%9B%BE/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">MySQL之索引与范式</div>
+      </a>
+    
+  </nav>
 
-  
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "dFVA5Fsm53B4vdyWtGFy0L7s-gzGzoHsz",
+    app_key: "xg2Ab6m7iBD4OGa79ueXjG9y",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "啥啥啥？",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
 
-  
-  
-  
-  
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
 
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
 </article>
+
 </section>
-    <footer class="footer">
+      <footer class="footer">
   <div class="outer">
-    <div class="float-right">
-      <ul class="list-inline">
-  
-  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
-  
-  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
-  
-</ul>
-    </div>
-    <ul class="list-inline">
-      <li>精神的壳 &copy; 2021</li>
+    <ul>
+      <li>
+        Copyrights &copy;
+        2017-2021
+        <i class="ri-heart-fill heart_icon"></i> 路边的土豆
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
       
-        <li>京ICP备17054916号-2</li>
+    </ul>
+    <ul>
       
-      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
-      <li>theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
     </ul>
   </div>
 </footer>
-  </main>
-  <aside class="sidebar">
-    <button class="navbar-toggle"></button>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
 <nav class="navbar">
   
   <div class="logo">
-    <a href="/"><img src="/images/hexo.svg" alt="精神的壳"></a>
+    <a href="/"><img src="/images/ayer-side.svg" alt="精神的壳"></a>
   </div>
   
   <ul class="nav nav-main">
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/">Home</a>
+      <a class="nav-item-link" href="/">主页</a>
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/archives">Archives</a>
+      <a class="nav-item-link" href="/archives">归档</a>
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/tags/">Tags</a>
+      <a class="nav-item-link" href="/categories">分类</a>
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/categories/">categories</a>
+      <a class="nav-item-link" href="/tags">标签</a>
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link nav-item-search" title="搜索">
-        <i class="fe fe-search"></i>
-        搜索
-      </a>
+      <a class="nav-item-link" href="/friends">友链</a>
     </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
   </ul>
 </nav>
 <nav class="navbar navbar-bottom">
   <ul class="nav">
     <li class="nav-item">
-      <div class="totop" id="totop">
-  <i class="fe fe-rocket"></i>
-</div>
-    </li>
-    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
       
       <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-        <i class="fe fe-feed"></i>
+        <i class="ri-rss-line"></i>
       </a>
       
     </li>
@@ -262,36 +455,273 @@
   <div id="local-search-result" class="local-search-result"></div>
 </div>
 </div>
-  </aside>
-  <script src="/js/jquery-2.0.3.min.js"></script>
-<script src="/js/jquery.justifiedGallery.min.js"></script>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+ 
 <script src="/js/lazyload.min.js"></script>
-<script src="/js/busuanzi-2.3.pure.min.js"></script>
 
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-<script src="/js/copybtn.js"></script>
-
-
-
+<!-- Tocbot -->
+ 
 <script src="/js/tocbot.min.js"></script>
+
 <script>
-  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
   tocbot.init({
-    tocSelector: '.tocbot',
-    contentSelector: '.article-entry',
-    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
     hasInnerContainers: true,
     scrollSmooth: true,
-    positionFixedSelector: '.tocbot',
-    positionFixedClass: 'is-position-fixed',
-    fixedSidebarOffset: 'auto',
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
   });
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
 
-<script src="/js/ocean.js"></script>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+  </div>
+</body>
 
 </html>
