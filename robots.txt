@@ -1,14 +1,13 @@
-# hexo robots.txt
 User-agent: *
 Allow: /
+Allow: /home/
 Allow: /archives/
-
-Disallow: /vendors/
-Disallow: /js/
+Allow: /gallery/
+Allow: /about/
+Allow: /links/
+Disallow: /images/
 Disallow: /css/
-Disallow: /fonts/
-Disallow: /vendors/
+Disallow: /js/
 Disallow: /fancybox/
-
-Sitemap: https://qiuyueqy.com/sitemap.xml
-Sitemap: https://qiuyueqy.com/baidusitemap.xml
+Sitemap: https://zhwangart.github.io/sitemap.xml
+Sitemap: https://zhwangart.github.io/baidusitemap.xml
