@@ -122,7 +122,6 @@ var _hmt = _hmt || [];
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Hello World!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>用 -w 编译，直接就通过了：</p>
-<p><img src="https://i.loli.net/2021/01/13/m8nbhCcvxtBw219.png" alt="-w编译"></p>
 <p>用 -Wall 编译，显示所有的 warning。包括声明的 main 函数返回类型为 void 而不是 int；返回值类型与声明类型不符；声明了变量 a 却未使用：</p>
 <p><img src="https://i.loli.net/2021/01/14/DgwdL9SluHKWMC3.png" alt="-Wall编译"></p>
 <p>用 -W 编译，只显示返回值类型与声明类型不符这一个 warning：</p>
@@ -387,10 +386,6 @@ var _hmt = _hmt || [];
     
     <li class="nav-item">
       <a class="nav-item-link" href="/friends">友链</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/about">关于我</a>
     </li>
     
   </ul>

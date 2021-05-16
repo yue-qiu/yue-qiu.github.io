@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>Java基础—处理异常 |  精神的壳</title>
+      <title>一点小想法 |  精神的壳</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -56,7 +56,7 @@ var _hmt = _hmt || [];
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Java程序设计—-处理异常"
+  id="post-最近生活的一点小想法"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -67,7 +67,7 @@ var _hmt = _hmt || [];
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Java基础—处理异常
+  一点小想法
 </h1>
  
 
@@ -75,11 +75,11 @@ var _hmt = _hmt || [];
     </header>
      
     <div class="article-meta">
-      <a href="/2018/06/24/Java%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E2%80%94-%E5%A4%84%E7%90%86%E5%BC%82%E5%B8%B8/" class="article-date">
-  <time datetime="2018-06-24T01:39:22.000Z" itemprop="datePublished">2018-06-24</time>
+      <a href="/2021/05/16/%E6%9C%80%E8%BF%91%E7%94%9F%E6%B4%BB%E7%9A%84%E4%B8%80%E7%82%B9%E5%B0%8F%E6%83%B3%E6%B3%95/" class="article-date">
+  <time datetime="2021-05-16T10:43:33.000Z" itemprop="datePublished">2021-05-16</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%AF%AD%E8%A8%80/">语言</a>
+    <a class="article-category-link" href="/categories/%E6%97%A5%E5%B8%B8/">日常</a>
   </div>
   
 <div class="word_count">
@@ -87,7 +87,7 @@ var _hmt = _hmt || [];
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">769</span>
+            <span class="post-count">1.1k</span>
         </span>
     </span>
 
@@ -96,7 +96,7 @@ var _hmt = _hmt || [];
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">2 分钟</span>
+            <span class="post-count">3 分钟</span>
         </span>
     </span>
 </div>
@@ -111,28 +111,17 @@ var _hmt = _hmt || [];
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p>处理异常的任务就是将控制权从错误产生的地方转移给能够处理这种情况的错误处理器。如果某个方法不能采用正常的途径完成他的任务 ，就可以通过另外一个路径退出方法。在这种情况下，方法并不能返回任何值，而是抛出（throw）一个封装了错误信息的对象，然后这个方法会退出且不返回任何值。</p>
-<p>异常又分为<code>受查(check)异常</code>与<code>非受查(uncheck)异常</code>。非受查异常包括Error类异常与RuntimeException类异常，这些异常都是因为程序本身设计不合理产生的，属于逻辑异常。而受查异常表示其他异常，如IOException。处理异常指的是处理受查异常。</p>
-<p><img src="http://p1csf090h.bkt.clouddn.com/java/error2412.png" alt="异常分类"></p>
-<h1 id="throws-throw抛出异常"><a href="#throws-throw抛出异常" class="headerlink" title="throws/throw抛出异常"></a>throws/throw抛出异常</h1><p>一个方法不仅需要告诉编译器将要返回什么值，还要告诉编译器有可能发生什么错误。所以方法应在其首部声明所有可能抛出的异常，这样可以从首部反映出这个方法可能抛出哪类受查异常。这就要用到<code>throws</code>关键字。例如FileInputStream类的构造器方法可能由于文件不存在而抛出一个FileNotFoundException：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">FileInputStream</span><span class="params">(String name)</span> <span class="keyword">throws</span> FileNotFoundException</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>多个Exception之间用 <code>，</code>分开。<br>如果超类方法没有抛出任何异常，那么子类方法也不能抛出异常。</p>
-<p>如果要手动抛出一个异常，用关键字<code>throw</code>。首先构造一个异常对象，然后用throw把这个对象抛出就可以了。如抛出一个EOFException：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">throw</span> <span class="keyword">new</span> EOFException；</span><br></pre></td></tr></table></figure>
-<h1 id="try-catch捕获异常"><a href="#try-catch捕获异常" class="headerlink" title="try/catch捕获异常"></a>try/catch捕获异常</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (ExceptionType e)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以使用多个单独的catch字句捕获多个异常。<br>异常对象可能包含与异常本身相关的信息，要想获得对象的更多信息可以用</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e.getMessage()</span><br></pre></td></tr></table></figure>
+  <p>关于我在学校摸鱼半年惊坐起，遥望大佬又一年这件事。</p>
+<span id="more"></span>
 
-<p>对实现了AutoCloseable接口的资源进行处理时，可以使用带资源的try语句，这样无论是否成功使用资源，在try块退出时都会自动关闭资源：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (Resource res = ...)</span><br><span class="line">&#123;</span><br><span class="line">    code</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打开hello.txt</span></span><br><span class="line"><span class="keyword">try</span> (FileWriter writer = <span class="keyword">new</span> FileWriter(<span class="string">&#x27;hello.txt&#x27;</span>, <span class="keyword">true</span>))</span><br><span class="line">&#123;</span><br><span class="line">    deal with the resource</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>编译器严格执行throws说明符，<strong>如果方法A调用了方法B，而方法B被声明为可能抛出异常e，则A要么继承e（即声明为可能抛出e），要么捕获e</strong></p>
-<h2 id="finally"><a href="#finally" class="headerlink" title="finally"></a>finally</h2><p>finally块中的代码不管是否有异常被捕获，都会执行。并且如果处理结果与try/catch中的处理发生冲突，finally中的处理结果会覆盖之。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">    code</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (ExceptionType e)</span><br><span class="line">&#123;</span><br><span class="line">    code</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">finally</span></span><br><span class="line">&#123;</span><br><span class="line">    code</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="Throwable"><a href="#Throwable" class="headerlink" title="Throwable"></a>Throwable</h1><p>Throwable是类，Error和Exception都继承自这个类。所以也可以用try/catch进行捕捉</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;<span class="keyword">catch</span>(Throwable t) &#123;</span><br><span class="line">    t.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在方法声明中，也可以抛出Throwable类异常，由这个方法的调用者处理：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> <span class="keyword">throws</span> Throwable</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> Throwable;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        test();</span><br><span class="line">    &#125;<span class="keyword">catch</span>(Throwable t) &#123;</span><br><span class="line">        t.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 
+<p>今天我趁毕业设计和辅修结课的事情暂告一段落，到几个朋友的博客转了转，发现不知不觉中大家的生活里又发生了这么多事，而自己上一次更新博客还是四个月前了，顿时羞愧地低下了头。</p>
+<h2 id="最近在做些什么"><a href="#最近在做些什么" class="headerlink" title="最近在做些什么"></a>最近在做些什么</h2><p>其实本来这个标题我是想起“最近在忙些什么”，想了想好像也没干啥事，实在称不上忙。四月份以来一直在做毕设，刚开始还觉得有点意思干劲十足，半个月之后新鲜劲儿一过就不耐烦了，随便搞搞应付了事。中间断断续续看了点《Linux高性能服务器编程》，照着别人的代码自己写点小玩具。学习上的事好像就这样了。</p>
+<p>生活上也没什么太大变化，依旧是不怎么出去玩，倒不是不想动，只是每次动了出去转转的念头最后关头又突然觉得没什么意思就放弃了，好几次都走到校门口了又折返回来。在学校里刷刷 B 站，看看奈飞，晚上喝点小酒，一天就这么稀里糊涂过去了。说起来最近喜欢上喝威士忌，而且比起波本，调和威士忌更对我胃口。波本总是给我一种家里长辈泡的药酒味，得兑点水才方便入口。</p>
+<p>精神方面，这学期以来看了三场 live，分别是帆布小镇+结冰水+温和治疗的拼盘、反光镜和霓虹花园。年初在家里经常听结冰水，所以后来把九连真人的票出了去看他们，没想到现场让我大失所望……主唱气息不足且全程放 program，乐队的控场能力也不行。那场 live 之后好长一段时间里我都不愿意再去听他们的歌了。相比之下反光镜不愧是中国老牌朋克乐队，无论是技术还是带动气氛的能力都出类拨萃，第一次有看 live 看到缺氧的感觉。霓虹花园的现场发挥令人影响深刻，同时带着年轻人火一样的热情。不晚的场地和灯光都很棒。这里还要鞭尸一下 vox，真该好好装修一下了，不然怎么跟不晚这种新秀竞争哟。还看了两本无关技术的书，分别是罗翔老师的《圆圈正义》和加莫夫的《从一到无穷大》。《圆圈正义》从一个法律人的角度解读正义、生命和学习，他认为正义就像是一个绝对的圆，是永远无法达到的，但我们必须保持一颗追求正义的心。这就像一句我一直很喜欢的话：高山仰止，景行行止；虽不能至，心向往之。《从一到无穷大》则是一本充满趣味的科普书，里面巧妙地证明一根线段上的点比全体整数更多这个过程让我大开眼界。说实话感觉自己读的书还是太少了，其实金融经济、历史政治这些内容我都比较感兴趣，但就是静不下心来好好学习。</p>
+<p>最近一个月稍微减了下肥，目前为止大概瘦了8斤这样。也没有特意加强运动，关键就是少吃碳水。午餐主食减半 + 晚餐拒绝主食，保持清淡饮食，肉和蛋可以多吃。东亚人被歧视体质不行就是肉蛋奶吃太少了，整天吃那些碳水除了增加患上高血糖的几率别的啥用没有。没东西吃只好多干几碗饭填肚子的时代已经过去了，没必要一顿饭还咔咔造那么多米面包子。</p>
+<h2 id="稍微展望一下未来"><a href="#稍微展望一下未来" class="headerlink" title="稍微展望一下未来"></a>稍微展望一下未来</h2><p>还有不到两个月我的学生生涯就要结束了，说实话从身边朋友的情况来看，社畜生活比我想象得要更艰难一点。除了钱以外，孤独和压力也让很多初入社会的应届生如牛负重。背井离乡打工的日子确实不好受，不过我对自己的抗压能力还是比较有信心。放弃幻想，准备战斗！</p>
+<p><img src="https://i.loli.net/2021/05/16/v8LQPfKhXlb7mVG.jpg" alt="IMG_20210508_213917.jpg"></p>
+ 
       <!-- reward -->
       
     </div>
@@ -184,12 +173,12 @@ var _hmt = _hmt || [];
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2018/06/24/Java%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E2%80%94-%E5%A4%84%E7%90%86%E5%BC%82%E5%B8%B8/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2021/05/16/%E6%9C%80%E8%BF%91%E7%94%9F%E6%B4%BB%E7%9A%84%E4%B8%80%E7%82%B9%E5%B0%8F%E6%83%B3%E6%B3%95/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%97%B2%E8%81%8A/" rel="tag">闲聊</a></li></ul>
 
     </footer>
   </div>
@@ -197,19 +186,10 @@ var _hmt = _hmt || [];
    
   <nav class="article-nav">
     
-      <a href="/2018/06/28/java%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%9B%86%E5%90%88/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            java基础-使用集合类
-          
-        </div>
-      </a>
     
-    
-      <a href="/2018/06/15/Java%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E2%80%94%E2%80%94%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/" class="article-nav-link">
+      <a href="/2021/01/20/Cache-Coherency-%E4%B8%8E-Memory-Consistency/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Java基础—继承与多态</div>
+        <div class="article-nav-title">Cache Coherency and Memory Consistency</div>
       </a>
     
   </nav>
