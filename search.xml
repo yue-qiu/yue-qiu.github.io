@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>给你的hexo博客换一个主题吧</title>
+    <url>/2021/05/19/%E7%BB%99%E4%BD%A0%E7%9A%84hexo%E5%8D%9A%E5%AE%A2%E6%8D%A2%E4%B8%80%E4%B8%AA%E4%B8%BB%E9%A2%98/</url>
+    <content><![CDATA[<p><a href="https://hexo.io/zh-cn/">hexo</a> 是一款非常优秀的的博客框架，它支持 MarkDown，拥有社区提供的各式各样的插件，只要几条简单的指令就可以把博客部署到 Github Page、Heroku 等平台。<a href="https://github.com/next-theme/hexo-theme-next">NexT</a> 则是 hexo 下广受好评的博客主题，提供了好几种页面布局供用户选择，天然集成了许多常用插件，因此许多博主都选择以它为例子讲述如何搭建属于自己的博客。笔者在刚入门 hexo 时也选择了 NexT，但在博客运行三年多以后已经对其产生了审美疲劳。事实上社区提供了上百款主题可供选择，其中亦不乏佼佼者，所以笔者决定尝试将博客主题更换为 <a href="https://shen-yu.gitee.io/">Ayer</a> 并记录下整个踩坑过程，以飨后人。</p>
+<h2 id="安装-Ayer"><a href="#安装-Ayer" class="headerlink" title="安装 Ayer"></a>安装 Ayer</h2><p>首先在博客根目录把 Ayer 下载到 <code>themes/</code>：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 国内用户如果速度较慢，可以把 github 地址替换为：https://gitee.com/mirrors/ayer.git</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/Shen-Yu/hexo-theme-ayer.git themes/ayer</span><br></pre></td></tr></table></figure>
+
+<p>然后在博客的 <code>_config.yml</code> 文件里更改主题选项：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">theme: ayer</span><br></pre></td></tr></table></figure>
+
+<p>然后直接部署就可以了：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
+
+<p>好了，理论上 hexo 切换主题的过程就是这么简单，就跟把大象装进冰箱一样，只要三步：</p>
+<ol>
+<li>挑选并下载心仪的主题到博客根目录的 <code>themes/</code> 文件夹下</li>
+<li>更改博客配置文件 <code>_config.yml</code> 中的 <code>theme</code> 选项</li>
+<li>更新并部署到远端</li>
+</ol>
+<h2 id="一些坑"><a href="#一些坑" class="headerlink" title="一些坑"></a>一些坑</h2><p>历史检验告诉我们，理论要跟实际相结合，理想是美好的现实是残酷的。更换主题过程中往往会出现一些意料之外的错误。部分错误可能是主题本身某些配置引起的，一般在该主题的官网会有相应 QA，仔细阅读这些内容会很有帮助。</p>
+<p>但也有些错误可能与用户自己的 hexo、node.js 版本等有关，这就需要你自己去调整。</p>
+<h3 id="升级-Hexo"><a href="#升级-Hexo" class="headerlink" title="升级 Hexo"></a>升级 Hexo</h3><p>一些比较新的主题可能需要新版 hexo 的某些特性才能正常工作，而对于用户来说一般很少会去更新自己的 hexo 版本，这就需要我们先升级自己的 hexo：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 使用淘宝源的 cnpm 替换 npm</span></span><br><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br><span class="line"></span><br><span class="line">cnpm install -g cnpm                 <span class="comment"># 升级 npm</span></span><br><span class="line">cnpm cache clean -f                 <span class="comment"># 清除 npm 缓存</span></span><br><span class="line"></span><br><span class="line">===更新 hexo: 进入博客根目录，执行如下命令=== </span><br><span class="line"><span class="comment"># 更新 package.json 中的 hexo 及个插件版本</span></span><br><span class="line">cnpm install -g npm-check           <span class="comment"># 检查之前安装的插件，都有哪些是可以升级的 </span></span><br><span class="line">cnpm install -g npm-upgrade         <span class="comment"># 升级系统中的插件</span></span><br><span class="line">npm-check</span><br><span class="line">npm-upgrade</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新 hexo 及所有插件</span></span><br><span class="line">cnpm update</span><br><span class="line"></span><br><span class="line"><span class="comment"># 确认 hexo 已经更新</span></span><br><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
+
+<h3 id="升级-node-js"><a href="#升级-node-js" class="headerlink" title="升级 node.js"></a>升级 node.js</h3><p>同理，新主题可能会使用新版 node.js 提供的函数等，用户需要更新自己的 node.js。Unix 系统可以使用 n 模块完成更新：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install npm@latest -g <span class="comment"># 升级 npm 到最新版本</span></span><br><span class="line">sudo npm cache clean -f <span class="comment"># 清楚 npm cache</span></span><br><span class="line">sudo npm install -g n <span class="comment"># 安装 n 模块</span></span><br><span class="line"></span><br><span class="line">sudo n stable <span class="comment"># 安装 node.js 最新的稳定版本</span></span><br><span class="line">sudo n 8.1.2 <span class="comment"># 安装指定的 node.js 版本</span></span><br></pre></td></tr></table></figure>
+
+<p>windows 系统暂不支持 n 模块。可以到 <a href="https://nodejs.org/en/">node.js 官网</a> 去下载合适的 msi 包。</p>
+<h2 id="部署到-Coding-Page"><a href="#部署到-Coding-Page" class="headerlink" title="部署到 Coding Page"></a>部署到 Coding Page</h2><p>如何利用 hexo + Github Page 搭建静态博客这个问题已经有很多教程了，但是由于某些众所周知的原因国内用户对 Github Page 的体验并不那么好。这时候 <a href="https://e.coding.net/login">Coding</a> 可以作为 Github 的替代品。以前经常有人吐槽 Coding Page 的服务还比 GitHub Page 还差，但最近两年它被腾讯收购以后特别是对国内用户的服务质量有很大提升。所以比较好的方案是国外流量走 Github，国内流量走 Coding。当然你也可以选择用自己的服务器，不做讨论。这里给出一个知乎上的<a href="https://zhuanlan.zhihu.com/p/111608743?from_voters_page=true">教程</a>。</p>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>一点小想法</title>
     <url>/2021/05/16/%E6%9C%80%E8%BF%91%E7%94%9F%E6%B4%BB%E7%9A%84%E4%B8%80%E7%82%B9%E5%B0%8F%E6%83%B3%E6%B3%95/</url>
     <content><![CDATA[<p>关于我在学校摸鱼半年惊坐起，遥望大佬又一年这件事。</p>
@@ -1272,10 +1309,10 @@
 <p>URN(Uniform Resource Name)：统一资源定位名称，通过某个命名空间中的唯一 ID 来标识一个资源</p>
 <p><img src="https://i.loli.net/2020/02/13/2XjAU6Phz9ONJQq.png" alt="URI"></p>
 <p>举个例子：小红的学号是 123456，这个学号就是 URN，能对应到小红这个人；小红的家庭住址是翻斗大街翻斗花园二号楼一零零一室，这个地址就是 URL，去那里就能找到小红。小红的学号、小红的住址都属于 URI。</p>
-<h1 id="URI-的格式"><a href="#URI-的格式" class="headerlink" title="URI 的格式"></a>URI 的格式</h1><p>一个标准的 URI 格式为：<code>[scheme:]scheme-specific-part</code>，如：<a href="http://qiuyueqy.com/">http://qiuyueqy.com</a>, mailto:<a href="mailto:&#x71;&#105;&#x75;&#121;&#x75;&#x65;&#x39;&#x39;&#55;&#49;&#x40;&#x31;&#50;&#x36;&#46;&#99;&#111;&#x6d;">&#x71;&#105;&#x75;&#121;&#x75;&#x65;&#x39;&#x39;&#55;&#49;&#x40;&#x31;&#50;&#x36;&#46;&#99;&#111;&#x6d;</a>, news:comp.go.lang</p>
+<h1 id="URI-的格式"><a href="#URI-的格式" class="headerlink" title="URI 的格式"></a>URI 的格式</h1><p>一个标准的 URI 格式为：<code>[scheme:]scheme-specific-part</code>，如：<a href="http://qiuyueqy.com/">http://qiuyueqy.com</a>, mailto:<a href="mailto:&#x71;&#x69;&#117;&#x79;&#x75;&#x65;&#57;&#x39;&#x37;&#x31;&#64;&#x31;&#x32;&#x36;&#46;&#99;&#111;&#x6d;">&#x71;&#x69;&#117;&#x79;&#x75;&#x65;&#57;&#x39;&#x37;&#x31;&#64;&#x31;&#x32;&#x36;&#46;&#99;&#111;&#x6d;</a>, news:comp.go.lang</p>
 <p>URI 可以细分为为<code>不透明的(opaque)</code>和<code>分层的(hierarchical)</code>两类：</p>
 <ul>
-<li>opaque 指 scheme-specific-part 不以 / 开头，是一个整体。呈 [scheme]:opaque[?query][#fragment] 的形式。如：mailto:<a href="mailto:&#x71;&#105;&#117;&#121;&#117;&#101;&#x39;&#x39;&#x37;&#49;&#64;&#49;&#50;&#x36;&#x2e;&#x63;&#111;&#109;">&#x71;&#105;&#117;&#121;&#117;&#101;&#x39;&#x39;&#x37;&#49;&#64;&#49;&#50;&#x36;&#x2e;&#x63;&#111;&#109;</a>，<a href="http://www.google.com:443/">www.google.com:443</a>, opaque 必须是绝对的。</li>
+<li>opaque 指 scheme-specific-part 不以 / 开头，是一个整体。呈 [scheme]:opaque[?query][#fragment] 的形式。如：mailto:<a href="mailto:&#x71;&#x69;&#117;&#x79;&#117;&#x65;&#57;&#57;&#55;&#49;&#x40;&#x31;&#x32;&#x36;&#46;&#x63;&#111;&#x6d;">&#x71;&#x69;&#117;&#x79;&#117;&#x65;&#57;&#57;&#55;&#49;&#x40;&#x31;&#x32;&#x36;&#46;&#x63;&#111;&#x6d;</a>，<a href="http://www.google.com:443/">www.google.com:443</a>, opaque 必须是绝对的。</li>
 <li>hierarchical 指 scheme-specific-part 以 / 开头且可以划分为好几部分。呈 [scheme:][//[userinfo@]host[:port]]path[?query][#fragment] 的形式。如：<a href="http://qiuyueqy.com/categories/">http://qiuyueqy.com/categories/</a>, hierarchical 可以是绝对的，也可以是相对的，如：<a href="https://github.com/yue-qiu/CUG_EmptyClassroom">https://github.com/yue-qiu/CUG_EmptyClassroom</a>, ../../static/verify.js</li>
 </ul>
 <h1 id="谈谈-URI-编码"><a href="#谈谈-URI-编码" class="headerlink" title="谈谈 URI 编码"></a>谈谈 URI 编码</h1><p>利用 URI 传参时，如果某些 URI 组件字符（如 /:?@&amp;=+$,#）同时也是参数的一部分会导致 URI 歧义。此外，URI 只支持 ASCII 编码，对于茫茫多的特殊字符（如：广东省）如何表示？</p>

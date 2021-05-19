@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>Java 禁止创建泛型数组 |  精神的壳</title>
+      <title>给你的hexo博客换一个主题吧 |  精神的壳</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -56,7 +56,7 @@ var _hmt = _hmt || [];
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Java基础——泛型数组"
+  id="post-给你的hexo博客换一个主题"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -67,7 +67,7 @@ var _hmt = _hmt || [];
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Java 禁止创建泛型数组
+  给你的hexo博客换一个主题吧
 </h1>
  
 
@@ -75,11 +75,11 @@ var _hmt = _hmt || [];
     </header>
      
     <div class="article-meta">
-      <a href="/2019/01/27/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94%E6%B3%9B%E5%9E%8B%E6%95%B0%E7%BB%84/" class="article-date">
-  <time datetime="2019-01-27T10:00:45.000Z" itemprop="datePublished">2019-01-27</time>
+      <a href="/2021/05/19/%E7%BB%99%E4%BD%A0%E7%9A%84hexo%E5%8D%9A%E5%AE%A2%E6%8D%A2%E4%B8%80%E4%B8%AA%E4%B8%BB%E9%A2%98/" class="article-date">
+  <time datetime="2021-05-19T06:36:26.000Z" itemprop="datePublished">2021-05-19</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%AF%AD%E8%A8%80/">语言</a>
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
   </div>
   
 <div class="word_count">
@@ -87,7 +87,7 @@ var _hmt = _hmt || [];
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">605</span>
+            <span class="post-count">1k</span>
         </span>
     </span>
 
@@ -96,38 +96,47 @@ var _hmt = _hmt || [];
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">2 分钟</span>
+            <span class="post-count">3 分钟</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p>java 不允许直接创建泛型数组，也不允许创建泛型实例。也就是说下面这种情况是不被允许的：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> T[] a = <span class="keyword">new</span> T[<span class="number">1</span>]; <span class="comment">// error</span></span><br><span class="line">  <span class="keyword">private</span> T t = <span class="keyword">new</span> T(); <span class="comment">// error</span></span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">hexo</a> 是一款非常优秀的的博客框架，它支持 MarkDown，拥有社区提供的各式各样的插件，只要几条简单的指令就可以把博客部署到 Github Page、Heroku 等平台。<a target="_blank" rel="noopener" href="https://github.com/next-theme/hexo-theme-next">NexT</a> 则是 hexo 下广受好评的博客主题，提供了好几种页面布局供用户选择，天然集成了许多常用插件，因此许多博主都选择以它为例子讲述如何搭建属于自己的博客。笔者在刚入门 hexo 时也选择了 NexT，但在博客运行三年多以后已经对其产生了审美疲劳。事实上社区提供了上百款主题可供选择，其中亦不乏佼佼者，所以笔者决定尝试将博客主题更换为 <a target="_blank" rel="noopener" href="https://shen-yu.gitee.io/">Ayer</a> 并记录下整个踩坑过程，以飨后人。</p>
+<h2 id="安装-Ayer"><a href="#安装-Ayer" class="headerlink" title="安装 Ayer"></a>安装 Ayer</h2><p>首先在博客根目录把 Ayer 下载到 <code>themes/</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 国内用户如果速度较慢，可以把 github 地址替换为：https://gitee.com/mirrors/ayer.git</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/Shen-Yu/hexo-theme-ayer.git themes/ayer</span><br></pre></td></tr></table></figure>
 
-<p>java 的泛型只停留在了编译层，编译器在编译完成后，会把泛型信息擦除，用第一个限定类型来替代，没有指定限定类型的泛型参数则用 Object 类替代：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 指定了泛型参数的限定类型</span></span><br><span class="line"><span class="keyword">public</span> &lt;T extends Comparable&gt; <span class="function"><span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> </span>&#123;...&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 经编译器类型擦除后</span></span><br><span class="line"><span class="keyword">public</span> &lt;Comparable&gt; <span class="function"><span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> </span>&#123;...&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 无限定类型</span></span><br><span class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> </span>&#123;...&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 经编译器类型擦除后</span></span><br><span class="line"><span class="keyword">public</span> &lt;Object&gt; <span class="function"><span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> </span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<p>然后在博客的 <code>_config.yml</code> 文件里更改主题选项：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: ayer</span><br></pre></td></tr></table></figure>
 
-<p>经过类型擦除后，拥有不同泛型参数的泛型类在虚拟机眼中就是一样的了：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Test&lt;String&gt; t1 = <span class="keyword">new</span> Test&lt;&gt;();</span><br><span class="line">Test&lt;Integer&gt; t2 = <span class="keyword">new</span> Test&lt;&gt;();</span><br><span class="line">t1.getClass() == t2.getClass(); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>然后直接部署就可以了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
 
-<p>java 允许父类的引用类型指向子类实例，而 Object[ ] 是任何数组的父类，这个时候如果我们往里面放不同于原始数据类型 但是满足后来使用的父类类型的话，编译不会有问题。如果是普通类，这样做也不会有什么问题，因为在运行时会检查加入数组的对象的类型，所以下面这段代码运行时会报错 ArrayStoreException：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String[] s = <span class="keyword">new</span> String[<span class="number">10</span>];</span><br><span class="line">Object[] o = s; <span class="comment">// OK</span></span><br><span class="line">Integer i = <span class="keyword">new</span> Integer(<span class="number">2</span>);</span><br><span class="line">o[<span class="number">0</span>] = i; <span class="comment">// throws ArrayStoreException</span></span><br></pre></td></tr></table></figure>
+<p>好了，理论上 hexo 切换主题的过程就是这么简单，就跟把大象装进冰箱一样，只要三步：</p>
+<ol>
+<li>挑选并下载心仪的主题到博客根目录的 <code>themes/</code> 文件夹下</li>
+<li>更改博客配置文件 <code>_config.yml</code> 中的 <code>theme</code> 选项</li>
+<li>更新并部署到远端</li>
+</ol>
+<h2 id="一些坑"><a href="#一些坑" class="headerlink" title="一些坑"></a>一些坑</h2><p>历史检验告诉我们，理论要跟实际相结合，理想是美好的现实是残酷的。更换主题过程中往往会出现一些意料之外的错误。部分错误可能是主题本身某些配置引起的，一般在该主题的官网会有相应 QA，仔细阅读这些内容会很有帮助。</p>
+<p>但也有些错误可能与用户自己的 hexo、node.js 版本等有关，这就需要你自己去调整。</p>
+<h3 id="升级-Hexo"><a href="#升级-Hexo" class="headerlink" title="升级 Hexo"></a>升级 Hexo</h3><p>一些比较新的主题可能需要新版 hexo 的某些特性才能正常工作，而对于用户来说一般很少会去更新自己的 hexo 版本，这就需要我们先升级自己的 hexo：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用淘宝源的 cnpm 替换 npm</span></span><br><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br><span class="line"></span><br><span class="line">cnpm install -g cnpm                 <span class="comment"># 升级 npm</span></span><br><span class="line">cnpm cache clean -f                 <span class="comment"># 清除 npm 缓存</span></span><br><span class="line"></span><br><span class="line">===更新 hexo: 进入博客根目录，执行如下命令=== </span><br><span class="line"><span class="comment"># 更新 package.json 中的 hexo 及个插件版本</span></span><br><span class="line">cnpm install -g npm-check           <span class="comment"># 检查之前安装的插件，都有哪些是可以升级的 </span></span><br><span class="line">cnpm install -g npm-upgrade         <span class="comment"># 升级系统中的插件</span></span><br><span class="line">npm-check</span><br><span class="line">npm-upgrade</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新 hexo 及所有插件</span></span><br><span class="line">cnpm update</span><br><span class="line"></span><br><span class="line"><span class="comment"># 确认 hexo 已经更新</span></span><br><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
 
-<p>如果可以创建泛型数组，那么一个 Object 数组引用类型指向这个泛型数组实例是可行的：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Test&lt;String&gt;[] tarr = new Test&lt;&gt;[10]; // 实际不行，假设可行</span><br><span class="line">Object[] o = tarr;</span><br></pre></td></tr></table></figure>
+<h3 id="升级-node-js"><a href="#升级-node-js" class="headerlink" title="升级 node.js"></a>升级 node.js</h3><p>同理，新主题可能会使用新版 node.js 提供的函数等，用户需要更新自己的 node.js。Unix 系统可以使用 n 模块完成更新：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">npm install npm@latest -g <span class="comment"># 升级 npm 到最新版本</span></span><br><span class="line">sudo npm cache clean -f <span class="comment"># 清楚 npm cache</span></span><br><span class="line">sudo npm install -g n <span class="comment"># 安装 n 模块</span></span><br><span class="line"></span><br><span class="line">sudo n stable <span class="comment"># 安装 node.js 最新的稳定版本</span></span><br><span class="line">sudo n 8.1.2 <span class="comment"># 安装指定的 node.js 版本</span></span><br></pre></td></tr></table></figure>
 
-<p>编译器编译时会根据引用类型进行类型检查，所以以下代码可以通过编译。在运行时会检查加入数组的对象的类型，但由于类型擦除，不同泛型参数的泛型类在虚拟机眼里是类型相同的，那么在运行时一个 Test<Integer> 实例成功被放进 Test<String>[ ] 中了：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Test&lt;Integer&gt; t = <span class="keyword">new</span> Test&lt;&gt;();</span><br><span class="line">o[<span class="number">0</span>] = t;</span><br></pre></td></tr></table></figure>
-
-<p>一个与泛型数组类型不同的实例可以被加入数组中而 java 无法检测到这一错误。那么很显然无法保证泛型数组元素类型的一致性，其后果不言而喻。</p>
+<p>windows 系统暂不支持 n 模块。可以到 <a target="_blank" rel="noopener" href="https://nodejs.org/en/">node.js 官网</a> 去下载合适的 msi 包。</p>
+<h2 id="部署到-Coding-Page"><a href="#部署到-Coding-Page" class="headerlink" title="部署到 Coding Page"></a>部署到 Coding Page</h2><p>如何利用 hexo + Github Page 搭建静态博客这个问题已经有很多教程了，但是由于某些众所周知的原因国内用户对 Github Page 的体验并不那么好。这时候 <a target="_blank" rel="noopener" href="https://e.coding.net/login">Coding</a> 可以作为 Github 的替代品。以前经常有人吐槽 Coding Page 的服务还比 GitHub Page 还差，但最近两年它被腾讯收购以后特别是对国内用户的服务质量有很大提升。所以比较好的方案是国外流量走 Github，国内流量走 Coding。当然你也可以选择用自己的服务器，不做讨论。这里给出一个知乎上的<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/111608743?from_voters_page=true">教程</a>。</p>
  
       <!-- reward -->
       
@@ -180,12 +189,12 @@ var _hmt = _hmt || [];
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2019/01/27/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94%E6%B3%9B%E5%9E%8B%E6%95%B0%E7%BB%84/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2021/05/19/%E7%BB%99%E4%BD%A0%E7%9A%84hexo%E5%8D%9A%E5%AE%A2%E6%8D%A2%E4%B8%80%E4%B8%AA%E4%B8%BB%E9%A2%98/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
 
     </footer>
   </div>
@@ -193,19 +202,10 @@ var _hmt = _hmt || [];
    
   <nav class="article-nav">
     
-      <a href="/2019/10/13/%E7%AE%A1%E7%A8%8B/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            管程
-          
-        </div>
-      </a>
     
-    
-      <a href="/2018/11/15/Flask%E5%AD%A6%E4%B9%A0/" class="article-nav-link">
+      <a href="/2021/05/16/%E6%9C%80%E8%BF%91%E7%94%9F%E6%B4%BB%E7%9A%84%E4%B8%80%E7%82%B9%E5%B0%8F%E6%83%B3%E6%B3%95/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Flask——启动吧，Flask！</div>
+        <div class="article-nav-title">一点小想法</div>
       </a>
     
   </nav>
