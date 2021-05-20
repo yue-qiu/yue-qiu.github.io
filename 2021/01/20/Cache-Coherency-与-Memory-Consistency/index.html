@@ -112,6 +112,8 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
        
   <p><a target="_blank" rel="noopener" href="http://qiuyueqy.com/2020/03/24/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E4%BB%A5Go%E4%B8%BA%E4%BE%8B/">并发编程-以Go为例</a>一文总结了并发编程中常见的两种错误并给出了解决策略。本文旨在从计算机体系的角度分析这两种错误出现的原因。</p>
+<span id="more"></span>
+
 <h2 id="缓存一致性-Cache-Coherency"><a href="#缓存一致性-Cache-Coherency" class="headerlink" title="缓存一致性(Cache Coherency)"></a>缓存一致性(Cache Coherency)</h2><p>又称<strong>缓存可见性</strong>，现代计算机存储系统采用了分级架构，每个 CPU 内核有自己的 L1、L2 Cache，相互之间还有一个共享的 L3 Cache，其中 L1 还分为缓存指令的 i-cache(只读)和缓存程序数据的 d-cache，L2、L3 Cache 则不区分指令和程序数据，称为统一缓存(unified cache)。而字节从 Memory 缓存到 Cache 的策略又分为<strong>直接映射</strong>、<strong>全相联</strong>和<strong>组相联</strong>三种，此处不做展开：</p>
 <p><img src="https://i.loli.net/2021/01/20/cAnCZgduros1mTY.png" alt="分级架构"></p>
 <p>在多核时代，假设有下面这一个场景：</p>

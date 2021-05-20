@@ -71,7 +71,7 @@
     <link href="http://yoursite.com/2021/05/16/%E6%9C%80%E8%BF%91%E7%94%9F%E6%B4%BB%E7%9A%84%E4%B8%80%E7%82%B9%E5%B0%8F%E6%83%B3%E6%B3%95/"/>
     <id>http://yoursite.com/2021/05/16/%E6%9C%80%E8%BF%91%E7%94%9F%E6%B4%BB%E7%9A%84%E4%B8%80%E7%82%B9%E5%B0%8F%E6%83%B3%E6%B3%95/</id>
     <published>2021-05-16T10:43:33.000Z</published>
-    <updated>2021-05-20T03:14:01.201Z</updated>
+    <updated>2021-05-20T05:43:56.841Z</updated>
     
     
     <summary type="html">&lt;p&gt;关于我在学校摸鱼半年惊坐起，遥望大佬又一年这件事。&lt;/p&gt;</summary>
@@ -90,16 +90,10 @@
     <link href="http://yoursite.com/2021/01/20/Cache-Coherency-%E4%B8%8E-Memory-Consistency/"/>
     <id>http://yoursite.com/2021/01/20/Cache-Coherency-%E4%B8%8E-Memory-Consistency/</id>
     <published>2021-01-20T03:26:46.000Z</published>
-    <updated>2021-03-01T05:53:44.726Z</updated>
+    <updated>2021-05-20T05:57:45.368Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html"></summary>
-        
-      
+    <summary type="html">&lt;p&gt;&lt;a href=&quot;http://qiuyueqy.com/2020/03/24/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E4%BB%A5Go%E4%B8%BA%E4%BE%8B/&quot;&gt;并发编程-以Go为例&lt;/a&gt;一文总结了并发编程中常见的两种错误并给出了解决策略。本文旨在从计算机体系的角度分析这两种错误出现的原因。&lt;/p&gt;</summary>
     
     
     
@@ -115,16 +109,10 @@
     <link href="http://yoursite.com/2021/01/13/%E5%B8%B8%E7%94%A8%E7%9A%84gcc%E7%BC%96%E8%AF%91%E9%80%89%E9%A1%B9/"/>
     <id>http://yoursite.com/2021/01/13/%E5%B8%B8%E7%94%A8%E7%9A%84gcc%E7%BC%96%E8%AF%91%E9%80%89%E9%A1%B9/</id>
     <published>2021-01-13T09:32:17.000Z</published>
-    <updated>2021-05-16T09:27:04.516Z</updated>
+    <updated>2021-05-20T05:52:43.240Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html"></summary>
-        
-      
+    <summary type="html">&lt;p&gt;本文旨在对 gcc 常用编译选项进行归类整理。&lt;/p&gt;</summary>
     
     
     
@@ -215,7 +203,7 @@
     <link href="http://yoursite.com/2020/11/21/%E4%BB%8EBP%E4%B8%8ESP%E8%AF%B4%E5%BC%80%E5%8E%BB/"/>
     <id>http://yoursite.com/2020/11/21/%E4%BB%8EBP%E4%B8%8ESP%E8%AF%B4%E5%BC%80%E5%8E%BB/</id>
     <published>2020-11-21T03:03:15.000Z</published>
-    <updated>2021-01-16T06:07:00.931Z</updated>
+    <updated>2021-05-20T05:50:12.709Z</updated>
     
     
       
@@ -265,16 +253,10 @@
     <link href="http://yoursite.com/2020/07/30/%E6%B5%85%E8%B0%88WiFi6/"/>
     <id>http://yoursite.com/2020/07/30/%E6%B5%85%E8%B0%88WiFi6/</id>
     <published>2020-07-30T01:44:35.000Z</published>
-    <updated>2020-07-30T02:14:45.223Z</updated>
+    <updated>2021-05-20T05:53:28.199Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html"></summary>
-        
-      
+    <summary type="html">&lt;p&gt;WiFi6 好处都有啥？谁说对了就给他！&lt;/p&gt;</summary>
     
     
     
@@ -365,16 +347,10 @@
     <link href="http://yoursite.com/2020/06/01/channel-Go%E7%9A%84%E4%BC%A0%E5%A3%B0%E7%AD%92/"/>
     <id>http://yoursite.com/2020/06/01/channel-Go%E7%9A%84%E4%BC%A0%E5%A3%B0%E7%AD%92/</id>
     <published>2020-06-01T06:54:30.000Z</published>
-    <updated>2020-06-21T02:15:52.987Z</updated>
+    <updated>2021-05-20T05:57:54.372Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html"></summary>
-        
-      
+    <summary type="html">&lt;p&gt;得益于 goroutine 的设计，Go 在执行并发任务是可谓是得心应手。既然存在并发，就必然牵扯到多任务同步的问题。当然，我们可以直接用共享内存来通信（如共享变量），但是 Go 的设计哲学中有一句话叫做&lt;code&gt;不要用共享内存来通信，而是用通信共享内存&lt;/code&gt;。利用内置的 channel 结构体在多个 goroutine 间通信是更安全也是更被推崇的。&lt;/p&gt;</summary>
     
     
     
@@ -440,16 +416,10 @@
     <link href="http://yoursite.com/2020/04/17/%E7%BD%91%E7%BB%9CIO/"/>
     <id>http://yoursite.com/2020/04/17/%E7%BD%91%E7%BB%9CIO/</id>
     <published>2020-04-17T15:17:38.000Z</published>
-    <updated>2020-05-30T06:35:02.262Z</updated>
+    <updated>2021-05-20T05:55:46.735Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html"></summary>
-        
-      
+    <summary type="html">&lt;p&gt;计算机之间可以通信，本质上也是计算机进程相互通信。为了方便不同终端进行通信，网络协议栈抽象出socket层，通过对socket文件描述符的操作来进行网络IO。当然，不同的应用场景，衍生出了不同的网络模型&lt;/p&gt;</summary>
     
     
     
@@ -465,16 +435,11 @@
     <link href="http://yoursite.com/2020/03/24/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E4%BB%A5Go%E4%B8%BA%E4%BE%8B/"/>
     <id>http://yoursite.com/2020/03/24/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E4%BB%A5Go%E4%B8%BA%E4%BE%8B/</id>
     <published>2020-03-24T15:49:51.000Z</published>
-    <updated>2021-01-20T08:50:22.815Z</updated>
+    <updated>2021-05-20T05:58:59.856Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html"></summary>
-        
-      
+    <summary type="html">&lt;p&gt;所谓&lt;code&gt;并发&lt;/code&gt;(concurrency) 是指几段程序在同一时间段内交错执行，当我们无法肯定一个事件一定会会先于另一个事件发生，那么就可以说这几个时间是“并发”的。如果一个函数在并发调用时仍能正确执行，这个函数就是&lt;code&gt;并发安全&lt;/code&gt;的；如果一个类型的所有可访问方法和操作都是并发安全的，则它就是一个并发安全的类型。&lt;/p&gt;
+&lt;p&gt;本文主要介绍了几种并发编程中常见的问题及对策，所有的例子都会用 Go 语言来描述，还会涉及到一些 Go 对并发编程的支持。&lt;/p&gt;</summary>
     
     
     

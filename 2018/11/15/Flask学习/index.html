@@ -87,7 +87,7 @@ var _hmt = _hmt || [];
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">608</span>
+            <span class="post-count">598</span>
         </span>
     </span>
 
@@ -111,8 +111,10 @@ var _hmt = _hmt || [];
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="新一代虚拟环境工具：pipenv"><a href="#新一代虚拟环境工具：pipenv" class="headerlink" title="新一代虚拟环境工具：pipenv"></a>新一代虚拟环境工具：pipenv</h1><p>以前虚拟环境主要靠 virtualenv， 配合 requirements.txt 做到一键安装依赖的效果。但是 requirements.txt 需要手动管理包记录，每次安装新的包之后都要更新这个文件，很麻烦。现在有了新的工具 pipenv。pipenv 将虚拟环境配置与依赖包管理整合在一起，并自动记录依赖包的安装、更新与卸载。真正做到了”一键使用“。pipenv 的用法参考<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/37581807">这篇文章</a>。</p>
-<h1 id="启动Flask"><a href="#启动Flask" class="headerlink" title="启动Flask"></a>启动Flask</h1><p>在 Flask 更新到版本 1.0 以后，不再推荐使用下面的方式启动 Flask</p>
+  <p>以前虚拟环境主要靠 virtualenv， 配合 requirements.txt 做到一键安装依赖的效果。但是 requirements.txt 需要手动管理包记录，每次安装新的包之后都要更新这个文件，很麻烦。现在有了新的工具 pipenv。pipenv 将虚拟环境配置与依赖包管理整合在一起，并自动记录依赖包的安装、更新与卸载。真正做到了”一键使用“。pipenv 的用法参考<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/37581807">这篇文章</a>。</p>
+<span id="more"></span>
+
+<h2 id="启动Flask"><a href="#启动Flask" class="headerlink" title="启动Flask"></a>启动Flask</h2><p>在 Flask 更新到版本 1.0 以后，不再推荐使用下面的方式启动 Flask</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.run()</span><br></pre></td></tr></table></figure>
 
 <p>取而代之的是命令</p>
@@ -132,15 +134,15 @@ var _hmt = _hmt || [];
 
 <p>也可以通过环境变量 FLASK_RUN_HOST 与 FLASK_RUN_PORT 设置。</p>
 <p>可以通过 <code>flask --help</code> 查看所有可用命令</p>
-<h1 id="管理环境变量"><a href="#管理环境变量" class="headerlink" title="管理环境变量"></a>管理环境变量</h1><p>如果安装了 python-dotenv 包， Flask 会从 .env 文件 和 .flaskenv 文件中加载环境变量。此时 Flask 加载环境变量的优先级是：系统环境变量 &gt; .env 中的环境变量 &gt; .flaskenv 中的环境变量</p>
+<h2 id="管理环境变量"><a href="#管理环境变量" class="headerlink" title="管理环境变量"></a>管理环境变量</h2><p>如果安装了 python-dotenv 包， Flask 会从 .env 文件 和 .flaskenv 文件中加载环境变量。此时 Flask 加载环境变量的优先级是：系统环境变量 &gt; .env 中的环境变量 &gt; .flaskenv 中的环境变量</p>
 <p>.env 用于存放公开环境变量, 如 FLAKS_APP, .flaskenv 用于存放敏感环境变量如 Email 账号密码：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">!# MyFlask/.env</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这是注释</span></span><br><span class="line">FLASK_APP = hello</span><br></pre></td></tr></table></figure>
 
-<h1 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h1><p>用如下命令可以启动带有上下文的 Python Shell 环境：</p>
+<h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><p>用如下命令可以启动带有上下文的 Python Shell 环境：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flask shell</span><br></pre></td></tr></table></figure>
 
 <p>和其他 flask 命令相同，在执行这个命令前要确保 Flask 实例可以被找到</p>
-<h1 id="flask-命令"><a href="#flask-命令" class="headerlink" title="flask 命令"></a>flask 命令</h1><p>通过为一个函数添加 @app.cli.command() 装饰器，可以注册一个 flask 命令。函数的名称即为命令名，也可以通过给装饰器传参的方式命名：</p>
+<h2 id="flask-命令"><a href="#flask-命令" class="headerlink" title="flask 命令"></a>flask 命令</h2><p>通过为一个函数添加 @app.cli.command() 装饰器，可以注册一个 flask 命令。函数的名称即为命令名，也可以通过给装饰器传参的方式命名：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.cli.command(<span class="params"><span class="string">&#x27;greet&#x27;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span>():</span></span><br><span class="line">    click.echo(<span class="string">&#x27;hello!&#x27;</span>)</span><br></pre></td></tr></table></figure>
 
 <p>flask 命令是通过 Click 包实现的，更多关于自定义命令的设置和功能请看<a target="_blank" rel="noopener" href="http://click.pocoo.org/6/">Click文档</a></p>

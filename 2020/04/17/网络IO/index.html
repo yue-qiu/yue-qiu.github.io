@@ -111,7 +111,9 @@ var _hmt = _hmt || [];
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="Linux-IO模型"><a href="#Linux-IO模型" class="headerlink" title="Linux IO模型"></a>Linux IO模型</h1><p>计算机之间可以通信，本质上也是计算机进程相互通信。为了方便不同终端进行通信，网络协议栈抽象出socket层，通过对socket文件描述符的操作来进行网络IO。当然，不同的应用场景，衍生出了不同的网络模型</p>
+  <p>计算机之间可以通信，本质上也是计算机进程相互通信。为了方便不同终端进行通信，网络协议栈抽象出socket层，通过对socket文件描述符的操作来进行网络IO。当然，不同的应用场景，衍生出了不同的网络模型</p>
+<span id="more"></span>
+
 <h2 id="一次网络响应"><a href="#一次网络响应" class="headerlink" title="一次网络响应"></a>一次网络响应</h2><p>互联网应用中，多数架构是 CS 模式，即 client 发出请求，server 接受请求，处理之后返回响应。这样的一次交互，伴随着 client 和 server 的 IO 操作。</p>
 <p>一次简单的交互，往往涉及网络 IO 和磁盘文件 IO。大致流程如图：</p>
 <p><img src="https://i.loli.net/2020/04/17/jMxUNO7ltuwgRTX.png" alt="一次IO"></p>

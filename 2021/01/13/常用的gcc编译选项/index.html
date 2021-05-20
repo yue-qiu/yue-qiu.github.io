@@ -87,7 +87,7 @@ var _hmt = _hmt || [];
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">785</span>
+            <span class="post-count">740</span>
         </span>
     </span>
 
@@ -96,7 +96,7 @@ var _hmt = _hmt || [];
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">3 分钟</span>
+            <span class="post-count">2 分钟</span>
         </span>
     </span>
 </div>
@@ -111,10 +111,10 @@ var _hmt = _hmt || [];
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p>本文旨在对 gcc 常用编译选项进行归类整理，全部选项可以通过执行如下命令得到：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+  <p>本文旨在对 gcc 常用编译选项进行归类整理。</p>
+<span id="more"></span>
 
-<h2 id="警告选项：-w、-W、-Wall、-Werror"><a href="#警告选项：-w、-W、-Wall、-Werror" class="headerlink" title="警告选项：-w、-W、-Wall、-Werror"></a>警告选项：-w、-W、-Wall、-Werror</h2><p>-w: 关闭所有 warning</p>
+<h2 id="警告选项"><a href="#警告选项" class="headerlink" title="警告选项"></a>警告选项</h2><p>-w: 关闭所有 warning</p>
 <p>-W: 只显示编译器认为可能出现错误的警告</p>
 <p>-Wall: 显示所有警告</p>
 <p>-Werror: 把 warning 当做 error 抛出</p>
@@ -129,7 +129,7 @@ var _hmt = _hmt || [];
 <p>用 -Werror 编译，提示存在 error，编译失败：</p>
 <p><img src="https://i.loli.net/2021/01/14/UZmjOfugJyVGCAt.png" alt="-Werror编译"></p>
 <p>比较好的做法是 -W 与 -Wall 连用</p>
-<h2 id="中间文件选项：-E、-S、-C、-save-temps、-I-大写i"><a href="#中间文件选项：-E、-S、-C、-save-temps、-I-大写i" class="headerlink" title="中间文件选项：-E、-S、-C、-save-temps、-I(大写i)"></a>中间文件选项：-E、-S、-C、-save-temps、-I(大写i)</h2><p>-Idir：使用 <code>#include</code> 包含头文件的时候，如果用 -I 指定了目录，gcc 会先在指定目录查找, 然后再按“当前目录、/usr/include、/usr/local/include”的顺序查找。</p>
+<h2 id="中间文件选项"><a href="#中间文件选项" class="headerlink" title="中间文件选项"></a>中间文件选项</h2><p>-Idir：使用 <code>#include</code> 包含头文件的时候，如果用 -I 指定了目录，gcc 会先在指定目录查找, 然后再按“当前目录、/usr/include、/usr/local/include”的顺序查找。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc vector.c -I./src</span><br></pre></td></tr></table></figure>
 
 <p>-E: 仅进行预处理，得到 .i 文件</p>
@@ -144,7 +144,7 @@ var _hmt = _hmt || [];
 <p>-save-temps: 保留整个过程中产生的所有中间文件到当前目录</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -save-temps -C test.c</span><br></pre></td></tr></table></figure>
 
-<h2 id="链接选项：-static、-shared、-fpic、-L、-l-小写L"><a href="#链接选项：-static、-shared、-fpic、-L、-l-小写L" class="headerlink" title="链接选项：-static、-shared、-fpic、-L、-l(小写L)"></a>链接选项：-static、-shared、-fpic、-L、-l(小写L)</h2><p>-static：使用静态编译，把静态库的代码和数据直接编译进可执行文件。这样得到的二进制文件体积自然比较大</p>
+<h2 id="链接选项"><a href="#链接选项" class="headerlink" title="链接选项"></a>链接选项</h2><p>-static：使用静态编译，把静态库的代码和数据直接编译进可执行文件。这样得到的二进制文件体积自然比较大</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -static test.c ./libvector.a</span><br></pre></td></tr></table></figure>
 
 <p>-shared：生成共享库(.so 文件)</p>
@@ -158,7 +158,7 @@ var _hmt = _hmt || [];
 <p>-Ldir：指定库文件所在的目录。如果库文件在上述路径之外就需要指定共享库的目录。假设需要链接的共享库 libvector.so 位于 /home/project 目录下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc test.c -L/home/project -lvector</span><br></pre></td></tr></table></figure>
 
-<h2 id="优化选项：-Og、-O1、-O2、-O3、-g、-pg"><a href="#优化选项：-Og、-O1、-O2、-O3、-g、-pg" class="headerlink" title="优化选项：-Og、-O1、-O2、-O3、-g、-pg"></a>优化选项：-Og、-O1、-O2、-O3、-g、-pg</h2><p>-Og：编译时不优化代码</p>
+<h2 id="优化选项"><a href="#优化选项" class="headerlink" title="优化选项"></a>优化选项</h2><p>-Og：编译时不优化代码</p>
 <p>-O1、-O2、-O3：编译器进行代码优化，数字越大优化程度越高</p>
 <p>-g：在二进制文件中生成调试信息，像 gdb 这类的工具需要有这种信息才能工作。这样可执行文件的体积会比较大。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc test.c -g</span><br></pre></td></tr></table></figure>

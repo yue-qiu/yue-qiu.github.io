@@ -87,7 +87,7 @@ var _hmt = _hmt || [];
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">553</span>
+            <span class="post-count">551</span>
         </span>
     </span>
 
@@ -96,7 +96,7 @@ var _hmt = _hmt || [];
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">2 分钟</span>
+            <span class="post-count">1 分钟</span>
         </span>
     </span>
 </div>
@@ -112,13 +112,15 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
        
   <p>以前编程的时候一直没注意回车符与换行符的区别，只是大概知道一个是 \r 一个是 \n。今天心血来潮查了一下，发现这还蛮有趣的~</p>
-<h1 id="回车-CR"><a href="#回车-CR" class="headerlink" title="回车 CR"></a>回车 CR</h1><p>原名 Carriage Return，ASCII 码 13。表示光标回到行首。</p>
+<span id="more"></span>
+
+<h2 id="回车"><a href="#回车" class="headerlink" title="回车"></a>回车</h2><p>原名 Carriage Return，ASCII 码 13。表示光标回到行首。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello\rworld&quot;</span>)</span><br><span class="line"><span class="comment"># output:</span></span><br><span class="line"><span class="comment">#   world</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="换行-LF"><a href="#换行-LF" class="headerlink" title="换行 LF"></a>换行 LF</h1><p>原名 Line Feed，ASCII 码 10。表示光标移动到下一行</p>
+<h2 id="换行"><a href="#换行" class="headerlink" title="换行"></a>换行</h2><p>原名 Line Feed，ASCII 码 10。表示光标移动到下一行</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello\nworld&quot;</span>)</span><br><span class="line"><span class="comment"># output:</span></span><br><span class="line"><span class="comment">#   hello</span></span><br><span class="line"><span class="comment">#   world</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="渊源"><a href="#渊源" class="headerlink" title="渊源"></a>渊源</h1><p>在计算机还没有出现之前，有一种叫做电传打字机（Teletype Model 33）的玩意，每秒钟可以打 10 个字符。但是它有一个问题，就是打完一行换行的时候，要用去 0.2 秒，正好可以打两个字符。要是在这0.2秒里面，又有新的字符传过来，那么这个字符将丢失。</p>
+<h2 id="渊源"><a href="#渊源" class="headerlink" title="渊源"></a>渊源</h2><p>在计算机还没有出现之前，有一种叫做电传打字机（Teletype Model 33）的玩意，每秒钟可以打 10 个字符。但是它有一个问题，就是打完一行换行的时候，要用去 0.2 秒，正好可以打两个字符。要是在这0.2秒里面，又有新的字符传过来，那么这个字符将丢失。</p>
 <p><img src="https://i.loli.net/2020/02/16/kMxhL2pTCwBZASi.png" alt="打字机"></p>
 <p>于是，研制人员想了个办法解决这个问题，就是在每行后面加两个表示结束的字符。一个叫做“回车”，告诉打字机把打印头定位在左边界；另一个叫做“换行”，告诉打字机把纸向下移一行。<br>这就是“换行”和“回车”的来历，从它们的英语名字上也可以看出一二。至于为什么回车在前换行在后呢？因为回车需要的时间更长，机器可以利用这个间隙完成换行操作。</p>
 <p>后来，计算机发明了，这两个概念也就被般到了计算机上。那时，存储器很贵，一些科学家认为在每行结尾加两个字符太浪费了。于是，就出现了分歧：</p>
