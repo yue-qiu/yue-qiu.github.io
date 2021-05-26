@@ -126,7 +126,7 @@ var _hmt = _hmt || [];
 <p>当我们从网络上获取数据时，常常也是获取到以 UTF-8 形式编码的字节，为了方便我们对数据进行处理，需要解码成普通的 Unicode：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">b = <span class="string">b&#x27;\xe4\xb8\xad\xe6\x96\x87&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(b.decode(<span class="string">&#x27;utf-8&#x27;</span>)) <span class="comment"># 输出：&#x27;中文&#x27;</span></span><br></pre></td></tr></table></figure>
 
-<p><strong>为了避免乱码，应该始终坚持以 UTF-8 的形式进行字符和字节之间的转换</strong></p>
+<p><strong>为了避免乱码，应该始终坚持以 UTF-8 的形式进行字符和字节之间的转换。</strong></p>
  
       <!-- reward -->
       

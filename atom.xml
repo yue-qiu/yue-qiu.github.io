@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-05-20T03:12:32.031Z</updated>
+  <updated>2021-05-26T12:13:55.791Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>细心很重要：记一次溢出错误</title>
+    <link href="http://yoursite.com/2021/05/26/%E7%BB%86%E5%BF%83%E5%BE%88%E9%87%8D%E8%A6%81%E2%80%94%E2%80%94%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%BA%A2%E5%87%BA%E9%94%99%E8%AF%AF/"/>
+    <id>http://yoursite.com/2021/05/26/%E7%BB%86%E5%BF%83%E5%BE%88%E9%87%8D%E8%A6%81%E2%80%94%E2%80%94%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%BA%A2%E5%87%BA%E9%94%99%E8%AF%AF/</id>
+    <published>2021-05-26T11:35:11.000Z</published>
+    <updated>2021-05-26T12:13:55.791Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;习惯了弱类型语言再回到 C 这类强类型语言的结果是，在各种类型转换之间软头转向。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="计算机系统" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+    <category term="编码" scheme="http://yoursite.com/tags/%E7%BC%96%E7%A0%81/"/>
+    
+  </entry>
   
   <entry>
     <title>时间轮与时间堆</title>
@@ -447,31 +466,6 @@
     
     
     <category term="并发" scheme="http://yoursite.com/tags/%E5%B9%B6%E5%8F%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>也说进程、线程与协程</title>
-    <link href="http://yoursite.com/2020/03/02/%E4%B9%9F%E8%B0%88%E8%BF%9B%E7%A8%8B%E3%80%81%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%8D%8F%E7%A8%8B/"/>
-    <id>http://yoursite.com/2020/03/02/%E4%B9%9F%E8%B0%88%E8%BF%9B%E7%A8%8B%E3%80%81%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%8D%8F%E7%A8%8B/</id>
-    <published>2020-03-02T02:05:30.000Z</published>
-    <updated>2021-01-20T13:17:13.423Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html"></summary>
-        
-      
-    
-    
-    
-    <category term="计算机系统" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/"/>
-    
-    
-    <category term="并发编程" scheme="http://yoursite.com/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   

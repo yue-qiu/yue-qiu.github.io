@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>categories |  精神的壳</title>
+      <title>细心很重要：记一次溢出错误 |  精神的壳</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -55,12 +55,210 @@ var _hmt = _hmt || [];
       
     <main class="content on">
       <section class="outer">
+  <article
+  id="post-细心很重要——记一次溢出错误"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  细心很重要：记一次溢出错误
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2021/05/26/%E7%BB%86%E5%BF%83%E5%BE%88%E9%87%8D%E8%A6%81%E2%80%94%E2%80%94%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%BA%A2%E5%87%BA%E9%94%99%E8%AF%AF/" class="article-date">
+  <time datetime="2021-05-26T11:35:11.000Z" itemprop="datePublished">2021-05-26</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a>
+  </div>
   
-    <h1 class="page-type-title">分类</h1>
-    <div class="categories-box">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Web%E5%BC%80%E5%8F%91/">Web开发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E5%B8%B8/">日常</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%AD%E8%A8%80/">语言</a><span class="category-list-count">15</span></li></ul>
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">467</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">1 分钟</span>
+        </span>
+    </span>
+</div>
+ 
     </div>
+      
+
+
+
   
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>习惯了弱类型语言再回到 C 这类强类型语言的结果是，在各种类型转换之间软头转向。</p>
+<span id="more"></span>
+
+<p>今天在用 C 写<a target="_blank" rel="noopener" href="https://github.com/yue-qiu/memoryPool">内存池</a>的时候，遇到了一个蛮有意思的隐式类型转换错误，特地记录一下。</p>
+<p>先写一个 test1.c：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> a 2097150</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">1025</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> c = a * b; </span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;c in test1: %lu\n&quot;</span>, c); </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再看 test2.c：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> a 2097150</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> b = <span class="number">1025</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> c = a * b; </span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;c in test2: %lu\n&quot;</span>, c); </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>两段代码变量 b 的数据类型不同。先输出试试：</p>
+<p><img src="https://i.loli.net/2021/05/26/Fx6odkEagmhtu28.png" alt="image.png"></p>
+<p>Oops，看来出了点意外。<code>test2</code> 产生了我的预期值，而 <code>test1</code> 似乎是发生了溢出。但 1025 * 2097150 的结果是小于 unsigned long 的最大值的，那恐怕不是溢出那么简单了。让我们从汇编的角度看看底层到底发生了什么。</p>
+<p>得到两段代码的汇编文件并用 vim 对比两者的不同之处：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gcc -S test1.c -o test1.s</span><br><span class="line">gcc -S test2.c -o test2.s</span><br><span class="line">vim -d test1.s test2.s </span><br></pre></td></tr></table></figure>
+
+<p>可以看到汇编代码的主要差别在第 22 行，test1.s 使用了 <code>cltq</code> 指令：</p>
+<p><img src="https://i.loli.net/2021/05/26/XNZdVvk53BqjPyY.png" alt="image.png"></p>
+<p>查阅资料发现 <code>cltq</code> 是这个意思：</p>
+<blockquote>
+<p>cltq R[%rax ] &lt;- SignExtend(R[%eax]) Convert %eax to quad word</p>
+</blockquote>
+<p>也就是说 <code>cltq</code> 会把 <code>%eax</code> 的值<strong>带符号地</strong>扩展到 <code>%rax</code>。而 1025 * 2097150 的结果在 <code>%eax</code> 最高位的取值是 1，扩展之后自然看起来就像溢出了一样。</p>
+<p>之所以产生这个错误，是因为一个 32 位有符号的右值被赋给了 64 位无符号左值，这个过程中发生的隐式类型转换由一条 <code>ctql</code> 指令来完成。使用强类型语言进行编码的时候要非常谨慎地在不同数据类型之间进行转换。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2021/05/26/%E7%BB%86%E5%BF%83%E5%BE%88%E9%87%8D%E8%A6%81%E2%80%94%E2%80%94%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%BA%A2%E5%87%BA%E9%94%99%E8%AF%AF/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A0%81/" rel="tag">编码</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2021/05/19/%E6%97%B6%E9%97%B4%E8%BD%AE%E4%B8%8E%E6%97%B6%E9%97%B4%E5%A0%86/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">时间轮与时间堆</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "dFVA5Fsm53B4vdyWtGFy0L7s-gzGzoHsz",
+    app_key: "xg2Ab6m7iBD4OGa79ueXjG9y",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "啥啥啥？",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
 </section>
       <footer class="footer">
   <div class="outer">
@@ -201,6 +399,22 @@ var _hmt = _hmt || [];
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
 <link
