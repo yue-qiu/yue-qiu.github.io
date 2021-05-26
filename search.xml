@@ -3,7 +3,7 @@
   <entry>
     <title>细心很重要：记一次溢出错误</title>
     <url>/2021/05/26/%E7%BB%86%E5%BF%83%E5%BE%88%E9%87%8D%E8%A6%81%E2%80%94%E2%80%94%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%BA%A2%E5%87%BA%E9%94%99%E8%AF%AF/</url>
-    <content><![CDATA[<p>习惯了弱类型语言再回到 C 这类强类型语言的结果是，在各种类型转换之间软头转向。</p>
+    <content><![CDATA[<p>习惯了弱类型语言再回到 C 这类强类型语言的结果是，在各种类型转换之间晕头转向。</p>
 <span id="more"></span>
 
 <p>今天在用 C 写<a href="https://github.com/yue-qiu/memoryPool">内存池</a>的时候，遇到了一个蛮有意思的隐式类型转换错误，特地记录一下。</p>
@@ -13,7 +13,7 @@
 <p>再看 test2.c：</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> a 2097150</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> b = <span class="number">1025</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> c = a * b; </span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;c in test2: %lu\n&quot;</span>, c); </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>两段代码变量 b 的数据类型不同。先输出试试：</p>
+<p>两段代码变量 b 的数据类型不同，输出试试：</p>
 <p><img src="https://i.loli.net/2021/05/26/Fx6odkEagmhtu28.png" alt="image.png"></p>
 <p>Oops，看来出了点意外。<code>test2</code> 产生了我的预期值，而 <code>test1</code> 似乎是发生了溢出。但 1025 * 2097150 的结果是小于 unsigned long 的最大值的，那恐怕不是溢出那么简单了。让我们从汇编的角度看看底层到底发生了什么。</p>
 <p>得到两段代码的汇编文件并用 vim 对比两者的不同之处：</p>
@@ -1388,10 +1388,10 @@
 <p>URN(Uniform Resource Name)：统一资源定位名称，通过某个命名空间中的唯一 ID 来标识一个资源</p>
 <p><img src="https://i.loli.net/2020/02/13/2XjAU6Phz9ONJQq.png" alt="URI"></p>
 <p>举个例子：小红的学号是 123456，这个学号就是 URN，能对应到小红这个人；小红的家庭住址是翻斗大街翻斗花园二号楼一零零一室，这个地址就是 URL，去那里就能找到小红。小红的学号、小红的住址都属于 URI。</p>
-<h1 id="URI-的格式"><a href="#URI-的格式" class="headerlink" title="URI 的格式"></a>URI 的格式</h1><p>一个标准的 URI 格式为：<code>[scheme:]scheme-specific-part</code>，如：<a href="http://qiuyueqy.com/">http://qiuyueqy.com</a>, mailto:<a href="mailto:&#113;&#x69;&#x75;&#121;&#x75;&#x65;&#57;&#x39;&#x37;&#49;&#x40;&#49;&#x32;&#54;&#46;&#x63;&#x6f;&#109;">&#113;&#x69;&#x75;&#121;&#x75;&#x65;&#57;&#x39;&#x37;&#49;&#x40;&#49;&#x32;&#54;&#46;&#x63;&#x6f;&#109;</a>, news:comp.go.lang</p>
+<h1 id="URI-的格式"><a href="#URI-的格式" class="headerlink" title="URI 的格式"></a>URI 的格式</h1><p>一个标准的 URI 格式为：<code>[scheme:]scheme-specific-part</code>，如：<a href="http://qiuyueqy.com/">http://qiuyueqy.com</a>, mailto:<a href="mailto:&#x71;&#x69;&#117;&#x79;&#x75;&#x65;&#x39;&#x39;&#55;&#x31;&#x40;&#49;&#x32;&#x36;&#46;&#x63;&#x6f;&#109;">&#x71;&#x69;&#117;&#x79;&#x75;&#x65;&#x39;&#x39;&#55;&#x31;&#x40;&#49;&#x32;&#x36;&#46;&#x63;&#x6f;&#109;</a>, news:comp.go.lang</p>
 <p>URI 可以细分为为<code>不透明的(opaque)</code>和<code>分层的(hierarchical)</code>两类：</p>
 <ul>
-<li>opaque 指 scheme-specific-part 不以 / 开头，是一个整体。呈 [scheme]:opaque[?query][#fragment] 的形式。如：mailto:<a href="mailto:&#x71;&#105;&#117;&#121;&#x75;&#101;&#57;&#57;&#x37;&#x31;&#64;&#49;&#50;&#54;&#46;&#99;&#x6f;&#x6d;">&#x71;&#105;&#117;&#121;&#x75;&#101;&#57;&#57;&#x37;&#x31;&#64;&#49;&#50;&#54;&#46;&#99;&#x6f;&#x6d;</a>，<a href="http://www.google.com:443/">www.google.com:443</a>, opaque 必须是绝对的。</li>
+<li>opaque 指 scheme-specific-part 不以 / 开头，是一个整体。呈 [scheme]:opaque[?query][#fragment] 的形式。如：mailto:<a href="mailto:&#113;&#x69;&#117;&#121;&#x75;&#x65;&#x39;&#57;&#55;&#x31;&#x40;&#x31;&#x32;&#54;&#x2e;&#x63;&#x6f;&#109;">&#113;&#x69;&#117;&#121;&#x75;&#x65;&#x39;&#57;&#55;&#x31;&#x40;&#x31;&#x32;&#54;&#x2e;&#x63;&#x6f;&#109;</a>，<a href="http://www.google.com:443/">www.google.com:443</a>, opaque 必须是绝对的。</li>
 <li>hierarchical 指 scheme-specific-part 以 / 开头且可以划分为好几部分。呈 [scheme:][//[userinfo@]host[:port]]path[?query][#fragment] 的形式。如：<a href="http://qiuyueqy.com/categories/">http://qiuyueqy.com/categories/</a>, hierarchical 可以是绝对的，也可以是相对的，如：<a href="https://github.com/yue-qiu/CUG_EmptyClassroom">https://github.com/yue-qiu/CUG_EmptyClassroom</a>, ../../static/verify.js</li>
 </ul>
 <h1 id="谈谈-URI-编码"><a href="#谈谈-URI-编码" class="headerlink" title="谈谈 URI 编码"></a>谈谈 URI 编码</h1><p>利用 URI 传参时，如果某些 URI 组件字符（如 /:?@&amp;=+$,#）同时也是参数的一部分会导致 URI 歧义。此外，URI 只支持 ASCII 编码，对于茫茫多的特殊字符（如：广东省）如何表示？</p>

@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-05-26T12:13:55.791Z</updated>
+  <updated>2021-05-26T12:18:17.878Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,10 +21,10 @@
     <link href="http://yoursite.com/2021/05/26/%E7%BB%86%E5%BF%83%E5%BE%88%E9%87%8D%E8%A6%81%E2%80%94%E2%80%94%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%BA%A2%E5%87%BA%E9%94%99%E8%AF%AF/"/>
     <id>http://yoursite.com/2021/05/26/%E7%BB%86%E5%BF%83%E5%BE%88%E9%87%8D%E8%A6%81%E2%80%94%E2%80%94%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%BA%A2%E5%87%BA%E9%94%99%E8%AF%AF/</id>
     <published>2021-05-26T11:35:11.000Z</published>
-    <updated>2021-05-26T12:13:55.791Z</updated>
+    <updated>2021-05-26T12:18:17.878Z</updated>
     
     
-    <summary type="html">&lt;p&gt;习惯了弱类型语言再回到 C 这类强类型语言的结果是，在各种类型转换之间软头转向。&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;习惯了弱类型语言再回到 C 这类强类型语言的结果是，在各种类型转换之间晕头转向。&lt;/p&gt;</summary>
     
     
     

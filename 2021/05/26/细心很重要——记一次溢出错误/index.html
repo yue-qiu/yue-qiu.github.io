@@ -87,7 +87,7 @@ var _hmt = _hmt || [];
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">467</span>
+            <span class="post-count">466</span>
         </span>
     </span>
 
@@ -109,7 +109,7 @@ var _hmt = _hmt || [];
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p>习惯了弱类型语言再回到 C 这类强类型语言的结果是，在各种类型转换之间软头转向。</p>
+  <p>习惯了弱类型语言再回到 C 这类强类型语言的结果是，在各种类型转换之间晕头转向。</p>
 <span id="more"></span>
 
 <p>今天在用 C 写<a target="_blank" rel="noopener" href="https://github.com/yue-qiu/memoryPool">内存池</a>的时候，遇到了一个蛮有意思的隐式类型转换错误，特地记录一下。</p>
@@ -119,7 +119,7 @@ var _hmt = _hmt || [];
 <p>再看 test2.c：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> a 2097150</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> b = <span class="number">1025</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> c = a * b; </span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;c in test2: %lu\n&quot;</span>, c); </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>两段代码变量 b 的数据类型不同。先输出试试：</p>
+<p>两段代码变量 b 的数据类型不同，输出试试：</p>
 <p><img src="https://i.loli.net/2021/05/26/Fx6odkEagmhtu28.png" alt="image.png"></p>
 <p>Oops，看来出了点意外。<code>test2</code> 产生了我的预期值，而 <code>test1</code> 似乎是发生了溢出。但 1025 * 2097150 的结果是小于 unsigned long 的最大值的，那恐怕不是溢出那么简单了。让我们从汇编的角度看看底层到底发生了什么。</p>
 <p>得到两段代码的汇编文件并用 vim 对比两者的不同之处：</p>
