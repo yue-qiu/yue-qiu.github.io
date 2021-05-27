@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>改变一下思路</title>
+    <url>/2021/05/27/%E6%80%9D%E8%B7%AF%E8%BD%AC%E5%8F%98/</url>
+    <content><![CDATA[<p>最近在思考自己的博客应该写些什么内容。</p>
+<span id="more"></span>
+
+<p>其实一开始我只是把博客作为一个跨平台的笔记本在用，所以如果去翻阅我早期的博文可以看到很多内容都比较枯燥。至于为什么不选择<a href="https://shimo.im/desktop">石墨文档</a>或者 <a href="https://www.yinxiang.com/?referer=en">Evernote</a> 这样的平台是因为那时候我觉得有个自己的网站很 cool😎。然后不知不觉这个博客就这样运行了三年多了，里面的内容也一直以技术为主。说起来还有个有意思的事，我面试的时候面试官特地打开这个博客浏览了一下，然后肯定了我写博客这个行为，听他意思应该是有加分，算是一个意外收获吧。</p>
+<p>这几天闲着没事干照例去翻一翻朋友的博客，发现大家不止会在上面讨论技术。吐槽日常生活、讨论数码科技、分享对产品的讲解……这些内容都很有意思，也提醒了我博客的本意是成为每个人在互联网上的一张名片，或者说是一种原始状态的“朋友圈”。如果一个人的朋友圈里只有工作相关的内容，那未免有些太无聊了吧？而且发布在朋友圈的内容大多比较简短，几十个字+两三张图片所能承载的信息还是有些捉襟见肘。以前和生活相关的内容大多在朋友圈或者个人贴吧，但经历了贴吧去年近乎野蛮地大规模删帖之后我对这些互联网公司的可靠性产生了深深地怀疑，谁知道哪天你写的东西莫名其妙就被“消失”了呢？另外我个人是比较享受写博文的感觉的，好像在和自己对话，一点点理清文章背后的逻辑。当然这样会花费更多时间和精力，但我始终觉得付出点时间去做思考总结是有益无害的。技术以外的世界也很精彩，同样值得记录。</p>
+<p>如何提高博文的质量也是个问题。平心而论我的很多博文都是自己看完一本书或者几篇文章后的阅读笔记，如前文所述，博客是我的笔记本。但最近我开始尝试以自我为中心进行写作，不是单纯地总结别人的工作，而是自己去实践提出问题—&gt;查阅资料-&gt;动手验证-&gt;整理成文这个过程。二者主要的区别在于一篇文章的 idea 是自己提出来的，尽管内容不可避免地需要参考别人的东西，但总体思路是自己的。</p>
+<p>博客的更新频率也可以作为近期学习质量的评价标准之一，没有输入就无从输出。希望自己不要太懒😭。</p>
+<p><img src="https://i.loli.net/2021/05/27/5NBPl6pCstxI9AF.png" alt="E7LZ713R__82T@AY_RERCY8.png"></p>
+]]></content>
+      <categories>
+        <category>日常</category>
+      </categories>
+      <tags>
+        <tag>闲聊</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>细心很重要：记一次溢出错误</title>
     <url>/2021/05/26/%E7%BB%86%E5%BF%83%E5%BE%88%E9%87%8D%E8%A6%81%E2%80%94%E2%80%94%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%BA%A2%E5%87%BA%E9%94%99%E8%AF%AF/</url>
     <content><![CDATA[<p>习惯了弱类型语言再回到 C 这类强类型语言的结果是，在各种类型转换之间晕头转向。</p>
@@ -105,7 +124,7 @@
   </entry>
   <entry>
     <title>一点小想法</title>
-    <url>/2021/05/16/%E6%9C%80%E8%BF%91%E7%94%9F%E6%B4%BB%E7%9A%84%E4%B8%80%E7%82%B9%E5%B0%8F%E6%83%B3%E6%B3%95/</url>
+    <url>/2021/05/16/%E4%B8%80%E7%82%B9%E5%B0%8F%E6%83%B3%E6%B3%95/</url>
     <content><![CDATA[<p>关于我在学校摸鱼半年惊坐起，遥望大佬又一年这件事。</p>
 <span id="more"></span>
 
@@ -216,71 +235,6 @@
       </categories>
       <tags>
         <tag>并发编程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>常用的gcc编译选项</title>
-    <url>/2021/01/13/%E5%B8%B8%E7%94%A8%E7%9A%84gcc%E7%BC%96%E8%AF%91%E9%80%89%E9%A1%B9/</url>
-    <content><![CDATA[<p>本文旨在对 gcc 常用编译选项进行归类整理。</p>
-<span id="more"></span>
-
-<h2 id="警告选项"><a href="#警告选项" class="headerlink" title="警告选项"></a>警告选项</h2><p>-w: 关闭所有 warning</p>
-<p>-W: 只显示编译器认为可能出现错误的警告</p>
-<p>-Wall: 显示所有警告</p>
-<p>-Werror: 把 warning 当做 error 抛出</p>
-<p>举个例子，test.c 中代码如下：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Hello World!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>用 -w 编译，直接就通过了：</p>
-<p>用 -Wall 编译，显示所有的 warning。包括声明的 main 函数返回类型为 void 而不是 int；返回值类型与声明类型不符；声明了变量 a 却未使用：</p>
-<p><img src="https://i.loli.net/2021/01/14/DgwdL9SluHKWMC3.png" alt="-Wall编译"></p>
-<p>用 -W 编译，只显示返回值类型与声明类型不符这一个 warning：</p>
-<p><img src="https://i.loli.net/2021/01/14/MP6DC2fOINbW594.png" alt="-W编译"></p>
-<p>用 -Werror 编译，提示存在 error，编译失败：</p>
-<p><img src="https://i.loli.net/2021/01/14/UZmjOfugJyVGCAt.png" alt="-Werror编译"></p>
-<p>比较好的做法是 -W 与 -Wall 连用</p>
-<h2 id="中间文件选项"><a href="#中间文件选项" class="headerlink" title="中间文件选项"></a>中间文件选项</h2><p>-Idir：使用 <code>#include</code> 包含头文件的时候，如果用 -I 指定了目录，gcc 会先在指定目录查找, 然后再按“当前目录、/usr/include、/usr/local/include”的顺序查找。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc vector.c -I./src</span><br></pre></td></tr></table></figure>
-
-<p>-E: 仅进行预处理，得到 .i 文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc -E test.c</span><br></pre></td></tr></table></figure>
-
-<p>-S：仅进行预处理和编译，得到 .s 文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc -S test.c</span><br></pre></td></tr></table></figure>
-
-<p>-C: 进行预处理，编译和汇编得到可重定位目标文件 .o，不链接</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc -C test.c</span><br></pre></td></tr></table></figure>
-
-<p>-save-temps: 保留整个过程中产生的所有中间文件到当前目录</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc -save-temps -C test.c</span><br></pre></td></tr></table></figure>
-
-<h2 id="链接选项"><a href="#链接选项" class="headerlink" title="链接选项"></a>链接选项</h2><p>-static：使用静态编译，把静态库的代码和数据直接编译进可执行文件。这样得到的二进制文件体积自然比较大</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc -static test.c ./libvector.a</span><br></pre></td></tr></table></figure>
-
-<p>-shared：生成共享库(.so 文件)</p>
-<p>-fpic：生成位置无关代码（Position Independent Code），生成共享库时必须要用到</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc -shared -fpic -o libvector.so vector.c</span><br></pre></td></tr></table></figure>
-
-<p>-lfile：链接到指定的库文件。gcc 会自动为 file 添加 lib 前缀和 .so/.a 后缀。gcc 默认为所有编译链接 libc.a 或 libc.so，所以我们才能使用诸如 <code>printf</code>、<code>scanf</code> 等常用的标准函数。下面这行命令会为 test.c 链接上 libm.a</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc test.c -lm</span><br></pre></td></tr></table></figure>
-
-<p>默认情况下，gcc 依次从从当前目录、/lib、/usr/lib 和 /usr/local/lib 中寻找库文件。</p>
-<p>-Ldir：指定库文件所在的目录。如果库文件在上述路径之外就需要指定共享库的目录。假设需要链接的共享库 libvector.so 位于 /home/project 目录下</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc test.c -L/home/project -lvector</span><br></pre></td></tr></table></figure>
-
-<h2 id="优化选项"><a href="#优化选项" class="headerlink" title="优化选项"></a>优化选项</h2><p>-Og：编译时不优化代码</p>
-<p>-O1、-O2、-O3：编译器进行代码优化，数字越大优化程度越高</p>
-<p>-g：在二进制文件中生成调试信息，像 gdb 这类的工具需要有这种信息才能工作。这样可执行文件的体积会比较大。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc test.c -g</span><br></pre></td></tr></table></figure>
-
-<p>-pg：在二进制文件中生成性能分析所需的信息，像 gprof 这类的工具需要有这种信息才工作</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc test.c -pg</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>开发工具</category>
-      </categories>
-      <tags>
-        <tag>gcc</tag>
       </tags>
   </entry>
   <entry>
@@ -1215,6 +1169,30 @@
       </tags>
   </entry>
   <entry>
+    <title>选择很重要</title>
+    <url>/2020/03/06/%E9%80%89%E6%8B%A9%E5%BE%88%E9%87%8D%E8%A6%81/</url>
+    <content><![CDATA[<p>虽然在我写下这篇文字的时候已经是周五凌晨了，但打开编辑器、敲下一些东西这个想法其实萌芽于周四晚上，所以本文会以周四晚这个时间段作为起点。记录一下心情，随便扯扯。</p>
+<h2 id="选择：读研-or-工作？"><a href="#选择：读研-or-工作？" class="headerlink" title="选择：读研 or 工作？"></a>选择：读研 or 工作？</h2><p>原定于下周的文献阅读检查被突然提前到了今天，因此不得不临时抱佛脚，匆匆浏览了几篇文章。特殊时期，检查当然也采取线上的形式一个接一个进行。本来说好是 8 点开始，每个人大概 10 分钟，结果我坐在电脑前等了又等，甚至打了几把游戏依然没轮到我。莫名的压力之下也没办法进行更多地复习，于是打开了微信看看有没有什么好玩的，结果刷到了这条推文：</p>
+<p><img src="https://i.loli.net/2020/03/06/CDMyLPnrBKg7IRd.jpg" alt="腾讯招聘推文"></p>
+<p>突然心里一惊，再看一下屏幕右下角的时间，啊！今天已经是 2020/3/5 ，新一年的招聘已经“蓄势待发”了。读研还是工作？这个问题再次涌进我脑海。</p>
+<p>每当我被这个问题困扰的时候，都会感叹一下时间流逝之快。自己已经不能像大一大二时那样从容地去学一些东西了。看了看腾讯的招聘需求，后台开发无非是熟悉 Java/Python/C++、熟悉计算机网络、了解 OS 和常见的数据结构及算法，此外要会 MySQL，近年来对 NoSQL 也做了一定要求，最好再会些分布式系统设计 &amp;&amp; 高可用。这里有些内容我了解过，有些则没有。当然，如果下决心去学的话肯定是能学会的。</p>
+<p>想到这里心里堵得很。10 点整，终于轮到我了，整个过程意外地短，只用了不到 6 分钟，也不知道是老师自己也累了还是我表现太差，难道是我回答得无懈可击导致他没啥能问的了？总之自己也没心情想那么多，顺手打开几个朋友的博客，发现他们也面临着这样那样的苦恼，有华科 CS 硕士没拿到满意 offer 的，有步入社会感叹大学时光一去不复返的，还有工作之后再也没更新博客的，真是人生百态。</p>
+<h2 id="质问：准备好了吗"><a href="#质问：准备好了吗" class="headerlink" title="质问：准备好了吗"></a>质问：准备好了吗</h2><p>本质上，任何人都不会有“准备好”的时候。所谓剑未佩妥，出门已是江湖。何况什么事都等准备万全再行动，那黄花菜都凉了。只是此刻我想问自己，<strong>你真的准备好成为一名码农了吗？</strong></p>
+<p>说得再现实一点，不可否认，虽然今天互联网行业的薪资还是优于其他行业，早期“入职-持股-上市分红”的模式早已不复存在。以前人们还会争论应届生到底是去大厂还是小厂，今天就不会再有这种问题，因为大家都抢破头了往大厂挤。正如一个朋友说的：</p>
+<blockquote>
+<p>从另一个角度来看，反正在这个前所未有的伟大时代，你快要饿死了居委会都会上门给你送米面油，互联网行业多的那点钱也干不了什么，借大厂股票期权财务自由的机会现在也没了。如果你有真心喜欢的工作，与其在西二旗令人窒息的空气里 996，不如回去干自己喜欢的事吧。</p>
+</blockquote>
+<p>所谓千金难买爷乐意，何况我作为一名“失败”人士，对升官发财这种事向来没什么追求，只要我过的开心，拿到的回报足够租房点外卖就 ok，如果还能剩一点下来以防万一那就再好不过。现在问题来了，什么工作符合这个条件呢？地质显然不是，那么我该去写代码吗？其实我还是挺喜欢 program 的，尤其享受亲手解决问题的过程。自己的逻辑和设计化身为一行行代码在计算机上飞快运行，这种感觉真是妙不可言。不同于应试教育下只是为了一个抽象的分数去做事，从无到有的创造这个过程让我快乐。但自己写着玩和以此谋生是完全不同的两件事。到了工作里，这份简单的快乐还会存在吗？</p>
+<p>再说读研，或许是因为自己毕竟不是正儿八经的计算机科班出身，对计算机方向的科研这件事儿一直心存向往，有时候就会想自己能不能在这方面做出点成绩来。只是如今考研形势一年比一年严峻，计算机作为热门专业更是炙手可热，自己到底能否在如此激烈的竞争中脱颖而出，其实心里也没底。</p>
+]]></content>
+      <categories>
+        <category>日常</category>
+      </categories>
+      <tags>
+        <tag>闲聊</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>也说进程、线程与协程</title>
     <url>/2020/03/02/%E4%B9%9F%E8%B0%88%E8%BF%9B%E7%A8%8B%E3%80%81%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%8D%8F%E7%A8%8B/</url>
     <content><![CDATA[<p>CPU 被誉为“计算机的大脑”，这个比喻可以说是很恰当了。计算机无论是进行 IO 还是计算都要在 CPU 的控制下完成。如此一来，一个强大的“大脑”对于整个系统而言就是非常重要的了，这也是为什么我们总能看到厂家不断地宣传自己 CPU 的主频有多高，核心有多大。</p>
@@ -1388,10 +1366,10 @@
 <p>URN(Uniform Resource Name)：统一资源定位名称，通过某个命名空间中的唯一 ID 来标识一个资源</p>
 <p><img src="https://i.loli.net/2020/02/13/2XjAU6Phz9ONJQq.png" alt="URI"></p>
 <p>举个例子：小红的学号是 123456，这个学号就是 URN，能对应到小红这个人；小红的家庭住址是翻斗大街翻斗花园二号楼一零零一室，这个地址就是 URL，去那里就能找到小红。小红的学号、小红的住址都属于 URI。</p>
-<h1 id="URI-的格式"><a href="#URI-的格式" class="headerlink" title="URI 的格式"></a>URI 的格式</h1><p>一个标准的 URI 格式为：<code>[scheme:]scheme-specific-part</code>，如：<a href="http://qiuyueqy.com/">http://qiuyueqy.com</a>, mailto:<a href="mailto:&#113;&#x69;&#x75;&#x79;&#x75;&#x65;&#x39;&#57;&#55;&#x31;&#64;&#49;&#x32;&#x36;&#x2e;&#99;&#x6f;&#109;">&#113;&#x69;&#x75;&#x79;&#x75;&#x65;&#x39;&#57;&#55;&#x31;&#64;&#49;&#x32;&#x36;&#x2e;&#99;&#x6f;&#109;</a>, news:comp.go.lang</p>
+<h1 id="URI-的格式"><a href="#URI-的格式" class="headerlink" title="URI 的格式"></a>URI 的格式</h1><p>一个标准的 URI 格式为：<code>[scheme:]scheme-specific-part</code>，如：<a href="http://qiuyueqy.com/">http://qiuyueqy.com</a>, mailto:<a href="mailto:&#113;&#105;&#x75;&#121;&#117;&#x65;&#x39;&#57;&#55;&#49;&#x40;&#x31;&#50;&#x36;&#x2e;&#99;&#111;&#x6d;">&#113;&#105;&#x75;&#121;&#117;&#x65;&#x39;&#57;&#55;&#49;&#x40;&#x31;&#50;&#x36;&#x2e;&#99;&#111;&#x6d;</a>, news:comp.go.lang</p>
 <p>URI 可以细分为为<code>不透明的(opaque)</code>和<code>分层的(hierarchical)</code>两类：</p>
 <ul>
-<li>opaque 指 scheme-specific-part 不以 / 开头，是一个整体。呈 [scheme]:opaque[?query][#fragment] 的形式。如：mailto:<a href="mailto:&#113;&#105;&#117;&#x79;&#117;&#101;&#57;&#x39;&#x37;&#49;&#64;&#x31;&#x32;&#54;&#x2e;&#99;&#x6f;&#x6d;">&#113;&#105;&#117;&#x79;&#117;&#101;&#57;&#x39;&#x37;&#49;&#64;&#x31;&#x32;&#54;&#x2e;&#99;&#x6f;&#x6d;</a>，<a href="http://www.google.com:443/">www.google.com:443</a>, opaque 必须是绝对的。</li>
+<li>opaque 指 scheme-specific-part 不以 / 开头，是一个整体。呈 [scheme]:opaque[?query][#fragment] 的形式。如：mailto:<a href="mailto:&#113;&#x69;&#117;&#121;&#x75;&#x65;&#57;&#57;&#x37;&#x31;&#64;&#49;&#50;&#54;&#46;&#99;&#111;&#109;">&#113;&#x69;&#117;&#121;&#x75;&#x65;&#57;&#57;&#x37;&#x31;&#64;&#49;&#50;&#54;&#46;&#99;&#111;&#109;</a>，<a href="http://www.google.com:443/">www.google.com:443</a>, opaque 必须是绝对的。</li>
 <li>hierarchical 指 scheme-specific-part 以 / 开头且可以划分为好几部分。呈 [scheme:][//[userinfo@]host[:port]]path[?query][#fragment] 的形式。如：<a href="http://qiuyueqy.com/categories/">http://qiuyueqy.com/categories/</a>, hierarchical 可以是绝对的，也可以是相对的，如：<a href="https://github.com/yue-qiu/CUG_EmptyClassroom">https://github.com/yue-qiu/CUG_EmptyClassroom</a>, ../../static/verify.js</li>
 </ul>
 <h1 id="谈谈-URI-编码"><a href="#谈谈-URI-编码" class="headerlink" title="谈谈 URI 编码"></a>谈谈 URI 编码</h1><p>利用 URI 传参时，如果某些 URI 组件字符（如 /:?@&amp;=+$,#）同时也是参数的一部分会导致 URI 歧义。此外，URI 只支持 ASCII 编码，对于茫茫多的特殊字符（如：广东省）如何表示？</p>
