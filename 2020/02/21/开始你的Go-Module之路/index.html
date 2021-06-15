@@ -87,7 +87,7 @@ var _hmt = _hmt || [];
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">875</span>
+            <span class="post-count">876</span>
         </span>
     </span>
 
@@ -112,7 +112,7 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
        
   <p>在 go 的历史上出现过一大批包管理工具，如 dep，vendor 等。自 go1.12 以来官方引入了 go module 来解决这个乱象。</p>
-<h1 id="从-GOPATH-说起"><a href="#从-GOPATH-说起" class="headerlink" title="从 GOPATH 说起"></a>从 GOPATH 说起</h1><p>GOPATH 是最早的 go 包管理方案，安装 golang 之后需要配置两个环境变量 <code>GOROOT</code> 与 <code>GOPATH</code>, 前者是 go 安装目录，后者是开发者自定义的用于存放代码的地方。GOPATH 下存在三个目录：</p>
+<h2 id="从-GOPATH-说起"><a href="#从-GOPATH-说起" class="headerlink" title="从 GOPATH 说起"></a>从 GOPATH 说起</h2><p>GOPATH 是最早的 go 包管理方案，安装 golang 之后需要配置两个环境变量 <code>GOROOT</code> 与 <code>GOPATH</code>, 前者是 go 安装目录，后者是开发者自定义的用于存放代码的地方。GOPATH 下存在三个目录：</p>
 <ul>
 <li>bin: 存放编译后的可执行文件</li>
 <li>pkg: 存放 go 的链接文件(suffix = .a)</li>
@@ -124,7 +124,7 @@ var _hmt = _hmt || [];
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;github.com/ramya-rao-a/go-outline&quot;</span></span><br><span class="line">    <span class="string">&quot;./test&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// your code</span></span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
 
 <p>fmt 是 go 自带的包，位于 $GOROOT/src/fmt；github.com/ramya-rao-a/go-outline 是第三方包，位于 $GOPATH/src/github.com/ramya-rao-a/go-outline；test 是自定义包，<code>.</code> 表示 mian.go 所在文件夹，位于 $GOPATH/src/service/test</p>
-<h1 id="升级，Go-module！"><a href="#升级，Go-module！" class="headerlink" title="升级，Go module！"></a>升级，Go module！</h1><p>讲了一大堆，是时候进入正题了。前面讲利用 GOPATH 进行包管理这个方法是在是太麻烦了，每个项目都要配一个专属的 GOPATH，不然各个项目的包就会混在一起。</p>
+<h2 id="现身吧，Go-module"><a href="#现身吧，Go-module" class="headerlink" title="现身吧，Go module!"></a>现身吧，Go module!</h2><p>讲了一大堆，是时候进入正题了。前面讲利用 GOPATH 进行包管理这个方法是在是太麻烦了，每个项目都要配一个专属的 GOPATH，不然各个项目的包就会混在一起。</p>
 <p>go1.12 后，设置环境变量 <code>GO111MODULE=on</code>，每个软件包都可以声明为一个 module。每个 module 的依赖包都会放在 $GOPATH/pkg/mod 下。如果没有设置 GOPATH 也没关系，go 会在用户的 $home 目录下创建一个 go 文件夹作为默认的 GOPATH</p>
 <h2 id="声明-module"><a href="#声明-module" class="headerlink" title="声明 module"></a>声明 module</h2><p>modulename 是任意的。如果想把这个包发布出去，最好还是按 github.com/user/xxxx 的形式：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go mod init &lt;modulename&gt;</span><br></pre></td></tr></table></figure>
@@ -135,7 +135,7 @@ var _hmt = _hmt || [];
 <p>现在，在这个项目里，github.com/yue-qiu/service 就是这个项目的根目录。main.go 改写为：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;github.com/ramya-rao-a/go-outline&quot;</span></span><br><span class="line">    <span class="string">&quot;github.com/yue-qiu/service/test&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// your code</span></span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>go mod 命令提供了一系列与 module 相关的用法：</p>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><p>go mod 命令提供了一系列与 module 相关的用法：</p>
 <p><img src="https://i.loli.net/2020/02/22/qk9bN2IMT48OSza.png" alt="module"></p>
 <ul>
 <li>go mod download: 根据 go.mod 中的内容拉取依赖包到本地</li>
@@ -150,9 +150,7 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 <p>这里重点说下 -replace 选项，因为在生产中经常遇到的一种情况是由于这样那样的原因我们需要 fork 一个私有仓库去改动第三方开源库，例如有个小哥针对 logrus 做了二次开发 github.com/gogap/logrus，这个时候就需要用 github.com/gogap/logrus 替换之前的第三方开源库 github.com/sirupsen/logrus，操作如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ go mod edit -replace=<span class="string">&quot;github.com/sirupsen/logrus=github.com/gogap/logrus@v0.8.2&quot;</span></span><br><span class="line"></span><br><span class="line">$ cat go.mod</span><br><span class="line"></span><br><span class="line">module <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line">go 1.12</span><br><span class="line"></span><br><span class="line">require github.com/sirupsen/logrus v1.4.2</span><br><span class="line"></span><br><span class="line">replace github.com/sirupsen/logrus =&gt; github.com/gogap/logrus v0.8.2</span><br></pre></td></tr></table></figure>
-
- 
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ go mod edit -replace=<span class="string">&quot;github.com/sirupsen/logrus=github.com/gogap/logrus@v0.8.2&quot;</span></span><br><span class="line"></span><br><span class="line">$ cat go.mod</span><br><span class="line"></span><br><span class="line">module <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line">go 1.12</span><br><span class="line"></span><br><span class="line">require github.com/sirupsen/logrus v1.4.2</span><br><span class="line"></span><br><span class="line">replace github.com/sirupsen/logrus =&gt; github.com/gogap/logrus v0.8.2</span><br></pre></td></tr></table></figure> 
       <!-- reward -->
       
     </div>

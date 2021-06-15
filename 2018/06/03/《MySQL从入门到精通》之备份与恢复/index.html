@@ -87,7 +87,7 @@ var _hmt = _hmt || [];
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">426</span>
+            <span class="post-count">420</span>
         </span>
     </span>
 
@@ -111,7 +111,7 @@ var _hmt = _hmt || [];
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="使用mysqldump命令备份"><a href="#使用mysqldump命令备份" class="headerlink" title="使用mysqldump命令备份"></a>使用mysqldump命令备份</h1><p><code>mysqldump</code> 命令可以将数据库中的数据备份成一个文本文件。表的结构和表中的数据将存储在生成的文本文件中。</p>
+  <p><code>mysqldump</code> 命令可以将数据库中的数据备份成一个文本文件。表的结构和表中的数据将存储在生成的文本文件中。</p>
 <p>mysqldump的工作原理就是查出需要备份的数据库和表的结构，然后在文本文件中生成相应的 <code>create</code> 和 <code>insert</code> 语句。需要导入数据库文件时 MySQL 通过使用文本文件中记录的语句生成相应的数据库和表就可以了。</p>
 <p>使用 <code>mysqldump</code> 命令进行数据备份时，经常分为以下3种形式：</p>
 <ol>
@@ -134,12 +134,13 @@ var _hmt = _hmt || [];
 
 <h2 id="备份所有数据库"><a href="#备份所有数据库" class="headerlink" title="备份所有数据库"></a>备份所有数据库</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump <span class="operator">-</span>u root <span class="operator">-</span>p <span class="comment">--all --databases &gt; filename</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="数据恢复"><a href="#数据恢复" class="headerlink" title="数据恢复"></a>数据恢复</h1><p>使用 <code>mysql</code> 命令进行还原：</p>
+<h2 id="数据恢复"><a href="#数据恢复" class="headerlink" title="数据恢复"></a>数据恢复</h2><p>使用 <code>mysql</code> 命令进行还原：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql <span class="operator">-</span>u root <span class="operator">-</span>p [dbname] <span class="operator">&lt;</span> filename</span><br></pre></td></tr></table></figure>
 
 <p>dbname 表示数据库名称，该参数是可选的。指定数据库名称时，表示还原该数据库下的表，不指定时表示还原数据库。</p>
 <p>也可以在进入相应数据库后用 <code>source</code> 命令恢复：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use test;</span><br><span class="line">mysql&gt; source filename;</span><br></pre></td></tr></table></figure> 
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use <span class="built_in">test</span>;</span><br><span class="line">mysql&gt; <span class="built_in">source</span> filename;</span><br></pre></td></tr></table></figure>
+ 
       <!-- reward -->
       
     </div>

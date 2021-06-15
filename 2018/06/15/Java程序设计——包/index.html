@@ -87,7 +87,7 @@ var _hmt = _hmt || [];
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.4k</span>
+            <span class="post-count">1.3k</span>
         </span>
     </span>
 
@@ -115,20 +115,26 @@ var _hmt = _hmt || [];
 <p>从编译器（compiler）的角度看，嵌套的包之间没有任何关系。例如java.util包与 java.util 包毫无关系，每一个都拥有独立的类集合。</p>
 <p>当编译一个 .java 文件（即一个编译单元）时，在.java文件中的每个类都会有一个输出文件，而该输出文件的名称与 .java 文件中每个类的名称相同，只是多了一个后缀名 .class。因此在编译少量 .java 文件之后，会得到大量的 .class 文件。每一个 .java 文件编译以后都会有一个 public 类，以及任意数量的非 public 类。因此每个 .java 文件都是一个构件，如果希望许许多多的这样的构件从属于同一个群组，就可以在每一个 .java 文件中使用关键字 package。而这个群组就是一个类库。</p>
 <p>就表示你在声明该编译单元是名为 fruit 的类库的一部分，或者换句话说，你正在声明该编译单元中的 public 类名称是位于 fruit 名称的保护伞下，由 fruit 名称罩着。任何想要使用该 public 类名称的人都必须指定全名或者与 fruit 结合使用关键字 import。</p>
-<h1 id="包作用域"><a href="#包作用域" class="headerlink" title="包作用域"></a>包作用域</h1><p>一个类、方法或变量如果没有指定 <code>private</code> 或 <code>public</code>，则可以被同一个包中的所有方法访问（如非公）。</p>
-<h1 id="将类放入包中"><a href="#将类放入包中" class="headerlink" title="将类放入包中"></a>将类放入包中</h1><p>要想将类放入包中，就必须将包的名字放在源文件的开头。包中定义类的代码之前。使用关键字 <code>package</code>：</p>
+<p>一个类、方法或变量如果没有指定 <code>private</code> 或 <code>public</code>，则可以被同一个包中的所有方法访问（如非公）。</p>
+<h2 id="将类放入包里"><a href="#将类放入包里" class="headerlink" title="将类放入包里"></a>将类放入包里</h2><p>要想将类放入包中，就必须将包的名字放在源文件的开头。包中定义类的代码之前。使用关键字 <code>package</code>：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文件名为Employee.java，位于目录com/qiuyueqy/learnjava下</span></span><br><span class="line"><span class="keyword">package</span> com.qiuyueqy.learnjava;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Employee</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>上面代码表明编译单元位于 com.qiuyueqy.learnjava 的保护伞下，任何想要使用该 public 类的人必须指定全名或使用修饰符 <code>import</code></p>
 <p>如果没有在源文件中放置 package 语句，这个源文件中的类就被放置在一个默认包（default package）中。默认包是一个没有名字的包</p>
-<p><strong>编译器对文件（以 .java 为扩展名）进行操作，而java解释器加载类（以. class 为扩展名）</strong></p>
 <h2 id="类的导入"><a href="#类的导入" class="headerlink" title="类的导入"></a>类的导入</h2><p>一个类可以使用所属包中所有的类，一起其他包的公有类。可以用两种方式访问其他包的公有类：</p>
 <ul>
-<li>在类名前加上完整的包名<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.time.LocalDate date = <span class="keyword">new</span> java.time.LoalcDate.now();</span><br></pre></td></tr></table></figure></li>
-<li>通过关键字<code>import</code>导入，**<code>import</code>必须在<code>package</code>之后**<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.qiuyueqy.learnjava;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.time.*;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br></pre></td></tr></table></figure></li>
+<li>在类名前加上完整的包名</li>
 </ul>
-<h2 id="静态导入"><a href="#静态导入" class="headerlink" title="静态导入"></a>静态导入</h2><p><code>import</code>语句不仅可以导入类，还可以导入类的静态方法和静态域：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.time.LocalDate date = <span class="keyword">new</span> java.time.LoalcDate.now();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>通过关键字<code>import</code>导入，**<code>import</code>必须在<code>package</code>之后**</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.qiuyueqy.learnjava;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.time.*;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br></pre></td></tr></table></figure>
+
+<h3 id="静态导入"><a href="#静态导入" class="headerlink" title="静态导入"></a>静态导入</h3><p><code>import</code>语句不仅可以导入类，还可以导入类的静态方法和静态域：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导入System类的静态方法和静态域</span></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.Systme.*;</span><br></pre></td></tr></table></figure>
+
 <p>这样就可以使用System类的静态方法和域，而不用加前缀：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">out.println(<span class="string">&quot;Hello World!&quot;</span>); <span class="comment">// System.out.println()</span></span><br><span class="line">exit(<span class="number">0</span>); <span class="comment">// System.exit()</span></span><br></pre></td></tr></table></figure>
 
@@ -138,19 +144,21 @@ var _hmt = _hmt || [];
 <ol>
 <li>把类放到一个目录中。这个目录是一个树状结构的基目录。例如：<strong>如果希望将com.qiuyueqy.learnjava类添加到其中，这个 learnjava.class 类文件就必须位于子目录 /home/user/classdir/com/qiuyueqy中</strong></li>
 <li>将jar文件放在非类路径中，如：/home/user/archives</li>
-<li>设置类路径（class path）。<strong>类路径是所有包含类文件的路径的集合</strong>。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/home/user/classdir:.:/home/user/archives/archives.jar // Linux下</span><br><span class="line"></span><br><span class="line">C:\classdir;.;C:\archives\archives.jar // windows下</span><br></pre></td></tr></table></figure></li>
+<li>设置类路径（class path）。<strong>类路径是所有包含类文件的路径的集合</strong>。</li>
 </ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/home/user/classdir:.:/home/user/archives/archives.jar // Linux下</span><br><span class="line"></span><br><span class="line">C:\classdir;.;C:\archives\archives.jar // windows下</span><br></pre></td></tr></table></figure>
+
 <p>类路径包括：</p>
 <ul>
 <li>基目录: 如 /home/user/classdir和C:\classdir</li>
 <li>当前目录: .</li>
 <li>jar文件： 如 /home/user/archives/archives.jar 或 C:\archives\archives.jar</li>
 </ul>
-<h2 id="设置类路径"><a href="#设置类路径" class="headerlink" title="设置类路径"></a>设置类路径</h2><p>最好通过<code>-classpath</code>或<code>-cp</code>选项指定类路径，例如要执行Employee.class：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -classpath /home/user/classdir:.:/home/user/archives/archives.jar Employee</span><br></pre></td></tr></table></figure>
-<p>也可以通过设置环境变量<code>CLASSPAHT</code>。默认CLASSPATH为<code>.</code>，改为我们需要的路径集合:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set CLASSPATH=C:\classdir;.;C:\archives\archives.jar //windows下</span><br><span class="line"></span><br><span class="line">export CLASSPATH=/home/user/classdir:.:/home/user/archives/archives.jar // Linux下</span><br></pre></td></tr></table></figure>
-<p>这样在shell退出前CLASSPATH变量都有效</p>
+<h3 id="设置类路径"><a href="#设置类路径" class="headerlink" title="设置类路径"></a>设置类路径</h3><p>最好通过<code>-classpath</code>或<code>-cp</code>选项指定类路径，例如要执行Employee.class：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -classpath /home/user/classdir:.:/home/user/archives/archives.jar Employee</span><br></pre></td></tr></table></figure>
+
+<p>也可以通过设置环境变量<code>CLASSPAHT</code>。默认 CLASSPATH 为<code>.</code>，改为我们需要的路径集合，这样在 shell 退出前 CLASSPATH 变量都有效:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> CLASSPATH=C:\classdir;.;C:\archives\archives.jar //windows下</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> CLASSPATH=/home/user/classdir:.:/home/user/archives/archives.jar // Linux下</span><br></pre></td></tr></table></figure>
  
       <!-- reward -->
       

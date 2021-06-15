@@ -111,7 +111,7 @@ var _hmt = _hmt || [];
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h1><p>索引是一种特殊的数据结构，类似于字典里的 key。通过索引查询数据库中的内容时，不需要遍历所有数据而是直接指向数据所在的位置，这样就可以快速查询到想要的内容。</p>
+  <p>索引是一种特殊的数据结构，类似于字典里的 key。通过索引查询数据库中的内容时，不需要遍历所有数据而是直接指向数据所在的位置，这样就可以快速查询到想要的内容。</p>
 <p>索引是把双刃剑，虽然索引可以提高检索数据的速度，提高整体的性能，但是也会带来一些副作用：  </p>
 <ol>
 <li>额外的物理空间（单列索引至少占原表5%到15%）</li>
@@ -142,8 +142,8 @@ var _hmt = _hmt || [];
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">unique</span> index username <span class="keyword">on</span> users(name);</span><br></pre></td></tr></table></figure>
 
 <p>也可以通过修改表结构的方式创建索引，参见《MySQL从入门到精通》之基本语句。</p>
-<h1 id="范式-Normal-Form"><a href="#范式-Normal-Form" class="headerlink" title="范式(Normal Form)"></a>范式(Normal Form)</h1><p>关系型数据库的规范化理论为：关系数据库中的每一个关系都要满足一定的规范。根据满足规范的条件不同，可以分为5个等级，一般只要把数据库规范到第三等级就足够了。</p>
-<h2 id="第一范式-1NF"><a href="#第一范式-1NF" class="headerlink" title="第一范式(1NF)"></a>第一范式(1NF)</h2><p>第一范式包括下列指导原则：</p>
+<h2 id="范式-Normal-Form"><a href="#范式-Normal-Form" class="headerlink" title="范式(Normal Form)"></a>范式(Normal Form)</h2><p>关系型数据库的规范化理论为：关系数据库中的每一个关系都要满足一定的规范。根据满足规范的条件不同，可以分为5个等级，一般只要把数据库规范到第三等级就足够了。</p>
+<h3 id="第一范式-1NF"><a href="#第一范式-1NF" class="headerlink" title="第一范式(1NF)"></a>第一范式(1NF)</h3><p>第一范式包括下列指导原则：</p>
 <ol>
 <li>数据组中的每个属性只可以包含一个值</li>
 <li>关系中的每个数组必须包含相同数量的值</li>
@@ -151,8 +151,8 @@ var _hmt = _hmt || [];
 </ol>
 <p>在任何一个关系型数据库中，第一范式是对关系模式的基本要求，不满足第一范式的数据库就不是关系型数据库。  </p>
 <p><strong>如果数据表中的每一个列都是不可再分割的基本数据项，即同一列中不能有多个值，那么就称此数据表符合第一范式</strong>，由此可见第一范式具有不可再分割的原子特性。</p>
-<h2 id="第二范式-2NF"><a href="#第二范式-2NF" class="headerlink" title="第二范式(2NF)"></a>第二范式(2NF)</h2><p>第二范式是在第一范式的基础上建立起来的，即满足第二范式必须先满足第一范式。<strong>第二范式要求数据库表中的每个实体（即各个记录行）必须可以被唯一地区分</strong>。 为了实现区分各记录行通常需要为表设置一个“区分列”，用以存储各个实体的唯一标识。这个唯一属性列被称为<strong>主关键字或主键。</strong></p>
-<h2 id="第三范式-3NF"><a href="#第三范式-3NF" class="headerlink" title="第三范式(3NF)"></a>第三范式(3NF)</h2><p>第三范式是在第二范式的基础上建立起来的。<strong>第三范式要求关系表不存在非关键字列对任意候选关键字列的传递函数依赖</strong>，也就是说，第三范式要求一个关系表中不包含已在其他表中包含的非主关键字信息。<br>所谓传递函数依赖，就是指如果存在关键字段A决定非关键字段B，而非关键字段B决定非关键字段C，则称非关键字段C传递函数依赖与关键字段A。参考下面的例子：  </p>
+<h3 id="第二范式-2NF"><a href="#第二范式-2NF" class="headerlink" title="第二范式(2NF)"></a>第二范式(2NF)</h3><p>第二范式是在第一范式的基础上建立起来的，即满足第二范式必须先满足第一范式。<strong>第二范式要求数据库表中的每个实体（即各个记录行）必须可以被唯一地区分</strong>。 为了实现区分各记录行通常需要为表设置一个“区分列”，用以存储各个实体的唯一标识。这个唯一属性列被称为<strong>主关键字或主键。</strong></p>
+<h3 id="第三范式-3NF"><a href="#第三范式-3NF" class="headerlink" title="第三范式(3NF)"></a>第三范式(3NF)</h3><p>第三范式是在第二范式的基础上建立起来的。<strong>第三范式要求关系表不存在非关键字列对任意候选关键字列的传递函数依赖</strong>，也就是说，第三范式要求一个关系表中不包含已在其他表中包含的非主关键字信息。<br>所谓传递函数依赖，就是指如果存在关键字段A决定非关键字段B，而非关键字段B决定非关键字段C，则称非关键字段C传递函数依赖与关键字段A。参考下面的例子：  </p>
 <blockquote>
 <p>(员工编码) ——&gt; (决定) (员工姓名、年龄、部门编码、部门经理)  </p>
 </blockquote>

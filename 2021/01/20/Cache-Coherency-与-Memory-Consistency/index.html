@@ -162,8 +162,8 @@ var _hmt = _hmt || [];
 <h2 id="缓存一致性和内存一致性的区别"><a href="#缓存一致性和内存一致性的区别" class="headerlink" title="缓存一致性和内存一致性的区别"></a>缓存一致性和内存一致性的区别</h2><p>缓存一致性主要考虑对于同一内存位置的写操作对于所有的处理器的可见性。理想情况下，我们希望写内存的结果可以立即被所有处理器看到，也就是说写操作后其它处理器的读操作所读到的值都是新值。但事实上，由于层次存储模型的存在，这样的假设由于太强不可能实现。</p>
 <p>内存一致性关注对多个内存区域的访问（读和写）的顺序。当然，最理想的情况就是所有指令的执行顺序和程序里写的一模一样（即满足顺序一致性），但事实上这也是不可能的。因为考虑到并行优化，几乎所有平台都会改变指令顺序来提高程序运行速度，这不可避免地会违反一致性原则。前面提到内存访问分两种：读和写，则<strong>违反内存一致性原则的情况可能有 4 种：LoadLoad，LoadStore，StoreStore 和 StoreLoad</strong>。过强的一致性约束会使优化程度极大降低，因此很多平台会选择放弃其中的一种或几种。</p>
 <h2 id="什么原因会导致乱序？"><a href="#什么原因会导致乱序？" class="headerlink" title="什么原因会导致乱序？"></a>什么原因会导致乱序？</h2><ol>
-<li>Store Buffer 可见性导致的 <code>伪·乱序</code>。写入 Store Buffer 的数据没有及时刷新到内存。</li>
-<li>编译器、CPU 指令重排导致的 <code>真·乱序</code>。即后面的指令真的跑到前面去执行了。</li>
+<li>Store Buffer 可见性导致的”伪·乱序”。写入 Store Buffer 的数据没有及时刷新到内存。</li>
+<li>编译器、CPU 指令重排导致的”真·乱序”。即后面的指令真的跑到前面去执行了。</li>
 </ol>
 <h2 id="内存屏障"><a href="#内存屏障" class="headerlink" title="内存屏障"></a>内存屏障</h2><p>限制编译器和 CPU 进行指令重排的方法就是使用<strong>内存屏障（Memory Barrier）</strong>，又称<strong>内存栅栏（Memory Fence）</strong>，它是程序员解决乱序问题的大杀器。内存屏障起到两个作用：</p>
 <ol>
@@ -184,27 +184,27 @@ var _hmt = _hmt || [];
 </thead>
 <tbody><tr>
 <td>Load-Load</td>
-<td>Load1; Load-Load; Load2</td>
+<td>Load1; Load-Load; Load2;</td>
 <td>Load1 先于 Load2 及其后所有 Load 指令执行</td>
 </tr>
 <tr>
 <td>Store-Store</td>
-<td>Store1; Store-Store; Store2</td>
+<td>Store1; Store-Store; Store2;</td>
 <td>Store1 先于 Store2 及其后所有 Store 指令执行，并保证 Store1 的结果立刻被刷新到内存</td>
 </tr>
 <tr>
 <td>Load-Store</td>
-<td>Load1; Load-Store; Store1</td>
+<td>Load1; Load-Store; Store1;</td>
 <td>Load1 先于 Store1 及其后所有 Store 指令执行</td>
 </tr>
 <tr>
 <td>Store-Load</td>
-<td>Store1; Store-Load; Load1</td>
+<td>Store1; Store-Load; Load1;</td>
 <td>保证该屏障之前的所有内存访问指令（Store 和 Load）都完成并刷新到内存，再执行该屏障之后的内存访问指令</td>
 </tr>
 </tbody></table>
 <p>其中 Store-Load 屏障是保证性最强的，也是开销最大的，所以部分 CPU 进行指令重排时能保证满足前三种要求，但是 Store-Load 需要程序员手动利用屏障保证。在 x86 架构处理器的指令集中，<code>lock</code> 指令可以触发 Store-Load 屏障。</p>
-<p>借助 C++11 里 atomic 的新特性，改进上面提到的单例模式代码：</p>
+<p>借助 C++11 的新特性 atomic，改进上面提到的单例模式代码：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">std::atomic&lt;Singleton*&gt; Singleton::m_instance;</span><br><span class="line">std::mutex Singleton::m_mutex;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* std::atomic_thread_fence(std::memory_order_acquire); </span></span><br><span class="line"><span class="comment">* std::atomic_thread_fence(std::memory_order_release);</span></span><br><span class="line"><span class="comment">* 这两句话可以保证他们之间的语句不会发生乱序执行。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function">Singleton* <span class="title">Singleton::getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Singleton* tmp = m_instance.<span class="built_in">load</span>(std::memory_order_relaxed);</span><br><span class="line">    std::<span class="built_in">atomic_thread_fence</span>(std::memory_order_acquire);  <span class="comment">//获取内存fence</span></span><br><span class="line">    <span class="keyword">if</span> (tmp == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        <span class="function">std::lock_guard&lt;std::mutex&gt; <span class="title">lock</span><span class="params">(m_mutex)</span></span>;</span><br><span class="line">        tmp = m_instance.<span class="built_in">load</span>(std::memory_order_relaxed);</span><br><span class="line">        <span class="keyword">if</span> (tmp == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            tmp = <span class="keyword">new</span> Singleton;</span><br><span class="line">            std::<span class="built_in">atomic_thread_fence</span>(std::memory_order_release);  <span class="comment">//释放内存fence</span></span><br><span class="line">            m_instance.<span class="built_in">store</span>(tmp, std::memory_order_relaxed);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>根据对内存一致性的的支持不同，处理器被划分为几种不同的内存模型：</p>
