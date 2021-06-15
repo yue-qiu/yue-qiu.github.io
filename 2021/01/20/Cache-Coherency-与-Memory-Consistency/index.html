@@ -87,7 +87,7 @@ var _hmt = _hmt || [];
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">3.6k</span>
+            <span class="post-count">3.8k</span>
         </span>
     </span>
 
@@ -96,7 +96,7 @@ var _hmt = _hmt || [];
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">13 分钟</span>
+            <span class="post-count">14 分钟</span>
         </span>
     </span>
 </div>
@@ -122,7 +122,7 @@ var _hmt = _hmt || [];
 <li>CPU0 要把 a 的值修改为 1，于是直接在自己的 Cache 里对 a 进行写操作（store）</li>
 <li>CPU1 执行读操作（load）读取 a 的值，这时候它读从自家 Cache 里读到的实际上是 a 的过期值（仍为 0）</li>
 </ol>
-<p>这就是一个由于缓存不一致引发的错误。Cache 设计的最大难点其实在于 Cache 一致性: 即所有 CPU 看到的指定地址的值是一致的。CPU 尝试修改某个地址值时，其它 CPU 可能已有该地址的缓存，甚至可能也在执行修改操作。因此该 CPU 需要先征求其它 CPU 的”同意”，才能执行操作。这需要给各个 CPU 的 Cache Line 加一些标记(状态)，辅以 CPU 之间的通信机制(事件)来完成。这可以通过 MESI 协议来完成。MESI 是以下四个状态的简称：</p>
+<p>这就是一个由于缓存不一致引发的错误。Cache 设计的最大难点其实在于 Cache 一致性: 即所有 CPU 看到的指定地址的值是一致的。CPU 尝试修改某个地址值时，其它 CPU 可能已有该地址的缓存，甚至可能也在执行修改操作。因此该 CPU 需要先征求其它 CPU 的“同意”，才能执行操作。这需要给各个 CPU 的 Cache Line 加一些标记(状态)，辅以 CPU 之间的通信机制(事件)来完成。这可以通过 MESI 协议来完成。MESI 是以下四个状态的简称：</p>
 <ul>
 <li>M(modified): 该行刚被 CPU 改过，并且保证不会出现在其它 CPU 的 Cache Line 中。即 CPU 是该行唯一所有者</li>
 <li>E(exclusive): 和 M 类似，但是未被修改，即和内存是一致的，CPU 可直接对该行执行修改(修改之后为 modified 状态)。</li>
@@ -130,16 +130,17 @@ var _hmt = _hmt || [];
 <li>I(invalidated): 该行为无效行，即为可以被填充的行，前面提到 Cache 策略会优先填充 Invalid 行。</li>
 </ul>
 <p><img src="https://i.loli.net/2021/01/20/ZKIjdyxQvRimwnC.png" alt="MESI状态机"></p>
-<p>MESI 协议足够简单，并且能够满足我们对缓存一致性的需求，它在单个 CPU 对指定地址的反复读写方面有很好的性能表现，但在某个 CPU 尝试修改在其它 CPU Cache Line 中存在的数据时，性能表现非常糟糕。硬件工程师为了追求极致的性能，在 CPU 和L1 Cache 之间又加入一级缓存，我们称之为 store buffer。store buffer 和 L1 Cache 还有点区别，<strong>store buffer只缓存 CPU 的写操作</strong>。store buffer 访问一般只需要 1 个指令周期，这在一定程度上降低了内存写延迟。不管 Cache 是否命中，CPU 都将数据写入 store buffer。store buffer 负责后续以 FIFO 次序写入 L1 Cache。store buffer 一般只有几十个字节，和 L1 Cache相比是小巫见大巫了。</p>
+<p>MESI 协议足够简单，并且能够满足我们对缓存一致性的需求，它在单个 CPU 对指定地址的反复读写方面有很好的性能表现，但在某个 CPU 尝试修改在其它 CPU Cache Line 中存在的数据时，性能表现非常糟糕。硬件工程师为了追求极致的性能，在 L1 Cache 之上又加入一级缓存，我们称之为 <code>store buffer</code>。store buffer 和 L1 Cache 还有点区别，<strong>store buffer只缓存 CPU 的写操作</strong>。store buffer 访问一般只需要 1 个指令周期，这在一定程度上降低了内存写延迟。不管 Cache 是否命中，CPU 都将数据写入 store buffer。store buffer 负责后续以 FIFO 次序写入 L1 Cache。store buffer 一般只有几十个字节，和 L1 Cache相比是小巫见大巫了。</p>
 <p><img src="https://i.loli.net/2021/01/20/EUBrteHac7OJhsz.png" alt="store buffer"></p>
-<p>当存在 store buffer 的情况下。<strong>针对写操作</strong>，CPU 直接把数据扔给 store buffer。后续 store buffer 负责<strong>以 FIFO 次序写回 L1 Cache</strong>。这会对我们的程序产生什么影响呢？我们来看个例子：</p>
+<p>存在 store buffer 的情况下。<strong>针对写操作</strong>，CPU 直接把数据扔给 store buffer。后续 store buffer 负责<strong>以 FIFO 次序写回 L1 Cache</strong>。这会对我们的程序产生什么影响呢？我们来看个例子：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 代码一</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> x = <span class="number">0</span>, y = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> r1, r2;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="keyword">int</span> <span class="title">thread_cpu0</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        x = <span class="number">1</span>;    <span class="comment">/* A */</span></span><br><span class="line">        r1 = y;   <span class="comment">/* B */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="keyword">int</span> <span class="title">thread_cpu1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        y = <span class="number">1</span>;    <span class="comment">/* C */</span></span><br><span class="line">        r2 = x;   <span class="comment">/* D */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">check_after_assign</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;r1 = %d, r2 = %d\n&quot;</span>, r1, r2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>假设 thread_cpu0 在 CPU0 上执行，thread_cpu1 在 CPU1 上执行。在多核系统上，我们知道两个函数 4 条操作执行可以互相交错。理论上来我们有以下 6 种组合，3 种结果：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">A-&gt;B-&gt;C-&gt;D</span><br><span class="line">A-&gt;C-&gt;B-&gt;D</span><br><span class="line">A-&gt;C-&gt;D-&gt;B</span><br><span class="line">C-&gt;D-&gt;A-&gt;B</span><br><span class="line">C-&gt;A-&gt;D-&gt;B</span><br><span class="line">C-&gt;A-&gt;B-&gt;D</span><br><span class="line"></span><br><span class="line">r1 = 1, r2 = 1</span><br><span class="line">r1 = 0, r2 = 1</span><br><span class="line">r1 = 1, r2 = 0</span><br></pre></td></tr></table></figure>
 
-<p>当我们考虑 store buffer 时，会是怎样的结果呢？我们就以 A-&gt;C-&gt;B-&gt;D 的执行次序说明问题。当 CPU0 执行 <code>x = 1</code> 时，x的值会被写入 CPU0 的 store buffer。CPU1 指令 <code>y = 1</code> 操作，同样 y 的值会被写入 CPU1 的 store buffer。接下来，<code>r1 = y</code> 执行时，CPU0 读取 y 的值，由于 y 的新值依然在 CPU1 的 store buffer 里面，所以 CPU0 看到 y 的值依然是 0。所以 r1 的值是 0。为什么 CPU0 看到 r1 的值是 0 呢？因为 MESI 只保证缓存一致性，只要值没有被写入 Cache(依然躺在 store buffer 里面)，MESI 就管不着。同样的道理，r2 的值也会是 0。此时我们看到了一个意外的结果。这里有个注意点，虽然 store buffer 主要是用来缓存 CPU 的写操作，但是 CPU 读取数据时也会检查私有 store buffer 是否命中，如果没有命中才会查找 L1 Cache。这主要是为了 CPU 自己看到自己写进 store buffer 的值。所以 CPU0 可以看到 x 值更新，但是 CPU1 不能及时看到 x。同样，CPU1 可以看到y值更新，但是 CPU0 不能及时看到 y。所以，我们经常说“单核乱序对程序员是透明的，只有其他核才会受到乱序影响”。</p>
-<h2 id="内存一致性-Memory-Consistency"><a href="#内存一致性-Memory-Consistency" class="headerlink" title="内存一致性(Memory Consistency)"></a>内存一致性(Memory Consistency)</h2><p>内存一致性关注的是多个 CPU 看到多个地址数据的读写次序。到目前为止我们只考虑了 CPU 按照程序顺序执行指令，而实际上为了更好地利用 CPU，CPU 和编译器都可能会对指令进行重排(reordering)：</p>
+<p>当我们考虑 store buffer 时，会是怎样的结果呢？我们就以 A-&gt;C-&gt;B-&gt;D 的执行次序说明问题。当 CPU0 执行 <code>x = 1</code> 时，x的值会被写入 CPU0 的 store buffer。CPU1 指令 <code>y = 1</code> 操作，同样 y 的值会被写入 CPU1 的 store buffer。接下来，CPU0 执行 <code>r1 = y</code> 读取 y 的值，由于 y 的新值依然在 CPU1 的 store buffer 里面，所以 CPU0 看到 y 的值依然是 0。所以 r1 的值是 0。为什么 CPU0 看到 r1 的值是 0 呢？因为 MESI 只保证缓存一致性，而如果值没有被写入 Cache(依然躺在 store buffer 里面)，MESI 就管不着。同样的道理，r2 的值也会是 0。</p>
+<p>By the way，虽然 store buffer 主要是用来缓存 CPU 的写操作，但是 CPU 读取数据时也会检查私有 store buffer 是否命中，如果没有命中才会查找 L1 Cache。这主要是为了 CPU 自己看到自己写进 store buffer 的值，所以 CPU0 可以看到 x 值更新。</p>
+<h2 id="内存一致性-Memory-Consistency"><a href="#内存一致性-Memory-Consistency" class="headerlink" title="内存一致性(Memory Consistency)"></a>内存一致性(Memory Consistency)</h2><p>内存一致性关注的是多个 CPU 对内存中多条指令的执行顺序。到目前为止我们只考虑了 CPU 按照程序顺序执行指令，而实际上为了更好地利用 CPU，CPU 和编译器都可能会对指令进行重排(reordering)：</p>
 <ul>
 <li>编译期间重排: 编译器在编译期间，可能对指令进行重排，以使其对 CPU 更友好</li>
 <li>运行期间重排: CPU 在执行指令的过程中，可能乱序执行以更好地利用流水线</li>
@@ -147,35 +148,70 @@ var _hmt = _hmt || [];
 <p>以下代码无法保证 A1 一定在 A2 之前执行，同样也无法保证 B1 一定在 B2 之前执行。因为赋值语句和输出语句对应不同变量，编译器可能认为这两个语句的执行顺序是不重要的，所以私自进行了指令重排，同理 CPU 指令流水期间也可能发生重排：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 代码二</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> x, y <span class="keyword">int</span></span><br><span class="line"><span class="keyword">var</span> done = <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        x = <span class="number">1</span>   <span class="comment">// A1</span></span><br><span class="line">        fmt.Print(<span class="string">&quot;y=&quot;</span>, y, <span class="string">&quot; &quot;</span>) <span class="comment">// A2</span></span><br><span class="line">        done &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        y = <span class="number">2</span>   <span class="comment">// B1</span></span><br><span class="line">        fmt.Print(<span class="string">&quot;x=&quot;</span>, x, <span class="string">&quot; &quot;</span>) <span class="comment">// B2</span></span><br><span class="line">        done &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    &lt;- done</span><br><span class="line">    &lt;- done</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="顺序一致性"><a href="#顺序一致性" class="headerlink" title="顺序一致性"></a>顺序一致性</h3><p>顺序一致性保证一个线程中所有操作必须按照代码编写的顺序来执行，也就是说如果上面的的代码满足顺序一致性，就不会出现“后面的指令反而放到前面来执行”的情况了。现代 CPU 为了支持指令重排以提高执行效率，往往只满足“无数据竞争程序的顺序一致性”，即对没有 data race 的程序来说，是满足顺序一致性的(编译器能够分析上下文相关性)，但是在并发环境下，需要程序员通过指令手动去限制指令重排以满足顺序一致性。</p>
-<p>值得注意的时，所谓“顺序一致性”是单个线程的要求，不要把它和“竞态”搞混了。</p>
+<p><code>顺序一致性（Sequential consistency）</code>保证所有操作必须按照代码编写的顺序来执行，也就是说如果上面的的代码满足顺序一致性，就不会出现“后面的指令反而放到前面来执行”的情况了。现代 CPU 为了支持指令重排以提高执行效率，往往只满足“无数据竞争程序的顺序一致性”，即对没有 data race 的程序来说，是满足顺序一致性的(编译器能够分析上下文相关性)，但是在并发环境下，需要程序员通过指令手动去限制指令重排以满足顺序一致性。</p>
+<p>这里再给出一个真实世界里由于指令重排导致 bug 的例子，很长一段时间里这个示例被认为是正确的：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Singleton* <span class="title">Singleton::getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//先判断是不是初始化了，如果初始化过，就再也不会使用锁了</span></span><br><span class="line">    <span class="keyword">if</span>(m_instance == <span class="literal">nullptr</span>)&#123;</span><br><span class="line">        Lock; <span class="comment">//伪代码</span></span><br><span class="line">        <span class="keyword">if</span> (m_instance == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            m_instance = <span class="keyword">new</span> <span class="built_in">Singleton</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> m_instance;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这段单例模式的代码看起来没问题。设想现在有线程 A 和线程 B 同时执行 <code>Singleton::getInstance()</code>，A 率先得到锁进入临界区执行 <code>m_instance = new Singleton();</code>，这句代码分为 3 步执行：</p>
+<ol>
+<li>申请一块内存空间</li>
+<li>在申请到的内存上创建一个 Singleton 对象</li>
+<li>把内存地址赋给 m_instance</li>
+</ol>
+<p>事实上指令执行顺序可能是 1-&gt;3-&gt;2，A 执行完 3 以后 m_instance 就不再是 nullptr，而 2 尚未执行即 Singleton 对象未创建，此时 B 检查 m_instance 会得到 false 直接 return m_instance 导致 bug。</p>
 <h2 id="缓存一致性和内存一致性的区别"><a href="#缓存一致性和内存一致性的区别" class="headerlink" title="缓存一致性和内存一致性的区别"></a>缓存一致性和内存一致性的区别</h2><p>缓存一致性主要考虑对于同一内存位置的写操作对于所有的处理器的可见性。理想情况下，我们希望写内存的结果可以立即被所有处理器看到，也就是说写操作后其它处理器的读操作所读到的值都是新值。但事实上，由于层次存储模型的存在，这样的假设由于太强不可能实现。</p>
 <p>内存一致性关注对多个内存区域的访问（读和写）的顺序。当然，最理想的情况就是所有指令的执行顺序和程序里写的一模一样（即满足顺序一致性），但事实上这也是不可能的。因为考虑到并行优化，几乎所有平台都会改变指令顺序来提高程序运行速度，这不可避免地会违反一致性原则。前面提到内存访问分两种：读和写，则<strong>违反内存一致性原则的情况可能有 4 种：LoadLoad，LoadStore，StoreStore 和 StoreLoad</strong>。过强的一致性约束会使优化程度极大降低，因此很多平台会选择放弃其中的一种或几种。</p>
 <h2 id="什么原因会导致乱序？"><a href="#什么原因会导致乱序？" class="headerlink" title="什么原因会导致乱序？"></a>什么原因会导致乱序？</h2><ol>
-<li>Store Buffer 可见性导致的 <code>伪·乱序</code>。指令顺序没有变，但是写入 Store Buffer 的数据没有及时刷新到内存，在其它 CPU 看来好像这个 CPU 发生了“乱序”。</li>
+<li>Store Buffer 可见性导致的 <code>伪·乱序</code>。写入 Store Buffer 的数据没有及时刷新到内存。</li>
 <li>编译器、CPU 指令重排导致的 <code>真·乱序</code>。即后面的指令真的跑到前面去执行了。</li>
 </ol>
 <h2 id="内存屏障"><a href="#内存屏障" class="headerlink" title="内存屏障"></a>内存屏障</h2><p>限制编译器和 CPU 进行指令重排的方法就是使用<strong>内存屏障（Memory Barrier）</strong>，又称<strong>内存栅栏（Memory Fence）</strong>，它是程序员解决乱序问题的大杀器。内存屏障起到两个作用：</p>
 <ol>
 <li>强制刷新 store buffer。这样内存屏障之前的所有写操作对屏障之后的指令都是可见的。</li>
-<li>阻止此处的指令重排。它后面的读写操作不会乱序到前面的指令之前执行，就像是个屏障一样，不容逾越。但是屏障前面/后面的 load/store 操作怎么乱序就管不着了。</li>
+<li>阻止此处的指令重排。它后面的指令不会乱序到前面执行，就像是个屏障一样，不容逾越。</li>
 </ol>
 <p>对于上文代码二，利用“管道操作”这一同步原语进行同步以后，就能够保证 A1 与 A2，B1 与 B2 的执行顺序了：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 代码三</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> x, y <span class="keyword">int</span></span><br><span class="line"><span class="keyword">var</span> done = <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line"><span class="keyword">var</span> ok = <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        x = <span class="number">1</span>   <span class="comment">// A1</span></span><br><span class="line">        ok &lt;- <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line">        fmt.Print(<span class="string">&quot;y=&quot;</span>, y, <span class="string">&quot; &quot;</span>) <span class="comment">// A2</span></span><br><span class="line">        done &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        y = <span class="number">2</span>   <span class="comment">// B1</span></span><br><span class="line">        &lt;-ok</span><br><span class="line">        fmt.Print(<span class="string">&quot;x=&quot;</span>, x, <span class="string">&quot; &quot;</span>) <span class="comment">// B2</span></span><br><span class="line">        done &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    &lt;- done</span><br><span class="line">    &lt;- done</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>实际的 CPU 架构中，可能提供多种内存屏障，比如可能分为四种:</p>
+<table>
+<thead>
+<tr>
+<th>屏障类型</th>
+<th>指令示例</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Load-Load</td>
+<td>Load1; Load-Load; Load2</td>
+<td>Load1 先于 Load2 及其后所有 Load 指令执行</td>
+</tr>
+<tr>
+<td>Store-Store</td>
+<td>Store1; Store-Store; Store2</td>
+<td>Store1 先于 Store2 及其后所有 Store 指令执行，并保证 Store1 的结果立刻被刷新到内存</td>
+</tr>
+<tr>
+<td>Load-Store</td>
+<td>Load1; Load-Store; Store1</td>
+<td>Load1 先于 Store1 及其后所有 Store 指令执行</td>
+</tr>
+<tr>
+<td>Store-Load</td>
+<td>Store1; Store-Load; Load1</td>
+<td>保证该屏障之前的所有内存访问指令（Store 和 Load）都完成并刷新到内存，再执行该屏障之后的内存访问指令</td>
+</tr>
+</tbody></table>
+<p>其中 Store-Load 屏障是保证性最强的，也是开销最大的，所以部分 CPU 进行指令重排时能保证满足前三种要求，但是 Store-Load 需要程序员手动利用屏障保证。在 x86 架构处理器的指令集中，<code>lock</code> 指令可以触发 Store-Load 屏障。</p>
+<p>借助 C++11 里 atomic 的新特性，改进上面提到的单例模式代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">std::atomic&lt;Singleton*&gt; Singleton::m_instance;</span><br><span class="line">std::mutex Singleton::m_mutex;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* std::atomic_thread_fence(std::memory_order_acquire); </span></span><br><span class="line"><span class="comment">* std::atomic_thread_fence(std::memory_order_release);</span></span><br><span class="line"><span class="comment">* 这两句话可以保证他们之间的语句不会发生乱序执行。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function">Singleton* <span class="title">Singleton::getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Singleton* tmp = m_instance.<span class="built_in">load</span>(std::memory_order_relaxed);</span><br><span class="line">    std::<span class="built_in">atomic_thread_fence</span>(std::memory_order_acquire);  <span class="comment">//获取内存fence</span></span><br><span class="line">    <span class="keyword">if</span> (tmp == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        <span class="function">std::lock_guard&lt;std::mutex&gt; <span class="title">lock</span><span class="params">(m_mutex)</span></span>;</span><br><span class="line">        tmp = m_instance.<span class="built_in">load</span>(std::memory_order_relaxed);</span><br><span class="line">        <span class="keyword">if</span> (tmp == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            tmp = <span class="keyword">new</span> Singleton;</span><br><span class="line">            std::<span class="built_in">atomic_thread_fence</span>(std::memory_order_release);  <span class="comment">//释放内存fence</span></span><br><span class="line">            m_instance.<span class="built_in">store</span>(tmp, std::memory_order_relaxed);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>根据对内存一致性的的支持不同，处理器被划分为几种不同的内存模型：</p>
 <ul>
-<li>LoadLoad: 任何该屏障前的读操作都会先于该屏障后的读操作完成</li>
-<li>LoadStore: 任何该屏障前的读操作都会先于该屏障后的写操作完成</li>
-<li>StoreStore: 任何该屏障前的写操作都会先于该屏障后的写操作完成</li>
-<li>StoreLoad: 任何该屏障前的写操作都会先于该屏障后的读操作完成</li>
-</ul>
-<p>其中 StoreLoad 屏障是保证性最强的，也是开销最大的，所以有些 CPU 能保证每条指令都满足前三种要求，但是 StoreLoad 需要程序员手动利用屏障保证。</p>
-<h2 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h2><p>根据对内存一致性的的支持不同，处理器被划分为几种不同的内存模型：</p>
-<ul>
-<li>弱内存模型：如 DEC Alpha。它可能经历所有的四种内存乱序(LoadLoad, LoadStore, StoreLoad, StoreStore)，任何 Load 和 Store 操作都能与任何其它的 Load 或 Store 操作乱序，只要其不改变单线程的行为。</li>
-<li>强内存模型：如 X86/64。它使用了 LoadLoad/LoadStore/StoreStore 三种内存屏障，即避免了四种乱序中的三种，仍然保留 StoreLoad 的重排，这种情况需要程序员手动插入屏障来确保程序正确。</li>
-<li>顺序一致性模型：最强的一致性，理想中的模型，在这种内存模型中，没有乱序的存在。如今很难找到一个硬件体系结构支持顺序一致性，因为它会严重限制硬件对 CPU 执行效率的优化(对寄存器/Cache/流水线的使用)。</li>
+<li>弱内存模型：如 DEC Alpha。只要其不改变单线程的行为，可能发生全部四种乱序。</li>
+<li>强内存模型：如 X86/64。它避免了四种乱序中的三种，但仍然保留 Store-Load 重排，这种情况需要程序员手动插入屏障来确保程序正确。</li>
+<li>顺序一致性模型：最强的一致性，理想中的模型，在这种内存模型中，没有乱序的存在。如今很难找到一个硬件体系结构支持顺序一致性，因为它会严重限制硬件对 CPU 执行效率的优化。</li>
 </ul>
 <h2 id="什么时候需要考虑一致性？"><a href="#什么时候需要考虑一致性？" class="headerlink" title="什么时候需要考虑一致性？"></a>什么时候需要考虑一致性？</h2><ol>
 <li>是否有共享数据？私有数据不存在竞争，也就不存在一致性的问题</li>
@@ -263,7 +299,7 @@ var _hmt = _hmt || [];
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            一点小想法
+            别摸鱼啦~
           
         </div>
       </a>
