@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-05-27T08:36:04.971Z</updated>
+  <updated>2021-12-18T09:00:40.478Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>对比 lua table 中哈希表和数组的内存占用</title>
+    <link href="http://yoursite.com/2021/12/18/%E5%AF%B9%E6%AF%94-lua-table-%E4%B8%AD%E5%93%88%E5%B8%8C%E8%A1%A8%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E5%86%85%E5%AD%98%E5%8D%A0%E7%94%A8/"/>
+    <id>http://yoursite.com/2021/12/18/%E5%AF%B9%E6%AF%94-lua-table-%E4%B8%AD%E5%93%88%E5%B8%8C%E8%A1%A8%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E5%86%85%E5%AD%98%E5%8D%A0%E7%94%A8/</id>
+    <published>2021-12-18T08:58:55.000Z</published>
+    <updated>2021-12-18T09:00:40.478Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="数据结构" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+    <category term="lua" scheme="http://yoursite.com/tags/lua/"/>
+    
+  </entry>
   
   <entry>
     <title>改变一下思路</title>
@@ -446,26 +471,6 @@
     
     
     <category term="并发编程" scheme="http://yoursite.com/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>并发编程-以 Go 为例</title>
-    <link href="http://yoursite.com/2020/03/24/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E4%BB%A5Go%E4%B8%BA%E4%BE%8B/"/>
-    <id>http://yoursite.com/2020/03/24/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E4%BB%A5Go%E4%B8%BA%E4%BE%8B/</id>
-    <published>2020-03-24T15:49:51.000Z</published>
-    <updated>2021-05-20T05:58:59.856Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;所谓&lt;code&gt;并发&lt;/code&gt;(concurrency) 是指几段程序在同一时间段内交错执行，当我们无法肯定一个事件一定会会先于另一个事件发生，那么就可以说这几个时间是“并发”的。如果一个函数在并发调用时仍能正确执行，这个函数就是&lt;code&gt;并发安全&lt;/code&gt;的；如果一个类型的所有可访问方法和操作都是并发安全的，则它就是一个并发安全的类型。&lt;/p&gt;
-&lt;p&gt;本文主要介绍了几种并发编程中常见的问题及对策，所有的例子都会用 Go 语言来描述，还会涉及到一些 Go 对并发编程的支持。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="计算机系统" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/"/>
-    
-    
-    <category term="并发" scheme="http://yoursite.com/tags/%E5%B9%B6%E5%8F%91/"/>
     
   </entry>
   

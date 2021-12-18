@@ -83,7 +83,7 @@ var _hmt = _hmt || [];
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">2.4k</span>
+            <span class="post-count">2.1k</span>
         </span>
     </span>
 
@@ -92,7 +92,7 @@ var _hmt = _hmt || [];
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">8 分钟</span>
+            <span class="post-count">7 分钟</span>
         </span>
     </span>
 </div>
@@ -149,22 +149,6 @@ var _hmt = _hmt || [];
 
 <p><img src="https://i.loli.net/2020/02/16/U5lM6bayKAHwX1r.png" alt="log"><br><img src="https://i.loli.net/2020/02/16/mO2ACVn9jQaMZJg.png" alt="log--oneline"></p>
 <p>HEAD 表示当前版本，可以用 HEAD^ 表示上一版本，HEAD^^ 表示上上版本… HEAD~100 表示第前 100 个版本。</p>
-<h3 id="版本回退-1"><a href="#版本回退-1" class="headerlink" title="版本回退"></a>版本回退</h3><p>使用 git 的一个主要好处就是 git 提供方便的版本控制，可以在需要的时候回退到任意版本。</p>
-<p>版本回退命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard 版本号</span><br></pre></td></tr></table></figure>
-
-<p>但是这里有个问题：当我们回到历史版本后，<code>git log</code> 命令就无法显示最新版本的版本号。相当于我们穿越到过去，却没办法回来了。幸好 <code>git relog</code> 命令可以解决这个问题，<code>git reflog</code> 记录了我们每次在版本间的移动：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reflog</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2020/02/16/BFnk1zxTIN7Khly.png" alt="reflog"></p>
-<p>可以看到，我通过 checkout 从 174e8dc 来到 e346f09，这样就不怕穿越不回现代啦~</p>
-<h3 id="管理修改-1"><a href="#管理修改-1" class="headerlink" title="管理修改"></a>管理修改</h3><p>有时我们修改了工作区或暂存区的文件，过了一会儿又后悔了，可以用下面的命令撤销这些修改：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- file</span><br></pre></td></tr></table></figure>
-
-<p>如果文件已经 add 到了暂存区，想要把它从暂存区里撤下来也是可以的：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD file</span><br></pre></td></tr></table></figure>
-
-<p>那如果文件已经 commit 了怎么版本？还记得前面的版本回退命令吗？直接回退就好啦！</p>
 <h2 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h2><p>要先在 Github 中添加这台机器的 ssh 密钥以允许你把本地文件传到 Github 上。执行：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;email&quot;</span></span><br></pre></td></tr></table></figure>
 
